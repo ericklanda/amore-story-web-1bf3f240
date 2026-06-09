@@ -174,25 +174,46 @@ function FloatingControls({
   lang: "es" | "en";
   setLang: (v: "es" | "en") => void;
 }) {
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(true);
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
 
-  const toggleMusic = () => {
-    if (!iframeRef.current) return;
-    const action = playing ? "pauseVideo" : "playVideo";
-    iframeRef.current.contentWindow?.postMessage(
+  const sendCommand = (action: string) => {
+    iframeRef.current?.contentWindow?.postMessage(
       JSON.stringify({ event: "command", func: action, args: [] }),
       "*"
     );
+  };
+
+  const toggleMusic = () => {
+    const action = playing ? "pauseVideo" : "playVideo";
+    sendCommand(action);
     setPlaying(!playing);
   };
+
+  useEffect(() => {
+    // intentar reproducir al montar
+    sendCommand("playVideo");
+    // si el navegador bloquea autoplay, reintentar en el primer gesto del usuario
+    const resume = () => {
+      sendCommand("playVideo");
+      setPlaying(true);
+      window.removeEventListener("click", resume);
+      window.removeEventListener("touchstart", resume);
+    };
+    window.addEventListener("click", resume);
+    window.addEventListener("touchstart", resume);
+    return () => {
+      window.removeEventListener("click", resume);
+      window.removeEventListener("touchstart", resume);
+    };
+  }, []);
 
   return (
     <>
       <iframe
         ref={iframeRef}
         title="background-music"
-        src={`https://www.youtube.com/embed/${YOUTUBE_SONG_ID}?enablejsapi=1&loop=1&playlist=${YOUTUBE_SONG_ID}&controls=0&modestbranding=1`}
+        src={`https://www.youtube.com/embed/${YOUTUBE_SONG_ID}?enablejsapi=1&autoplay=1&loop=1&playlist=${YOUTUBE_SONG_ID}&controls=0&modestbranding=1`}
         allow="autoplay"
         style={{ position: "fixed", width: 1, height: 1, opacity: 0, pointerEvents: "none", border: 0 }}
       />
@@ -330,10 +351,10 @@ function Hero() {
 /* ---------------- OUR STORY ---------------- */
 function OurStory() {
   const milestones = [
-    { date: "Marzo 2019", title: "El día que nos conocimos", text: "Una tarde inesperada en una cafetería del centro. Un café se convirtió en horas de conversación." },
-    { date: "Diciembre 2020", title: "Nuestro primer viaje", text: "Recorrimos la costa y supimos que queríamos seguir explorando el mundo juntos." },
-    { date: "Agosto 2023", title: "Una casa, un hogar", text: "Decidimos compartirlo todo bajo el mismo techo, entre cajas, risas y planes." },
-    { date: "Febrero 2025", title: "La propuesta", text: "Bajo las estrellas, frente al mar, con un anillo y un 'sí' que cambió todo." },
+    { date: "Diciembre 2024", title: "El reencuentro", text: "Último día de diciembre del 2024 nos reencontramos de la manera más extraña." },
+    { date: "Marzo 2025", title: "Nos hicimos novios", text: "30 de marzo de 2025 empezó oficialmente nuestra historia juntos." },
+    { date: "Abril 2025", title: "Nuestro primer viaje", text: "En abril de 2025 emprendimos nuestra primera aventura como pareja." },
+    { date: "Noviembre 2025", title: "La propuesta", text: "En noviembre de 2025 nos comprometimos: la propuesta que selló nuestro futuro." },
   ];
   return (
     <section id="historia" className="py-24 md:py-36 px-6 bg-gradient-blush">
