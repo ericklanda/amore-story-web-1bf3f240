@@ -936,7 +936,7 @@ function ThankYou() {
         </Reveal>
         <Reveal delay={800}>
           <div className="mt-6 text-xs tracking-[0.4em] uppercase text-white/70">
-            14 · 06 · 2026
+            30 · 10 · 2026
           </div>
         </Reveal>
       </div>
