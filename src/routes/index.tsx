@@ -739,35 +739,32 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 /* ---------------- GIFT REGISTRY ---------------- */
 function GiftRegistry() {
   const gifts = [
-    { icon: "🎁", title: "Mesa de regalos", text: "Liverpool · Código 12345", cta: "Ver mesa", href: "#" },
-    { icon: "🛒", title: "Amazon", text: "Lista en línea curada", cta: "Abrir lista", href: "#" },
-    { icon: "🏦", title: "Transferencia", text: "BBVA · 4152 3138 0000 0000", cta: "Copiar datos", href: "#" },
-    { icon: "✈️", title: "Luna de miel", text: "Contribuye a nuestro viaje", cta: "Aportar", href: "#" },
+    { icon: "💌", title: "Lluvia de sobres", text: "Tendremos un buzón especial el día del evento para recibir tu sobre con todo nuestro cariño." },
+    { icon: "🎁", title: "Regalo sorpresa", text: "Si prefieres consentirnos con un detalle especial, lo recibiremos con muchísima ilusión." },
+    { icon: "🛍️", title: "Mesa de regalos", text: "Pronto compartiremos los detalles de nuestra mesa de regalos contigo." },
   ];
   return (
     <section className="py-24 md:py-32 px-6 bg-background">
       <div className="max-w-5xl mx-auto">
         <Reveal>
-          <SectionTitle kicker="Con cariño" title="Mesa de regalos" />
+          <SectionTitle kicker="Con cariño" title="Opciones de regalo" />
         </Reveal>
         <p className="text-center max-w-xl mx-auto text-muted-foreground italic font-serif mb-12">
-          Tu presencia es el mejor regalo. Si deseas obsequiarnos algo más, aquí algunas opciones.
+          Tu presencia es nuestro mejor regalo. Si deseas obsequiarnos algo más, aquí algunas opciones.
         </p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {gifts.map((g, i) => (
             <Reveal key={g.title} delay={i * 100}>
               <div className="bg-card border border-border rounded-sm p-7 text-center shadow-card hover:shadow-soft hover:-translate-y-1 transition-all h-full flex flex-col">
                 <div className="text-4xl mb-4">{g.icon}</div>
                 <h3 className="font-serif text-xl text-primary mb-2">{g.title}</h3>
-                <p className="text-sm text-muted-foreground mb-5 flex-1">{g.text}</p>
-                <a href={g.href} className="text-xs tracking-[0.2em] uppercase text-gold hover:text-primary transition-colors">
-                  {g.cta} →
-                </a>
+                <p className="text-sm text-muted-foreground flex-1">{g.text}</p>
               </div>
             </Reveal>
           ))}
         </div>
       </div>
+
     </section>
   );
 }
