@@ -10,10 +10,10 @@ import engagement from "@/assets/engagement.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Sofía & Mateo · 14 de Junio, 2026" },
-      { name: "description", content: "Invitación de boda de Sofía y Mateo. Confirma tu asistencia, conoce el itinerario y los detalles del gran día." },
-      { property: "og:title", content: "Sofía & Mateo · Nuestra Boda" },
-      { property: "og:description", content: "Acompáñanos el 14 de Junio de 2026." },
+      { title: "Luis Carlos & Leonardo · 30 de Octubre, 2026" },
+      { name: "description", content: "Invitación de boda de Luis Carlos y Leonardo. Confirma tu asistencia y conoce los detalles de nuestro gran día." },
+      { property: "og:title", content: "Luis Carlos & Leonardo · Nuestra Boda" },
+      { property: "og:description", content: "Acompáñanos el 30 de Octubre de 2026 en Ciudad Juárez." },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
@@ -21,17 +21,22 @@ export const Route = createFileRoute("/")({
   component: WeddingInvitation,
 });
 
-const WEDDING_DATE = new Date("2026-06-14T17:00:00");
-const HASHTAG = "#SofiaYMateo2026";
+const WEDDING_DATE = new Date("2026-10-30T20:00:00");
+const HASHTAG = "#LuisYLeo2026";
+const WHATSAPP_NUMBER = "5216568637484"; // 52 + 1 + número
+const YOUTUBE_SONG_ID = "gxXo8bWZbWw";
+const VENUE_MAPS = "https://maps.app.goo.gl/fb6ZCWdXrxMd9wwu7";
+const VENUE_ADDRESS = "Cam. Viejo a San José 4545, Las Arcadas, 32590 Juárez, Chih.";
 
 const GALLERY = [
-  { src: heroCouple, caption: "Sesión de compromiso" },
-  { src: couple2, caption: "Atardecer en el campo" },
-  { src: couple3, caption: "Un instante íntimo" },
+  { src: heroCouple, caption: "Nosotros" },
+  { src: couple2, caption: "Momentos" },
+  { src: couple3, caption: "Juntos" },
   { src: bouquet, caption: "Detalles" },
-  { src: engagement, caption: "Risas que recordamos" },
-  { src: details, caption: "Mesa de celebración" },
+  { src: engagement, caption: "Risas" },
+  { src: details, caption: "Celebración" },
 ];
+
 
 function useCountdown(target: Date) {
   const [now, setNow] = useState(() => new Date());
