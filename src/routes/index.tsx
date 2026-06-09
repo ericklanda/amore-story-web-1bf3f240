@@ -148,7 +148,7 @@ function WeddingInvitation() {
       <EventDetails />
       <DressCode />
       <Timeline />
-      <SpecialMoments />
+      {/* SpecialMoments removido */}
       <Rsvp />
       <GiftRegistry />
       {/* Hospedaje removido */}
