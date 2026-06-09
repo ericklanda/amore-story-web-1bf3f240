@@ -626,7 +626,7 @@ function Rsvp() {
 
   const whatsappMsg = useMemo(() => {
     const text = `Hola! Confirmo mi asistencia a la boda de Luis Carlos y Leonardo. Nombre: ${form.name || "(nombre)"}, asistencia: ${form.attending === "yes" ? "Sí" : "No"}, acompañantes: ${form.guests}`;
-    return `https://wa.me/5210000000000?text=${encodeURIComponent(text)}`;
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
   }, [form]);
 
   return (
