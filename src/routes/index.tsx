@@ -157,54 +157,58 @@ function FloatingControls({
   setLang: (v: "es" | "en") => void;
 }) {
   const [playing, setPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
 
   const toggleMusic = () => {
-    if (!audioRef.current) {
-      const a = new Audio("https://cdn.pixabay.com/audio/2022/10/30/audio_347111d004.mp3");
-      a.loop = true;
-      a.volume = 0.4;
-      audioRef.current = a;
-    }
-    if (playing) {
-      audioRef.current.pause();
-      setPlaying(false);
-    } else {
-      audioRef.current.play().catch(() => {});
-      setPlaying(true);
-    }
+    if (!iframeRef.current) return;
+    const action = playing ? "pauseVideo" : "playVideo";
+    iframeRef.current.contentWindow?.postMessage(
+      JSON.stringify({ event: "command", func: action, args: [] }),
+      "*"
+    );
+    setPlaying(!playing);
   };
 
   return (
-    <div className="fixed bottom-5 right-5 z-40 flex flex-col gap-2.5">
-      <button
-        onClick={toggleMusic}
-        aria-label="Reproducir música"
-        className="w-12 h-12 rounded-full bg-primary text-primary-foreground shadow-soft flex items-center justify-center hover:scale-110 transition-transform"
-      >
-        {playing ? (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
-        ) : (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        )}
-      </button>
-      <button
-        onClick={() => setDark(!dark)}
-        aria-label="Cambiar tema"
-        className="w-12 h-12 rounded-full bg-card border border-border text-foreground shadow-card flex items-center justify-center hover:scale-110 transition-transform"
-      >
-        {dark ? "☀" : "☾"}
-      </button>
-      <button
-        onClick={() => setLang(lang === "es" ? "en" : "es")}
-        aria-label="Idioma"
-        className="w-12 h-12 rounded-full bg-card border border-border text-foreground text-xs font-medium tracking-wider shadow-card flex items-center justify-center hover:scale-110 transition-transform"
-      >
-        {lang.toUpperCase()}
-      </button>
-    </div>
+    <>
+      <iframe
+        ref={iframeRef}
+        title="background-music"
+        src={`https://www.youtube.com/embed/${YOUTUBE_SONG_ID}?enablejsapi=1&loop=1&playlist=${YOUTUBE_SONG_ID}&controls=0&modestbranding=1`}
+        allow="autoplay"
+        style={{ position: "fixed", width: 1, height: 1, opacity: 0, pointerEvents: "none", border: 0 }}
+      />
+      <div className="fixed bottom-5 right-5 z-40 flex flex-col gap-2.5">
+        <button
+          onClick={toggleMusic}
+          aria-label="Reproducir música"
+          className="w-12 h-12 rounded-full bg-primary text-primary-foreground shadow-soft flex items-center justify-center hover:scale-110 transition-transform"
+        >
+          {playing ? (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
+          ) : (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          )}
+        </button>
+        <button
+          onClick={() => setDark(!dark)}
+          aria-label="Cambiar tema"
+          className="w-12 h-12 rounded-full bg-card border border-border text-foreground shadow-card flex items-center justify-center hover:scale-110 transition-transform"
+        >
+          {dark ? "☀" : "☾"}
+        </button>
+        <button
+          onClick={() => setLang(lang === "es" ? "en" : "es")}
+          aria-label="Idioma"
+          className="w-12 h-12 rounded-full bg-card border border-border text-foreground text-xs font-medium tracking-wider shadow-card flex items-center justify-center hover:scale-110 transition-transform"
+        >
+          {lang.toUpperCase()}
+        </button>
+      </div>
+    </>
   );
 }
+
 
 /* ---------------- HERO ---------------- */
 function Hero() {
