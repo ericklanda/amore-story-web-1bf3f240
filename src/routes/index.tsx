@@ -366,7 +366,7 @@ function ParentsSection() {
         <p className="text-center max-w-2xl mx-auto text-muted-foreground italic font-serif text-lg mb-14">
           "Con la bendición de Dios y de nuestros padres, queremos compartir contigo este día tan especial."
         </p>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           {groups.map((g, i) => (
             <Reveal key={g.title} delay={i * 120}>
               <div className="bg-card border border-border rounded-sm p-8 text-center shadow-card hover:shadow-soft transition-shadow">
