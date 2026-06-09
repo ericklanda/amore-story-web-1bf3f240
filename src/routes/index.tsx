@@ -444,26 +444,28 @@ function Gallery() {
 function EventDetails() {
   const events = [
     {
-      label: "Ceremonia",
-      time: "5:00 pm",
-      place: "Parroquia San Francisco",
-      address: "Plaza Allende S/N, Centro, Ciudad Juárez",
-      maps: "https://maps.google.com/?q=Parroquia+San+Francisco+San+Miguel+de+Allende",
+      label: "Ceremonia simbólica",
+      time: "8:00 pm",
+      place: "Terraza Jardín Arjeri",
+      address: VENUE_ADDRESS,
+      maps: VENUE_MAPS,
     },
     {
       label: "Recepción",
-      time: "7:30 pm",
-      place: "Hacienda Las Trojes",
-      address: "Camino Real 12, Ciudad Juárez",
-      maps: "https://maps.google.com/?q=Hacienda+Las+Trojes+San+Miguel+de+Allende",
+      time: "9:00 pm – 2:00 am",
+      place: "Terraza Jardín Arjeri",
+      address: VENUE_ADDRESS,
+      maps: VENUE_MAPS,
     },
   ];
 
   const calendarLink = () => {
-    const start = "20260614T230000Z";
-    const end = "20260615T060000Z";
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Luis+Carlos+%26+Leonardo&dates=${start}/${end}&details=Acompáñanos+a+celebrar+nuestro+día.&location=San+Miguel+de+Allende`;
+    // 30 Oct 2026 20:00 → 31 Oct 2026 02:00 (CST = UTC-6)
+    const start = "20261031T020000Z";
+    const end = "20261031T080000Z";
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Luis+Carlos+%26+Leonardo&dates=${start}/${end}&details=Acompáñanos+a+celebrar+nuestro+día.&location=${encodeURIComponent(VENUE_ADDRESS)}`;
   };
+
 
   return (
     <section className="py-24 md:py-32 px-6 bg-background">
