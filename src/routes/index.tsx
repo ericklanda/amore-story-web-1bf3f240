@@ -10,10 +10,10 @@ import engagement from "@/assets/engagement.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Sofía & Mateo · 14 de Junio, 2026" },
-      { name: "description", content: "Invitación de boda de Sofía y Mateo. Confirma tu asistencia, conoce el itinerario y los detalles del gran día." },
-      { property: "og:title", content: "Sofía & Mateo · Nuestra Boda" },
-      { property: "og:description", content: "Acompáñanos el 14 de Junio de 2026." },
+      { title: "Luis Carlos & Leonardo · 30 de Octubre, 2026" },
+      { name: "description", content: "Invitación de boda de Luis Carlos y Leonardo. Confirma tu asistencia y conoce los detalles de nuestro gran día." },
+      { property: "og:title", content: "Luis Carlos & Leonardo · Nuestra Boda" },
+      { property: "og:description", content: "Acompáñanos el 30 de Octubre de 2026 en Ciudad Juárez." },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
@@ -21,17 +21,22 @@ export const Route = createFileRoute("/")({
   component: WeddingInvitation,
 });
 
-const WEDDING_DATE = new Date("2026-06-14T17:00:00");
-const HASHTAG = "#SofiaYMateo2026";
+const WEDDING_DATE = new Date("2026-10-30T20:00:00");
+const HASHTAG = "#LuisYLeo2026";
+const WHATSAPP_NUMBER = "5216568637484"; // 52 + 1 + número
+const YOUTUBE_SONG_ID = "gxXo8bWZbWw";
+const VENUE_MAPS = "https://maps.app.goo.gl/fb6ZCWdXrxMd9wwu7";
+const VENUE_ADDRESS = "Cam. Viejo a San José 4545, Las Arcadas, 32590 Juárez, Chih.";
 
 const GALLERY = [
-  { src: heroCouple, caption: "Sesión de compromiso" },
-  { src: couple2, caption: "Atardecer en el campo" },
-  { src: couple3, caption: "Un instante íntimo" },
+  { src: heroCouple, caption: "Nosotros" },
+  { src: couple2, caption: "Momentos" },
+  { src: couple3, caption: "Juntos" },
   { src: bouquet, caption: "Detalles" },
-  { src: engagement, caption: "Risas que recordamos" },
-  { src: details, caption: "Mesa de celebración" },
+  { src: engagement, caption: "Risas" },
+  { src: details, caption: "Celebración" },
 ];
+
 
 function useCountdown(target: Date) {
   const [now, setNow] = useState(() => new Date());
@@ -152,54 +157,58 @@ function FloatingControls({
   setLang: (v: "es" | "en") => void;
 }) {
   const [playing, setPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
 
   const toggleMusic = () => {
-    if (!audioRef.current) {
-      const a = new Audio("https://cdn.pixabay.com/audio/2022/10/30/audio_347111d004.mp3");
-      a.loop = true;
-      a.volume = 0.4;
-      audioRef.current = a;
-    }
-    if (playing) {
-      audioRef.current.pause();
-      setPlaying(false);
-    } else {
-      audioRef.current.play().catch(() => {});
-      setPlaying(true);
-    }
+    if (!iframeRef.current) return;
+    const action = playing ? "pauseVideo" : "playVideo";
+    iframeRef.current.contentWindow?.postMessage(
+      JSON.stringify({ event: "command", func: action, args: [] }),
+      "*"
+    );
+    setPlaying(!playing);
   };
 
   return (
-    <div className="fixed bottom-5 right-5 z-40 flex flex-col gap-2.5">
-      <button
-        onClick={toggleMusic}
-        aria-label="Reproducir música"
-        className="w-12 h-12 rounded-full bg-primary text-primary-foreground shadow-soft flex items-center justify-center hover:scale-110 transition-transform"
-      >
-        {playing ? (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
-        ) : (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        )}
-      </button>
-      <button
-        onClick={() => setDark(!dark)}
-        aria-label="Cambiar tema"
-        className="w-12 h-12 rounded-full bg-card border border-border text-foreground shadow-card flex items-center justify-center hover:scale-110 transition-transform"
-      >
-        {dark ? "☀" : "☾"}
-      </button>
-      <button
-        onClick={() => setLang(lang === "es" ? "en" : "es")}
-        aria-label="Idioma"
-        className="w-12 h-12 rounded-full bg-card border border-border text-foreground text-xs font-medium tracking-wider shadow-card flex items-center justify-center hover:scale-110 transition-transform"
-      >
-        {lang.toUpperCase()}
-      </button>
-    </div>
+    <>
+      <iframe
+        ref={iframeRef}
+        title="background-music"
+        src={`https://www.youtube.com/embed/${YOUTUBE_SONG_ID}?enablejsapi=1&loop=1&playlist=${YOUTUBE_SONG_ID}&controls=0&modestbranding=1`}
+        allow="autoplay"
+        style={{ position: "fixed", width: 1, height: 1, opacity: 0, pointerEvents: "none", border: 0 }}
+      />
+      <div className="fixed bottom-5 right-5 z-40 flex flex-col gap-2.5">
+        <button
+          onClick={toggleMusic}
+          aria-label="Reproducir música"
+          className="w-12 h-12 rounded-full bg-primary text-primary-foreground shadow-soft flex items-center justify-center hover:scale-110 transition-transform"
+        >
+          {playing ? (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
+          ) : (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          )}
+        </button>
+        <button
+          onClick={() => setDark(!dark)}
+          aria-label="Cambiar tema"
+          className="w-12 h-12 rounded-full bg-card border border-border text-foreground shadow-card flex items-center justify-center hover:scale-110 transition-transform"
+        >
+          {dark ? "☀" : "☾"}
+        </button>
+        <button
+          onClick={() => setLang(lang === "es" ? "en" : "es")}
+          aria-label="Idioma"
+          className="w-12 h-12 rounded-full bg-card border border-border text-foreground text-xs font-medium tracking-wider shadow-card flex items-center justify-center hover:scale-110 transition-transform"
+        >
+          {lang.toUpperCase()}
+        </button>
+      </div>
+    </>
   );
 }
+
 
 /* ---------------- HERO ---------------- */
 function Hero() {
@@ -222,7 +231,7 @@ function Hero() {
         >
           <img
             src={src}
-            alt="Sofía y Mateo"
+            alt="Luis Carlos y Leonardo"
             className="w-full h-full object-cover"
             style={{
               transform: i === idx ? "scale(1.06)" : "scale(1)",
@@ -237,20 +246,21 @@ function Hero() {
 
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-white">
         <Reveal delay={200}>
-          <div className="ornament !text-white/90 mb-6">14 · Junio · 2026</div>
+          <div className="ornament !text-white/90 mb-6">30 · Octubre · 2026</div>
         </Reveal>
         <Reveal delay={400}>
-          <h1 className="font-serif italic text-6xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.95]">
-            Sofía
+          <h1 className="font-serif italic text-5xl sm:text-6xl md:text-8xl lg:text-9xl leading-[0.95]">
+            Luis Carlos
             <span className="font-script text-gold block text-4xl sm:text-5xl md:text-6xl my-2 not-italic">&</span>
-            Mateo
+            Leonardo
           </h1>
         </Reveal>
         <Reveal delay={700}>
-          <p className="mt-6 max-w-md font-sans text-sm tracking-[0.25em] uppercase text-white/85">
-            Nos casamos · San Miguel de Allende
+          <p className="mt-6 max-w-md font-sans text-xs sm:text-sm tracking-[0.25em] uppercase text-white/85">
+            Nos casamos · Ciudad Juárez, Chihuahua
           </p>
         </Reveal>
+
 
         <Reveal delay={900}>
           <div className="mt-10 grid grid-cols-4 gap-3 sm:gap-5">
@@ -316,7 +326,7 @@ function OurStory() {
 
         <Reveal delay={150}>
           <div className="mb-16 overflow-hidden rounded-sm shadow-soft">
-            <img src={engagement} alt="Sofía y Mateo" className="w-full aspect-[16/10] object-cover" loading="lazy" />
+            <img src={engagement} alt="Luis Carlos y Leonardo" className="w-full aspect-[16/10] object-cover" loading="lazy" />
           </div>
         </Reveal>
 
@@ -343,10 +353,10 @@ function OurStory() {
 /* ---------------- PARENTS ---------------- */
 function ParentsSection() {
   const groups = [
-    { title: "Padres de la novia", names: ["Carlos Hernández Vega", "María Luisa Ortega"] },
-    { title: "Padres del novio", names: ["Roberto Martínez León", "Ana Patricia Solís"] },
-    { title: "Padrinos", names: ["Eduardo Ramírez", "Lucía Vázquez"] },
+    { title: "Padres de Luis Carlos", names: ["Lazara Ayala Estrada", "Luis Carlos Delgado Leyva"] },
+    { title: "Padres de Leonardo", names: ["Magdalena Bautista Ávalos", "Cirilo García Olivares †"] },
   ];
+
   return (
     <section className="py-24 md:py-32 px-6 bg-background">
       <div className="max-w-6xl mx-auto">
@@ -356,7 +366,7 @@ function ParentsSection() {
         <p className="text-center max-w-2xl mx-auto text-muted-foreground italic font-serif text-lg mb-14">
           "Con la bendición de Dios y de nuestros padres, queremos compartir contigo este día tan especial."
         </p>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           {groups.map((g, i) => (
             <Reveal key={g.title} delay={i * 120}>
               <div className="bg-card border border-border rounded-sm p-8 text-center shadow-card hover:shadow-soft transition-shadow">
@@ -434,26 +444,28 @@ function Gallery() {
 function EventDetails() {
   const events = [
     {
-      label: "Ceremonia",
-      time: "5:00 pm",
-      place: "Parroquia San Francisco",
-      address: "Plaza Allende S/N, Centro, San Miguel de Allende",
-      maps: "https://maps.google.com/?q=Parroquia+San+Francisco+San+Miguel+de+Allende",
+      label: "Ceremonia simbólica",
+      time: "8:00 pm",
+      place: "Terraza Jardín Arjeri",
+      address: VENUE_ADDRESS,
+      maps: VENUE_MAPS,
     },
     {
       label: "Recepción",
-      time: "7:30 pm",
-      place: "Hacienda Las Trojes",
-      address: "Camino Real 12, San Miguel de Allende",
-      maps: "https://maps.google.com/?q=Hacienda+Las+Trojes+San+Miguel+de+Allende",
+      time: "9:00 pm – 2:00 am",
+      place: "Terraza Jardín Arjeri",
+      address: VENUE_ADDRESS,
+      maps: VENUE_MAPS,
     },
   ];
 
   const calendarLink = () => {
-    const start = "20260614T230000Z";
-    const end = "20260615T060000Z";
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Sofía+%26+Mateo&dates=${start}/${end}&details=Acompáñanos+a+celebrar+nuestro+día.&location=San+Miguel+de+Allende`;
+    // 30 Oct 2026 20:00 → 31 Oct 2026 02:00 (CST = UTC-6)
+    const start = "20261031T020000Z";
+    const end = "20261031T080000Z";
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Luis+Carlos+%26+Leonardo&dates=${start}/${end}&details=Acompáñanos+a+celebrar+nuestro+día.&location=${encodeURIComponent(VENUE_ADDRESS)}`;
   };
+
 
   return (
     <section className="py-24 md:py-32 px-6 bg-background">
@@ -500,16 +512,16 @@ function EventDetails() {
 
 /* ---------------- DRESS CODE ---------------- */
 function DressCode() {
-  const palette = ["#3b2a2a", "#8a4a3c", "#c89b7b", "#e8d4b8", "#f3ebe0"];
+  const palette = ["#000000", "#1a1a1a", "#2b2b2b", "#3d3d3d", "#525252"];
   return (
     <section className="py-24 md:py-32 px-6 bg-gradient-blush">
       <div className="max-w-5xl mx-auto text-center">
         <Reveal>
-          <SectionTitle kicker="Código de vestimenta" title="Formal · Etiqueta jardín" />
+          <SectionTitle kicker="Código de vestimenta" title="Black · Todos de negro" />
         </Reveal>
         <Reveal delay={150}>
           <p className="max-w-xl mx-auto text-muted-foreground mb-10">
-            Te invitamos a vestir elegante con tonos cálidos y terrosos. Evita el blanco —reservado para la novia—.
+            Queremos una noche elegante y cinematográfica: te pedimos vestir totalmente de <strong>negro</strong>.
           </p>
         </Reveal>
         <Reveal delay={250}>
@@ -522,17 +534,10 @@ function DressCode() {
           </div>
         </Reveal>
         <Reveal delay={350}>
-          <div className="grid grid-cols-2 gap-4 max-w-xl mx-auto">
-            <div className="bg-card border border-border rounded-sm p-6">
-              <div className="text-4xl mb-3">👗</div>
-              <h4 className="font-serif text-xl text-primary mb-1">Ellas</h4>
-              <p className="text-xs text-muted-foreground tracking-wider">Vestido largo</p>
-            </div>
-            <div className="bg-card border border-border rounded-sm p-6">
-              <div className="text-4xl mb-3">🤵</div>
-              <h4 className="font-serif text-xl text-primary mb-1">Ellos</h4>
-              <p className="text-xs text-muted-foreground tracking-wider">Traje oscuro</p>
-            </div>
+          <div className="max-w-md mx-auto bg-card border border-border rounded-sm p-7">
+            <div className="text-4xl mb-3">🖤</div>
+            <h4 className="font-serif text-xl text-primary mb-1">Dress code</h4>
+            <p className="text-sm text-muted-foreground tracking-wider">Black formal · de pies a cabeza</p>
           </div>
         </Reveal>
       </div>
@@ -540,16 +545,18 @@ function DressCode() {
   );
 }
 
+
 /* ---------------- TIMELINE OF DAY ---------------- */
 function Timeline() {
   const items = [
-    { time: "5:00 pm", title: "Ceremonia", icon: "⛪" },
-    { time: "6:30 pm", title: "Cóctel", icon: "🥂" },
-    { time: "8:00 pm", title: "Cena", icon: "🍽" },
-    { time: "9:30 pm", title: "Primer baile", icon: "💃" },
-    { time: "10:00 pm", title: "Fiesta", icon: "🎶" },
+    { time: "8:00 pm", title: "Ceremonia simbólica", icon: "💍" },
+    { time: "9:00 pm", title: "Recepción & cóctel", icon: "🥂" },
+    { time: "10:00 pm", title: "Cena", icon: "🍽" },
+    { time: "11:00 pm", title: "Primer baile", icon: "💃" },
+    { time: "12:00 am", title: "Fiesta", icon: "🎶" },
     { time: "2:00 am", title: "Despedida", icon: "✨" },
   ];
+
   return (
     <section className="py-24 md:py-32 px-6 bg-background">
       <div className="max-w-3xl mx-auto">
@@ -618,8 +625,8 @@ function Rsvp() {
   };
 
   const whatsappMsg = useMemo(() => {
-    const text = `Hola! Confirmo mi asistencia a la boda de Sofía y Mateo. Nombre: ${form.name || "(nombre)"}, asistencia: ${form.attending === "yes" ? "Sí" : "No"}, acompañantes: ${form.guests}`;
-    return `https://wa.me/5210000000000?text=${encodeURIComponent(text)}`;
+    const text = `Hola! Confirmo mi asistencia a la boda de Luis Carlos y Leonardo. Nombre: ${form.name || "(nombre)"}, asistencia: ${form.attending === "yes" ? "Sí" : "No"}, acompañantes: ${form.guests}`;
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
   }, [form]);
 
   return (
@@ -732,35 +739,32 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 /* ---------------- GIFT REGISTRY ---------------- */
 function GiftRegistry() {
   const gifts = [
-    { icon: "🎁", title: "Mesa de regalos", text: "Liverpool · Código 12345", cta: "Ver mesa", href: "#" },
-    { icon: "🛒", title: "Amazon", text: "Lista en línea curada", cta: "Abrir lista", href: "#" },
-    { icon: "🏦", title: "Transferencia", text: "BBVA · 4152 3138 0000 0000", cta: "Copiar datos", href: "#" },
-    { icon: "✈️", title: "Luna de miel", text: "Contribuye a nuestro viaje", cta: "Aportar", href: "#" },
+    { icon: "💌", title: "Lluvia de sobres", text: "Tendremos un buzón especial el día del evento para recibir tu sobre con todo nuestro cariño." },
+    { icon: "🎁", title: "Regalo sorpresa", text: "Si prefieres consentirnos con un detalle especial, lo recibiremos con muchísima ilusión." },
+    { icon: "🛍️", title: "Mesa de regalos", text: "Pronto compartiremos los detalles de nuestra mesa de regalos contigo." },
   ];
   return (
     <section className="py-24 md:py-32 px-6 bg-background">
       <div className="max-w-5xl mx-auto">
         <Reveal>
-          <SectionTitle kicker="Con cariño" title="Mesa de regalos" />
+          <SectionTitle kicker="Con cariño" title="Opciones de regalo" />
         </Reveal>
         <p className="text-center max-w-xl mx-auto text-muted-foreground italic font-serif mb-12">
-          Tu presencia es el mejor regalo. Si deseas obsequiarnos algo más, aquí algunas opciones.
+          Tu presencia es nuestro mejor regalo. Si deseas obsequiarnos algo más, aquí algunas opciones.
         </p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {gifts.map((g, i) => (
             <Reveal key={g.title} delay={i * 100}>
               <div className="bg-card border border-border rounded-sm p-7 text-center shadow-card hover:shadow-soft hover:-translate-y-1 transition-all h-full flex flex-col">
                 <div className="text-4xl mb-4">{g.icon}</div>
                 <h3 className="font-serif text-xl text-primary mb-2">{g.title}</h3>
-                <p className="text-sm text-muted-foreground mb-5 flex-1">{g.text}</p>
-                <a href={g.href} className="text-xs tracking-[0.2em] uppercase text-gold hover:text-primary transition-colors">
-                  {g.cta} →
-                </a>
+                <p className="text-sm text-muted-foreground flex-1">{g.text}</p>
               </div>
             </Reveal>
           ))}
         </div>
       </div>
+
     </section>
   );
 }
@@ -861,12 +865,13 @@ function SocialWall() {
 /* ---------------- FAQ ---------------- */
 function Faq() {
   const items = [
-    { q: "¿Puedo llevar acompañantes?", a: "Por capacidad del recinto, solo podemos recibir a las personas indicadas en tu invitación." },
-    { q: "¿Hay estacionamiento?", a: "Sí, contamos con estacionamiento gratuito para todos los invitados." },
-    { q: "¿Cuál es el código de vestimenta?", a: "Formal etiqueta jardín. Tonos cálidos y terrosos. Evita el blanco." },
-    { q: "¿Pueden asistir niños?", a: "Será una celebración para adultos. Agradecemos tu comprensión." },
-    { q: "¿Hasta cuándo puedo confirmar?", a: "Te pedimos confirmar antes del 14 de mayo de 2026." },
+    { q: "¿Pueden asistir niños?", a: "¡Sí! Los niños son bienvenidos a celebrar con nosotros." },
+    { q: "¿Cuál es el código de vestimenta?", a: "Black — te pedimos vestir totalmente de negro, formal y elegante." },
+    { q: "¿Habrá ceremonia religiosa?", a: "No tendremos ceremonia religiosa. Realizaremos una ceremonia simbólica en el mismo salón a las 8:00 pm." },
+    { q: "¿Hay estacionamiento?", a: "Sí, el recinto cuenta con estacionamiento para los invitados." },
+    { q: "¿Hasta cuándo puedo confirmar?", a: "Te pedimos confirmar tu asistencia antes del 30 de septiembre de 2026 por WhatsApp." },
   ];
+
   const [open, setOpen] = useState<number | null>(0);
   return (
     <section className="py-24 md:py-32 px-6 bg-background">
@@ -908,7 +913,7 @@ function Faq() {
 function ThankYou() {
   return (
     <section className="relative h-[100svh] min-h-[600px] w-full overflow-hidden">
-      <img src={couple3} alt="Sofía y Mateo" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+      <img src={couple3} alt="Luis Carlos y Leonardo" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
       <div className="absolute inset-0 bg-black/50" />
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-white">
         <Reveal>
@@ -926,12 +931,12 @@ function ThankYou() {
         </Reveal>
         <Reveal delay={600}>
           <div className="mt-8 font-script text-5xl md:text-6xl text-gold">
-            Sofía & Mateo
+            Luis Carlos & Leonardo
           </div>
         </Reveal>
         <Reveal delay={800}>
           <div className="mt-6 text-xs tracking-[0.4em] uppercase text-white/70">
-            14 · 06 · 2026
+            30 · 10 · 2026
           </div>
         </Reveal>
       </div>
