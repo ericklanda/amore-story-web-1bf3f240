@@ -1,11 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
-import heroCouple from "@/assets/hero-couple.jpg";
-import couple2 from "@/assets/couple-2.jpg";
-import couple3 from "@/assets/couple-3.jpg";
-import details from "@/assets/details.jpg";
-import bouquet from "@/assets/bouquet.jpg";
-import engagement from "@/assets/engagement.jpg";
+import p12 from "@/assets/photos/p12.jpg.asset.json";
+import p52 from "@/assets/photos/p52.jpg.asset.json";
+import p150 from "@/assets/photos/p150.jpg.asset.json";
+import p169 from "@/assets/photos/p169.jpg.asset.json";
+import p201 from "@/assets/photos/p201.jpg.asset.json";
+import p218 from "@/assets/photos/p218.jpg.asset.json";
+import p238 from "@/assets/photos/p238.jpg.asset.json";
+import p274 from "@/assets/photos/p274.jpg.asset.json";
+import p277 from "@/assets/photos/p277.jpg.asset.json";
+import p279 from "@/assets/photos/p279.jpg.asset.json";
+
+const heroCouple = p52.url;
+const couple2 = p201.url;
+const couple3 = p279.url;
+const details = p238.url;
+const bouquet = p12.url;
+const engagement = p277.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -14,6 +25,7 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Invitación de boda de Luis Carlos y Leonardo. Confirma tu asistencia y conoce los detalles de nuestro gran día." },
       { property: "og:title", content: "Luis Carlos & Leonardo · Nuestra Boda" },
       { property: "og:description", content: "Acompáñanos el 30 de Octubre de 2026 en Ciudad Juárez." },
+      { property: "og:image", content: p52.url },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
@@ -29,12 +41,16 @@ const VENUE_MAPS = "https://maps.app.goo.gl/fb6ZCWdXrxMd9wwu7";
 const VENUE_ADDRESS = "Cam. Viejo a San José 4545, Las Arcadas, 32590 Juárez, Chih.";
 
 const GALLERY = [
-  { src: heroCouple, caption: "Nosotros" },
-  { src: couple2, caption: "Momentos" },
-  { src: couple3, caption: "Juntos" },
-  { src: bouquet, caption: "Detalles" },
-  { src: engagement, caption: "Risas" },
-  { src: details, caption: "Celebración" },
+  { src: p52.url, caption: "Nosotros" },
+  { src: p201.url, caption: "Atardecer" },
+  { src: p279.url, caption: "Risas" },
+  { src: p12.url, caption: "Complicidad" },
+  { src: p277.url, caption: "Juntos" },
+  { src: p274.url, caption: "Para siempre" },
+  { src: p169.url, caption: "Mirando al futuro" },
+  { src: p150.url, caption: "Sueños" },
+  { src: p218.url, caption: "Nuestra historia" },
+  { src: p238.url, caption: "Descanso" },
 ];
 
 
