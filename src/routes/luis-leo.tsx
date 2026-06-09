@@ -174,18 +174,39 @@ function FloatingControls({
   lang: "es" | "en";
   setLang: (v: "es" | "en") => void;
 }) {
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(true);
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
 
-  const toggleMusic = () => {
-    if (!iframeRef.current) return;
-    const action = playing ? "pauseVideo" : "playVideo";
-    iframeRef.current.contentWindow?.postMessage(
+  const sendCommand = (action: string) => {
+    iframeRef.current?.contentWindow?.postMessage(
       JSON.stringify({ event: "command", func: action, args: [] }),
       "*"
     );
+  };
+
+  const toggleMusic = () => {
+    const action = playing ? "pauseVideo" : "playVideo";
+    sendCommand(action);
     setPlaying(!playing);
   };
+
+  useEffect(() => {
+    // intentar reproducir al montar
+    sendCommand("playVideo");
+    // si el navegador bloquea autoplay, reintentar en el primer gesto del usuario
+    const resume = () => {
+      sendCommand("playVideo");
+      setPlaying(true);
+      window.removeEventListener("click", resume);
+      window.removeEventListener("touchstart", resume);
+    };
+    window.addEventListener("click", resume);
+    window.addEventListener("touchstart", resume);
+    return () => {
+      window.removeEventListener("click", resume);
+      window.removeEventListener("touchstart", resume);
+    };
+  }, []);
 
   return (
     <>
