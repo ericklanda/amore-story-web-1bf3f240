@@ -246,20 +246,21 @@ function Hero() {
 
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-white">
         <Reveal delay={200}>
-          <div className="ornament !text-white/90 mb-6">14 · Junio · 2026</div>
+          <div className="ornament !text-white/90 mb-6">30 · Octubre · 2026</div>
         </Reveal>
         <Reveal delay={400}>
-          <h1 className="font-serif italic text-6xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.95]">
-            Sofía
+          <h1 className="font-serif italic text-5xl sm:text-6xl md:text-8xl lg:text-9xl leading-[0.95]">
+            Luis Carlos
             <span className="font-script text-gold block text-4xl sm:text-5xl md:text-6xl my-2 not-italic">&</span>
-            Mateo
+            Leonardo
           </h1>
         </Reveal>
         <Reveal delay={700}>
-          <p className="mt-6 max-w-md font-sans text-sm tracking-[0.25em] uppercase text-white/85">
-            Nos casamos · San Miguel de Allende
+          <p className="mt-6 max-w-md font-sans text-xs sm:text-sm tracking-[0.25em] uppercase text-white/85">
+            Nos casamos · Ciudad Juárez, Chihuahua
           </p>
         </Reveal>
+
 
         <Reveal delay={900}>
           <div className="mt-10 grid grid-cols-4 gap-3 sm:gap-5">
