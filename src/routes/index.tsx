@@ -631,7 +631,7 @@ function SpecialMoments() {
 /* ---------------- RSVP ---------------- */
 function Rsvp() {
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ name: "", attending: "yes", guests: "1", dietary: "", message: "" });
+  const [form, setForm] = useState({ name: "", attending: "yes", guests: "1", message: "" });
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -700,14 +700,6 @@ function Rsvp() {
                     <option key={n} value={n}>{n}</option>
                   ))}
                 </select>
-              </Field>
-              <Field label="Restricciones alimentarias">
-                <input
-                  value={form.dietary}
-                  onChange={(e) => setForm({ ...form, dietary: e.target.value })}
-                  placeholder="Vegetariano, sin gluten…"
-                  className="w-full bg-transparent border-b border-border focus:border-primary outline-none py-2"
-                />
               </Field>
               <Field label="Mensaje para los novios">
                 <textarea
