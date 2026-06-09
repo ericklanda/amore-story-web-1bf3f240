@@ -701,14 +701,6 @@ function Rsvp() {
                   ))}
                 </select>
               </Field>
-              <Field label="Restricciones alimentarias">
-                <input
-                  value={form.dietary}
-                  onChange={(e) => setForm({ ...form, dietary: e.target.value })}
-                  placeholder="Vegetariano, sin gluten…"
-                  className="w-full bg-transparent border-b border-border focus:border-primary outline-none py-2"
-                />
-              </Field>
               <Field label="Mensaje para los novios">
                 <textarea
                   rows={3}
