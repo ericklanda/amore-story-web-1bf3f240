@@ -353,10 +353,10 @@ function OurStory() {
 /* ---------------- PARENTS ---------------- */
 function ParentsSection() {
   const groups = [
-    { title: "Padres de la novia", names: ["Carlos Hernández Vega", "María Luisa Ortega"] },
-    { title: "Padres del novio", names: ["Roberto Martínez León", "Ana Patricia Solís"] },
-    { title: "Padrinos", names: ["Eduardo Ramírez", "Lucía Vázquez"] },
+    { title: "Padres de Luis Carlos", names: ["Lazara Ayala Estrada", "Luis Carlos Delgado Leyva"] },
+    { title: "Padres de Leonardo", names: ["Magdalena Bautista Ávalos", "Cirilo García Olivares †"] },
   ];
+
   return (
     <section className="py-24 md:py-32 px-6 bg-background">
       <div className="max-w-6xl mx-auto">
