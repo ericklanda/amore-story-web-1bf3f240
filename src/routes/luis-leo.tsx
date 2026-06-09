@@ -192,7 +192,7 @@ function FloatingControls({
       <iframe
         ref={iframeRef}
         title="background-music"
-        src={`https://www.youtube.com/embed/${YOUTUBE_SONG_ID}?enablejsapi=1&loop=1&playlist=${YOUTUBE_SONG_ID}&controls=0&modestbranding=1`}
+        src={`https://www.youtube.com/embed/${YOUTUBE_SONG_ID}?enablejsapi=1&autoplay=1&loop=1&playlist=${YOUTUBE_SONG_ID}&controls=0&modestbranding=1`}
         allow="autoplay"
         style={{ position: "fixed", width: 1, height: 1, opacity: 0, pointerEvents: "none", border: 0 }}
       />
