@@ -231,7 +231,7 @@ function Hero() {
         >
           <img
             src={src}
-            alt="Sofía y Mateo"
+            alt="Luis Carlos y Leonardo"
             className="w-full h-full object-cover"
             style={{
               transform: i === idx ? "scale(1.06)" : "scale(1)",
@@ -326,7 +326,7 @@ function OurStory() {
 
         <Reveal delay={150}>
           <div className="mb-16 overflow-hidden rounded-sm shadow-soft">
-            <img src={engagement} alt="Sofía y Mateo" className="w-full aspect-[16/10] object-cover" loading="lazy" />
+            <img src={engagement} alt="Luis Carlos y Leonardo" className="w-full aspect-[16/10] object-cover" loading="lazy" />
           </div>
         </Reveal>
 
@@ -447,14 +447,14 @@ function EventDetails() {
       label: "Ceremonia",
       time: "5:00 pm",
       place: "Parroquia San Francisco",
-      address: "Plaza Allende S/N, Centro, San Miguel de Allende",
+      address: "Plaza Allende S/N, Centro, Ciudad Juárez",
       maps: "https://maps.google.com/?q=Parroquia+San+Francisco+San+Miguel+de+Allende",
     },
     {
       label: "Recepción",
       time: "7:30 pm",
       place: "Hacienda Las Trojes",
-      address: "Camino Real 12, San Miguel de Allende",
+      address: "Camino Real 12, Ciudad Juárez",
       maps: "https://maps.google.com/?q=Hacienda+Las+Trojes+San+Miguel+de+Allende",
     },
   ];
@@ -462,7 +462,7 @@ function EventDetails() {
   const calendarLink = () => {
     const start = "20260614T230000Z";
     const end = "20260615T060000Z";
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Sofía+%26+Mateo&dates=${start}/${end}&details=Acompáñanos+a+celebrar+nuestro+día.&location=San+Miguel+de+Allende`;
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Luis+Carlos+%26+Leonardo&dates=${start}/${end}&details=Acompáñanos+a+celebrar+nuestro+día.&location=San+Miguel+de+Allende`;
   };
 
   return (
@@ -628,7 +628,7 @@ function Rsvp() {
   };
 
   const whatsappMsg = useMemo(() => {
-    const text = `Hola! Confirmo mi asistencia a la boda de Sofía y Mateo. Nombre: ${form.name || "(nombre)"}, asistencia: ${form.attending === "yes" ? "Sí" : "No"}, acompañantes: ${form.guests}`;
+    const text = `Hola! Confirmo mi asistencia a la boda de Luis Carlos y Leonardo. Nombre: ${form.name || "(nombre)"}, asistencia: ${form.attending === "yes" ? "Sí" : "No"}, acompañantes: ${form.guests}`;
     return `https://wa.me/5210000000000?text=${encodeURIComponent(text)}`;
   }, [form]);
 
@@ -918,7 +918,7 @@ function Faq() {
 function ThankYou() {
   return (
     <section className="relative h-[100svh] min-h-[600px] w-full overflow-hidden">
-      <img src={couple3} alt="Sofía y Mateo" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+      <img src={couple3} alt="Luis Carlos y Leonardo" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
       <div className="absolute inset-0 bg-black/50" />
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-white">
         <Reveal>
@@ -936,7 +936,7 @@ function ThankYou() {
         </Reveal>
         <Reveal delay={600}>
           <div className="mt-8 font-script text-5xl md:text-6xl text-gold">
-            Sofía & Mateo
+            Luis Carlos & Leonardo
           </div>
         </Reveal>
         <Reveal delay={800}>
