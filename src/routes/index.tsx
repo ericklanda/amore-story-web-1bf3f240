@@ -566,10 +566,8 @@ function DressCode() {
 function Timeline() {
   const items = [
     { time: "8:00 pm", title: "Ceremonia simbólica", icon: "💍" },
-    { time: "9:00 pm", title: "Recepción & cóctel", icon: "🥂" },
-    { time: "10:00 pm", title: "Cena", icon: "🍽" },
-    { time: "11:00 pm", title: "Primer baile", icon: "💃" },
-    { time: "12:00 am", title: "Fiesta", icon: "🎶" },
+    { time: "9:00 pm", title: "Primer baile", icon: "💃" },
+    { time: "10:00 pm", title: "Fiesta", icon: "🎶" },
     { time: "2:00 am", title: "Despedida", icon: "✨" },
   ];
 
