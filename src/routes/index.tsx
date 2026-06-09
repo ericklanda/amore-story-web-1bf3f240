@@ -549,13 +549,14 @@ function DressCode() {
 /* ---------------- TIMELINE OF DAY ---------------- */
 function Timeline() {
   const items = [
-    { time: "5:00 pm", title: "Ceremonia", icon: "⛪" },
-    { time: "6:30 pm", title: "Cóctel", icon: "🥂" },
-    { time: "8:00 pm", title: "Cena", icon: "🍽" },
-    { time: "9:30 pm", title: "Primer baile", icon: "💃" },
-    { time: "10:00 pm", title: "Fiesta", icon: "🎶" },
+    { time: "8:00 pm", title: "Ceremonia simbólica", icon: "💍" },
+    { time: "9:00 pm", title: "Recepción & cóctel", icon: "🥂" },
+    { time: "10:00 pm", title: "Cena", icon: "🍽" },
+    { time: "11:00 pm", title: "Primer baile", icon: "💃" },
+    { time: "12:00 am", title: "Fiesta", icon: "🎶" },
     { time: "2:00 am", title: "Despedida", icon: "✨" },
   ];
+
   return (
     <section className="py-24 md:py-32 px-6 bg-background">
       <div className="max-w-3xl mx-auto">
