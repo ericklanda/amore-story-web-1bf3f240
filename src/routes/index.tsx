@@ -631,7 +631,7 @@ function SpecialMoments() {
 /* ---------------- RSVP ---------------- */
 function Rsvp() {
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ name: "", attending: "yes", guests: "1", dietary: "", message: "" });
+  const [form, setForm] = useState({ name: "", attending: "yes", guests: "1", message: "" });
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
