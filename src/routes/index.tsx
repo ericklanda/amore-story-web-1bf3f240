@@ -865,12 +865,13 @@ function SocialWall() {
 /* ---------------- FAQ ---------------- */
 function Faq() {
   const items = [
-    { q: "¿Puedo llevar acompañantes?", a: "Por capacidad del recinto, solo podemos recibir a las personas indicadas en tu invitación." },
-    { q: "¿Hay estacionamiento?", a: "Sí, contamos con estacionamiento gratuito para todos los invitados." },
-    { q: "¿Cuál es el código de vestimenta?", a: "Formal etiqueta jardín. Tonos cálidos y terrosos. Evita el blanco." },
-    { q: "¿Pueden asistir niños?", a: "Será una celebración para adultos. Agradecemos tu comprensión." },
-    { q: "¿Hasta cuándo puedo confirmar?", a: "Te pedimos confirmar antes del 14 de mayo de 2026." },
+    { q: "¿Pueden asistir niños?", a: "¡Sí! Los niños son bienvenidos a celebrar con nosotros." },
+    { q: "¿Cuál es el código de vestimenta?", a: "Black — te pedimos vestir totalmente de negro, formal y elegante." },
+    { q: "¿Habrá ceremonia religiosa?", a: "No tendremos ceremonia religiosa. Realizaremos una ceremonia simbólica en el mismo salón a las 8:00 pm." },
+    { q: "¿Hay estacionamiento?", a: "Sí, el recinto cuenta con estacionamiento para los invitados." },
+    { q: "¿Hasta cuándo puedo confirmar?", a: "Te pedimos confirmar tu asistencia antes del 30 de septiembre de 2026 por WhatsApp." },
   ];
+
   const [open, setOpen] = useState<number | null>(0);
   return (
     <section className="py-24 md:py-32 px-6 bg-background">
