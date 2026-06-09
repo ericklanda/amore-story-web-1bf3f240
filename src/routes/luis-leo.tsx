@@ -26,9 +26,9 @@ export const Route = createFileRoute("/luis-leo")({
       { property: "og:title", content: "Luis Carlos & Leonardo · Nuestra Boda" },
       { property: "og:description", content: "Acompáñanos el 30 de Octubre de 2026 en Ciudad Juárez." },
       { property: "og:image", content: p52.url },
-      { property: "og:url", content: "/luis-leo" },
+      { property: "og:url", content: "https://blcksocial.com/luis-leo" },
     ],
-    links: [{ rel: "canonical", href: "/luis-leo" }],
+    links: [{ rel: "canonical", href: "https://blcksocial.com/luis-leo" }],
   }),
   component: WeddingInvitation,
 });
