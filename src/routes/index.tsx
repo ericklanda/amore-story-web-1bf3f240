@@ -151,7 +151,7 @@ function WeddingInvitation() {
       <SpecialMoments />
       <Rsvp />
       <GiftRegistry />
-      <Accommodation />
+      {/* Hospedaje removido */}
       <Transportation />
       <SocialWall />
       <Faq />
