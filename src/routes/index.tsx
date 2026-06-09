@@ -512,16 +512,16 @@ function EventDetails() {
 
 /* ---------------- DRESS CODE ---------------- */
 function DressCode() {
-  const palette = ["#3b2a2a", "#8a4a3c", "#c89b7b", "#e8d4b8", "#f3ebe0"];
+  const palette = ["#000000", "#1a1a1a", "#2b2b2b", "#3d3d3d", "#525252"];
   return (
     <section className="py-24 md:py-32 px-6 bg-gradient-blush">
       <div className="max-w-5xl mx-auto text-center">
         <Reveal>
-          <SectionTitle kicker="Código de vestimenta" title="Formal · Etiqueta jardín" />
+          <SectionTitle kicker="Código de vestimenta" title="Black · Todos de negro" />
         </Reveal>
         <Reveal delay={150}>
           <p className="max-w-xl mx-auto text-muted-foreground mb-10">
-            Te invitamos a vestir elegante con tonos cálidos y terrosos. Evita el blanco —reservado para la novia—.
+            Queremos una noche elegante y cinematográfica: te pedimos vestir totalmente de <strong>negro</strong>.
           </p>
         </Reveal>
         <Reveal delay={250}>
@@ -534,23 +534,17 @@ function DressCode() {
           </div>
         </Reveal>
         <Reveal delay={350}>
-          <div className="grid grid-cols-2 gap-4 max-w-xl mx-auto">
-            <div className="bg-card border border-border rounded-sm p-6">
-              <div className="text-4xl mb-3">👗</div>
-              <h4 className="font-serif text-xl text-primary mb-1">Ellas</h4>
-              <p className="text-xs text-muted-foreground tracking-wider">Vestido largo</p>
-            </div>
-            <div className="bg-card border border-border rounded-sm p-6">
-              <div className="text-4xl mb-3">🤵</div>
-              <h4 className="font-serif text-xl text-primary mb-1">Ellos</h4>
-              <p className="text-xs text-muted-foreground tracking-wider">Traje oscuro</p>
-            </div>
+          <div className="max-w-md mx-auto bg-card border border-border rounded-sm p-7">
+            <div className="text-4xl mb-3">🖤</div>
+            <h4 className="font-serif text-xl text-primary mb-1">Dress code</h4>
+            <p className="text-sm text-muted-foreground tracking-wider">Black formal · de pies a cabeza</p>
           </div>
         </Reveal>
       </div>
     </section>
   );
 }
+
 
 /* ---------------- TIMELINE OF DAY ---------------- */
 function Timeline() {
