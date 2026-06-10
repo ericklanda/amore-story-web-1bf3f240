@@ -101,6 +101,24 @@ function AuthPage() {
           >
             {mode === "login" ? "¿Primera vez? Crear cuenta" : "Ya tengo cuenta · Entrar"}
           </button>
+          {mode === "login" && (
+            <button
+              onClick={async () => {
+                if (!email) {
+                  toast.error("Escribe tu email primero");
+                  return;
+                }
+                const { error } = await supabase.auth.resetPasswordForEmail(email, {
+                  redirectTo: `${window.location.origin}/reset-password`,
+                });
+                if (error) toast.error(error.message);
+                else toast.success("Te enviamos un enlace para restablecer tu contraseña");
+              }}
+              className="mt-2 w-full text-xs tracking-[0.2em] uppercase text-[#8A7E72] hover:text-[#D4AF37] transition-colors"
+            >
+              Olvidé mi contraseña
+            </button>
+          )}
         </div>
       </div>
     </div>
