@@ -657,11 +657,31 @@ function SpecialMoments() {
 /* ---------------- RSVP ---------------- */
 function Rsvp() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ name: "", attending: "yes", guests: "1", message: "" });
+  const submit = useServerFn(submitRsvp);
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (submitting) return;
+    setSubmitting(true);
+    try {
+      await submit({
+        data: {
+          invitation_slug: "luis-leo",
+          name: form.name.trim(),
+          attending: form.attending as "yes" | "no",
+          guests: Number(form.guests) || 0,
+          message: form.message || null,
+        },
+      });
+      setSubmitted(true);
+    } catch (err) {
+      console.error(err);
+      toast.error("No pudimos guardar tu confirmación. Intenta de nuevo.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const whatsappMsg = useMemo(() => {
