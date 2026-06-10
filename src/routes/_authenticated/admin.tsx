@@ -146,6 +146,15 @@ function AdminPage() {
                 {showCreate ? "Cerrar" : "+ Nueva"}
               </button>
             )}
+            {slug && (
+              <button
+                onClick={() => setShowEditor((v) => !v)}
+                className="px-3 py-2 text-xs tracking-[0.2em] uppercase border border-[#2D2D2D] text-[#2D2D2D] rounded-sm hover:bg-[#2D2D2D] hover:text-white transition-colors"
+              >
+                {showEditor ? "Cerrar editor" : "Editar invitación"}
+              </button>
+            )}
+
             <button
               onClick={() => refetch()}
               disabled={!slug}
