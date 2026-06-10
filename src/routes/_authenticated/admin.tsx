@@ -5,6 +5,8 @@ import { useEffect, useMemo, useState } from "react";
 import { listRsvps, listMyInvitations, createInvitation } from "@/lib/rsvp-admin.functions";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { InvitationEditor } from "@/components/admin/InvitationEditor";
+
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
@@ -44,6 +46,8 @@ function AdminPage() {
 
   const [slug, setSlug] = useState<string>("");
   const [showCreate, setShowCreate] = useState(false);
+  const [showEditor, setShowEditor] = useState(false);
+
 
   const invQuery = useQuery({
     queryKey: ["my-invitations"],
@@ -142,6 +146,15 @@ function AdminPage() {
                 {showCreate ? "Cerrar" : "+ Nueva"}
               </button>
             )}
+            {slug && (
+              <button
+                onClick={() => setShowEditor((v) => !v)}
+                className="px-3 py-2 text-xs tracking-[0.2em] uppercase border border-[#2D2D2D] text-[#2D2D2D] rounded-sm hover:bg-[#2D2D2D] hover:text-white transition-colors"
+              >
+                {showEditor ? "Cerrar editor" : "Editar invitación"}
+              </button>
+            )}
+
             <button
               onClick={() => refetch()}
               disabled={!slug}
@@ -175,6 +188,14 @@ function AdminPage() {
             }}
           />
         )}
+
+        {showEditor && slug && (
+          <div className="mb-6">
+            <InvitationEditor slug={slug} />
+          </div>
+        )}
+
+
 
         {invitations.length === 0 && !invQuery.isLoading ? (
           <div className="bg-white border border-[#E5DED3] rounded-sm p-8 text-center text-[#8A7E72]">
