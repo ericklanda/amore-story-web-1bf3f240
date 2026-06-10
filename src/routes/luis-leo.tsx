@@ -272,11 +272,14 @@ function SplashOverlay({ onEnter }: { onEnter: () => void }) {
         <p className="text-white/70 text-xs tracking-[0.25em] uppercase mb-10">
           Nos casamos · Ciudad Juárez, Chihuahua
         </p>
+        <p className="font-serif italic text-2xl sm:text-3xl text-white/90 mb-6">
+          Estas Invitado
+        </p>
         <button
           onClick={handleEnter}
           className="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-white/95 text-primary font-sans text-sm tracking-[0.2em] uppercase hover:bg-white transition-all hover:gap-5"
         >
-          Entrar
+          Ingresa
           <span>→</span>
         </button>
       </div>
