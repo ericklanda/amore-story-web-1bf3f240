@@ -758,9 +758,10 @@ function Rsvp() {
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <button
                   type="submit"
-                  className="flex-1 py-3.5 bg-primary text-primary-foreground tracking-[0.2em] uppercase text-xs rounded-full hover:opacity-90 transition-opacity"
+                  disabled={submitting}
+                  className="flex-1 py-3.5 bg-primary text-primary-foreground tracking-[0.2em] uppercase text-xs rounded-full hover:opacity-90 transition-opacity disabled:opacity-60"
                 >
-                  Enviar confirmación
+                  {submitting ? "Enviando..." : "Enviar confirmación"}
                 </button>
                 <a
                   href={whatsappMsg}
