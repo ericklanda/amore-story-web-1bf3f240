@@ -5,6 +5,8 @@ import { useEffect, useMemo, useState } from "react";
 import { listRsvps, listMyInvitations, createInvitation } from "@/lib/rsvp-admin.functions";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { InvitationEditor } from "@/components/admin/InvitationEditor";
+
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
