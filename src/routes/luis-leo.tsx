@@ -174,13 +174,15 @@ function FloatingControls({
   setDark,
   lang,
   setLang,
+  entered,
 }: {
   dark: boolean;
   setDark: (v: boolean) => void;
   lang: "es" | "en";
   setLang: (v: "es" | "en") => void;
+  entered: boolean;
 }) {
-  const [playing, setPlaying] = useState(true);
+  const [playing, setPlaying] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
 
   const sendCommand = (action: string) => {
@@ -197,22 +199,11 @@ function FloatingControls({
   };
 
   useEffect(() => {
-    // intentar reproducir al montar
-    sendCommand("playVideo");
-    // si el navegador bloquea autoplay, reintentar en el primer gesto del usuario
-    const resume = () => {
+    if (entered) {
       sendCommand("playVideo");
       setPlaying(true);
-      window.removeEventListener("click", resume);
-      window.removeEventListener("touchstart", resume);
-    };
-    window.addEventListener("click", resume);
-    window.addEventListener("touchstart", resume);
-    return () => {
-      window.removeEventListener("click", resume);
-      window.removeEventListener("touchstart", resume);
-    };
-  }, []);
+    }
+  }, [entered]);
 
   return (
     <>
