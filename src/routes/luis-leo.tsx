@@ -259,9 +259,9 @@ function SplashOverlay({ onEnter }: { onEnter: () => void }) {
       className={`fixed inset-0 z-[60] flex flex-col items-center justify-center text-center px-6 transition-opacity duration-700 ${
         fading ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
-      style={{ background: "var(--gradient-hero)" }}
+      style={{ background: "linear-gradient(180deg, oklch(0.32 0.05 150), oklch(0.42 0.06 145))" }}
     >
-      <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 bg-primary/20" />
       <div className="relative z-10 max-w-lg">
         <div className="ornament !text-white/80 mb-6 text-sm tracking-[0.3em]">30 · Octubre · 2026</div>
         <h1 className="font-serif italic text-5xl sm:text-6xl md:text-7xl text-white leading-[0.95] mb-4">
