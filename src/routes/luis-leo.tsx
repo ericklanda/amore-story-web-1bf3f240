@@ -245,6 +245,44 @@ function FloatingControls({
   );
 }
 
+/* ---------------- SPLASH OVERLAY ---------------- */
+function SplashOverlay({ onEnter }: { onEnter: () => void }) {
+  const [fading, setFading] = useState(false);
+
+  const handleEnter = () => {
+    setFading(true);
+    setTimeout(onEnter, 800);
+  };
+
+  return (
+    <div
+      className={`fixed inset-0 z-[60] flex flex-col items-center justify-center text-center px-6 transition-opacity duration-700 ${
+        fading ? "opacity-0 pointer-events-none" : "opacity-100"
+      }`}
+      style={{ background: "var(--gradient-hero)" }}
+    >
+      <div className="absolute inset-0 bg-black/40" />
+      <div className="relative z-10 max-w-lg">
+        <div className="ornament !text-white/80 mb-6 text-sm tracking-[0.3em]">30 · Octubre · 2026</div>
+        <h1 className="font-serif italic text-5xl sm:text-6xl md:text-7xl text-white leading-[0.95] mb-4">
+          Luis Carlos
+          <span className="font-script text-gold block text-4xl sm:text-5xl md:text-6xl my-2 not-italic">&</span>
+          Leonardo
+        </h1>
+        <p className="text-white/70 text-xs tracking-[0.25em] uppercase mb-10">
+          Nos casamos · Ciudad Juárez, Chihuahua
+        </p>
+        <button
+          onClick={handleEnter}
+          className="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-white/95 text-primary font-sans text-sm tracking-[0.2em] uppercase hover:bg-white transition-all hover:gap-5"
+        >
+          Entrar
+          <span>→</span>
+        </button>
+      </div>
+    </div>
+  );
+}
 
 /* ---------------- HERO ---------------- */
 function Hero() {
