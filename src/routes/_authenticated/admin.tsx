@@ -46,6 +46,8 @@ function AdminPage() {
 
   const [slug, setSlug] = useState<string>("");
   const [showCreate, setShowCreate] = useState(false);
+  const [showEditor, setShowEditor] = useState(false);
+
 
   const invQuery = useQuery({
     queryKey: ["my-invitations"],
