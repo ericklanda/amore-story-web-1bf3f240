@@ -64,8 +64,10 @@ function ErrorInvitation({ error }: { error: Error }) {
 function PublicInvitationPage() {
   const { slug } = Route.useParams();
   const { data: inv } = useSuspenseQuery(invitationQueryOptions(slug));
+  if (!inv) return <NotFoundInvitation />;
   return <Template inv={inv} />;
 }
+
 
 /* ============================================================
    The same elegant layout as luis-leo, fully data-driven.
