@@ -189,6 +189,14 @@ function AdminPage() {
           />
         )}
 
+        {showEditor && slug && (
+          <div className="mb-6">
+            <InvitationEditor slug={slug} />
+          </div>
+        )}
+
+
+
         {invitations.length === 0 && !invQuery.isLoading ? (
           <div className="bg-white border border-[#E5DED3] rounded-sm p-8 text-center text-[#8A7E72]">
             <p>No tienes invitaciones asignadas a tu cuenta.</p>
