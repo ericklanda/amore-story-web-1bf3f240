@@ -16,34 +16,106 @@ export type Database = {
     Tables: {
       invitations: {
         Row: {
+          bride_name: string | null
+          city: string | null
           couple_names: string
           created_at: string
+          dress_code: string | null
+          dress_code_note: string | null
           event_date: string | null
+          event_datetime: string | null
+          faq: Json
+          gallery: Json
+          gift_registry: Json
+          groom_name: string | null
+          hashtag: string | null
+          hero_image_url: string | null
           id: string
           owner_email: string
           owner_user_id: string | null
+          parents: Json
+          published: boolean
           slug: string
+          story_image_url: string | null
+          story_milestones: Json
+          thank_you_message: string | null
+          timeline: Json
+          transportation_note: string | null
           updated_at: string
+          venue_address: string | null
+          venue_maps_url: string | null
+          venue_name: string | null
+          welcome_message: string | null
+          whatsapp_number: string | null
+          youtube_song_id: string | null
         }
         Insert: {
+          bride_name?: string | null
+          city?: string | null
           couple_names: string
           created_at?: string
+          dress_code?: string | null
+          dress_code_note?: string | null
           event_date?: string | null
+          event_datetime?: string | null
+          faq?: Json
+          gallery?: Json
+          gift_registry?: Json
+          groom_name?: string | null
+          hashtag?: string | null
+          hero_image_url?: string | null
           id?: string
           owner_email: string
           owner_user_id?: string | null
+          parents?: Json
+          published?: boolean
           slug: string
+          story_image_url?: string | null
+          story_milestones?: Json
+          thank_you_message?: string | null
+          timeline?: Json
+          transportation_note?: string | null
           updated_at?: string
+          venue_address?: string | null
+          venue_maps_url?: string | null
+          venue_name?: string | null
+          welcome_message?: string | null
+          whatsapp_number?: string | null
+          youtube_song_id?: string | null
         }
         Update: {
+          bride_name?: string | null
+          city?: string | null
           couple_names?: string
           created_at?: string
+          dress_code?: string | null
+          dress_code_note?: string | null
           event_date?: string | null
+          event_datetime?: string | null
+          faq?: Json
+          gallery?: Json
+          gift_registry?: Json
+          groom_name?: string | null
+          hashtag?: string | null
+          hero_image_url?: string | null
           id?: string
           owner_email?: string
           owner_user_id?: string | null
+          parents?: Json
+          published?: boolean
           slug?: string
+          story_image_url?: string | null
+          story_milestones?: Json
+          thank_you_message?: string | null
+          timeline?: Json
+          transportation_note?: string | null
           updated_at?: string
+          venue_address?: string | null
+          venue_maps_url?: string | null
+          venue_name?: string | null
+          welcome_message?: string | null
+          whatsapp_number?: string | null
+          youtube_song_id?: string | null
         }
         Relationships: []
       }
