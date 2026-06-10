@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { submitRsvp } from "@/lib/rsvp.functions";
+import { toast } from "sonner";
 import p12 from "@/assets/photos/p12.jpg.asset.json";
 import p52 from "@/assets/photos/p52.jpg.asset.json";
 import p150 from "@/assets/photos/p150.jpg.asset.json";
@@ -654,11 +657,31 @@ function SpecialMoments() {
 /* ---------------- RSVP ---------------- */
 function Rsvp() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ name: "", attending: "yes", guests: "1", message: "" });
+  const submit = useServerFn(submitRsvp);
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (submitting) return;
+    setSubmitting(true);
+    try {
+      await submit({
+        data: {
+          invitation_slug: "luis-leo",
+          name: form.name.trim(),
+          attending: form.attending as "yes" | "no",
+          guests: Number(form.guests) || 0,
+          message: form.message || null,
+        },
+      });
+      setSubmitted(true);
+    } catch (err) {
+      console.error(err);
+      toast.error("No pudimos guardar tu confirmación. Intenta de nuevo.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const whatsappMsg = useMemo(() => {
@@ -735,9 +758,10 @@ function Rsvp() {
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <button
                   type="submit"
-                  className="flex-1 py-3.5 bg-primary text-primary-foreground tracking-[0.2em] uppercase text-xs rounded-full hover:opacity-90 transition-opacity"
+                  disabled={submitting}
+                  className="flex-1 py-3.5 bg-primary text-primary-foreground tracking-[0.2em] uppercase text-xs rounded-full hover:opacity-90 transition-opacity disabled:opacity-60"
                 >
-                  Enviar confirmación
+                  {submitting ? "Enviando..." : "Enviar confirmación"}
                 </button>
                 <a
                   href={whatsappMsg}
