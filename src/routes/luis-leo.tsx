@@ -119,6 +119,7 @@ function WeddingInvitation() {
   const [dark, setDark] = useState(false);
   const [lang, setLang] = useState<"es" | "en">("es");
   const [progress, setProgress] = useState(0);
+  const [entered, setEntered] = useState(false);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
@@ -144,7 +145,9 @@ function WeddingInvitation() {
       />
 
       {/* Floating controls */}
-      <FloatingControls dark={dark} setDark={setDark} lang={lang} setLang={setLang} />
+      <FloatingControls dark={dark} setDark={setDark} lang={lang} setLang={setLang} entered={entered} />
+
+      {!entered && <SplashOverlay onEnter={() => setEntered(true)} />}
 
       <Hero />
       <OurStory />
