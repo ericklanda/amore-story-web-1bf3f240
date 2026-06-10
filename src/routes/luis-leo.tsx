@@ -798,14 +798,6 @@ function Rsvp() {
                 >
                   {submitting ? "Enviando..." : "Enviar confirmación"}
                 </button>
-                <a
-                  href={whatsappMsg}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 text-center py-3.5 border border-primary text-primary tracking-[0.2em] uppercase text-xs rounded-full hover:bg-primary hover:text-primary-foreground transition-colors"
-                >
-                  Confirmar por WhatsApp
-                </a>
               </div>
             </form>
           </Reveal>
