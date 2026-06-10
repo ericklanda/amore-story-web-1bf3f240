@@ -153,8 +153,11 @@ export const getInvitationForEdit = createServerFn({ method: "GET" })
     if (!isAdmin && row.owner_user_id !== context.userId) {
       throw new Error("No tienes permiso para editar esta invitación.");
     }
-    const { hero, story, gallery } = await resolveImages(supabaseAdmin, row as Record<string, unknown>);
-    return rowToDTO(row as Record<string, unknown>, hero, story, gallery);
+    // For editing, return RAW values (paths stay as paths, URLs as URLs)
+    const r = row as Record<string, unknown>;
+    const rawGallery = Array.isArray(r.gallery) ? (r.gallery as GalleryItem[]) : [];
+    return rowToDTO(r, (r.hero_image_url as string | null) ?? null, (r.story_image_url as string | null) ?? null, rawGallery);
+
   });
 
 const MilestoneSchema = z.object({ date: z.string().max(60), title: z.string().max(120), text: z.string().max(500) });
