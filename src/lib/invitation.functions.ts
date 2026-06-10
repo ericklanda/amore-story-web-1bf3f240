@@ -124,10 +124,11 @@ export const getPublicInvitation = createServerFn({ method: "GET" })
       console.error("[getPublicInvitation]", error);
       throw new Error("No se pudo cargar la invitación.");
     }
-    if (!row) throw notFound();
+    if (!row) return null;
     const { hero, story, gallery } = await resolveImages(supabaseAdmin, row as Record<string, unknown>);
     return rowToDTO(row as Record<string, unknown>, hero, story, gallery);
   });
+
 
 export const getInvitationForEdit = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
