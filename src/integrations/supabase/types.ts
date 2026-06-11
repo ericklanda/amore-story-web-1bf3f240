@@ -39,6 +39,7 @@ export type Database = {
           story_image_url: string | null
           story_milestones: Json
           thank_you_message: string | null
+          theme_colors: string[] | null
           timeline: Json
           transportation_note: string | null
           updated_at: string
@@ -73,6 +74,7 @@ export type Database = {
           story_image_url?: string | null
           story_milestones?: Json
           thank_you_message?: string | null
+          theme_colors?: string[] | null
           timeline?: Json
           transportation_note?: string | null
           updated_at?: string
@@ -107,6 +109,7 @@ export type Database = {
           story_image_url?: string | null
           story_milestones?: Json
           thank_you_message?: string | null
+          theme_colors?: string[] | null
           timeline?: Json
           transportation_note?: string | null
           updated_at?: string
