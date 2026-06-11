@@ -343,6 +343,17 @@ function CreateInvitationForm({
           className="w-full border border-[#E5DED3] rounded-sm px-3 py-2 text-sm"
         />
       </Field>
+      <Field label="Paquete">
+        <select
+          value={form.package_tier}
+          onChange={(e) => setForm({ ...form, package_tier: e.target.value as "plata" | "oro" | "diamante" })}
+          className="w-full border border-[#E5DED3] rounded-sm px-3 py-2 text-sm bg-white"
+        >
+          <option value="plata">Plata</option>
+          <option value="oro">Oro</option>
+          <option value="diamante">Diamante</option>
+        </select>
+      </Field>
       <div className="sm:col-span-2 flex justify-end">
         <button
           type="submit"
