@@ -41,10 +41,12 @@ type Patch = Partial<{
   welcome_message: string | null;
   thank_you_message: string | null;
   published: boolean;
+  theme_colors: string[] | null;
 }>;
 
 const SECTIONS = [
   { id: "general", label: "General" },
+  { id: "colores", label: "Colores" },
   { id: "historia", label: "Historia" },
   { id: "padres", label: "Padres" },
   { id: "galeria", label: "Galería" },
@@ -114,6 +116,7 @@ export function InvitationEditor({ slug }: { slug: string }) {
         faq: state.faq,
         welcome_message: state.welcome_message,
         thank_you_message: state.thank_you_message,
+        theme_colors: state.theme_colors,
       };
       await save({ data: { slug, patch } });
       toast.success("Cambios guardados.");
