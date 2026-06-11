@@ -497,7 +497,7 @@ function Gallery({ inv }: { inv: InvitationDTO }) {
         <Reveal>
           <SectionTitle kicker="Galería" title="Momentos juntos" />
         </Reveal>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 justify-items-center">
           {items.map((g, i) => (
             <Reveal key={i} delay={(i % 3) * 100}>
               <button
