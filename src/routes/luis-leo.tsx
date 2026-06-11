@@ -471,7 +471,7 @@ function Gallery() {
         <Reveal>
           <SectionTitle kicker="Galería" title="Momentos juntos" />
         </Reveal>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 justify-items-center">
           {GALLERY.map((g, i) => (
             <Reveal key={i} delay={(i % 3) * 100}>
               <button
@@ -543,7 +543,7 @@ function EventDetails() {
         <Reveal>
           <SectionTitle kicker="Detalles del evento" title="¿Cuándo y dónde?" />
         </Reveal>
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid md:grid-cols-1 gap-6 md:gap-8 max-w-2xl mx-auto">
           {events.map((ev, i) => (
             <Reveal key={ev.label} delay={i * 120}>
               <article className="bg-card border border-border rounded-sm p-8 md:p-10 text-center shadow-card hover:shadow-soft transition-shadow">
