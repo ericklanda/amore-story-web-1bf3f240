@@ -15,7 +15,7 @@ const FIELDS: FieldDef[] = [
   { name: "timeline", label: "Itinerario del evento", type: "textarea", help: "Ej: 17:00 Ceremonia · 18:00 Cocktail · 20:00 Cena..." },
   { name: "gift_registry", label: "Mesa de regalos / sobre", type: "textarea", help: "Links de Amazon, Liverpool, datos bancarios, etc." },
   { name: "whatsapp_number", label: "WhatsApp para confirmaciones", type: "tel", placeholder: "+52..." },
-  { name: "gallery_note", label: "Galería de fotos", type: "textarea", help: "Indícanos cuántas fotos quieres incluir (te las pediremos por WhatsApp)." },
+  { name: "gallery_note", label: "📷 Galería de fotos", type: "notice", notice: "Al enviar este formulario serás redirigido a WhatsApp para enviarnos tus fotos (hasta 10 imágenes para la galería)." },
 ];
 
 export const Route = createFileRoute("/comprar/oro")({
