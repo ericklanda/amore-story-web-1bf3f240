@@ -35,6 +35,7 @@ type Invitation = {
   owner_email: string;
   event_date: string | null;
   owner_user_id: string | null;
+  package_tier?: "plata" | "oro" | "diamante";
 };
 
 function AdminPage() {
@@ -54,7 +55,7 @@ function AdminPage() {
     queryFn: () => fetchInvitations(),
   });
 
-  const invitations: Invitation[] = invQuery.data?.invitations ?? [];
+  const invitations: Invitation[] = (invQuery.data?.invitations ?? []) as Invitation[];
   const isAdmin = !!invQuery.data?.isAdmin;
 
   useEffect(() => {
@@ -157,14 +158,14 @@ function AdminPage() {
 
             <button
               onClick={() => refetch()}
-              disabled={!slug}
+              disabled={!slug || currentInv?.package_tier === "plata"}
               className="px-3 py-2 text-xs tracking-[0.2em] uppercase border border-[#E5DED3] rounded-sm hover:bg-white disabled:opacity-40"
             >
               {isFetching ? "..." : "Refrescar"}
             </button>
             <button
               onClick={downloadExcel}
-              disabled={!slug}
+              disabled={!slug || currentInv?.package_tier === "plata"}
               className="px-4 py-2 text-xs tracking-[0.2em] uppercase bg-[#2D2D2D] text-white rounded-sm hover:opacity-90 disabled:opacity-40"
             >
               Descargar Excel
@@ -213,49 +214,58 @@ function AdminPage() {
               </div>
             )}
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-              <Stat label="Total respuestas" value={stats.total} />
-              <Stat label="Sí asisten" value={stats.yes} accent />
-              <Stat label="No asisten" value={stats.no} />
-              <Stat label="Personas confirmadas" value={stats.totalGuests} accent />
-            </div>
+            {currentInv?.package_tier === "plata" ? (
+              <div className="bg-white border border-[#E5DED3] rounded-sm p-8 text-center text-[#8A7E72]">
+                <p className="text-sm">El paquete <span className="text-[#D4AF37] tracking-[0.2em] uppercase">Plata</span> no incluye panel de confirmaciones.</p>
+                <p className="text-xs mt-2">Las confirmaciones llegan directo al WhatsApp configurado en la invitación.</p>
+              </div>
+            ) : (
+              <>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                  <Stat label="Total respuestas" value={stats.total} />
+                  <Stat label="Sí asisten" value={stats.yes} accent />
+                  <Stat label="No asisten" value={stats.no} />
+                  <Stat label="Personas confirmadas" value={stats.totalGuests} accent />
+                </div>
 
-            <div className="bg-white border border-[#E5DED3] rounded-sm overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="bg-[#F7F3EE] text-[10px] tracking-[0.2em] uppercase text-[#8A7E72]">
-                  <tr>
-                    <th className="text-left px-4 py-3">Fecha</th>
-                    <th className="text-left px-4 py-3">Nombre</th>
-                    <th className="text-left px-4 py-3">Asiste</th>
-                    <th className="text-left px-4 py-3">Personas</th>
-                    <th className="text-left px-4 py-3">Mensaje</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {isLoading ? (
-                    <tr><td colSpan={5} className="px-4 py-8 text-center text-[#8A7E72]">Cargando...</td></tr>
-                  ) : rows.length === 0 ? (
-                    <tr><td colSpan={5} className="px-4 py-8 text-center text-[#8A7E72]">Sin confirmaciones todavía.</td></tr>
-                  ) : (
-                    rows.map((r) => (
-                      <tr key={r.id} className="border-t border-[#F0E9DE]">
-                        <td className="px-4 py-3 whitespace-nowrap text-[#8A7E72]">
-                          {new Date(r.created_at).toLocaleString("es-MX")}
-                        </td>
-                        <td className="px-4 py-3 font-medium text-[#2D2D2D]">{r.name}</td>
-                        <td className="px-4 py-3">
-                          <span className={r.attending === "yes" ? "text-emerald-700" : "text-rose-700"}>
-                            {r.attending === "yes" ? "Sí" : "No"}
-                          </span>
-                        </td>
-                        <td className="px-4 py-3">{r.guests}</td>
-                        <td className="px-4 py-3 text-[#5a5249] max-w-md">{r.message}</td>
+                <div className="bg-white border border-[#E5DED3] rounded-sm overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead className="bg-[#F7F3EE] text-[10px] tracking-[0.2em] uppercase text-[#8A7E72]">
+                      <tr>
+                        <th className="text-left px-4 py-3">Fecha</th>
+                        <th className="text-left px-4 py-3">Nombre</th>
+                        <th className="text-left px-4 py-3">Asiste</th>
+                        <th className="text-left px-4 py-3">Personas</th>
+                        <th className="text-left px-4 py-3">Mensaje</th>
                       </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
-            </div>
+                    </thead>
+                    <tbody>
+                      {isLoading ? (
+                        <tr><td colSpan={5} className="px-4 py-8 text-center text-[#8A7E72]">Cargando...</td></tr>
+                      ) : rows.length === 0 ? (
+                        <tr><td colSpan={5} className="px-4 py-8 text-center text-[#8A7E72]">Sin confirmaciones todavía.</td></tr>
+                      ) : (
+                        rows.map((r) => (
+                          <tr key={r.id} className="border-t border-[#F0E9DE]">
+                            <td className="px-4 py-3 whitespace-nowrap text-[#8A7E72]">
+                              {new Date(r.created_at).toLocaleString("es-MX")}
+                            </td>
+                            <td className="px-4 py-3 font-medium text-[#2D2D2D]">{r.name}</td>
+                            <td className="px-4 py-3">
+                              <span className={r.attending === "yes" ? "text-emerald-700" : "text-rose-700"}>
+                                {r.attending === "yes" ? "Sí" : "No"}
+                              </span>
+                            </td>
+                            <td className="px-4 py-3">{r.guests}</td>
+                            <td className="px-4 py-3 text-[#5a5249] max-w-md">{r.message}</td>
+                          </tr>
+                        ))
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
           </>
         )}
       </div>
@@ -266,9 +276,9 @@ function AdminPage() {
 function CreateInvitationForm({
   onCreate,
 }: {
-  onCreate: (p: { slug: string; couple_names: string; owner_email: string; event_date?: string | null }) => Promise<void>;
+  onCreate: (p: { slug: string; couple_names: string; owner_email: string; event_date?: string | null; package_tier: "plata" | "oro" | "diamante" }) => Promise<void>;
 }) {
-  const [form, setForm] = useState({ slug: "", couple_names: "", owner_email: "", event_date: "" });
+  const [form, setForm] = useState<{ slug: string; couple_names: string; owner_email: string; event_date: string; package_tier: "plata" | "oro" | "diamante" }>({ slug: "", couple_names: "", owner_email: "", event_date: "", package_tier: "oro" });
   const [busy, setBusy] = useState(false);
 
   return (
@@ -282,8 +292,9 @@ function CreateInvitationForm({
             couple_names: form.couple_names.trim(),
             owner_email: form.owner_email.trim().toLowerCase(),
             event_date: form.event_date || null,
+            package_tier: form.package_tier,
           });
-          setForm({ slug: "", couple_names: "", owner_email: "", event_date: "" });
+          setForm({ slug: "", couple_names: "", owner_email: "", event_date: "", package_tier: "oro" });
         } catch (err) {
           toast.error(err instanceof Error ? err.message : "Error");
         } finally {
@@ -331,6 +342,17 @@ function CreateInvitationForm({
           onChange={(e) => setForm({ ...form, event_date: e.target.value })}
           className="w-full border border-[#E5DED3] rounded-sm px-3 py-2 text-sm"
         />
+      </Field>
+      <Field label="Paquete">
+        <select
+          value={form.package_tier}
+          onChange={(e) => setForm({ ...form, package_tier: e.target.value as "plata" | "oro" | "diamante" })}
+          className="w-full border border-[#E5DED3] rounded-sm px-3 py-2 text-sm bg-white"
+        >
+          <option value="plata">Plata</option>
+          <option value="oro">Oro</option>
+          <option value="diamante">Diamante</option>
+        </select>
       </Field>
       <div className="sm:col-span-2 flex justify-end">
         <button

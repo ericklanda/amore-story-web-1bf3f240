@@ -18,7 +18,7 @@ export const listMyInvitations = createServerFn({ method: "GET" })
 
     let query = context.supabase
       .from("invitations")
-      .select("id, slug, couple_names, owner_email, event_date, owner_user_id")
+      .select("id, slug, couple_names, owner_email, event_date, owner_user_id, package_tier")
       .order("created_at", { ascending: false });
 
     if (!isAdmin) {
@@ -64,11 +64,11 @@ export const createInvitation = createServerFn({ method: "POST" })
         couple_names: z.string().min(2).max(120),
         owner_email: z.string().email().max(255),
         event_date: z.string().optional().nullable(),
+        package_tier: z.enum(["plata", "oro", "diamante"]).default("oro"),
       })
       .parse(input),
   )
   .handler(async ({ data, context }) => {
-    // Only admins can create new invitations
     const { data: roleRow } = await context.supabase
       .from("user_roles")
       .select("role")
@@ -82,7 +82,6 @@ export const createInvitation = createServerFn({ method: "POST" })
 
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
-    // Check if user already exists with that email to set owner_user_id now
     const { data: existing } = await supabaseAdmin
       .from("invitations")
       .select("id")
@@ -95,6 +94,7 @@ export const createInvitation = createServerFn({ method: "POST" })
       couple_names: data.couple_names,
       owner_email: data.owner_email,
       event_date: data.event_date || null,
+      package_tier: data.package_tier,
     });
     if (error) {
       console.error("[createInvitation]", error);

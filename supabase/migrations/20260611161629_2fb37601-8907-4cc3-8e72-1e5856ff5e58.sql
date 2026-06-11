@@ -1,0 +1,2 @@
+ALTER TABLE public.invitations ADD COLUMN IF NOT EXISTS package_tier text NOT NULL DEFAULT 'oro' CHECK (package_tier IN ('plata','oro','diamante'));
+UPDATE public.invitations SET package_tier = 'plata' WHERE slug = 'sofia-daniel';

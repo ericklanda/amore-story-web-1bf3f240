@@ -167,33 +167,41 @@ export function InvitationEditor({ slug }: { slug: string }) {
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-1 px-4 pt-4 border-b border-[#E5DED3]">
-        {SECTIONS.map((s) => (
-          <button
-            key={s.id}
-            onClick={() => setSection(s.id)}
-            className={`px-3 py-2 text-[11px] tracking-[0.2em] uppercase border-b-2 -mb-px transition-colors ${
-              section === s.id
-                ? "border-[#D4AF37] text-[#2D2D2D]"
-                : "border-transparent text-[#8A7E72] hover:text-[#2D2D2D]"
-            }`}
-          >
-            {s.label}
-          </button>
-        ))}
-      </div>
+      {state.package_tier === "plata" ? (
+        <div className="p-6">
+          <PlataSection state={state} update={update} slug={slug} />
+        </div>
+      ) : (
+        <>
+          <div className="flex flex-wrap gap-1 px-4 pt-4 border-b border-[#E5DED3]">
+            {SECTIONS.map((s) => (
+              <button
+                key={s.id}
+                onClick={() => setSection(s.id)}
+                className={`px-3 py-2 text-[11px] tracking-[0.2em] uppercase border-b-2 -mb-px transition-colors ${
+                  section === s.id
+                    ? "border-[#D4AF37] text-[#2D2D2D]"
+                    : "border-transparent text-[#8A7E72] hover:text-[#2D2D2D]"
+                }`}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
 
-      <div className="p-6 space-y-4">
-        {section === "general" && <GeneralSection state={state} update={update} slug={slug} />}
-        {section === "colores" && <ColorsSection state={state} update={update} />}
-        {section === "historia" && <HistorySection state={state} update={update} slug={slug} />}
-        {section === "padres" && <ParentsSection state={state} update={update} />}
-        {section === "galeria" && <GallerySection state={state} update={update} slug={slug} />}
-        {section === "evento" && <EventSection state={state} update={update} />}
-        {section === "itinerario" && <TimelineSection state={state} update={update} />}
-        {section === "regalos" && <GiftsSection state={state} update={update} />}
-        {section === "faq" && <FaqSection state={state} update={update} />}
-      </div>
+          <div className="p-6 space-y-4">
+            {section === "general" && <GeneralSection state={state} update={update} slug={slug} />}
+            {section === "colores" && <ColorsSection state={state} update={update} />}
+            {section === "historia" && <HistorySection state={state} update={update} slug={slug} />}
+            {section === "padres" && <ParentsSection state={state} update={update} />}
+            {section === "galeria" && <GallerySection state={state} update={update} slug={slug} />}
+            {section === "evento" && <EventSection state={state} update={update} />}
+            {section === "itinerario" && <TimelineSection state={state} update={update} />}
+            {section === "regalos" && <GiftsSection state={state} update={update} />}
+            {section === "faq" && <FaqSection state={state} update={update} />}
+          </div>
+        </>
+      )}
 
       <div className="px-6 py-5 border-t border-[#E5DED3] flex flex-wrap items-center justify-end gap-3">
         <button
@@ -355,6 +363,41 @@ function PhotoUpload({
 /* ------------------ sections ------------------ */
 
 type UpdateFn = <K extends keyof InvitationDTO>(key: K, value: InvitationDTO[K]) => void;
+
+function PlataSection({ state, update, slug }: { state: InvitationDTO; update: UpdateFn; slug: string }) {
+  const dt = state.event_datetime ? state.event_datetime.slice(0, 16) : "";
+  return (
+    <div className="space-y-5">
+      <div className="bg-[#F7F3EE] border border-[#E5DED3] rounded-sm p-3 text-[11px] text-[#8A7E72] tracking-[0.1em]">
+        Paquete Plata · Edita los campos básicos de tu invitación.
+      </div>
+      <PhotoUpload slug={slug} label="Foto principal" current={state.hero_image_url} onChange={(v) => update("hero_image_url", v)} />
+      <div className="grid md:grid-cols-2 gap-4">
+        <Field label="Fecha y hora del evento" hint="Se usa para la cuenta regresiva">
+          <TextInput
+            type="datetime-local"
+            value={dt}
+            onChange={(e) => update("event_datetime", e.target.value ? new Date(e.target.value).toISOString() : null)}
+          />
+        </Field>
+        <Field label="WhatsApp para confirmación" hint="Con código de país. Ej: 5216568637484">
+          <TextInput value={state.whatsapp_number ?? ""} onChange={(e) => update("whatsapp_number", e.target.value || null)} />
+        </Field>
+        <Field label="Código de vestimenta" hint="Ej: Formal · Black tie">
+          <TextInput value={state.dress_code ?? ""} onChange={(e) => update("dress_code", e.target.value || null)} />
+        </Field>
+        <Field label="Ubicación (link de Google Maps)" hint="Pega el link de Google Maps del lugar">
+          <TextInput placeholder="https://maps.app.goo.gl/..." value={state.venue_maps_url ?? ""} onChange={(e) => update("venue_maps_url", e.target.value || null)} />
+        </Field>
+        <div className="md:col-span-2">
+          <Field label="Mensaje de los novios">
+            <TextArea rows={3} value={state.welcome_message ?? ""} onChange={(e) => update("welcome_message", e.target.value || null)} />
+          </Field>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function GeneralSection({ state, update, slug }: { state: InvitationDTO; update: UpdateFn; slug: string }) {
   const dt = state.event_datetime ? state.event_datetime.slice(0, 16) : "";
