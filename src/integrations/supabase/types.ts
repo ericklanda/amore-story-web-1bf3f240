@@ -33,6 +33,7 @@ export type Database = {
           id: string
           owner_email: string
           owner_user_id: string | null
+          package_tier: string
           parents: Json
           published: boolean
           slug: string
@@ -68,6 +69,7 @@ export type Database = {
           id?: string
           owner_email: string
           owner_user_id?: string | null
+          package_tier?: string
           parents?: Json
           published?: boolean
           slug: string
@@ -103,6 +105,7 @@ export type Database = {
           id?: string
           owner_email?: string
           owner_user_id?: string | null
+          package_tier?: string
           parents?: Json
           published?: boolean
           slug?: string
