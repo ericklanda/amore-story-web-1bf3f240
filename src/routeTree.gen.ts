@@ -16,6 +16,9 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as SlugRouteImport } from './routes/$slug'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ComprarPlataRouteImport } from './routes/comprar.plata'
+import { Route as ComprarOroRouteImport } from './routes/comprar.oro'
+import { Route as ComprarDiamanteRouteImport } from './routes/comprar.diamante'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -52,6 +55,21 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComprarPlataRoute = ComprarPlataRouteImport.update({
+  id: '/comprar/plata',
+  path: '/comprar/plata',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComprarOroRoute = ComprarOroRouteImport.update({
+  id: '/comprar/oro',
+  path: '/comprar/oro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComprarDiamanteRoute = ComprarDiamanteRouteImport.update({
+  id: '/comprar/diamante',
+  path: '/comprar/diamante',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -66,6 +84,9 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/comprar/diamante': typeof ComprarDiamanteRoute
+  '/comprar/oro': typeof ComprarOroRoute
+  '/comprar/plata': typeof ComprarPlataRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -75,6 +96,9 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/comprar/diamante': typeof ComprarDiamanteRoute
+  '/comprar/oro': typeof ComprarOroRoute
+  '/comprar/plata': typeof ComprarPlataRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -86,6 +110,9 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/comprar/diamante': typeof ComprarDiamanteRoute
+  '/comprar/oro': typeof ComprarOroRoute
+  '/comprar/plata': typeof ComprarPlataRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -97,6 +124,9 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/admin'
+    | '/comprar/diamante'
+    | '/comprar/oro'
+    | '/comprar/plata'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -106,6 +136,9 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/admin'
+    | '/comprar/diamante'
+    | '/comprar/oro'
+    | '/comprar/plata'
   id:
     | '__root__'
     | '/'
@@ -116,6 +149,9 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/_authenticated/admin'
+    | '/comprar/diamante'
+    | '/comprar/oro'
+    | '/comprar/plata'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -126,6 +162,9 @@ export interface RootRouteChildren {
   LuisLeoRoute: typeof LuisLeoRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ComprarDiamanteRoute: typeof ComprarDiamanteRoute
+  ComprarOroRoute: typeof ComprarOroRoute
+  ComprarPlataRoute: typeof ComprarPlataRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -179,6 +218,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/comprar/plata': {
+      id: '/comprar/plata'
+      path: '/comprar/plata'
+      fullPath: '/comprar/plata'
+      preLoaderRoute: typeof ComprarPlataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comprar/oro': {
+      id: '/comprar/oro'
+      path: '/comprar/oro'
+      fullPath: '/comprar/oro'
+      preLoaderRoute: typeof ComprarOroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comprar/diamante': {
+      id: '/comprar/diamante'
+      path: '/comprar/diamante'
+      fullPath: '/comprar/diamante'
+      preLoaderRoute: typeof ComprarDiamanteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/admin': {
       id: '/_authenticated/admin'
       path: '/admin'
@@ -208,6 +268,9 @@ const rootRouteChildren: RootRouteChildren = {
   LuisLeoRoute: LuisLeoRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ComprarDiamanteRoute: ComprarDiamanteRoute,
+  ComprarOroRoute: ComprarOroRoute,
+  ComprarPlataRoute: ComprarPlataRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      invitation_requests: {
+        Row: {
+          contact_email: string
+          contact_name: string
+          contact_phone: string
+          couple_names: string
+          created_at: string
+          event_date: string | null
+          id: string
+          package_tier: string
+          payload: Json
+          status: string
+        }
+        Insert: {
+          contact_email: string
+          contact_name: string
+          contact_phone: string
+          couple_names: string
+          created_at?: string
+          event_date?: string | null
+          id?: string
+          package_tier: string
+          payload?: Json
+          status?: string
+        }
+        Update: {
+          contact_email?: string
+          contact_name?: string
+          contact_phone?: string
+          couple_names?: string
+          created_at?: string
+          event_date?: string | null
+          id?: string
+          package_tier?: string
+          payload?: Json
+          status?: string
+        }
+        Relationships: []
+      }
       invitations: {
         Row: {
           bride_name: string | null
