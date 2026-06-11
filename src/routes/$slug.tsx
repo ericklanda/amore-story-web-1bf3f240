@@ -166,7 +166,9 @@ function formatTime(iso: string | null): string {
 function Template({ inv }: { inv: PublicInvitationDTO }) {
   const [dark, setDark] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [entered, setEntered] = useState(false);
+  const hasSplash = !!inv.youtube_song_id;
+  const [entered, setEntered] = useState(!hasSplash);
+
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
@@ -220,7 +222,7 @@ function Template({ inv }: { inv: PublicInvitationDTO }) {
 
       <FloatingControls dark={dark} setDark={setDark} entered={entered} youtubeId={inv.youtube_song_id} />
 
-      {!entered && <SplashOverlay inv={inv} eventDate={eventDate} onEnter={() => setEntered(true)} />}
+      {hasSplash && !entered && <SplashOverlay inv={inv} eventDate={eventDate} onEnter={() => setEntered(true)} />}
 
       <Hero inv={inv} eventDate={eventDate} />
       {inv.story_milestones.length > 0 && <OurStory inv={inv} />}
