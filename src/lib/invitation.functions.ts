@@ -110,9 +110,11 @@ function rowToDTO(row: Record<string, unknown>, hero: string | null, story: stri
 
 const SlugSchema = z.object({ slug: z.string().min(1).max(64).regex(/^[a-z0-9-]+$/) });
 
+export type PublicInvitationDTO = Omit<InvitationDTO, "owner_email" | "owner_user_id">;
+
 export const getPublicInvitation = createServerFn({ method: "GET" })
   .inputValidator((input: unknown) => SlugSchema.parse(input))
-  .handler(async ({ data }) => {
+  .handler(async ({ data }): Promise<PublicInvitationDTO | null> => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: row, error } = await supabaseAdmin
       .from("invitations")
@@ -126,7 +128,11 @@ export const getPublicInvitation = createServerFn({ method: "GET" })
     }
     if (!row) return null;
     const { hero, story, gallery } = await resolveImages(supabaseAdmin, row as Record<string, unknown>);
-    return rowToDTO(row as Record<string, unknown>, hero, story, gallery);
+    const full = rowToDTO(row as Record<string, unknown>, hero, story, gallery);
+    // Strip sensitive owner fields from public response
+    const { owner_email: _oe, owner_user_id: _ou, ...publicDto } = full;
+    void _oe; void _ou;
+    return publicDto;
   });
 
 
