@@ -276,9 +276,9 @@ function AdminPage() {
 function CreateInvitationForm({
   onCreate,
 }: {
-  onCreate: (p: { slug: string; couple_names: string; owner_email: string; event_date?: string | null }) => Promise<void>;
+  onCreate: (p: { slug: string; couple_names: string; owner_email: string; event_date?: string | null; package_tier: "plata" | "oro" | "diamante" }) => Promise<void>;
 }) {
-  const [form, setForm] = useState({ slug: "", couple_names: "", owner_email: "", event_date: "" });
+  const [form, setForm] = useState<{ slug: string; couple_names: string; owner_email: string; event_date: string; package_tier: "plata" | "oro" | "diamante" }>({ slug: "", couple_names: "", owner_email: "", event_date: "", package_tier: "oro" });
   const [busy, setBusy] = useState(false);
 
   return (
@@ -292,8 +292,9 @@ function CreateInvitationForm({
             couple_names: form.couple_names.trim(),
             owner_email: form.owner_email.trim().toLowerCase(),
             event_date: form.event_date || null,
+            package_tier: form.package_tier,
           });
-          setForm({ slug: "", couple_names: "", owner_email: "", event_date: "" });
+          setForm({ slug: "", couple_names: "", owner_email: "", event_date: "", package_tier: "oro" });
         } catch (err) {
           toast.error(err instanceof Error ? err.message : "Error");
         } finally {
