@@ -185,8 +185,19 @@ function Template({ inv }: { inv: PublicInvitationDTO }) {
 
   const eventDate = inv.event_datetime ? new Date(inv.event_datetime) : inv.event_date ? new Date(inv.event_date) : null;
 
+  const themeStyle = inv.theme_colors && inv.theme_colors.length === 3
+    ? ({
+        "--primary": inv.theme_colors[0],
+        "--ring": inv.theme_colors[1],
+        "--accent": inv.theme_colors[1],
+        "--gold": inv.theme_colors[1],
+        "--secondary": inv.theme_colors[2],
+        "--gradient-gold": `linear-gradient(135deg, ${inv.theme_colors[1]}, ${inv.theme_colors[0]})`,
+      } as React.CSSProperties)
+    : undefined;
+
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden" style={themeStyle}>
       <div
         className="fixed top-0 left-0 h-[2px] bg-gradient-gold z-50 transition-[width] duration-150"
         style={{ width: `${progress * 100}%` }}
