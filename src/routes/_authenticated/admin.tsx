@@ -158,14 +158,14 @@ function AdminPage() {
 
             <button
               onClick={() => refetch()}
-              disabled={!slug}
+              disabled={!slug || currentInv?.package_tier === "plata"}
               className="px-3 py-2 text-xs tracking-[0.2em] uppercase border border-[#E5DED3] rounded-sm hover:bg-white disabled:opacity-40"
             >
               {isFetching ? "..." : "Refrescar"}
             </button>
             <button
               onClick={downloadExcel}
-              disabled={!slug}
+              disabled={!slug || currentInv?.package_tier === "plata"}
               className="px-4 py-2 text-xs tracking-[0.2em] uppercase bg-[#2D2D2D] text-white rounded-sm hover:opacity-90 disabled:opacity-40"
             >
               Descargar Excel
