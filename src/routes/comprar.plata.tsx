@@ -6,7 +6,7 @@ const FIELDS: FieldDef[] = [
   { name: "venue_maps_url", label: "Ubicación (link de Google Maps)", type: "url", placeholder: "https://maps.google.com/..." },
   { name: "dress_code", label: "Código de vestimenta", placeholder: "Formal, Cocktail, Casual elegante..." },
   { name: "whatsapp_number", label: "WhatsApp para confirmaciones", type: "tel", placeholder: "+52...", help: "Tus invitados confirmarán directo por WhatsApp." },
-  { name: "hero_image_note", label: "Foto principal", type: "textarea", help: "Después de enviar este formulario te pediremos la foto por WhatsApp." },
+  { name: "hero_image_note", label: "📷 Foto principal", type: "notice", notice: "Al enviar este formulario serás redirigido a WhatsApp. Ahí te pediremos la foto que usaremos como imagen principal de tu invitación." },
 ];
 
 export const Route = createFileRoute("/comprar/plata")({
