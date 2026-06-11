@@ -709,7 +709,8 @@ function Rsvp({ inv }: { inv: PublicInvitationDTO }) {
   };
 
   return (
-    <section className="py-24 md:py-32 px-6 bg-gradient-blush">
+    <section className="py-24 md:py-32 px-6 bg-background">
+
       <div className="max-w-2xl mx-auto">
         <Reveal>
           <SectionTitle kicker="Confirmación" title="¿Nos acompañas?" />
