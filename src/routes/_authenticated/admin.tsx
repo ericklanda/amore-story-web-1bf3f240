@@ -35,6 +35,7 @@ type Invitation = {
   owner_email: string;
   event_date: string | null;
   owner_user_id: string | null;
+  package_tier?: "plata" | "oro" | "diamante";
 };
 
 function AdminPage() {
