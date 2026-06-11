@@ -106,6 +106,7 @@ function rowToDTO(row: Record<string, unknown>, hero: string | null, story: stri
     thank_you_message: (row.thank_you_message as string | null) ?? null,
     published: (row.published as boolean) ?? false,
     theme_colors: (row.theme_colors as string[] | null) ?? null,
+    package_tier: ((row.package_tier as string) ?? "oro") as "plata" | "oro" | "diamante",
     owner_email: row.owner_email as string,
     owner_user_id: (row.owner_user_id as string | null) ?? null,
   };
