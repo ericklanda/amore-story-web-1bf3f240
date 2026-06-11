@@ -222,7 +222,7 @@ function Template({ inv }: { inv: PublicInvitationDTO }) {
 
       <FloatingControls dark={dark} setDark={setDark} entered={entered} youtubeId={inv.youtube_song_id} />
 
-      {!entered && <SplashOverlay inv={inv} eventDate={eventDate} onEnter={() => setEntered(true)} />}
+      {hasSplash && !entered && <SplashOverlay inv={inv} eventDate={eventDate} onEnter={() => setEntered(true)} />}
 
       <Hero inv={inv} eventDate={eventDate} />
       {inv.story_milestones.length > 0 && <OurStory inv={inv} />}
