@@ -10,10 +10,11 @@ import { submitInvitationRequest } from "@/lib/invitation-requests.functions";
 export type FieldDef = {
   name: string;
   label: string;
-  type?: "text" | "textarea" | "url" | "date" | "tel" | "email";
+  type?: "text" | "textarea" | "url" | "date" | "tel" | "email" | "notice";
   placeholder?: string;
   required?: boolean;
   help?: string;
+  notice?: string;
 };
 
 type Props = {
