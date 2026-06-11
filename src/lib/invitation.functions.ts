@@ -39,6 +39,7 @@ export type InvitationDTO = {
   welcome_message: string | null;
   thank_you_message: string | null;
   published: boolean;
+  theme_colors: string[] | null;
   owner_email: string;
   owner_user_id: string | null;
 };
@@ -103,6 +104,7 @@ function rowToDTO(row: Record<string, unknown>, hero: string | null, story: stri
     welcome_message: (row.welcome_message as string | null) ?? null,
     thank_you_message: (row.thank_you_message as string | null) ?? null,
     published: (row.published as boolean) ?? false,
+    theme_colors: (row.theme_colors as string[] | null) ?? null,
     owner_email: row.owner_email as string,
     owner_user_id: (row.owner_user_id as string | null) ?? null,
   };
@@ -201,6 +203,7 @@ const UpdateSchema = z.object({
     welcome_message: z.string().max(500).nullable().optional(),
     thank_you_message: z.string().max(500).nullable().optional(),
     published: z.boolean().optional(),
+    theme_colors: z.array(z.string().regex(/^#[0-9A-Fa-f]{6}$/)).length(3).nullable().optional(),
   }),
 });
 
