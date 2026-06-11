@@ -4,7 +4,7 @@ import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import { submitRsvp } from "@/lib/rsvp.functions";
-import { getPublicInvitation, type InvitationDTO } from "@/lib/invitation.functions";
+import { getPublicInvitation, type PublicInvitationDTO } from "@/lib/invitation.functions";
 
 const invitationQueryOptions = (slug: string) =>
   queryOptions({
@@ -163,7 +163,7 @@ function formatTime(iso: string | null): string {
   }
 }
 
-function Template({ inv }: { inv: InvitationDTO }) {
+function Template({ inv }: { inv: PublicInvitationDTO }) {
   const [dark, setDark] = useState(false);
   const [progress, setProgress] = useState(0);
   const [entered, setEntered] = useState(false);
@@ -286,7 +286,7 @@ function FloatingControls({
 }
 
 /* ---------------- SPLASH OVERLAY ---------------- */
-function SplashOverlay({ inv, eventDate, onEnter }: { inv: InvitationDTO; eventDate: Date | null; onEnter: () => void }) {
+function SplashOverlay({ inv, eventDate, onEnter }: { inv: PublicInvitationDTO; eventDate: Date | null; onEnter: () => void }) {
   const [fading, setFading] = useState(false);
   const handleEnter = () => {
     setFading(true);
@@ -325,7 +325,7 @@ function SplashOverlay({ inv, eventDate, onEnter }: { inv: InvitationDTO; eventD
 }
 
 /* ---------------- HERO ---------------- */
-function Hero({ inv, eventDate }: { inv: InvitationDTO; eventDate: Date | null }) {
+function Hero({ inv, eventDate }: { inv: PublicInvitationDTO; eventDate: Date | null }) {
   const slides = useMemo(() => {
     const arr = [inv.hero_image_url, ...inv.gallery.slice(0, 2).map((g) => g.url)].filter(Boolean) as string[];
     return arr.length ? arr : [];
@@ -423,7 +423,7 @@ function Hero({ inv, eventDate }: { inv: InvitationDTO; eventDate: Date | null }
 }
 
 /* ---------------- OUR STORY ---------------- */
-function OurStory({ inv }: { inv: InvitationDTO }) {
+function OurStory({ inv }: { inv: PublicInvitationDTO }) {
   return (
     <section id="historia" className="py-24 md:py-36 px-6 bg-gradient-blush">
       <div className="max-w-5xl mx-auto">
@@ -460,7 +460,7 @@ function OurStory({ inv }: { inv: InvitationDTO }) {
 }
 
 /* ---------------- PARENTS ---------------- */
-function ParentsSection({ inv }: { inv: InvitationDTO }) {
+function ParentsSection({ inv }: { inv: PublicInvitationDTO }) {
   return (
     <section className="py-24 md:py-32 px-6 bg-background">
       <div className="max-w-6xl mx-auto">
@@ -488,7 +488,7 @@ function ParentsSection({ inv }: { inv: InvitationDTO }) {
 }
 
 /* ---------------- GALLERY ---------------- */
-function Gallery({ inv }: { inv: InvitationDTO }) {
+function Gallery({ inv }: { inv: PublicInvitationDTO }) {
   const [lightbox, setLightbox] = useState<number | null>(null);
   const items = inv.gallery;
   return (
@@ -540,7 +540,7 @@ function Gallery({ inv }: { inv: InvitationDTO }) {
 }
 
 /* ---------------- EVENT DETAILS ---------------- */
-function EventDetails({ inv, eventDate }: { inv: InvitationDTO; eventDate: Date | null }) {
+function EventDetails({ inv, eventDate }: { inv: PublicInvitationDTO; eventDate: Date | null }) {
   const calendarLink = () => {
     if (!eventDate) return "#";
     const startMs = eventDate.getTime();
@@ -597,7 +597,7 @@ function EventDetails({ inv, eventDate }: { inv: InvitationDTO; eventDate: Date 
 }
 
 /* ---------------- DRESS CODE ---------------- */
-function DressCode({ inv }: { inv: InvitationDTO }) {
+function DressCode({ inv }: { inv: PublicInvitationDTO }) {
   return (
     <section className="py-24 md:py-32 px-6 bg-gradient-blush">
       <div className="max-w-5xl mx-auto text-center">
@@ -622,7 +622,7 @@ function DressCode({ inv }: { inv: InvitationDTO }) {
 }
 
 /* ---------------- TIMELINE ---------------- */
-function Timeline({ inv }: { inv: InvitationDTO }) {
+function Timeline({ inv }: { inv: PublicInvitationDTO }) {
   return (
     <section className="py-24 md:py-32 px-6 bg-background">
       <div className="max-w-3xl mx-auto">
@@ -651,7 +651,7 @@ function Timeline({ inv }: { inv: InvitationDTO }) {
 }
 
 /* ---------------- RSVP ---------------- */
-function Rsvp({ inv }: { inv: InvitationDTO }) {
+function Rsvp({ inv }: { inv: PublicInvitationDTO }) {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ name: "", attending: "yes", message: "" });
@@ -756,7 +756,7 @@ function RsvpField({ label, children }: { label: string; children: React.ReactNo
 }
 
 /* ---------------- GIFT REGISTRY ---------------- */
-function GiftRegistry({ inv }: { inv: InvitationDTO }) {
+function GiftRegistry({ inv }: { inv: PublicInvitationDTO }) {
   return (
     <section className="py-24 md:py-32 px-6 bg-background">
       <div className="max-w-5xl mx-auto">
@@ -788,7 +788,7 @@ function GiftRegistry({ inv }: { inv: InvitationDTO }) {
 }
 
 /* ---------------- TRANSPORTATION ---------------- */
-function Transportation({ inv }: { inv: InvitationDTO }) {
+function Transportation({ inv }: { inv: PublicInvitationDTO }) {
   return (
     <section className="py-24 md:py-32 px-6 bg-background">
       <div className="max-w-3xl mx-auto text-center">
@@ -804,7 +804,7 @@ function Transportation({ inv }: { inv: InvitationDTO }) {
 }
 
 /* ---------------- SOCIAL WALL ---------------- */
-function SocialWall({ inv }: { inv: InvitationDTO }) {
+function SocialWall({ inv }: { inv: PublicInvitationDTO }) {
   return (
     <section className="py-24 md:py-32 px-6 bg-cream text-center">
       <div className="max-w-3xl mx-auto">
@@ -824,7 +824,7 @@ function SocialWall({ inv }: { inv: InvitationDTO }) {
 }
 
 /* ---------------- FAQ ---------------- */
-function Faq({ inv }: { inv: InvitationDTO }) {
+function Faq({ inv }: { inv: PublicInvitationDTO }) {
   const [open, setOpen] = useState<number | null>(0);
   return (
     <section className="py-24 md:py-32 px-6 bg-background">
@@ -860,7 +860,7 @@ function Faq({ inv }: { inv: InvitationDTO }) {
 }
 
 /* ---------------- THANK YOU ---------------- */
-function ThankYou({ inv, eventDate }: { inv: InvitationDTO; eventDate: Date | null }) {
+function ThankYou({ inv, eventDate }: { inv: PublicInvitationDTO; eventDate: Date | null }) {
   const bg = inv.gallery[inv.gallery.length - 1]?.url ?? inv.hero_image_url ?? "";
   return (
     <section className="relative h-[100svh] min-h-[600px] w-full overflow-hidden">
