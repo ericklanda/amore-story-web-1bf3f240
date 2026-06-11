@@ -627,7 +627,8 @@ function EventDetails({ inv, eventDate }: { inv: PublicInvitationDTO; eventDate:
 /* ---------------- DRESS CODE ---------------- */
 function DressCode({ inv }: { inv: PublicInvitationDTO }) {
   return (
-    <section className="py-24 md:py-32 px-6 bg-gradient-blush">
+    <section className="py-24 md:py-32 px-6 bg-background">
+
       <div className="max-w-5xl mx-auto text-center">
         <Reveal>
           <SectionTitle kicker="Código de vestimenta" title={inv.dress_code ?? ""} />
