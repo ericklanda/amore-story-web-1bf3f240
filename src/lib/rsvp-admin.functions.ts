@@ -18,7 +18,7 @@ export const listMyInvitations = createServerFn({ method: "GET" })
 
     let query = context.supabase
       .from("invitations")
-      .select("id, slug, couple_names, owner_email, event_date, owner_user_id")
+      .select("id, slug, couple_names, owner_email, event_date, owner_user_id, package_tier")
       .order("created_at", { ascending: false });
 
     if (!isAdmin) {
