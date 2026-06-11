@@ -55,7 +55,7 @@ function AdminPage() {
     queryFn: () => fetchInvitations(),
   });
 
-  const invitations: Invitation[] = invQuery.data?.invitations ?? [];
+  const invitations: Invitation[] = (invQuery.data?.invitations ?? []) as Invitation[];
   const isAdmin = !!invQuery.data?.isAdmin;
 
   useEffect(() => {
