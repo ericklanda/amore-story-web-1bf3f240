@@ -167,33 +167,41 @@ export function InvitationEditor({ slug }: { slug: string }) {
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-1 px-4 pt-4 border-b border-[#E5DED3]">
-        {SECTIONS.map((s) => (
-          <button
-            key={s.id}
-            onClick={() => setSection(s.id)}
-            className={`px-3 py-2 text-[11px] tracking-[0.2em] uppercase border-b-2 -mb-px transition-colors ${
-              section === s.id
-                ? "border-[#D4AF37] text-[#2D2D2D]"
-                : "border-transparent text-[#8A7E72] hover:text-[#2D2D2D]"
-            }`}
-          >
-            {s.label}
-          </button>
-        ))}
-      </div>
+      {state.package_tier === "plata" ? (
+        <div className="p-6">
+          <PlataSection state={state} update={update} slug={slug} />
+        </div>
+      ) : (
+        <>
+          <div className="flex flex-wrap gap-1 px-4 pt-4 border-b border-[#E5DED3]">
+            {SECTIONS.map((s) => (
+              <button
+                key={s.id}
+                onClick={() => setSection(s.id)}
+                className={`px-3 py-2 text-[11px] tracking-[0.2em] uppercase border-b-2 -mb-px transition-colors ${
+                  section === s.id
+                    ? "border-[#D4AF37] text-[#2D2D2D]"
+                    : "border-transparent text-[#8A7E72] hover:text-[#2D2D2D]"
+                }`}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
 
-      <div className="p-6 space-y-4">
-        {section === "general" && <GeneralSection state={state} update={update} slug={slug} />}
-        {section === "colores" && <ColorsSection state={state} update={update} />}
-        {section === "historia" && <HistorySection state={state} update={update} slug={slug} />}
-        {section === "padres" && <ParentsSection state={state} update={update} />}
-        {section === "galeria" && <GallerySection state={state} update={update} slug={slug} />}
-        {section === "evento" && <EventSection state={state} update={update} />}
-        {section === "itinerario" && <TimelineSection state={state} update={update} />}
-        {section === "regalos" && <GiftsSection state={state} update={update} />}
-        {section === "faq" && <FaqSection state={state} update={update} />}
-      </div>
+          <div className="p-6 space-y-4">
+            {section === "general" && <GeneralSection state={state} update={update} slug={slug} />}
+            {section === "colores" && <ColorsSection state={state} update={update} />}
+            {section === "historia" && <HistorySection state={state} update={update} slug={slug} />}
+            {section === "padres" && <ParentsSection state={state} update={update} />}
+            {section === "galeria" && <GallerySection state={state} update={update} slug={slug} />}
+            {section === "evento" && <EventSection state={state} update={update} />}
+            {section === "itinerario" && <TimelineSection state={state} update={update} />}
+            {section === "regalos" && <GiftsSection state={state} update={update} />}
+            {section === "faq" && <FaqSection state={state} update={update} />}
+          </div>
+        </>
+      )}
 
       <div className="px-6 py-5 border-t border-[#E5DED3] flex flex-wrap items-center justify-end gap-3">
         <button
