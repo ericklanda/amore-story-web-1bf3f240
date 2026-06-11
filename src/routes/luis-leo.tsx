@@ -158,7 +158,7 @@ function WeddingInvitation() {
       <Timeline />
       {/* SpecialMoments removido */}
       <Rsvp />
-      <GiftRegistry />
+      {/* GiftRegistry removido */}
       {/* Hospedaje removido */}
       <Transportation />
       <SocialWall />
@@ -521,13 +521,6 @@ function Gallery() {
 function EventDetails() {
   const events = [
     {
-      label: "Ceremonia simbólica",
-      time: "8:00 pm",
-      place: "Terraza Jardín Arjeri",
-      address: VENUE_ADDRESS,
-      maps: VENUE_MAPS,
-    },
-    {
       label: "Recepción",
       time: "9:00 pm – 2:00 am",
       place: "Terraza Jardín Arjeri",
@@ -626,7 +619,7 @@ function DressCode() {
 /* ---------------- TIMELINE OF DAY ---------------- */
 function Timeline() {
   const items = [
-    { time: "8:00 pm", title: "Ceremonia simbólica", icon: "💍" },
+    
     { time: "9:00 pm", title: "Primer baile", icon: "💃" },
     { time: "10:00 pm", title: "Fiesta", icon: "🎶" },
     { time: "2:00 am", title: "Despedida", icon: "✨" },
@@ -947,7 +940,7 @@ function Faq() {
   const items = [
     { q: "¿Pueden asistir niños?", a: "¡Sí! Los niños son bienvenidos a celebrar con nosotros." },
     { q: "¿Cuál es el código de vestimenta?", a: "Black — te pedimos vestir totalmente de negro, formal y elegante." },
-    { q: "¿Habrá ceremonia religiosa?", a: "No tendremos ceremonia religiosa. Realizaremos una ceremonia simbólica en el mismo salón a las 8:00 pm." },
+    
     { q: "¿Hay estacionamiento?", a: "Sí, el recinto cuenta con estacionamiento para los invitados." },
     { q: "¿Hasta cuándo puedo confirmar?", a: "Te pedimos confirmar tu asistencia antes del 30 de septiembre de 2026 por WhatsApp." },
   ];
