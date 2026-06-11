@@ -214,49 +214,58 @@ function AdminPage() {
               </div>
             )}
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-              <Stat label="Total respuestas" value={stats.total} />
-              <Stat label="Sí asisten" value={stats.yes} accent />
-              <Stat label="No asisten" value={stats.no} />
-              <Stat label="Personas confirmadas" value={stats.totalGuests} accent />
-            </div>
+            {currentInv?.package_tier === "plata" ? (
+              <div className="bg-white border border-[#E5DED3] rounded-sm p-8 text-center text-[#8A7E72]">
+                <p className="text-sm">El paquete <span className="text-[#D4AF37] tracking-[0.2em] uppercase">Plata</span> no incluye panel de confirmaciones.</p>
+                <p className="text-xs mt-2">Las confirmaciones llegan directo al WhatsApp configurado en la invitación.</p>
+              </div>
+            ) : (
+              <>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                  <Stat label="Total respuestas" value={stats.total} />
+                  <Stat label="Sí asisten" value={stats.yes} accent />
+                  <Stat label="No asisten" value={stats.no} />
+                  <Stat label="Personas confirmadas" value={stats.totalGuests} accent />
+                </div>
 
-            <div className="bg-white border border-[#E5DED3] rounded-sm overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="bg-[#F7F3EE] text-[10px] tracking-[0.2em] uppercase text-[#8A7E72]">
-                  <tr>
-                    <th className="text-left px-4 py-3">Fecha</th>
-                    <th className="text-left px-4 py-3">Nombre</th>
-                    <th className="text-left px-4 py-3">Asiste</th>
-                    <th className="text-left px-4 py-3">Personas</th>
-                    <th className="text-left px-4 py-3">Mensaje</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {isLoading ? (
-                    <tr><td colSpan={5} className="px-4 py-8 text-center text-[#8A7E72]">Cargando...</td></tr>
-                  ) : rows.length === 0 ? (
-                    <tr><td colSpan={5} className="px-4 py-8 text-center text-[#8A7E72]">Sin confirmaciones todavía.</td></tr>
-                  ) : (
-                    rows.map((r) => (
-                      <tr key={r.id} className="border-t border-[#F0E9DE]">
-                        <td className="px-4 py-3 whitespace-nowrap text-[#8A7E72]">
-                          {new Date(r.created_at).toLocaleString("es-MX")}
-                        </td>
-                        <td className="px-4 py-3 font-medium text-[#2D2D2D]">{r.name}</td>
-                        <td className="px-4 py-3">
-                          <span className={r.attending === "yes" ? "text-emerald-700" : "text-rose-700"}>
-                            {r.attending === "yes" ? "Sí" : "No"}
-                          </span>
-                        </td>
-                        <td className="px-4 py-3">{r.guests}</td>
-                        <td className="px-4 py-3 text-[#5a5249] max-w-md">{r.message}</td>
+                <div className="bg-white border border-[#E5DED3] rounded-sm overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead className="bg-[#F7F3EE] text-[10px] tracking-[0.2em] uppercase text-[#8A7E72]">
+                      <tr>
+                        <th className="text-left px-4 py-3">Fecha</th>
+                        <th className="text-left px-4 py-3">Nombre</th>
+                        <th className="text-left px-4 py-3">Asiste</th>
+                        <th className="text-left px-4 py-3">Personas</th>
+                        <th className="text-left px-4 py-3">Mensaje</th>
                       </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
-            </div>
+                    </thead>
+                    <tbody>
+                      {isLoading ? (
+                        <tr><td colSpan={5} className="px-4 py-8 text-center text-[#8A7E72]">Cargando...</td></tr>
+                      ) : rows.length === 0 ? (
+                        <tr><td colSpan={5} className="px-4 py-8 text-center text-[#8A7E72]">Sin confirmaciones todavía.</td></tr>
+                      ) : (
+                        rows.map((r) => (
+                          <tr key={r.id} className="border-t border-[#F0E9DE]">
+                            <td className="px-4 py-3 whitespace-nowrap text-[#8A7E72]">
+                              {new Date(r.created_at).toLocaleString("es-MX")}
+                            </td>
+                            <td className="px-4 py-3 font-medium text-[#2D2D2D]">{r.name}</td>
+                            <td className="px-4 py-3">
+                              <span className={r.attending === "yes" ? "text-emerald-700" : "text-rose-700"}>
+                                {r.attending === "yes" ? "Sí" : "No"}
+                              </span>
+                            </td>
+                            <td className="px-4 py-3">{r.guests}</td>
+                            <td className="px-4 py-3 text-[#5a5249] max-w-md">{r.message}</td>
+                          </tr>
+                        ))
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
           </>
         )}
       </div>
