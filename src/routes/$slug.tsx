@@ -188,13 +188,28 @@ function Template({ inv }: { inv: PublicInvitationDTO }) {
   const themeStyle = inv.theme_colors && inv.theme_colors.length === 3
     ? ({
         "--primary": inv.theme_colors[0],
+        "--primary-foreground": inv.theme_colors[2],
         "--ring": inv.theme_colors[1],
         "--accent": inv.theme_colors[1],
+        "--accent-foreground": inv.theme_colors[0],
         "--gold": inv.theme_colors[1],
         "--secondary": inv.theme_colors[2],
+        "--secondary-foreground": inv.theme_colors[0],
+        "--background": inv.theme_colors[2],
+        "--foreground": inv.theme_colors[0],
+        "--card": inv.theme_colors[2],
+        "--card-foreground": inv.theme_colors[0],
+        "--popover": inv.theme_colors[2],
+        "--popover-foreground": inv.theme_colors[0],
+        "--muted": `color-mix(in oklab, ${inv.theme_colors[2]} 80%, ${inv.theme_colors[0]})`,
+        "--muted-foreground": `color-mix(in oklab, ${inv.theme_colors[0]} 65%, ${inv.theme_colors[2]})`,
+        "--border": `color-mix(in oklab, ${inv.theme_colors[1]} 35%, ${inv.theme_colors[2]})`,
+        "--input": `color-mix(in oklab, ${inv.theme_colors[1]} 30%, ${inv.theme_colors[2]})`,
         "--gradient-gold": `linear-gradient(135deg, ${inv.theme_colors[1]}, ${inv.theme_colors[0]})`,
+        "--gradient-hero": `linear-gradient(180deg, ${inv.theme_colors[0]}00, ${inv.theme_colors[0]}99)`,
       } as React.CSSProperties)
     : undefined;
+
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden" style={themeStyle}>
