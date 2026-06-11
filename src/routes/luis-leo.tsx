@@ -158,7 +158,7 @@ function WeddingInvitation() {
       <Timeline />
       {/* SpecialMoments removido */}
       <Rsvp />
-      {/* GiftRegistry removido */}
+      <GiftRegistry />
       {/* Hospedaje removido */}
       <Transportation />
       <SocialWall />
@@ -686,7 +686,7 @@ function SpecialMoments() {
 function Rsvp() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [form, setForm] = useState({ name: "", attending: "yes", guests: "1", message: "" });
+  const [form, setForm] = useState({ name: "", attending: "yes", message: "" });
   const submit = useServerFn(submitRsvp);
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -699,7 +699,6 @@ function Rsvp() {
           invitation_slug: "luis-leo",
           name: form.name.trim(),
           attending: form.attending as "yes" | "no",
-          guests: Number(form.guests) || 0,
           message: form.message || null,
         },
       });
@@ -713,7 +712,7 @@ function Rsvp() {
   };
 
   const whatsappMsg = useMemo(() => {
-    const text = `Hola! Confirmo mi asistencia a la boda de Luis Carlos y Leonardo. Nombre: ${form.name || "(nombre)"}, asistencia: ${form.attending === "yes" ? "Sí" : "No"}, acompañantes: ${form.guests}`;
+    const text = `Hola! Confirmo mi asistencia a la boda de Luis Carlos y Leonardo. Nombre: ${form.name || "(nombre)"}, asistencia: ${form.attending === "yes" ? "Sí" : "No"}`;
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
   }, [form]);
 
@@ -763,17 +762,6 @@ function Rsvp() {
                     </button>
                   ))}
                 </div>
-              </Field>
-              <Field label="Acompañantes">
-                <select
-                  value={form.guests}
-                  onChange={(e) => setForm({ ...form, guests: e.target.value })}
-                  className="w-full bg-transparent border-b border-border focus:border-primary outline-none py-2"
-                >
-                  {[0, 1, 2, 3, 4].map((n) => (
-                    <option key={n} value={n}>{n}</option>
-                  ))}
-                </select>
               </Field>
               <Field label="Mensaje para los novios">
                 <textarea

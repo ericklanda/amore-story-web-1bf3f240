@@ -654,7 +654,7 @@ function Timeline({ inv }: { inv: InvitationDTO }) {
 function Rsvp({ inv }: { inv: InvitationDTO }) {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [form, setForm] = useState({ name: "", attending: "yes", guests: "1", message: "" });
+  const [form, setForm] = useState({ name: "", attending: "yes", message: "" });
   const submit = useServerFn(submitRsvp);
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -667,7 +667,6 @@ function Rsvp({ inv }: { inv: InvitationDTO }) {
           invitation_slug: inv.slug,
           name: form.name.trim(),
           attending: form.attending as "yes" | "no",
-          guests: Number(form.guests) || 0,
           message: form.message || null,
         },
       });
@@ -723,17 +722,6 @@ function Rsvp({ inv }: { inv: InvitationDTO }) {
                     </button>
                   ))}
                 </div>
-              </RsvpField>
-              <RsvpField label="Acompañantes">
-                <select
-                  value={form.guests}
-                  onChange={(e) => setForm({ ...form, guests: e.target.value })}
-                  className="w-full bg-transparent border-b border-border focus:border-primary outline-none py-2"
-                >
-                  {[0, 1, 2, 3, 4].map((n) => (
-                    <option key={n} value={n}>{n}</option>
-                  ))}
-                </select>
               </RsvpField>
               <RsvpField label="Mensaje para los novios">
                 <textarea
