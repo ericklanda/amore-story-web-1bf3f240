@@ -41,10 +41,12 @@ type Patch = Partial<{
   welcome_message: string | null;
   thank_you_message: string | null;
   published: boolean;
+  theme_colors: string[] | null;
 }>;
 
 const SECTIONS = [
   { id: "general", label: "General" },
+  { id: "colores", label: "Colores" },
   { id: "historia", label: "Historia" },
   { id: "padres", label: "Padres" },
   { id: "galeria", label: "Galería" },
@@ -114,6 +116,7 @@ export function InvitationEditor({ slug }: { slug: string }) {
         faq: state.faq,
         welcome_message: state.welcome_message,
         thank_you_message: state.thank_you_message,
+        theme_colors: state.theme_colors,
       };
       await save({ data: { slug, patch } });
       toast.success("Cambios guardados.");
@@ -182,6 +185,7 @@ export function InvitationEditor({ slug }: { slug: string }) {
 
       <div className="p-6 space-y-4">
         {section === "general" && <GeneralSection state={state} update={update} slug={slug} />}
+        {section === "colores" && <ColorsSection state={state} update={update} />}
         {section === "historia" && <HistorySection state={state} update={update} slug={slug} />}
         {section === "padres" && <ParentsSection state={state} update={update} />}
         {section === "galeria" && <GallerySection state={state} update={update} slug={slug} />}
@@ -607,5 +611,111 @@ function FaqSection({ state, update }: { state: InvitationDTO; update: UpdateFn 
         </div>
       ))}
     </SectionCard>
+  );
+}
+
+/* ------------------ colors ------------------ */
+
+const COLOR_PRESETS: { name: string; colors: [string, string, string] }[] = [
+  { name: "Eucalipto & Oro",     colors: ["#3D5240", "#C8A96A", "#F5F1E8"] },
+  { name: "Borgoña Clásico",     colors: ["#5C1A1B", "#C9A227", "#F7EFE5"] },
+  { name: "Marino & Champaña",   colors: ["#1F2A44", "#D4B483", "#F4ECDD"] },
+  { name: "Rosa Polvo",          colors: ["#7A4A4D", "#D8A7A0", "#F8EDEB"] },
+  { name: "Verde Bosque",        colors: ["#2C3E2D", "#B59B6A", "#EFEAE0"] },
+  { name: "Negro & Oro",         colors: ["#1A1A1A", "#D4AF37", "#F2EFE7"] },
+  { name: "Terracota Otoñal",    colors: ["#8B3A1F", "#D9A066", "#F6EBDA"] },
+  { name: "Lavanda Suave",       colors: ["#4A3F66", "#B8A2C8", "#F2EDF5"] },
+  { name: "Salvia & Crema",      colors: ["#7A8B6A", "#C9B58A", "#F4F1E8"] },
+  { name: "Mostaza Vintage",     colors: ["#5A4A1F", "#D4A93B", "#F5EFDC"] },
+  { name: "Azul Polvo",          colors: ["#3C5A7A", "#C8B68A", "#EEF1F4"] },
+  { name: "Cobre & Marfil",      colors: ["#7C3A1F", "#C58B5C", "#F6EFE3"] },
+  { name: "Vino & Rosa",         colors: ["#5C2B3A", "#D4A5A0", "#F8EEEC"] },
+  { name: "Esmeralda Profundo",  colors: ["#1F4D3F", "#C8A96A", "#EFEDDF"] },
+  { name: "Coral & Arena",       colors: ["#B5523B", "#E8B492", "#F8EFE2"] },
+  { name: "Carbón & Plata",      colors: ["#2D2D2D", "#B5B5B5", "#EFEFEC"] },
+  { name: "Mocha & Crema",       colors: ["#3E2A20", "#B68863", "#F4ECDD"] },
+  { name: "Lila & Oro Rosa",     colors: ["#564166", "#D4A574", "#F3ECF1"] },
+  { name: "Menta Suave",         colors: ["#3B6B5C", "#C9B68A", "#EAF1ED"] },
+  { name: "Berenjena & Oro",     colors: ["#3A2238", "#C9A35E", "#F2ECEB"] },
+];
+
+function ColorsSection({ state, update }: { state: InvitationDTO; update: UpdateFn }) {
+  const current = state.theme_colors && state.theme_colors.length === 3 ? state.theme_colors : null;
+  const setColors = (next: [string, string, string] | null) => update("theme_colors", next);
+  const isActive = (c: [string, string, string]) =>
+    !!current && current[0].toLowerCase() === c[0].toLowerCase() && current[1].toLowerCase() === c[1].toLowerCase() && current[2].toLowerCase() === c[2].toLowerCase();
+
+  const updateAt = (idx: 0 | 1 | 2, value: string) => {
+    const base = current ?? ["#2D2D2D", "#D4AF37", "#F7F3EE"];
+    const next: [string, string, string] = [base[0], base[1], base[2]];
+    next[idx] = value;
+    setColors(next);
+  };
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className="text-[11px] tracking-[0.3em] uppercase text-[#8A7E72] mb-1">Paleta de la invitación</h3>
+        <p className="text-[12px] text-[#8A7E72]">
+          Elige una combinación lista o ajusta los 3 colores a tu gusto. El primer color es el principal (títulos y botones), el segundo es el acento dorado, y el tercero es el fondo suave.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+        {COLOR_PRESETS.map((p) => {
+          const active = isActive(p.colors);
+          return (
+            <button
+              key={p.name}
+              type="button"
+              onClick={() => setColors(p.colors)}
+              className={`group text-left border rounded-sm p-3 transition-all ${
+                active ? "border-[#2D2D2D] ring-2 ring-[#D4AF37]" : "border-[#E5DED3] hover:border-[#D4AF37]"
+              }`}
+            >
+              <div className="flex h-10 rounded-sm overflow-hidden border border-[#E5DED3]">
+                {p.colors.map((c) => (
+                  <div key={c} style={{ backgroundColor: c }} className="flex-1" />
+                ))}
+              </div>
+              <div className="mt-2 text-[11px] tracking-[0.15em] uppercase text-[#2D2D2D]">{p.name}</div>
+              <div className="text-[10px] text-[#8A7E72] font-mono">{p.colors.join(" · ")}</div>
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="border-t border-[#E5DED3] pt-5 space-y-3">
+        <h3 className="text-[11px] tracking-[0.3em] uppercase text-[#8A7E72]">Personalizar (opcional)</h3>
+        <div className="grid grid-cols-3 gap-3">
+          {(["Principal", "Acento", "Fondo"] as const).map((label, i) => {
+            const val = current ? current[i] : ["#2D2D2D", "#D4AF37", "#F7F3EE"][i];
+            return (
+              <div key={label}>
+                <div className="text-[10px] tracking-[0.25em] uppercase text-[#8A7E72] mb-1.5">{label}</div>
+                <div className="flex items-center gap-2 border border-[#E5DED3] rounded-sm px-2 py-1.5">
+                  <input
+                    type="color"
+                    value={val}
+                    onChange={(e) => updateAt(i as 0 | 1 | 2, e.target.value)}
+                    className="w-8 h-8 border-0 bg-transparent cursor-pointer"
+                  />
+                  <span className="text-xs font-mono text-[#2D2D2D] uppercase">{val}</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        {current && (
+          <button
+            type="button"
+            onClick={() => setColors(null)}
+            className="text-[11px] tracking-[0.2em] uppercase text-rose-600 hover:text-rose-700"
+          >
+            Quitar paleta (usar predeterminada)
+          </button>
+        )}
+      </div>
+    </div>
   );
 }
