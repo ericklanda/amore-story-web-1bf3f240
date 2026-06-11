@@ -166,7 +166,9 @@ function formatTime(iso: string | null): string {
 function Template({ inv }: { inv: PublicInvitationDTO }) {
   const [dark, setDark] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [entered, setEntered] = useState(false);
+  const hasSplash = !!inv.youtube_song_id;
+  const [entered, setEntered] = useState(!hasSplash);
+
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
