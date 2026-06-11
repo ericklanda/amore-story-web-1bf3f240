@@ -128,6 +128,16 @@ export default function PurchaseForm({ tier, tierLabel, tagline, fields }: Props
 }
 
 function FieldRow({ field }: { field: FieldDef }) {
+  if (field.type === "notice") {
+    return (
+      <div className="rounded-md border border-[#D4AF37]/30 bg-[#FBF7EF] px-4 py-3">
+        <p className="text-sm font-medium text-[#2D2D2D]">{field.label}</p>
+        {field.notice ? (
+          <p className="mt-1 text-sm text-[#5C5347] leading-relaxed">{field.notice}</p>
+        ) : null}
+      </div>
+    );
+  }
   const common = {
     id: field.name,
     name: field.name,
