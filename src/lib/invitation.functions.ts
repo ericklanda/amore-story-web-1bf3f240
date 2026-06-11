@@ -40,6 +40,7 @@ export type InvitationDTO = {
   thank_you_message: string | null;
   published: boolean;
   theme_colors: string[] | null;
+  package_tier: "plata" | "oro" | "diamante";
   owner_email: string;
   owner_user_id: string | null;
 };
