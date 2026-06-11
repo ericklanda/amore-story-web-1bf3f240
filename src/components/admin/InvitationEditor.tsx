@@ -185,6 +185,7 @@ export function InvitationEditor({ slug }: { slug: string }) {
 
       <div className="p-6 space-y-4">
         {section === "general" && <GeneralSection state={state} update={update} slug={slug} />}
+        {section === "colores" && <ColorsSection state={state} update={update} />}
         {section === "historia" && <HistorySection state={state} update={update} slug={slug} />}
         {section === "padres" && <ParentsSection state={state} update={update} />}
         {section === "galeria" && <GallerySection state={state} update={update} slug={slug} />}
