@@ -19,7 +19,7 @@ const FIELDS: FieldDef[] = [
   { name: "faq", label: "Preguntas frecuentes", type: "textarea", help: "Una pregunta y respuesta por línea." },
   { name: "thank_you_message", label: "Mensaje de agradecimiento final", type: "textarea" },
   { name: "whatsapp_number", label: "WhatsApp para confirmaciones", type: "tel", placeholder: "+52..." },
-  { name: "gallery_note", label: "Galería de fotos", type: "textarea", help: "Indícanos cuántas fotos quieres incluir (te las pediremos por WhatsApp)." },
+  { name: "gallery_note", label: "📷 Galería de fotos", type: "notice", notice: "Al enviar este formulario serás redirigido a WhatsApp para compartirnos todas tus fotos (galería ilimitada y foto principal en alta resolución)." },
   { name: "custom_requests", label: "Personalizaciones adicionales", type: "textarea", help: "Cualquier detalle especial: tipografía, paleta de colores, animaciones, etc." },
 ];
 
