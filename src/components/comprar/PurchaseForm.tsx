@@ -22,6 +22,7 @@ type Props = {
   tierLabel: string;
   tagline: string;
   fields: FieldDef[];
+  baseFields?: FieldDef[];
 };
 
 const BASE_FIELDS: FieldDef[] = [

@@ -1,6 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import PurchaseForm, { type FieldDef } from "@/components/comprar/PurchaseForm";
 
+const BASE_FIELDS: FieldDef[] = [
+  { name: "contact_name", label: "Tu nombre completo", required: true },
+  { name: "contact_email", label: "Correo electrónico", type: "email", required: true },
+  { name: "contact_phone", label: "WhatsApp de contacto", type: "tel", required: true, placeholder: "+52..." },
+  { name: "couple_names", label: "Nombre Mamá/Papá", required: true, placeholder: "María & Carlos" },
+  { name: "event_date", label: "Fecha del evento", type: "date", required: true },
+];
+
 const FIELDS: FieldDef[] = [
   { name: "quinceanera_name", label: "Nombre de la quinceañera", required: true, placeholder: "Valentina" },
   { name: "welcome_message", label: "Mensaje de bienvenida", type: "textarea", help: "Texto que verán tus invitados al abrir la invitación." },
