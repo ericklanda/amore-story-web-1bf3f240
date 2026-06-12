@@ -103,7 +103,7 @@ export default function PurchaseForm({ tier, tierLabel, tagline, fields, baseFie
         <form onSubmit={onSubmit} className="space-y-8">
           <section className="space-y-4">
             <h2 className="font-serif text-xl text-[#2D2D2D]">Datos de contacto</h2>
-            {BASE_FIELDS.map((f) => (
+            {(baseFields ?? BASE_FIELDS).map((f) => (
               <FieldRow key={f.name} field={f} />
             ))}
           </section>
