@@ -20,6 +20,9 @@ import { Route as ComprarPlataRouteImport } from './routes/comprar.plata'
 import { Route as ComprarOroRouteImport } from './routes/comprar.oro'
 import { Route as ComprarDiamanteRouteImport } from './routes/comprar.diamante'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as ComprarXvPlataRouteImport } from './routes/comprar.xv.plata'
+import { Route as ComprarXvOroRouteImport } from './routes/comprar.xv.oro'
+import { Route as ComprarXvDiamanteRouteImport } from './routes/comprar.xv.diamante'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -75,6 +78,21 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const ComprarXvPlataRoute = ComprarXvPlataRouteImport.update({
+  id: '/comprar/xv/plata',
+  path: '/comprar/xv/plata',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComprarXvOroRoute = ComprarXvOroRouteImport.update({
+  id: '/comprar/xv/oro',
+  path: '/comprar/xv/oro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComprarXvDiamanteRoute = ComprarXvDiamanteRouteImport.update({
+  id: '/comprar/xv/diamante',
+  path: '/comprar/xv/diamante',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -87,6 +105,9 @@ export interface FileRoutesByFullPath {
   '/comprar/diamante': typeof ComprarDiamanteRoute
   '/comprar/oro': typeof ComprarOroRoute
   '/comprar/plata': typeof ComprarPlataRoute
+  '/comprar/xv/diamante': typeof ComprarXvDiamanteRoute
+  '/comprar/xv/oro': typeof ComprarXvOroRoute
+  '/comprar/xv/plata': typeof ComprarXvPlataRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -99,6 +120,9 @@ export interface FileRoutesByTo {
   '/comprar/diamante': typeof ComprarDiamanteRoute
   '/comprar/oro': typeof ComprarOroRoute
   '/comprar/plata': typeof ComprarPlataRoute
+  '/comprar/xv/diamante': typeof ComprarXvDiamanteRoute
+  '/comprar/xv/oro': typeof ComprarXvOroRoute
+  '/comprar/xv/plata': typeof ComprarXvPlataRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -113,6 +137,9 @@ export interface FileRoutesById {
   '/comprar/diamante': typeof ComprarDiamanteRoute
   '/comprar/oro': typeof ComprarOroRoute
   '/comprar/plata': typeof ComprarPlataRoute
+  '/comprar/xv/diamante': typeof ComprarXvDiamanteRoute
+  '/comprar/xv/oro': typeof ComprarXvOroRoute
+  '/comprar/xv/plata': typeof ComprarXvPlataRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -127,6 +154,9 @@ export interface FileRouteTypes {
     | '/comprar/diamante'
     | '/comprar/oro'
     | '/comprar/plata'
+    | '/comprar/xv/diamante'
+    | '/comprar/xv/oro'
+    | '/comprar/xv/plata'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -139,6 +169,9 @@ export interface FileRouteTypes {
     | '/comprar/diamante'
     | '/comprar/oro'
     | '/comprar/plata'
+    | '/comprar/xv/diamante'
+    | '/comprar/xv/oro'
+    | '/comprar/xv/plata'
   id:
     | '__root__'
     | '/'
@@ -152,6 +185,9 @@ export interface FileRouteTypes {
     | '/comprar/diamante'
     | '/comprar/oro'
     | '/comprar/plata'
+    | '/comprar/xv/diamante'
+    | '/comprar/xv/oro'
+    | '/comprar/xv/plata'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -165,6 +201,9 @@ export interface RootRouteChildren {
   ComprarDiamanteRoute: typeof ComprarDiamanteRoute
   ComprarOroRoute: typeof ComprarOroRoute
   ComprarPlataRoute: typeof ComprarPlataRoute
+  ComprarXvDiamanteRoute: typeof ComprarXvDiamanteRoute
+  ComprarXvOroRoute: typeof ComprarXvOroRoute
+  ComprarXvPlataRoute: typeof ComprarXvPlataRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -246,6 +285,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/comprar/xv/plata': {
+      id: '/comprar/xv/plata'
+      path: '/comprar/xv/plata'
+      fullPath: '/comprar/xv/plata'
+      preLoaderRoute: typeof ComprarXvPlataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comprar/xv/oro': {
+      id: '/comprar/xv/oro'
+      path: '/comprar/xv/oro'
+      fullPath: '/comprar/xv/oro'
+      preLoaderRoute: typeof ComprarXvOroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comprar/xv/diamante': {
+      id: '/comprar/xv/diamante'
+      path: '/comprar/xv/diamante'
+      fullPath: '/comprar/xv/diamante'
+      preLoaderRoute: typeof ComprarXvDiamanteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -271,6 +331,9 @@ const rootRouteChildren: RootRouteChildren = {
   ComprarDiamanteRoute: ComprarDiamanteRoute,
   ComprarOroRoute: ComprarOroRoute,
   ComprarPlataRoute: ComprarPlataRoute,
+  ComprarXvDiamanteRoute: ComprarXvDiamanteRoute,
+  ComprarXvOroRoute: ComprarXvOroRoute,
+  ComprarXvPlataRoute: ComprarXvPlataRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
