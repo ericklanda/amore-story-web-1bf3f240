@@ -48,6 +48,7 @@ export const Route = createFileRoute("/comprar/xv/diamante")({
       tierLabel="Diamante · XV Años"
       tagline="Experiencia premium para tus XV: todo Oro + historia extendida, transporte, FAQ y personalizaciones a medida."
       fields={FIELDS}
+      baseFields={BASE_FIELDS}
     />
   ),
 });

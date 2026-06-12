@@ -32,6 +32,7 @@ export const Route = createFileRoute("/comprar/xv/plata")({
       tierLabel="Plata · XV Años"
       tagline="Invitación esencial para tus XV: una foto, ubicación, cuenta regresiva y confirmaciones por WhatsApp."
       fields={FIELDS}
+      baseFields={BASE_FIELDS}
     />
   ),
 });
