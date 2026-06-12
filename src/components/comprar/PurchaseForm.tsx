@@ -22,6 +22,7 @@ type Props = {
   tierLabel: string;
   tagline: string;
   fields: FieldDef[];
+  baseFields?: FieldDef[];
 };
 
 const BASE_FIELDS: FieldDef[] = [
@@ -32,7 +33,7 @@ const BASE_FIELDS: FieldDef[] = [
   { name: "event_date", label: "Fecha del evento", type: "date", required: true },
 ];
 
-export default function PurchaseForm({ tier, tierLabel, tagline, fields }: Props) {
+export default function PurchaseForm({ tier, tierLabel, tagline, fields, baseFields }: Props) {
   const submit = useServerFn(submitInvitationRequest);
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
@@ -102,7 +103,7 @@ export default function PurchaseForm({ tier, tierLabel, tagline, fields }: Props
         <form onSubmit={onSubmit} className="space-y-8">
           <section className="space-y-4">
             <h2 className="font-serif text-xl text-[#2D2D2D]">Datos de contacto</h2>
-            {BASE_FIELDS.map((f) => (
+            {(baseFields ?? BASE_FIELDS).map((f) => (
               <FieldRow key={f.name} field={f} />
             ))}
           </section>
