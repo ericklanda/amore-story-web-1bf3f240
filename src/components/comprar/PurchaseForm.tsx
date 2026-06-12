@@ -33,7 +33,7 @@ const BASE_FIELDS: FieldDef[] = [
   { name: "event_date", label: "Fecha del evento", type: "date", required: true },
 ];
 
-export default function PurchaseForm({ tier, tierLabel, tagline, fields }: Props) {
+export default function PurchaseForm({ tier, tierLabel, tagline, fields, baseFields }: Props) {
   const submit = useServerFn(submitInvitationRequest);
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
