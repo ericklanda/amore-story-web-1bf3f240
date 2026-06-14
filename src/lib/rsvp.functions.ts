@@ -5,7 +5,7 @@ const RsvpSchema = z.object({
   invitation_slug: z.string().min(1).max(64).regex(/^[a-z0-9-]+$/),
   name: z.string().trim().min(1).max(120),
   attending: z.enum(["yes", "no"]),
-  guests: z.number().int().min(0).max(10),
+  guests: z.number().int().min(0).max(10).optional().default(1),
   message: z.string().max(500).optional().nullable(),
 });
 
