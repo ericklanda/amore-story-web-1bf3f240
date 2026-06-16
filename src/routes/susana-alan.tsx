@@ -845,6 +845,33 @@ function GiftRegistry() {
             </Reveal>
           ))}
         </div>
+
+        {/* Datos bancarios */}
+        <div className="mt-16 max-w-2xl mx-auto bg-gradient-blush border border-border rounded-sm p-8 md:p-10 shadow-soft">
+          <div className="text-center mb-6">
+            <div className="text-4xl mb-3">🏦</div>
+            <h3 className="font-serif italic text-2xl md:text-3xl text-primary mb-2">Datos bancarios</h3>
+            <p className="text-sm text-muted-foreground">Si prefieres hacer una transferencia, aquí tienes nuestros datos.</p>
+          </div>
+          <div className="space-y-3 text-sm">
+            <div className="flex justify-between border-b border-border/50 pb-2">
+              <span className="text-muted-foreground tracking-wider uppercase text-xs">Beneficiario</span>
+              <span className="font-medium text-foreground">Susana / Alan</span>
+            </div>
+            <div className="flex justify-between border-b border-border/50 pb-2">
+              <span className="text-muted-foreground tracking-wider uppercase text-xs">Banco</span>
+              <span className="font-medium text-foreground">Por confirmar</span>
+            </div>
+            <div className="flex justify-between border-b border-border/50 pb-2">
+              <span className="text-muted-foreground tracking-wider uppercase text-xs">CLABE</span>
+              <span className="font-mono text-foreground">000 000 00000000 0000</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground tracking-wider uppercase text-xs">Tarjeta</span>
+              <span className="font-mono text-foreground">0000 0000 0000 0000</span>
+            </div>
+          </div>
+        </div>
       </div>
 
     </section>
