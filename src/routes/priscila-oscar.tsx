@@ -8,6 +8,7 @@ import po19 from "@/assets/priscila-oscar/po-19.jpg.asset.json";
 import po23 from "@/assets/priscila-oscar/po-23.jpg.asset.json";
 import po28 from "@/assets/priscila-oscar/po-28.jpg.asset.json";
 import po29 from "@/assets/priscila-oscar/po-29.jpg.asset.json";
+import flowersSide from "@/assets/priscila-oscar/flowers-side.png.asset.json";
 
 const heroCouple = po23.url;
 const couple2 = po17.url;
@@ -104,7 +105,7 @@ function SectionTitle({ kicker, title }: { kicker?: string; title: string }) {
 }
 
 function WeddingInvitation() {
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(false);
   const [lang, setLang] = useState<"es" | "en">("es");
   const [progress, setProgress] = useState(0);
   const [entered, setEntered] = useState(false);
@@ -235,26 +236,40 @@ function SplashOverlay({ onEnter }: { onEnter: () => void }) {
       className={`fixed inset-0 z-[60] flex flex-col items-center justify-center text-center px-6 transition-opacity duration-700 ${
         fading ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
-      style={{ background: "linear-gradient(180deg, #0a0a0a, #1a1410)" }}
+      style={{ background: "linear-gradient(180deg, #ffffff, #faf7f1)" }}
     >
-      <div className="absolute inset-0" style={{ background: "radial-gradient(circle at center, oklch(0.78 0.13 85 / 0.12), transparent 60%)" }} />
+      <img
+        src={flowersSide.url}
+        alt=""
+        aria-hidden
+        className="absolute left-0 top-0 h-full w-auto max-w-[40vw] object-cover object-right pointer-events-none select-none opacity-90"
+        loading="eager"
+      />
+      <img
+        src={flowersSide.url}
+        alt=""
+        aria-hidden
+        className="absolute right-0 top-0 h-full w-auto max-w-[40vw] object-cover object-left pointer-events-none select-none opacity-90 scale-x-[-1]"
+        loading="eager"
+      />
+      <div className="absolute inset-0" style={{ background: "radial-gradient(circle at center, rgba(255,255,255,0.85), rgba(255,255,255,0.6) 60%, transparent)" }} />
       <div className="relative z-10 max-w-lg">
-        <div className="ornament mb-6 text-sm tracking-[0.3em]" style={{ color: "oklch(0.82 0.14 85)" }}>14 · Noviembre · 2026</div>
-        <h1 className="font-serif italic text-5xl sm:text-6xl md:text-7xl text-white leading-[0.95] mb-4">
+        <div className="ornament mb-6 text-sm tracking-[0.3em]" style={{ color: "oklch(0.55 0.10 70)" }}>14 · Noviembre · 2026</div>
+        <h1 className="font-serif italic text-5xl sm:text-6xl md:text-7xl leading-[0.95] mb-4" style={{ color: "#1a1410" }}>
           Priscila
-          <span className="font-script block text-4xl sm:text-5xl md:text-6xl my-2 not-italic" style={{ color: "oklch(0.82 0.14 85)" }}>&</span>
+          <span className="font-script block text-4xl sm:text-5xl md:text-6xl my-2 not-italic" style={{ color: "oklch(0.62 0.12 70)" }}>&</span>
           Oscar
         </h1>
-        <p className="text-white/70 text-xs tracking-[0.25em] uppercase mb-10">
+        <p className="text-xs tracking-[0.25em] uppercase mb-10" style={{ color: "rgba(26,20,16,0.65)" }}>
           Nos casamos · Ciudad Juárez, Chihuahua
         </p>
-        <p className="font-serif italic text-2xl sm:text-3xl text-white/90 mb-6">
+        <p className="font-serif italic text-2xl sm:text-3xl mb-6" style={{ color: "#1a1410" }}>
           Estás Invitado
         </p>
         <button
           onClick={handleEnter}
-          className="inline-flex items-center gap-3 px-10 py-4 rounded-full font-sans text-sm tracking-[0.2em] uppercase transition-all hover:gap-5"
-          style={{ background: "linear-gradient(135deg, oklch(0.82 0.14 85), oklch(0.62 0.12 70))", color: "#0a0a0a" }}
+          className="inline-flex items-center gap-3 px-10 py-4 rounded-full font-sans text-sm tracking-[0.2em] uppercase transition-all hover:gap-5 shadow-soft"
+          style={{ background: "linear-gradient(135deg, oklch(0.78 0.13 85), oklch(0.62 0.12 70))", color: "#0a0a0a" }}
         >
           Ingresa
           <span>→</span>
