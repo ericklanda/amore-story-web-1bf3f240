@@ -105,7 +105,7 @@ function SectionTitle({ kicker, title }: { kicker?: string; title: string }) {
 }
 
 function WeddingInvitation() {
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(false);
   const [lang, setLang] = useState<"es" | "en">("es");
   const [progress, setProgress] = useState(0);
   const [entered, setEntered] = useState(false);
