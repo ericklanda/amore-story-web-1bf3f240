@@ -265,9 +265,9 @@ function SplashOverlay({ onEnter }: { onEnter: () => void }) {
       <div className="relative z-10 max-w-lg">
         <div className="ornament !text-white/80 mb-6 text-sm tracking-[0.3em]">30 · Octubre · 2026</div>
         <h1 className="font-serif italic text-5xl sm:text-6xl md:text-7xl text-white leading-[0.95] mb-4">
-          Luis Carlos
+          Susana
           <span className="font-script text-gold block text-4xl sm:text-5xl md:text-6xl my-2 not-italic">&</span>
-          Leonardo
+          Alan
         </h1>
         <p className="text-white/70 text-xs tracking-[0.25em] uppercase mb-10">
           Nos casamos · Ciudad Juárez, Chihuahua
@@ -308,7 +308,7 @@ function Hero() {
         >
           <img
             src={src}
-            alt="Luis Carlos y Leonardo"
+            alt="Susana y Alan"
             className="w-full h-full object-cover"
             style={{
               transform: i === idx ? "scale(1.06)" : "scale(1)",
@@ -327,9 +327,9 @@ function Hero() {
         </Reveal>
         <Reveal delay={400}>
           <h1 className="font-serif italic text-5xl sm:text-6xl md:text-8xl lg:text-9xl leading-[0.95]">
-            Luis Carlos
+            Susana
             <span className="font-script text-gold block text-4xl sm:text-5xl md:text-6xl my-2 not-italic">&</span>
-            Leonardo
+            Alan
           </h1>
         </Reveal>
         <Reveal delay={700}>
@@ -403,7 +403,7 @@ function OurStory() {
 
         <Reveal delay={150}>
           <div className="mb-16 overflow-hidden rounded-sm shadow-soft">
-            <img src={engagement} alt="Luis Carlos y Leonardo" className="w-full aspect-[16/10] object-cover" loading="lazy" />
+            <img src={engagement} alt="Susana y Alan" className="w-full aspect-[16/10] object-cover" loading="lazy" />
           </div>
         </Reveal>
 
@@ -430,8 +430,8 @@ function OurStory() {
 /* ---------------- PARENTS ---------------- */
 function ParentsSection() {
   const groups = [
-    { title: "Padres de Luis Carlos", names: ["Lazara Ayala Estrada", "Luis Carlos Delgado Leyva"] },
-    { title: "Padres de Leonardo", names: ["Magdalena Bautista Ávalos", "Cirilo García Olivares †"] },
+    { title: "Padres de Susana", names: ["Lazara Ayala Estrada", "Susana Delgado Leyva"] },
+    { title: "Padres de Alan", names: ["Magdalena Bautista Ávalos", "Cirilo García Olivares †"] },
   ];
 
   return (
@@ -533,7 +533,7 @@ function EventDetails() {
     // 30 Oct 2026 20:00 → 31 Oct 2026 02:00 (CST = UTC-6)
     const start = "20261031T020000Z";
     const end = "20261031T080000Z";
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Luis+Carlos+%26+Leonardo&dates=${start}/${end}&details=Acompáñanos+a+celebrar+nuestro+día.&location=${encodeURIComponent(VENUE_ADDRESS)}`;
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Luis+Carlos+%26+Alan&dates=${start}/${end}&details=Acompáñanos+a+celebrar+nuestro+día.&location=${encodeURIComponent(VENUE_ADDRESS)}`;
   };
 
 
@@ -696,7 +696,7 @@ function Rsvp() {
     try {
       await submit({
         data: {
-          invitation_slug: "luis-leo",
+          invitation_slug: "susana-alan",
           name: form.name.trim(),
           attending: form.attending as "yes" | "no",
           message: form.message || null,
@@ -712,7 +712,7 @@ function Rsvp() {
   };
 
   const whatsappMsg = useMemo(() => {
-    const text = `Hola! Confirmo mi asistencia a la boda de Luis Carlos y Leonardo. Nombre: ${form.name || "(nombre)"}, asistencia: ${form.attending === "yes" ? "Sí" : "No"}`;
+    const text = `Hola! Confirmo mi asistencia a la boda de Susana y Alan. Nombre: ${form.name || "(nombre)"}, asistencia: ${form.attending === "yes" ? "Sí" : "No"}`;
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
   }, [form]);
 
@@ -974,7 +974,7 @@ function Faq() {
 function ThankYou() {
   return (
     <section className="relative h-[100svh] min-h-[600px] w-full overflow-hidden">
-      <img src={couple3} alt="Luis Carlos y Leonardo" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+      <img src={couple3} alt="Susana y Alan" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
       <div className="absolute inset-0 bg-black/50" />
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-white">
         <Reveal>
@@ -992,7 +992,7 @@ function ThankYou() {
         </Reveal>
         <Reveal delay={600}>
           <div className="mt-8 font-script text-5xl md:text-6xl text-gold">
-            Luis Carlos & Leonardo
+            Susana & Alan
           </div>
         </Reveal>
         <Reveal delay={800}>
