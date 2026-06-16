@@ -104,7 +104,7 @@ function SectionTitle({ kicker, title }: { kicker?: string; title: string }) {
 }
 
 function WeddingInvitation() {
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(false);
   const [lang, setLang] = useState<"es" | "en">("es");
   const [progress, setProgress] = useState(0);
   const [entered, setEntered] = useState(false);
@@ -125,7 +125,7 @@ function WeddingInvitation() {
   }, []);
 
   return (
-    <div data-theme="luxe" className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div data-theme="luxe" className="min-h-screen bg-background text-foreground overflow-x-hidden marble-bg">
       <div
         className="fixed top-0 left-0 h-[2px] bg-gradient-gold z-50 transition-[width] duration-150"
         style={{ width: `${progress * 100}%` }}
@@ -232,29 +232,30 @@ function SplashOverlay({ onEnter }: { onEnter: () => void }) {
 
   return (
     <div
-      className={`fixed inset-0 z-[60] flex flex-col items-center justify-center text-center px-6 transition-opacity duration-700 ${
+      data-theme="luxe"
+      className={`marble-bg fixed inset-0 z-[60] flex flex-col items-center justify-center text-center px-6 transition-opacity duration-700 ${
         fading ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
-      style={{ background: "linear-gradient(180deg, #0a0a0a, #1a1410)" }}
+      style={{ backgroundColor: "#fafaf7" }}
     >
-      <div className="absolute inset-0" style={{ background: "radial-gradient(circle at center, oklch(0.78 0.13 85 / 0.12), transparent 60%)" }} />
+      <div className="absolute inset-0" style={{ background: "radial-gradient(circle at center, oklch(0.78 0.13 85 / 0.10), transparent 65%)" }} />
       <div className="relative z-10 max-w-lg">
-        <div className="ornament mb-6 text-sm tracking-[0.3em]" style={{ color: "oklch(0.82 0.14 85)" }}>14 · Noviembre · 2026</div>
-        <h1 className="font-serif italic text-5xl sm:text-6xl md:text-7xl text-white leading-[0.95] mb-4">
+        <div className="ornament mb-6 text-sm tracking-[0.3em]" style={{ color: "oklch(0.58 0.12 75)" }}>14 · Noviembre · 2026</div>
+        <h1 className="font-serif italic text-5xl sm:text-6xl md:text-7xl leading-[0.95] mb-4" style={{ color: "oklch(0.16 0.005 60)" }}>
           Priscila
-          <span className="font-script block text-4xl sm:text-5xl md:text-6xl my-2 not-italic" style={{ color: "oklch(0.82 0.14 85)" }}>&</span>
+          <span className="font-script block text-4xl sm:text-5xl md:text-6xl my-2 not-italic" style={{ color: "oklch(0.62 0.12 75)" }}>&</span>
           Oscar
         </h1>
-        <p className="text-white/70 text-xs tracking-[0.25em] uppercase mb-10">
+        <p className="text-xs tracking-[0.25em] uppercase mb-10" style={{ color: "oklch(0.40 0.010 70)" }}>
           Nos casamos · Ciudad Juárez, Chihuahua
         </p>
-        <p className="font-serif italic text-2xl sm:text-3xl text-white/90 mb-6">
+        <p className="font-serif italic text-2xl sm:text-3xl mb-6" style={{ color: "oklch(0.22 0.008 60)" }}>
           Estás Invitado
         </p>
         <button
           onClick={handleEnter}
-          className="inline-flex items-center gap-3 px-10 py-4 rounded-full font-sans text-sm tracking-[0.2em] uppercase transition-all hover:gap-5"
-          style={{ background: "linear-gradient(135deg, oklch(0.82 0.14 85), oklch(0.62 0.12 70))", color: "#0a0a0a" }}
+          className="inline-flex items-center gap-3 px-10 py-4 rounded-full font-sans text-sm tracking-[0.2em] uppercase transition-all hover:gap-5 shadow-soft"
+          style={{ background: "linear-gradient(135deg, oklch(0.74 0.14 80), oklch(0.58 0.12 70))", color: "#0a0a0a" }}
         >
           Ingresa
           <span>→</span>
