@@ -238,38 +238,51 @@
    Luxe palette — Black / White / Gold (Priscila & Oscar - Diamante)
    ============================================================ */
 [data-theme="luxe"] {
-  --background: oklch(0.985 0.003 90);
+  --background: oklch(0.975 0.004 85);
   --foreground: oklch(0.18 0.005 60);
   --card: oklch(0.995 0.002 90);
   --card-foreground: oklch(0.18 0.005 60);
   --popover: oklch(0.995 0.002 90);
   --popover-foreground: oklch(0.18 0.005 60);
-  --primary: oklch(0.16 0.005 60);
+  --primary: oklch(0.20 0.005 60);
   --primary-foreground: oklch(0.985 0.005 90);
   --secondary: oklch(0.92 0.020 85);
   --secondary-foreground: oklch(0.20 0.005 60);
   --muted: oklch(0.94 0.010 85);
-  --muted-foreground: oklch(0.45 0.010 70);
-  --accent: oklch(0.78 0.13 85);
-  --accent-foreground: oklch(0.18 0.005 60);
+  --muted-foreground: oklch(0.42 0.010 70);
+  --accent: oklch(0.62 0.12 75);
+  --accent-foreground: oklch(0.99 0.005 90);
   --destructive: oklch(0.55 0.20 25);
   --destructive-foreground: oklch(0.985 0.005 90);
-  --border: oklch(0.88 0.015 85);
-  --input: oklch(0.92 0.015 85);
-  --ring: oklch(0.78 0.13 85);
+  --border: oklch(0.86 0.012 80);
+  --input: oklch(0.92 0.012 85);
+  --ring: oklch(0.62 0.12 75);
 
-  --gold: oklch(0.74 0.14 80);
+  --gold: oklch(0.58 0.12 75);
   --blush: oklch(0.96 0.012 85);
   --rose: oklch(0.55 0.06 70);
   --cream: oklch(0.97 0.010 85);
   --sage: oklch(0.65 0.05 75);
 
   --gradient-hero: linear-gradient(180deg, oklch(0.10 0 0 / 0.10), oklch(0.05 0 0 / 0.75));
-  --gradient-gold: linear-gradient(135deg, oklch(0.82 0.14 85), oklch(0.62 0.12 70));
-  --gradient-blush: linear-gradient(180deg, oklch(0.985 0.003 90), oklch(0.93 0.025 85));
+  --gradient-gold: linear-gradient(135deg, oklch(0.74 0.14 80), oklch(0.55 0.11 70));
+  --gradient-blush: linear-gradient(180deg, oklch(0.985 0.003 90), oklch(0.93 0.018 85));
 
-  --shadow-soft: 0 20px 60px -20px oklch(0.10 0 0 / 0.30);
-  --shadow-card: 0 4px 24px -8px oklch(0.10 0 0 / 0.20);
+  --shadow-soft: 0 20px 60px -20px oklch(0.10 0 0 / 0.18);
+  --shadow-card: 0 4px 24px -8px oklch(0.10 0 0 / 0.12);
+}
+
+/* Soft marble texture for the luxe (Priscila & Oscar) invitation */
+.marble-bg {
+  background-color: var(--background);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% 15%, oklch(0.92 0.012 80 / 0.55), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 30%, oklch(0.88 0.015 70 / 0.45), transparent 65%),
+    radial-gradient(ellipse 70% 45% at 30% 75%, oklch(0.90 0.010 85 / 0.50), transparent 60%),
+    radial-gradient(ellipse 55% 35% at 85% 85%, oklch(0.86 0.018 60 / 0.40), transparent 65%),
+    linear-gradient(120deg, transparent 0%, oklch(0.94 0.008 80 / 0.30) 40%, transparent 55%, oklch(0.90 0.012 70 / 0.25) 75%, transparent 100%);
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 [data-theme="luxe"].dark,
