@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SusanaAlanRouteImport } from './routes/susana-alan'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as PriscilaOscarRouteImport } from './routes/priscila-oscar'
 import { Route as LuisLeoRouteImport } from './routes/luis-leo'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as SlugRouteImport } from './routes/$slug'
@@ -38,6 +39,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PriscilaOscarRoute = PriscilaOscarRouteImport.update({
+  id: '/priscila-oscar',
+  path: '/priscila-oscar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LuisLeoRoute = LuisLeoRouteImport.update({
@@ -105,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/$slug': typeof SlugRoute
   '/auth': typeof AuthRoute
   '/luis-leo': typeof LuisLeoRoute
+  '/priscila-oscar': typeof PriscilaOscarRoute
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/susana-alan': typeof SusanaAlanRoute
@@ -121,6 +128,7 @@ export interface FileRoutesByTo {
   '/$slug': typeof SlugRoute
   '/auth': typeof AuthRoute
   '/luis-leo': typeof LuisLeoRoute
+  '/priscila-oscar': typeof PriscilaOscarRoute
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/susana-alan': typeof SusanaAlanRoute
@@ -139,6 +147,7 @@ export interface FileRoutesById {
   '/$slug': typeof SlugRoute
   '/auth': typeof AuthRoute
   '/luis-leo': typeof LuisLeoRoute
+  '/priscila-oscar': typeof PriscilaOscarRoute
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/susana-alan': typeof SusanaAlanRoute
@@ -157,6 +166,7 @@ export interface FileRouteTypes {
     | '/$slug'
     | '/auth'
     | '/luis-leo'
+    | '/priscila-oscar'
     | '/reset-password'
     | '/sitemap.xml'
     | '/susana-alan'
@@ -173,6 +183,7 @@ export interface FileRouteTypes {
     | '/$slug'
     | '/auth'
     | '/luis-leo'
+    | '/priscila-oscar'
     | '/reset-password'
     | '/sitemap.xml'
     | '/susana-alan'
@@ -190,6 +201,7 @@ export interface FileRouteTypes {
     | '/$slug'
     | '/auth'
     | '/luis-leo'
+    | '/priscila-oscar'
     | '/reset-password'
     | '/sitemap.xml'
     | '/susana-alan'
@@ -208,6 +220,7 @@ export interface RootRouteChildren {
   SlugRoute: typeof SlugRoute
   AuthRoute: typeof AuthRoute
   LuisLeoRoute: typeof LuisLeoRoute
+  PriscilaOscarRoute: typeof PriscilaOscarRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SusanaAlanRoute: typeof SusanaAlanRoute
@@ -240,6 +253,13 @@ declare module '@tanstack/react-router' {
       path: '/reset-password'
       fullPath: '/reset-password'
       preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/priscila-oscar': {
+      id: '/priscila-oscar'
+      path: '/priscila-oscar'
+      fullPath: '/priscila-oscar'
+      preLoaderRoute: typeof PriscilaOscarRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/luis-leo': {
@@ -346,6 +366,7 @@ const rootRouteChildren: RootRouteChildren = {
   SlugRoute: SlugRoute,
   AuthRoute: AuthRoute,
   LuisLeoRoute: LuisLeoRoute,
+  PriscilaOscarRoute: PriscilaOscarRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SusanaAlanRoute: SusanaAlanRoute,
