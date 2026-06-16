@@ -389,10 +389,10 @@ function Hero() {
 /* ---------------- OUR STORY ---------------- */
 function OurStory() {
   const milestones = [
-    { date: "Diciembre 2024", title: "El reencuentro", text: "Último día de diciembre del 2024 nos reencontramos de la manera más extraña." },
-    { date: "Marzo 2025", title: "Nos hicimos novios", text: "30 de marzo de 2025 empezó oficialmente nuestra historia juntos." },
-    { date: "Abril 2025", title: "Nuestro primer viaje", text: "En abril de 2025 emprendimos nuestra primera aventura como pareja." },
-    { date: "Noviembre 2025", title: "La propuesta", text: "En noviembre de 2025 nos comprometimos: la propuesta que selló nuestro futuro." },
+    { date: "Capítulo 1", title: "Cómo nos conocimos", text: "Aquí va el momento en que sus caminos se cruzaron por primera vez." },
+    { date: "Capítulo 2", title: "El primer 'sí'", text: "El día en que decidieron caminar juntos como pareja." },
+    { date: "Capítulo 3", title: "Aventuras juntos", text: "Los viajes y momentos que fueron formando su historia." },
+    { date: "Capítulo 4", title: "La propuesta", text: "El instante mágico en que dijeron sí para toda la vida." },
   ];
   return (
     <section id="historia" className="py-24 md:py-36 px-6 bg-gradient-blush">
