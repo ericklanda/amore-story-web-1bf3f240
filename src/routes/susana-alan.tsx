@@ -430,28 +430,49 @@ function OurStory() {
 /* ---------------- PARENTS ---------------- */
 function ParentsSection() {
   const groups = [
-    { title: "Padres de Susana", names: ["Lazara Ayala Estrada", "Susana Delgado Leyva"] },
-    { title: "Padres de Alan", names: ["Magdalena Bautista Ávalos", "Cirilo García Olivares †"] },
+    { title: "Padres de Susana", names: ["Nombre de la mamá", "Nombre del papá"] },
+    { title: "Padres de Alan", names: ["Nombre de la mamá", "Nombre del papá"] },
+  ];
+
+  const padrinos = [
+    { role: "Padrinos de velación", names: ["Nombre & Nombre"] },
+    { role: "Padrinos de anillos", names: ["Nombre & Nombre"] },
+    { role: "Padrinos de arras", names: ["Nombre & Nombre"] },
+    { role: "Padrinos de lazo", names: ["Nombre & Nombre"] },
   ];
 
   return (
     <section className="py-24 md:py-32 px-6 bg-background">
       <div className="max-w-6xl mx-auto">
         <Reveal>
-          <SectionTitle kicker="Con amor" title="Padres y Padrinos" />
+          <SectionTitle kicker="Con amor" title="Padres" />
         </Reveal>
         <p className="text-center max-w-2xl mx-auto text-muted-foreground italic font-serif text-lg mb-14">
           "Con la bendición de Dios y de nuestros padres, queremos compartir contigo este día tan especial."
         </p>
-        <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-20">
           {groups.map((g, i) => (
             <Reveal key={g.title} delay={i * 120}>
               <div className="bg-card border border-border rounded-sm p-8 text-center shadow-card hover:shadow-soft transition-shadow">
                 <div className="ornament mb-5 !text-sm">{g.title}</div>
                 {g.names.map((n) => (
-                  <p key={n} className="font-serif text-xl text-primary leading-relaxed">
-                    {n}
-                  </p>
+                  <p key={n} className="font-serif text-xl text-primary leading-relaxed">{n}</p>
+                ))}
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal>
+          <SectionTitle kicker="Acompañándonos" title="Nuestros Padrinos" />
+        </Reveal>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
+          {padrinos.map((p, i) => (
+            <Reveal key={p.role} delay={i * 100}>
+              <div className="bg-card border border-border rounded-sm p-6 text-center shadow-card hover:shadow-soft transition-shadow h-full">
+                <div className="text-xs tracking-[0.3em] uppercase text-gold mb-3">{p.role}</div>
+                {p.names.map((n) => (
+                  <p key={n} className="font-serif text-lg text-primary leading-relaxed">{n}</p>
                 ))}
               </div>
             </Reveal>
