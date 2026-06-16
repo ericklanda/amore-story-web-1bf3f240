@@ -336,9 +336,12 @@
   filter: blur(40px);
 }
 
-.marble-bg > * {
-  position: relative;
-  z-index: 1;
+.marble-bg {
+  isolation: isolate;
+}
+.marble-bg::before,
+.marble-bg::after {
+  z-index: -1;
 }
 
 [data-theme="luxe"].dark,
