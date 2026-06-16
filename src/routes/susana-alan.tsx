@@ -554,7 +554,7 @@ function EventDetails() {
     // 30 Oct 2026 20:00 → 31 Oct 2026 02:00 (CST = UTC-6)
     const start = "20261031T020000Z";
     const end = "20261031T080000Z";
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Luis+Carlos+%26+Alan&dates=${start}/${end}&details=Acompáñanos+a+celebrar+nuestro+día.&location=${encodeURIComponent(VENUE_ADDRESS)}`;
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Susana+%26+Alan&dates=${start}/${end}&details=Acompáñanos+a+celebrar+nuestro+día.&location=${encodeURIComponent(VENUE_ADDRESS)}`;
   };
 
 
