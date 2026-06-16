@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SusanaAlanRouteImport } from './routes/susana-alan'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as LuisLeoRouteImport } from './routes/luis-leo'
@@ -24,6 +25,11 @@ import { Route as ComprarXvPlataRouteImport } from './routes/comprar.xv.plata'
 import { Route as ComprarXvOroRouteImport } from './routes/comprar.xv.oro'
 import { Route as ComprarXvDiamanteRouteImport } from './routes/comprar.xv.diamante'
 
+const SusanaAlanRoute = SusanaAlanRouteImport.update({
+  id: '/susana-alan',
+  path: '/susana-alan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -101,6 +107,7 @@ export interface FileRoutesByFullPath {
   '/luis-leo': typeof LuisLeoRoute
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/susana-alan': typeof SusanaAlanRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/comprar/diamante': typeof ComprarDiamanteRoute
   '/comprar/oro': typeof ComprarOroRoute
@@ -116,6 +123,7 @@ export interface FileRoutesByTo {
   '/luis-leo': typeof LuisLeoRoute
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/susana-alan': typeof SusanaAlanRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/comprar/diamante': typeof ComprarDiamanteRoute
   '/comprar/oro': typeof ComprarOroRoute
@@ -133,6 +141,7 @@ export interface FileRoutesById {
   '/luis-leo': typeof LuisLeoRoute
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/susana-alan': typeof SusanaAlanRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/comprar/diamante': typeof ComprarDiamanteRoute
   '/comprar/oro': typeof ComprarOroRoute
@@ -150,6 +159,7 @@ export interface FileRouteTypes {
     | '/luis-leo'
     | '/reset-password'
     | '/sitemap.xml'
+    | '/susana-alan'
     | '/admin'
     | '/comprar/diamante'
     | '/comprar/oro'
@@ -165,6 +175,7 @@ export interface FileRouteTypes {
     | '/luis-leo'
     | '/reset-password'
     | '/sitemap.xml'
+    | '/susana-alan'
     | '/admin'
     | '/comprar/diamante'
     | '/comprar/oro'
@@ -181,6 +192,7 @@ export interface FileRouteTypes {
     | '/luis-leo'
     | '/reset-password'
     | '/sitemap.xml'
+    | '/susana-alan'
     | '/_authenticated/admin'
     | '/comprar/diamante'
     | '/comprar/oro'
@@ -198,6 +210,7 @@ export interface RootRouteChildren {
   LuisLeoRoute: typeof LuisLeoRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SusanaAlanRoute: typeof SusanaAlanRoute
   ComprarDiamanteRoute: typeof ComprarDiamanteRoute
   ComprarOroRoute: typeof ComprarOroRoute
   ComprarPlataRoute: typeof ComprarPlataRoute
@@ -208,6 +221,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/susana-alan': {
+      id: '/susana-alan'
+      path: '/susana-alan'
+      fullPath: '/susana-alan'
+      preLoaderRoute: typeof SusanaAlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -328,6 +348,7 @@ const rootRouteChildren: RootRouteChildren = {
   LuisLeoRoute: LuisLeoRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SusanaAlanRoute: SusanaAlanRoute,
   ComprarDiamanteRoute: ComprarDiamanteRoute,
   ComprarOroRoute: ComprarOroRoute,
   ComprarPlataRoute: ComprarPlataRoute,
@@ -338,13 +359,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
