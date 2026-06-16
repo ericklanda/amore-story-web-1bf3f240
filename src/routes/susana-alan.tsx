@@ -130,7 +130,7 @@ function WeddingInvitation() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div data-theme="ocean" className="min-h-screen bg-background text-foreground overflow-x-hidden">
       {/* Scroll progress */}
       <div
         className="fixed top-0 left-0 h-[2px] bg-gradient-gold z-50 transition-[width] duration-150"
