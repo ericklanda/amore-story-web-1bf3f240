@@ -8,6 +8,7 @@ import po19 from "@/assets/priscila-oscar/po-19.jpg.asset.json";
 import po23 from "@/assets/priscila-oscar/po-23.jpg.asset.json";
 import po28 from "@/assets/priscila-oscar/po-28.jpg.asset.json";
 import po29 from "@/assets/priscila-oscar/po-29.jpg.asset.json";
+import flowersSide from "@/assets/priscila-oscar/flowers-side.png.asset.json";
 
 const heroCouple = po23.url;
 const couple2 = po17.url;
