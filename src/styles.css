@@ -343,6 +343,53 @@
   z-index: -1;
 }
 
+/* Subtle silk fabric texture — white, very low contrast, no color temperature */
+.silk-bg {
+  position: relative;
+  background-color: var(--background);
+}
+.silk-bg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+  background-image:
+    repeating-linear-gradient(
+      122deg,
+      transparent 0px,
+      transparent 180px,
+      oklch(0.94 0.003 230 / 0.04) 181px,
+      oklch(0.94 0.003 230 / 0.04) 183px,
+      transparent 184px
+    ),
+    repeating-linear-gradient(
+      58deg,
+      transparent 0px,
+      transparent 260px,
+      oklch(0.92 0.004 240 / 0.035) 261px,
+      oklch(0.92 0.004 240 / 0.035) 263px,
+      transparent 264px
+    ),
+    radial-gradient(ellipse 80% 50% at 25% 20%, oklch(0.98 0.002 235 / 0.12), transparent 55%),
+    radial-gradient(ellipse 70% 45% at 75% 80%, oklch(0.96 0.003 245 / 0.10), transparent 55%);
+  filter: blur(0.6px);
+}
+.silk-bg::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.25;
+  background-image:
+    linear-gradient(105deg, oklch(0.99 0.001 240 / 0.08) 0%, transparent 45%),
+    linear-gradient(255deg, oklch(0.97 0.002 235 / 0.06) 0%, transparent 40%);
+}
+.silk-bg { isolation: isolate; }
+.silk-bg::before, .silk-bg::after { z-index: -1; }
+
 [data-theme="luxe"].dark,
 .dark [data-theme="luxe"] {
   --background: oklch(0.10 0.003 60);
