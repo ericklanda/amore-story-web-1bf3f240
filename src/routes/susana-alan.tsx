@@ -24,24 +24,24 @@ const engagement = p277.url;
 export const Route = createFileRoute("/susana-alan")({
   head: () => ({
     meta: [
-      { title: "Luis Carlos & Leonardo · 30 de Octubre, 2026" },
-      { name: "description", content: "Invitación de boda de Luis Carlos y Leonardo. Confirma tu asistencia y conoce los detalles de nuestro gran día." },
-      { property: "og:title", content: "Luis Carlos & Leonardo · Nuestra Boda" },
-      { property: "og:description", content: "Acompáñanos el 30 de Octubre de 2026 en Ciudad Juárez." },
+      { title: "Susana & Alan · Nuestra Boda" },
+      { name: "description", content: "Invitación de boda de Susana y Alan. Confirma tu asistencia y conoce los detalles de nuestro gran día." },
+      { property: "og:title", content: "Susana & Alan · Nuestra Boda" },
+      { property: "og:description", content: "Acompáñanos a celebrar nuestro gran día." },
       { property: "og:image", content: p52.url },
-      { property: "og:url", content: "https://blcksocial.com/luis-leo" },
+      { property: "og:url", content: "https://blcksocial.com/susana-alan" },
     ],
-    links: [{ rel: "canonical", href: "https://blcksocial.com/luis-leo" }],
+    links: [{ rel: "canonical", href: "https://blcksocial.com/susana-alan" }],
   }),
   component: WeddingInvitation,
 });
 
 const WEDDING_DATE = new Date("2026-10-30T20:00:00");
-const HASHTAG = "#LuisYLeo2026";
-const WHATSAPP_NUMBER = "5216568637484"; // 52 + 1 + número
+const HASHTAG = "#SusanaYAlan2026";
+const WHATSAPP_NUMBER = "5216568637484";
 const YOUTUBE_SONG_ID = "gxXo8bWZbWw";
 const VENUE_MAPS = "https://maps.app.goo.gl/fb6ZCWdXrxMd9wwu7";
-const VENUE_ADDRESS = "Cam. Viejo a San José 4545, Las Arcadas, 32590 Juárez, Chih.";
+const VENUE_ADDRESS = "Por confirmar · Ciudad sede del evento";
 
 const GALLERY = [
   { src: p52.url, caption: "Nosotros" },
