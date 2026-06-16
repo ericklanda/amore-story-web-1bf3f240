@@ -3,23 +3,19 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { submitRsvp } from "@/lib/rsvp.functions";
 import { toast } from "sonner";
-import p12 from "@/assets/photos/p12.jpg.asset.json";
-import p52 from "@/assets/photos/p52.jpg.asset.json";
-import p150 from "@/assets/photos/p150.jpg.asset.json";
-import p169 from "@/assets/photos/p169.jpg.asset.json";
-import p201 from "@/assets/photos/p201.jpg.asset.json";
-import p218 from "@/assets/photos/p218.jpg.asset.json";
-import p238 from "@/assets/photos/p238.jpg.asset.json";
-import p274 from "@/assets/photos/p274.jpg.asset.json";
-import p277 from "@/assets/photos/p277.jpg.asset.json";
-import p279 from "@/assets/photos/p279.jpg.asset.json";
+import sa311 from "@/assets/susana-alan/sa-311.jpg.asset.json";
+import sa288 from "@/assets/susana-alan/sa-288.jpg.asset.json";
+import sa170 from "@/assets/susana-alan/sa-170.jpg.asset.json";
+import sa164 from "@/assets/susana-alan/sa-164.jpg.asset.json";
+import sa154 from "@/assets/susana-alan/sa-154.jpg.asset.json";
+import sa141 from "@/assets/susana-alan/sa-141.jpg.asset.json";
 
-const heroCouple = p52.url;
-const couple2 = p201.url;
-const couple3 = p279.url;
-const details = p238.url;
-const bouquet = p12.url;
-const engagement = p277.url;
+const heroCouple = sa311.url;
+const couple2 = sa164.url;
+const couple3 = sa288.url;
+const details = sa154.url;
+const bouquet = sa170.url;
+const engagement = sa141.url;
 
 export const Route = createFileRoute("/susana-alan")({
   head: () => ({
@@ -28,7 +24,7 @@ export const Route = createFileRoute("/susana-alan")({
       { name: "description", content: "Invitación de boda de Susana y Alan. Confirma tu asistencia y conoce los detalles de nuestro gran día." },
       { property: "og:title", content: "Susana & Alan · Nuestra Boda" },
       { property: "og:description", content: "Acompáñanos a celebrar nuestro gran día." },
-      { property: "og:image", content: p52.url },
+      { property: "og:image", content: sa311.url },
       { property: "og:url", content: "https://blcksocial.com/susana-alan" },
     ],
     links: [{ rel: "canonical", href: "https://blcksocial.com/susana-alan" }],
@@ -44,17 +40,14 @@ const VENUE_MAPS = "https://maps.app.goo.gl/fb6ZCWdXrxMd9wwu7";
 const VENUE_ADDRESS = "Por confirmar · Ciudad sede del evento";
 
 const GALLERY = [
-  { src: p52.url, caption: "Nosotros" },
-  { src: p201.url, caption: "Atardecer" },
-  { src: p279.url, caption: "Risas" },
-  { src: p12.url, caption: "Complicidad" },
-  { src: p277.url, caption: "Juntos" },
-  { src: p274.url, caption: "Para siempre" },
-  { src: p169.url, caption: "Mirando al futuro" },
-  { src: p150.url, caption: "Sueños" },
-  { src: p218.url, caption: "Nuestra historia" },
-  { src: p238.url, caption: "Descanso" },
+  { src: sa311.url, caption: "Nosotros" },
+  { src: sa164.url, caption: "Bajo el cielo" },
+  { src: sa288.url, caption: "Cómplices" },
+  { src: sa141.url, caption: "Mirada" },
+  { src: sa154.url, caption: "Juntos" },
+  { src: sa170.url, caption: "Para siempre" },
 ];
+
 
 
 function useCountdown(target: Date) {
