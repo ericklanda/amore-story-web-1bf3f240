@@ -274,7 +274,6 @@
 
 /* Soft marble texture for the luxe (Priscila & Oscar) invitation */
 .marble-bg {
-  position: relative;
   background-color: var(--background);
   background-image:
     radial-gradient(ellipse 80% 50% at 20% 15%, oklch(0.94 0.012 80 / 0.55), transparent 60%),
