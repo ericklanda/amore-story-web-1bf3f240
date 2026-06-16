@@ -130,7 +130,7 @@ function WeddingInvitation() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div data-theme="ocean" className="min-h-screen bg-background text-foreground overflow-x-hidden">
       {/* Scroll progress */}
       <div
         className="fixed top-0 left-0 h-[2px] bg-gradient-gold z-50 transition-[width] duration-150"
@@ -252,7 +252,7 @@ function SplashOverlay({ onEnter }: { onEnter: () => void }) {
       className={`fixed inset-0 z-[60] flex flex-col items-center justify-center text-center px-6 transition-opacity duration-700 ${
         fading ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
-      style={{ background: "linear-gradient(180deg, oklch(0.32 0.05 150), oklch(0.42 0.06 145))" }}
+      style={{ background: "linear-gradient(180deg, oklch(0.20 0.07 250), oklch(0.32 0.08 230))" }}
     >
       <div className="absolute inset-0 bg-primary/20" />
       <div className="relative z-10 max-w-lg">
