@@ -274,15 +274,71 @@
 
 /* Soft marble texture for the luxe (Priscila & Oscar) invitation */
 .marble-bg {
+  position: relative;
   background-color: var(--background);
   background-image:
-    radial-gradient(ellipse 80% 50% at 20% 15%, oklch(0.92 0.012 80 / 0.55), transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 30%, oklch(0.88 0.015 70 / 0.45), transparent 65%),
-    radial-gradient(ellipse 70% 45% at 30% 75%, oklch(0.90 0.010 85 / 0.50), transparent 60%),
-    radial-gradient(ellipse 55% 35% at 85% 85%, oklch(0.86 0.018 60 / 0.40), transparent 65%),
-    linear-gradient(120deg, transparent 0%, oklch(0.94 0.008 80 / 0.30) 40%, transparent 55%, oklch(0.90 0.012 70 / 0.25) 75%, transparent 100%);
+    radial-gradient(ellipse 80% 50% at 20% 15%, oklch(0.94 0.012 80 / 0.55), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 30%, oklch(0.90 0.015 70 / 0.45), transparent 65%),
+    radial-gradient(ellipse 70% 45% at 30% 75%, oklch(0.92 0.010 85 / 0.50), transparent 60%),
+    radial-gradient(ellipse 55% 35% at 85% 85%, oklch(0.88 0.018 60 / 0.40), transparent 65%),
+    radial-gradient(ellipse 90% 60% at 60% 50%, oklch(0.78 0.006 70 / 0.16), transparent 70%),
+    radial-gradient(ellipse 50% 70% at 10% 60%, oklch(0.72 0.008 75 / 0.12), transparent 65%),
+    linear-gradient(120deg, transparent 0%, oklch(0.96 0.008 80 / 0.30) 40%, transparent 55%, oklch(0.90 0.012 70 / 0.25) 75%, transparent 100%);
   background-attachment: fixed;
   background-size: cover;
+}
+
+/* Marble vein overlay — fixed so the whole page feels like stone */
+.marble-bg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+  background-image:
+    repeating-linear-gradient(
+      115deg,
+      transparent 0px,
+      transparent 140px,
+      oklch(0.55 0.012 70 / 0.05) 141px,
+      oklch(0.55 0.012 70 / 0.05) 143px,
+      transparent 144px,
+      transparent 220px,
+      oklch(0.45 0.010 75 / 0.04) 221px,
+      oklch(0.45 0.010 75 / 0.04) 222px,
+      transparent 223px
+    ),
+    repeating-linear-gradient(
+      62deg,
+      transparent 0px,
+      transparent 260px,
+      oklch(0.50 0.010 70 / 0.035) 261px,
+      oklch(0.50 0.010 70 / 0.035) 263px,
+      transparent 264px
+    );
+  filter: blur(0.4px);
+}
+
+/* Soft botanical/edge shadows for depth */
+.marble-bg::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+  background-image:
+    radial-gradient(ellipse 35% 55% at -5% 20%, oklch(0.55 0.020 80 / 0.22), transparent 60%),
+    radial-gradient(ellipse 30% 45% at 105% 70%, oklch(0.55 0.020 80 / 0.20), transparent 60%),
+    radial-gradient(ellipse 20% 30% at 95% 10%, oklch(0.60 0.015 75 / 0.18), transparent 65%),
+    radial-gradient(ellipse 25% 35% at 5% 90%, oklch(0.60 0.015 75 / 0.18), transparent 65%);
+  filter: blur(40px);
+}
+
+.marble-bg > * {
+  position: relative;
+  z-index: 1;
 }
 
 [data-theme="luxe"].dark,

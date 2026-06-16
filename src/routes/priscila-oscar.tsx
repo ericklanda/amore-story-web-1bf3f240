@@ -416,7 +416,7 @@ function ParentsSection() {
   ];
 
   return (
-    <section className="py-24 md:py-32 px-6 bg-background">
+    <section className="py-24 md:py-32 px-6">
       <div className="max-w-6xl mx-auto">
         <Reveal>
           <SectionTitle kicker="Con amor" title="Padres" />
@@ -521,7 +521,7 @@ function EventDetails() {
   };
 
   return (
-    <section className="py-24 md:py-32 px-6 bg-background">
+    <section className="py-24 md:py-32 px-6">
       <div className="max-w-5xl mx-auto">
         <Reveal>
           <SectionTitle kicker="Detalles del evento" title="¿Cuándo y dónde?" />
@@ -606,7 +606,7 @@ function Timeline() {
   ];
 
   return (
-    <section className="py-24 md:py-32 px-6 bg-background">
+    <section className="py-24 md:py-32 px-6">
       <div className="max-w-3xl mx-auto">
         <Reveal>
           <SectionTitle kicker="Itinerario" title="Programa del evento" />
@@ -743,7 +743,7 @@ function GiftRegistry() {
     { icon: "🛍️", title: "Mesa de regalos", text: "Pronto compartiremos los detalles de nuestra mesa de regalos contigo." },
   ];
   return (
-    <section className="py-24 md:py-32 px-6 bg-background">
+    <section className="py-24 md:py-32 px-6">
       <div className="max-w-5xl mx-auto">
         <Reveal>
           <SectionTitle kicker="Con cariño" title="Opciones de regalo" />
@@ -827,7 +827,7 @@ function Accommodation() {
     { name: "City Express Plus", dist: "Consulado · 8 min del recinto", phone: "+52 656 257 6900", url: "#" },
   ];
   return (
-    <section className="py-24 md:py-32 px-6 bg-background">
+    <section className="py-24 md:py-32 px-6">
       <div className="max-w-5xl mx-auto">
         <Reveal>
           <SectionTitle kicker="Hospedaje" title="Dónde quedarte" />
@@ -856,7 +856,7 @@ function Accommodation() {
 
 function SocialWall() {
   return (
-    <section className="py-24 md:py-32 px-6 bg-cream text-center">
+    <section className="py-24 md:py-32 px-6 text-center">
       <div className="max-w-3xl mx-auto">
         <Reveal>
           <div className="ornament mb-4">Comparte</div>
@@ -885,7 +885,7 @@ function Faq() {
 
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section className="py-24 md:py-32 px-6 bg-background">
+    <section className="py-24 md:py-32 px-6">
       <div className="max-w-3xl mx-auto">
         <Reveal>
           <SectionTitle kicker="FAQ" title="Preguntas frecuentes" />
