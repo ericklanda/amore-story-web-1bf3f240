@@ -155,6 +155,7 @@ function WeddingInvitation() {
       {!entered && <SplashOverlay onEnter={() => setEntered(true)} />}
 
       <Hero />
+      <FloralParallax />
       <OurStory />
       <ParentsSection />
       <Gallery />
