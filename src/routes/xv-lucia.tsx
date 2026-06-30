@@ -409,7 +409,7 @@ function OurStory() {
     { date: "Capítulo 4", title: "Hoy, mis XV", text: "Una nueva etapa que quiero celebrar contigo." },
   ];
   return (
-    <section id="historia" className="py-24 md:py-36 px-6 bg-gradient-blush">
+    <section id="historia" className="py-24 md:py-36 px-6 floral-section">
       <div className="max-w-5xl mx-auto">
         <Reveal>
           <SectionTitle kicker="Mi historia" title="Mi historia" />
@@ -501,7 +501,7 @@ function ParentsSection() {
 function Gallery() {
   const [lightbox, setLightbox] = useState<number | null>(null);
   return (
-    <section className="py-24 md:py-32 px-6 bg-gradient-blush">
+    <section className="py-24 md:py-32 px-6 floral-section">
       <div className="max-w-7xl mx-auto">
         <Reveal>
           <SectionTitle kicker="Galería" title="Mis recuerdos" />
@@ -752,7 +752,7 @@ function Rsvp() {
   }, [form]);
 
   return (
-    <section className="py-24 md:py-32 px-6 bg-gradient-blush">
+    <section className="py-24 md:py-32 px-6 floral-section">
       <div className="max-w-2xl mx-auto">
         <Reveal>
           <SectionTitle kicker="Confirmación" title="¿Nos acompañas?" />
