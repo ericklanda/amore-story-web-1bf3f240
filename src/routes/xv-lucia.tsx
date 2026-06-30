@@ -10,6 +10,7 @@ import p86 from "@/assets/xv-lucia/lucia-86.jpg.asset.json";
 import p174 from "@/assets/xv-lucia/lucia-174.jpg.asset.json";
 import p74 from "@/assets/xv-lucia/lucia-74.jpg.asset.json";
 import floralBg from "@/assets/xv-lucia/floral-bg.jpg.asset.json";
+import floralFrame from "@/assets/xv-lucia/lucia-flower-frame.png.asset.json";
 
 const heroCouple = p72.url;
 const couple2 = p86.url;
