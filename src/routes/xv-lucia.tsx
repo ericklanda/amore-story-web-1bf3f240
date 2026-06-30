@@ -299,11 +299,10 @@ function SplashOverlay({ onEnter }: { onEnter: () => void }) {
   );
 }
 
-/* ---------------- FLORAL PARALLAX ---------------- */
+/* ---------------- FLORAL PARALLAX OVERLAY ---------------- */
 function FloralParallax() {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const leftRef = useRef<HTMLImageElement | null>(null);
-  const rightRef = useRef<HTMLImageElement | null>(null);
+  const imgRef = useRef<HTMLImageElement | null>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     let raf = 0;
@@ -311,18 +310,12 @@ function FloralParallax() {
       if (raf) return;
       raf = requestAnimationFrame(() => {
         raf = 0;
-        const el = ref.current;
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
+        const y = window.scrollY || 0;
         const vh = window.innerHeight || 1;
-        // progress: -1 (below viewport) → 0 (centered) → 1 (above)
-        const progress = (vh - rect.top) / (vh + rect.height) - 0.5;
-        const offset = progress * 120; // px range
-        if (leftRef.current) {
-          leftRef.current.style.transform = `translate3d(${-offset * 0.4}px, ${offset * 0.6}px, 0) rotate(${offset * 0.05}deg)`;
-        }
-        if (rightRef.current) {
-          rightRef.current.style.transform = `translate3d(${offset * 0.4}px, ${-offset * 0.6}px, 0) rotate(${-offset * 0.05}deg)`;
+        setVisible(y > vh * 0.6);
+        if (imgRef.current) {
+          const offset = (y - vh) * 0.15;
+          imgRef.current.style.transform = `translate3d(0, ${offset}px, 0)`;
         }
       });
     };
@@ -337,27 +330,19 @@ function FloralParallax() {
   }, []);
 
   return (
-    <section
-      ref={ref}
+    <div
       aria-hidden="true"
-      className="relative w-full overflow-hidden pointer-events-none"
-      style={{ height: "min(60vh, 520px)" }}
+      className="pointer-events-none fixed inset-0 z-[5] overflow-hidden transition-opacity duration-700"
+      style={{ opacity: visible ? 1 : 0 }}
     >
       <img
-        ref={leftRef}
+        ref={imgRef}
         src={floralFrame.url}
         alt=""
-        className="absolute top-1/2 left-0 -translate-y-1/2 w-[58%] max-w-[640px] opacity-95 select-none will-change-transform"
+        className="absolute left-1/2 top-1/2 w-[120vw] max-w-none -translate-x-1/2 -translate-y-1/2 select-none will-change-transform"
         style={{ transform: "translate3d(0,0,0)" }}
       />
-      <img
-        ref={rightRef}
-        src={floralFrame.url}
-        alt=""
-        className="absolute top-1/2 right-0 -translate-y-1/2 w-[58%] max-w-[640px] opacity-95 select-none will-change-transform scale-x-[-1]"
-        style={{ transform: "translate3d(0,0,0)" }}
-      />
-    </section>
+    </div>
   );
 }
 
