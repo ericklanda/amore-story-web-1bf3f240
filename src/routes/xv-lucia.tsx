@@ -9,6 +9,7 @@ import p159 from "@/assets/xv-lucia/lucia-159.jpg.asset.json";
 import p86 from "@/assets/xv-lucia/lucia-86.jpg.asset.json";
 import p174 from "@/assets/xv-lucia/lucia-174.jpg.asset.json";
 import p74 from "@/assets/xv-lucia/lucia-74.jpg.asset.json";
+import floralBg from "@/assets/xv-lucia/floral-bg.jpg.asset.json";
 
 const heroCouple = p72.url;
 const couple2 = p86.url;
@@ -130,7 +131,18 @@ function WeddingInvitation() {
   }, []);
 
   return (
-    <div data-theme="blush" className="min-h-screen bg-background text-foreground overflow-x-hidden silk-bg">
+    <div
+      data-theme="blush"
+      className="min-h-screen text-foreground overflow-x-hidden relative"
+      style={{
+        backgroundColor: "oklch(0.985 0.012 30)",
+        backgroundImage: `url(${floralBg.url})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center top",
+        backgroundAttachment: "fixed",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       {/* Scroll progress */}
       <div
         className="fixed top-0 left-0 h-[2px] bg-gradient-gold z-50 transition-[width] duration-150"
@@ -252,24 +264,30 @@ function SplashOverlay({ onEnter }: { onEnter: () => void }) {
       className={`fixed inset-0 z-[60] flex flex-col items-center justify-center text-center px-6 transition-opacity duration-700 ${
         fading ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
-      style={{ background: "linear-gradient(180deg, oklch(0.20 0.07 250), oklch(0.32 0.08 230))" }}
+      style={{
+        backgroundImage: `url(${floralBg.url})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
     >
-      <div className="absolute inset-0 bg-primary/20" />
+      {/* soft cream wash to keep text legible while showing the florals */}
+      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, oklch(0.99 0.012 30 / 0.55), oklch(0.96 0.025 25 / 0.75))" }} />
       <div className="relative z-10 max-w-lg">
-        <div className="ornament !text-white/80 mb-6 text-sm tracking-[0.3em]">03 · Octubre · 2026</div>
-        <h1 className="font-serif italic text-5xl sm:text-6xl md:text-7xl text-white leading-[0.95] mb-4">
+        <div className="ornament mb-6 text-sm tracking-[0.3em]" style={{ color: "oklch(0.55 0.10 25)" }}>03 · Octubre · 2026</div>
+        <h1 className="font-serif italic text-5xl sm:text-6xl md:text-7xl leading-[0.95] mb-4" style={{ color: "oklch(0.32 0.06 25)" }}>
           Lucía
-            <span className="font-script text-gold block text-3xl sm:text-4xl md:text-5xl my-2 not-italic">Mis XV Años</span>
+          <span className="font-script block text-3xl sm:text-4xl md:text-5xl my-2 not-italic" style={{ color: "oklch(0.62 0.11 70)" }}>Mis XV Años</span>
         </h1>
-        <p className="text-white/70 text-xs tracking-[0.25em] uppercase mb-10">
+        <p className="text-xs tracking-[0.25em] uppercase mb-10" style={{ color: "oklch(0.45 0.06 25)" }}>
           Mis XV Años · Una noche para recordar
         </p>
-        <p className="font-serif italic text-2xl sm:text-3xl text-white/90 mb-6">
-          Estas Invitado
+        <p className="font-serif italic text-2xl sm:text-3xl mb-6" style={{ color: "oklch(0.38 0.06 25)" }}>
+          Estás Invitado
         </p>
         <button
           onClick={handleEnter}
-          className="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-white/95 text-primary font-sans text-sm tracking-[0.2em] uppercase hover:bg-white transition-all hover:gap-5"
+          className="inline-flex items-center gap-3 px-10 py-4 rounded-full font-sans text-sm tracking-[0.2em] uppercase transition-all hover:gap-5 shadow-soft"
+          style={{ background: "oklch(0.45 0.08 25)", color: "oklch(0.99 0.006 40)" }}
         >
           Ingresa
           <span>→</span>
