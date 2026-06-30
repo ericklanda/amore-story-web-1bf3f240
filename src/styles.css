@@ -235,6 +235,44 @@
 }
 
 /* ============================================================
+   Blush & Gold palette — scoped to XV Lucía (demo)
+   ============================================================ */
+[data-theme="blush"] {
+  --background: oklch(0.985 0.012 30);
+  --foreground: oklch(0.30 0.04 25);
+  --card: oklch(0.995 0.006 40);
+  --card-foreground: oklch(0.30 0.04 25);
+  --popover: oklch(0.995 0.006 40);
+  --popover-foreground: oklch(0.30 0.04 25);
+  --primary: oklch(0.45 0.08 25);            /* deep rose */
+  --primary-foreground: oklch(0.99 0.006 40);
+  --secondary: oklch(0.92 0.03 30);
+  --secondary-foreground: oklch(0.30 0.04 25);
+  --muted: oklch(0.94 0.018 35);
+  --muted-foreground: oklch(0.50 0.04 30);
+  --accent: oklch(0.78 0.10 75);             /* champagne gold */
+  --accent-foreground: oklch(0.25 0.04 25);
+  --destructive: oklch(0.55 0.20 25);
+  --destructive-foreground: oklch(0.99 0.006 40);
+  --border: oklch(0.88 0.02 35);
+  --input: oklch(0.93 0.018 35);
+  --ring: oklch(0.72 0.10 70);
+
+  --gold: oklch(0.72 0.11 75);
+  --blush: oklch(0.90 0.04 25);
+  --rose: oklch(0.62 0.10 20);
+  --cream: oklch(0.975 0.014 40);
+  --sage: oklch(0.75 0.05 50);
+
+  --gradient-hero: linear-gradient(180deg, oklch(0.30 0.05 25 / 0.05), oklch(0.30 0.05 25 / 0.55));
+  --gradient-gold: linear-gradient(135deg, oklch(0.82 0.10 80), oklch(0.62 0.10 60));
+  --gradient-blush: linear-gradient(180deg, oklch(0.985 0.012 30), oklch(0.90 0.045 25));
+
+  --shadow-soft: 0 20px 60px -20px oklch(0.45 0.08 25 / 0.25);
+  --shadow-card: 0 4px 24px -8px oklch(0.45 0.08 25 / 0.18);
+}
+
+/* ============================================================
    Luxe palette — Black / White / Gold (Priscila & Oscar - Diamante)
    ============================================================ */
 [data-theme="luxe"] {
