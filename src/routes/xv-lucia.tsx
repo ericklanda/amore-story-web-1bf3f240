@@ -10,6 +10,7 @@ import p86 from "@/assets/xv-lucia/lucia-86.jpg.asset.json";
 import p174 from "@/assets/xv-lucia/lucia-174.jpg.asset.json";
 import p74 from "@/assets/xv-lucia/lucia-74.jpg.asset.json";
 import floralBg from "@/assets/xv-lucia/floral-bg.jpg.asset.json";
+import floralFrame from "@/assets/xv-lucia/lucia-flower-frame.png.asset.json";
 
 const heroCouple = p72.url;
 const couple2 = p86.url;
@@ -155,6 +156,7 @@ function WeddingInvitation() {
       {!entered && <SplashOverlay onEnter={() => setEntered(true)} />}
 
       <Hero />
+      <FloralParallax />
       <OurStory />
       <ParentsSection />
       <Gallery />
@@ -294,6 +296,68 @@ function SplashOverlay({ onEnter }: { onEnter: () => void }) {
         </button>
       </div>
     </div>
+  );
+}
+
+/* ---------------- FLORAL PARALLAX ---------------- */
+function FloralParallax() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const leftRef = useRef<HTMLImageElement | null>(null);
+  const rightRef = useRef<HTMLImageElement | null>(null);
+
+  useEffect(() => {
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const el = ref.current;
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const vh = window.innerHeight || 1;
+        // progress: -1 (below viewport) → 0 (centered) → 1 (above)
+        const progress = (vh - rect.top) / (vh + rect.height) - 0.5;
+        const offset = progress * 120; // px range
+        if (leftRef.current) {
+          leftRef.current.style.transform = `translate3d(${-offset * 0.4}px, ${offset * 0.6}px, 0) rotate(${offset * 0.05}deg)`;
+        }
+        if (rightRef.current) {
+          rightRef.current.style.transform = `translate3d(${offset * 0.4}px, ${-offset * 0.6}px, 0) rotate(${-offset * 0.05}deg)`;
+        }
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  return (
+    <section
+      ref={ref}
+      aria-hidden="true"
+      className="relative w-full overflow-hidden pointer-events-none"
+      style={{ height: "min(60vh, 520px)" }}
+    >
+      <img
+        ref={leftRef}
+        src={floralFrame.url}
+        alt=""
+        className="absolute top-1/2 left-0 -translate-y-1/2 w-[58%] max-w-[640px] opacity-95 select-none will-change-transform"
+        style={{ transform: "translate3d(0,0,0)" }}
+      />
+      <img
+        ref={rightRef}
+        src={floralFrame.url}
+        alt=""
+        className="absolute top-1/2 right-0 -translate-y-1/2 w-[58%] max-w-[640px] opacity-95 select-none will-change-transform scale-x-[-1]"
+        style={{ transform: "translate3d(0,0,0)" }}
+      />
+    </section>
   );
 }
 
