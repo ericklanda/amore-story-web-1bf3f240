@@ -543,9 +543,9 @@ function EventDetails() {
 
   const calendarLink = () => {
     // 30 Oct 2026 20:00 → 31 Oct 2026 02:00 (CST = UTC-6)
-    const start = "20261031T020000Z";
-    const end = "20261031T080000Z";
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+Lucía&dates=${start}/${end}&details=Acompáñanos+a+celebrar+nuestro+día.&location=${encodeURIComponent(VENUE_ADDRESS)}`;
+    const start = "20261004T020000Z";
+    const end = "20261004T080000Z";
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+Lucía&dates=${start}/${end}&details=Acompáñame+a+mis+XV.&location=${encodeURIComponent(VENUE_ADDRESS)}`;
   };
 
 
@@ -969,7 +969,7 @@ function Faq() {
     { q: "¿Cuál es el código de vestimenta?", a: "Formal — tonos rosa, dorado o nude. Evita el blanco y el rosa fuerte." },
     
     { q: "¿Hay estacionamiento?", a: "Sí, el recinto cuenta con estacionamiento para los invitados." },
-    { q: "¿Hasta cuándo puedo confirmar?", a: "Te pedimos confirmar tu asistencia antes del 20 de septiembre de 2026 por WhatsApp." },
+    { q: "¿Hasta cuándo puedo confirmar?", a: "Te pedimos confirmar tu asistencia antes del 20 de septiembre de 2026 directamente en esta invitación." },
   ];
 
   const [open, setOpen] = useState<number | null>(0);
