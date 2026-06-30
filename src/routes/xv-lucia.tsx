@@ -20,10 +20,10 @@ const engagement = p74.url;
 export const Route = createFileRoute("/xv-lucia")({
   head: () => ({
     meta: [
-      { title: "Susana & Alan · Nuestra Boda" },
-      { name: "description", content: "Invitación de boda de Susana y Alan. Confirma tu asistencia y conoce los detalles de nuestro gran día." },
-      { property: "og:title", content: "Susana & Alan · Nuestra Boda" },
-      { property: "og:description", content: "Acompáñanos a celebrar nuestro gran día." },
+      { title: "Lucía · Mis XV Años" },
+      { name: "description", content: "Invitación digital de los XV años de Lucía. Acompáñame a celebrar este momento tan especial." },
+      { property: "og:title", content: "Lucía · Mis XV Años" },
+      { property: "og:description", content: "Acompáñame a celebrar mis XV años." },
       { property: "og:image", content: p72.url },
       { property: "og:url", content: "https://blcksocial.com/xv-lucia" },
     ],
@@ -32,12 +32,12 @@ export const Route = createFileRoute("/xv-lucia")({
   component: WeddingInvitation,
 });
 
-const WEDDING_DATE = new Date("2026-10-30T20:00:00");
-const HASHTAG = "#SusanaYAlan2026";
-const WHATSAPP_NUMBER = "5216568637484";
+const WEDDING_DATE = new Date("2026-10-03T20:00:00");
+const HASHTAG = "#LuciaXV2026";
+const WHATSAPP_NUMBER = "";
 const YOUTUBE_SONG_ID = "gxXo8bWZbWw";
-const VENUE_MAPS = "https://maps.app.goo.gl/fb6ZCWdXrxMd9wwu7";
-const VENUE_ADDRESS = "Por confirmar · Ciudad sede del evento";
+const VENUE_MAPS = "#";
+const VENUE_ADDRESS = "Lugar por confirmar";
 
 const GALLERY = [
   { src: p72.url, caption: "Nosotros" },
@@ -256,14 +256,13 @@ function SplashOverlay({ onEnter }: { onEnter: () => void }) {
     >
       <div className="absolute inset-0 bg-primary/20" />
       <div className="relative z-10 max-w-lg">
-        <div className="ornament !text-white/80 mb-6 text-sm tracking-[0.3em]">30 · Octubre · 2026</div>
+        <div className="ornament !text-white/80 mb-6 text-sm tracking-[0.3em]">03 · Octubre · 2026</div>
         <h1 className="font-serif italic text-5xl sm:text-6xl md:text-7xl text-white leading-[0.95] mb-4">
-          Susana
-          <span className="font-script text-gold block text-4xl sm:text-5xl md:text-6xl my-2 not-italic">&</span>
-          Alan
+          Lucía
+            <span className="font-script text-gold block text-3xl sm:text-4xl md:text-5xl my-2 not-italic">Mis XV Años</span>
         </h1>
         <p className="text-white/70 text-xs tracking-[0.25em] uppercase mb-10">
-          Nos casamos · Ciudad Juárez, Chihuahua
+          Mis XV Años · Una noche para recordar
         </p>
         <p className="font-serif italic text-2xl sm:text-3xl text-white/90 mb-6">
           Estas Invitado
@@ -301,7 +300,7 @@ function Hero() {
         >
           <img
             src={src}
-            alt="Susana y Alan"
+            alt="Lucía"
             className="w-full h-full object-cover"
             style={{
               transform: i === idx ? "scale(1.06)" : "scale(1)",
@@ -316,18 +315,17 @@ function Hero() {
 
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-white">
         <Reveal delay={200}>
-          <div className="ornament !text-white/90 mb-6">30 · Octubre · 2026</div>
+          <div className="ornament !text-white/90 mb-6">03 · Octubre · 2026</div>
         </Reveal>
         <Reveal delay={400}>
           <h1 className="font-serif italic text-5xl sm:text-6xl md:text-8xl lg:text-9xl leading-[0.95]">
-            Susana
-            <span className="font-script text-gold block text-4xl sm:text-5xl md:text-6xl my-2 not-italic">&</span>
-            Alan
+            Lucía
+            <span className="font-script text-gold block text-3xl sm:text-4xl md:text-5xl my-2 not-italic">Mis XV Años</span>
           </h1>
         </Reveal>
         <Reveal delay={700}>
           <p className="mt-6 max-w-md font-sans text-xs sm:text-sm tracking-[0.25em] uppercase text-white/85">
-            Nos casamos · Ciudad Juárez, Chihuahua
+            Mis XV Años · Una noche para recordar
           </p>
         </Reveal>
 
@@ -382,21 +380,21 @@ function Hero() {
 /* ---------------- OUR STORY ---------------- */
 function OurStory() {
   const milestones = [
-    { date: "Capítulo 1", title: "Cómo nos conocimos", text: "Aquí va el momento en que sus caminos se cruzaron por primera vez." },
-    { date: "Capítulo 2", title: "El primer 'sí'", text: "El día en que decidieron caminar juntos como pareja." },
-    { date: "Capítulo 3", title: "Aventuras juntos", text: "Los viajes y momentos que fueron formando su historia." },
-    { date: "Capítulo 4", title: "La propuesta", text: "El instante mágico en que dijeron sí para toda la vida." },
+    { date: "Capítulo 1", title: "Mi infancia", text: "Los primeros años, llenos de sueños, risas y travesuras." },
+    { date: "Capítulo 2", title: "Mi familia", text: "El amor incondicional de quienes me han acompañado siempre." },
+    { date: "Capítulo 3", title: "Mis pasiones", text: "Lo que me hace feliz: el baile, la música y mis amigas." },
+    { date: "Capítulo 4", title: "Hoy, mis XV", text: "Una nueva etapa que quiero celebrar contigo." },
   ];
   return (
     <section id="historia" className="py-24 md:py-36 px-6 bg-gradient-blush">
       <div className="max-w-5xl mx-auto">
         <Reveal>
-          <SectionTitle kicker="Nuestra historia" title="El camino que nos trajo aquí" />
+          <SectionTitle kicker="Mi historia" title="Mi historia" />
         </Reveal>
 
         <Reveal delay={150}>
           <div className="mb-16 overflow-hidden rounded-sm shadow-soft">
-            <img src={engagement} alt="Susana y Alan" className="w-full aspect-[16/10] object-cover" loading="lazy" />
+            <img src={engagement} alt="Lucía" className="w-full aspect-[16/10] object-cover" loading="lazy" />
           </div>
         </Reveal>
 
@@ -423,15 +421,15 @@ function OurStory() {
 /* ---------------- PARENTS ---------------- */
 function ParentsSection() {
   const groups = [
-    { title: "Padres de Susana", names: ["Nombre de la mamá", "Nombre del papá"] },
-    { title: "Padres de Alan", names: ["Nombre de la mamá", "Nombre del papá"] },
+    { title: "Padres de Lucía", names: ["Nombre de la mamá", "Nombre del papá"] },
+    { title: "Padrinos", names: ["Nombre de la mamá", "Nombre del papá"] },
   ];
 
   const padrinos = [
-    { role: "Padrinos de velación", names: ["Nombre & Nombre"] },
-    { role: "Padrinos de anillos", names: ["Nombre & Nombre"] },
-    { role: "Padrinos de arras", names: ["Nombre & Nombre"] },
-    { role: "Padrinos de lazo", names: ["Nombre & Nombre"] },
+    { role: "Padrino de honor", names: ["Nombre · Nombre"] },
+    { role: "Madrina de vals", names: ["Nombre · Nombre"] },
+    { role: "Padrino de brindis", names: ["Nombre · Nombre"] },
+    { role: "Madrina de ramo", names: ["Nombre · Nombre"] },
   ];
 
   return (
@@ -441,7 +439,7 @@ function ParentsSection() {
           <SectionTitle kicker="Con amor" title="Padres" />
         </Reveal>
         <p className="text-center max-w-2xl mx-auto text-muted-foreground italic font-serif text-lg mb-14">
-          "Con la bendición de Dios y de nuestros padres, queremos compartir contigo este día tan especial."
+          "Con la bendición de Dios y el amor de mi familia, quiero compartir contigo este día tan especial."
         </p>
         <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-20">
           {groups.map((g, i) => (
@@ -457,7 +455,7 @@ function ParentsSection() {
         </div>
 
         <Reveal>
-          <SectionTitle kicker="Acompañándonos" title="Nuestros Padrinos" />
+          <SectionTitle kicker="Con amor" title="Mis Padrinos" />
         </Reveal>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
           {padrinos.map((p, i) => (
@@ -483,7 +481,7 @@ function Gallery() {
     <section className="py-24 md:py-32 px-6 bg-gradient-blush">
       <div className="max-w-7xl mx-auto">
         <Reveal>
-          <SectionTitle kicker="Galería" title="Momentos juntos" />
+          <SectionTitle kicker="Galería" title="Mis recuerdos" />
         </Reveal>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 justify-items-center">
           {GALLERY.map((g, i) => (
@@ -536,8 +534,8 @@ function EventDetails() {
   const events = [
     {
       label: "Recepción",
-      time: "9:00 pm – 2:00 am",
-      place: "Terraza Jardín Arjeri",
+      time: "8:00 pm – 2:00 am",
+      place: "Salón por confirmar",
       address: VENUE_ADDRESS,
       maps: VENUE_MAPS,
     },
@@ -547,7 +545,7 @@ function EventDetails() {
     // 30 Oct 2026 20:00 → 31 Oct 2026 02:00 (CST = UTC-6)
     const start = "20261031T020000Z";
     const end = "20261031T080000Z";
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Susana+%26+Alan&dates=${start}/${end}&details=Acompáñanos+a+celebrar+nuestro+día.&location=${encodeURIComponent(VENUE_ADDRESS)}`;
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+Lucía&dates=${start}/${end}&details=Acompáñanos+a+celebrar+nuestro+día.&location=${encodeURIComponent(VENUE_ADDRESS)}`;
   };
 
 
@@ -571,7 +569,7 @@ function EventDetails() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 border border-primary text-primary text-xs tracking-[0.2em] uppercase rounded-full hover:bg-primary hover:text-primary-foreground transition-colors"
                 >
-                  Cómo llegar →
+                  Ubicación próximamente →
                 </a>
               </article>
             </Reveal>
@@ -601,11 +599,11 @@ function DressCode() {
     <section className="py-24 md:py-32 px-6 bg-gradient-blush">
       <div className="max-w-5xl mx-auto text-center">
         <Reveal>
-          <SectionTitle kicker="Código de vestimenta" title="Black · Todos de negro" />
+          <SectionTitle kicker="Código de vestimenta" title="Rosa & Oro · Elegante" />
         </Reveal>
         <Reveal delay={150}>
           <p className="max-w-xl mx-auto text-muted-foreground mb-10">
-            Queremos una noche elegante y cinematográfica: te pedimos vestir totalmente de <strong>negro</strong>.
+            Para esta noche tan especial te pedimos vestir <strong>formal</strong> en tonos rosa, dorado, champagne o nude.
           </p>
         </Reveal>
         <Reveal delay={250}>
@@ -619,9 +617,9 @@ function DressCode() {
         </Reveal>
         <Reveal delay={350}>
           <div className="max-w-md mx-auto bg-card border border-border rounded-sm p-7">
-            <div className="text-4xl mb-3">🖤</div>
+            <div className="text-4xl mb-3">🌹</div>
             <h4 className="font-serif text-xl text-primary mb-1">Dress code</h4>
-            <p className="text-sm text-muted-foreground tracking-wider">Black formal · de pies a cabeza</p>
+            <p className="text-sm text-muted-foreground tracking-wider">Formal · evita el blanco y el rosa intenso</p>
           </div>
         </Reveal>
       </div>
@@ -634,7 +632,7 @@ function DressCode() {
 function Timeline() {
   const items = [
     
-    { time: "9:00 pm", title: "Primer baile", icon: "💃" },
+    { time: "9:00 pm", title: "Vals", icon: "💃" },
     { time: "10:00 pm", title: "Fiesta", icon: "🎶" },
     { time: "2:00 am", title: "Despedida", icon: "✨" },
   ];
@@ -671,7 +669,7 @@ function SpecialMoments() {
   const moments = [
     { year: "2019", title: "Primera cita", text: "Café y conversación sin fin." },
     { year: "2022", title: "Mudanza juntos", text: "Construyendo un hogar." },
-    { year: "2025", title: "La propuesta", text: "El sí más fácil del mundo." },
+    { year: "2025", title: "Hoy, mis XV", text: "El sí más fácil del mundo." },
     { year: "2026", title: "Nuestra boda", text: "El comienzo de todo." },
   ];
   return (
@@ -726,7 +724,7 @@ function Rsvp() {
   };
 
   const whatsappMsg = useMemo(() => {
-    const text = `Hola! Confirmo mi asistencia a la boda de Susana y Alan. Nombre: ${form.name || "(nombre)"}, asistencia: ${form.attending === "yes" ? "Sí" : "No"}`;
+    const text = `Hola! Confirmo mi asistencia a la boda de Lucía. Nombre: ${form.name || "(nombre)"}, asistencia: ${form.attending === "yes" ? "Sí" : "No"}`;
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
   }, [form]);
 
@@ -742,7 +740,7 @@ function Rsvp() {
             <div className="text-center bg-card border border-accent/40 rounded-sm p-10 shadow-soft">
               <div className="text-5xl mb-4">💌</div>
               <h3 className="font-serif italic text-3xl text-primary mb-3">¡Gracias, {form.name || "amig@"}!</h3>
-              <p className="text-muted-foreground">Hemos recibido tu confirmación. Será un honor celebrar contigo.</p>
+              <p className="text-muted-foreground">He recibido tu confirmación. Será un honor celebrar contigo.</p>
             </div>
           </Reveal>
         ) : (
@@ -777,7 +775,7 @@ function Rsvp() {
                   ))}
                 </div>
               </Field>
-              <Field label="Mensaje para los novios">
+              <Field label="Mensaje para la quinceañera">
                 <textarea
                   rows={3}
                   value={form.message}
@@ -814,9 +812,9 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 /* ---------------- GIFT REGISTRY ---------------- */
 function GiftRegistry() {
   const gifts = [
-    { icon: "💌", title: "Lluvia de sobres", text: "Tendremos un buzón especial el día del evento para recibir tu sobre con todo nuestro cariño." },
-    { icon: "🎁", title: "Regalo sorpresa", text: "Si prefieres consentirnos con un detalle especial, lo recibiremos con muchísima ilusión." },
-    { icon: "🛍️", title: "Mesa de regalos", text: "Pronto compartiremos los detalles de nuestra mesa de regalos contigo." },
+    { icon: "💌", title: "Lluvia de sobres", text: "Tendremos un buzón especial el día del evento para recibir tu sobre con todo cariño." },
+    { icon: "🎁", title: "Regalo sorpresa", text: "Si prefieres consentirnos con un detalle especial, lo recibiré con muchísima ilusión." },
+    { icon: "🛍️", title: "Mesa de regalos", text: "Pronto compartiremos los detalles de la mesa de regalos contigo." },
   ];
   return (
     <section className="py-24 md:py-32 px-6 bg-background">
@@ -825,7 +823,7 @@ function GiftRegistry() {
           <SectionTitle kicker="Con cariño" title="Opciones de regalo" />
         </Reveal>
         <p className="text-center max-w-xl mx-auto text-muted-foreground italic font-serif mb-12">
-          Tu presencia es nuestro mejor regalo. Si deseas obsequiarnos algo más, aquí algunas opciones.
+          Tu presencia es mi mejor regalo. Si deseas obsequiarme algo más, aquí algunas opciones.
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {gifts.map((g, i) => (
@@ -844,12 +842,12 @@ function GiftRegistry() {
           <div className="text-center mb-6">
             <div className="text-4xl mb-3">🏦</div>
             <h3 className="font-serif italic text-2xl md:text-3xl text-primary mb-2">Datos bancarios</h3>
-            <p className="text-sm text-muted-foreground">Si prefieres hacer una transferencia, aquí tienes nuestros datos.</p>
+            <p className="text-sm text-muted-foreground">Si prefieres hacer una transferencia, aquí están los datos.</p>
           </div>
           <div className="space-y-3 text-sm">
             <div className="flex justify-between border-b border-border/50 pb-2">
               <span className="text-muted-foreground tracking-wider uppercase text-xs">Beneficiario</span>
-              <span className="font-medium text-foreground">Susana / Alan</span>
+              <span className="font-medium text-foreground">Lucía</span>
             </div>
             <div className="flex justify-between border-b border-border/50 pb-2">
               <span className="text-muted-foreground tracking-wider uppercase text-xs">Banco</span>
@@ -909,13 +907,13 @@ function Transportation() {
     <section className="py-24 md:py-32 px-6 bg-background">
       <div className="max-w-4xl mx-auto">
         <Reveal>
-          <SectionTitle kicker="Transporte" title="Cómo llegar" />
+          <SectionTitle kicker="Transporte" title="Ubicación próximamente" />
         </Reveal>
         <div className="grid md:grid-cols-3 gap-5">
           {[
-            { icon: "🅿️", title: "Estacionamiento", text: "Gratis para invitados, capacidad para 80 autos." },
-            { icon: "🚐", title: "Shuttle", text: "Salidas desde el centro a las 4:15 pm y 4:45 pm." },
-            { icon: "🚕", title: "Taxi/Uber", text: "Disponibilidad amplia en la zona durante toda la noche." },
+            { icon: "🅿️", title: "Estacionamiento", text: "Gratis para invitados." },
+            { icon: "🚐", title: "Shuttle", text: "Salidas desde el centro a las 6:30 pm y 7:00 pm." },
+            { icon: "🚕", title: "Taxi/Uber", text: "Disponibilidad amplia durante toda la noche." },
           ].map((t, i) => (
             <Reveal key={t.title} delay={i * 100}>
               <div className="text-center p-7 bg-card border border-border rounded-sm shadow-card">
@@ -941,7 +939,7 @@ function SocialWall() {
           <h2 className="font-serif italic text-4xl md:text-5xl text-primary mb-6">Comparte tus fotos</h2>
         </Reveal>
         <Reveal delay={150}>
-          <p className="text-muted-foreground mb-8">Etiquétanos y usa nuestro hashtag para verlas todas en un mismo lugar.</p>
+          <p className="text-muted-foreground mb-8">Etiquétame y usa mi hashtag para verlas todas en un mismo lugar.</p>
           <div className="inline-block bg-gradient-gold text-primary-foreground font-script text-3xl md:text-4xl px-10 py-5 rounded-full shadow-soft">
             {HASHTAG}
           </div>
@@ -968,10 +966,10 @@ function SocialWall() {
 function Faq() {
   const items = [
     { q: "¿Pueden asistir niños?", a: "¡Sí! Los niños son bienvenidos a celebrar con nosotros." },
-    { q: "¿Cuál es el código de vestimenta?", a: "Black — te pedimos vestir totalmente de negro, formal y elegante." },
+    { q: "¿Cuál es el código de vestimenta?", a: "Formal — tonos rosa, dorado o nude. Evita el blanco y el rosa fuerte." },
     
     { q: "¿Hay estacionamiento?", a: "Sí, el recinto cuenta con estacionamiento para los invitados." },
-    { q: "¿Hasta cuándo puedo confirmar?", a: "Te pedimos confirmar tu asistencia antes del 30 de septiembre de 2026 por WhatsApp." },
+    { q: "¿Hasta cuándo puedo confirmar?", a: "Te pedimos confirmar tu asistencia antes del 20 de septiembre de 2026 por WhatsApp." },
   ];
 
   const [open, setOpen] = useState<number | null>(0);
@@ -1015,7 +1013,7 @@ function Faq() {
 function ThankYou() {
   return (
     <section className="relative h-[100svh] min-h-[600px] w-full overflow-hidden">
-      <img src={couple3} alt="Susana y Alan" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+      <img src={couple3} alt="Lucía" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
       <div className="absolute inset-0 bg-black/50" />
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-white">
         <Reveal>
@@ -1023,22 +1021,22 @@ function ThankYou() {
         </Reveal>
         <Reveal delay={200}>
           <h2 className="font-serif italic text-5xl md:text-7xl max-w-3xl leading-tight">
-            Gracias por ser parte de nuestra historia
+            Gracias por ser parte de mi historia
           </h2>
         </Reveal>
         <Reveal delay={400}>
           <p className="mt-6 max-w-xl text-white/85 italic font-serif text-lg">
-            Tu presencia hará este día aún más inolvidable. Con todo nuestro amor,
+            Tu presencia hará este día aún más inolvidable. Con todo mi cariño,
           </p>
         </Reveal>
         <Reveal delay={600}>
           <div className="mt-8 font-script text-5xl md:text-6xl text-gold">
-            Susana & Alan
+            Lucía
           </div>
         </Reveal>
         <Reveal delay={800}>
           <div className="mt-6 text-xs tracking-[0.4em] uppercase text-white/70">
-            30 · 10 · 2026
+            03 · 10 · 2026
           </div>
         </Reveal>
       </div>

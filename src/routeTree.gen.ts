@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as XvLuciaRouteImport } from './routes/xv-lucia'
 import { Route as SusanaAlanRouteImport } from './routes/susana-alan'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
@@ -26,6 +27,11 @@ import { Route as ComprarXvPlataRouteImport } from './routes/comprar.xv.plata'
 import { Route as ComprarXvOroRouteImport } from './routes/comprar.xv.oro'
 import { Route as ComprarXvDiamanteRouteImport } from './routes/comprar.xv.diamante'
 
+const XvLuciaRoute = XvLuciaRouteImport.update({
+  id: '/xv-lucia',
+  path: '/xv-lucia',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SusanaAlanRoute = SusanaAlanRouteImport.update({
   id: '/susana-alan',
   path: '/susana-alan',
@@ -115,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/susana-alan': typeof SusanaAlanRoute
+  '/xv-lucia': typeof XvLuciaRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/comprar/diamante': typeof ComprarDiamanteRoute
   '/comprar/oro': typeof ComprarOroRoute
@@ -132,6 +139,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/susana-alan': typeof SusanaAlanRoute
+  '/xv-lucia': typeof XvLuciaRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/comprar/diamante': typeof ComprarDiamanteRoute
   '/comprar/oro': typeof ComprarOroRoute
@@ -151,6 +159,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/susana-alan': typeof SusanaAlanRoute
+  '/xv-lucia': typeof XvLuciaRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/comprar/diamante': typeof ComprarDiamanteRoute
   '/comprar/oro': typeof ComprarOroRoute
@@ -170,6 +179,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/susana-alan'
+    | '/xv-lucia'
     | '/admin'
     | '/comprar/diamante'
     | '/comprar/oro'
@@ -187,6 +197,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/susana-alan'
+    | '/xv-lucia'
     | '/admin'
     | '/comprar/diamante'
     | '/comprar/oro'
@@ -205,6 +216,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/susana-alan'
+    | '/xv-lucia'
     | '/_authenticated/admin'
     | '/comprar/diamante'
     | '/comprar/oro'
@@ -224,6 +236,7 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SusanaAlanRoute: typeof SusanaAlanRoute
+  XvLuciaRoute: typeof XvLuciaRoute
   ComprarDiamanteRoute: typeof ComprarDiamanteRoute
   ComprarOroRoute: typeof ComprarOroRoute
   ComprarPlataRoute: typeof ComprarPlataRoute
@@ -234,6 +247,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/xv-lucia': {
+      id: '/xv-lucia'
+      path: '/xv-lucia'
+      fullPath: '/xv-lucia'
+      preLoaderRoute: typeof XvLuciaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/susana-alan': {
       id: '/susana-alan'
       path: '/susana-alan'
@@ -370,6 +390,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SusanaAlanRoute: SusanaAlanRoute,
+  XvLuciaRoute: XvLuciaRoute,
   ComprarDiamanteRoute: ComprarDiamanteRoute,
   ComprarOroRoute: ComprarOroRoute,
   ComprarPlataRoute: ComprarPlataRoute,
