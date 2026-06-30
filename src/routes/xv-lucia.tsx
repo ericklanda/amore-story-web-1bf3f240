@@ -131,7 +131,18 @@ function WeddingInvitation() {
   }, []);
 
   return (
-    <div data-theme="blush" className="min-h-screen bg-background text-foreground overflow-x-hidden silk-bg">
+    <div
+      data-theme="blush"
+      className="min-h-screen text-foreground overflow-x-hidden relative"
+      style={{
+        backgroundColor: "oklch(0.985 0.012 30)",
+        backgroundImage: `url(${floralBg.url})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center top",
+        backgroundAttachment: "fixed",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       {/* Scroll progress */}
       <div
         className="fixed top-0 left-0 h-[2px] bg-gradient-gold z-50 transition-[width] duration-150"
