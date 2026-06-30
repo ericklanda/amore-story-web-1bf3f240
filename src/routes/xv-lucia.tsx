@@ -299,7 +299,11 @@ function SplashOverlay({ onEnter }: { onEnter: () => void }) {
 
 /* ---------------- HERO ---------------- */
 function Hero() {
-  const slides = [heroCouple, couple2, couple3];
+  const slides = [
+    { src: heroCouple, position: "center 18%" }, // p72 — face near top
+    { src: couple2, position: "center 28%" },    // p86 — face upper third
+    { src: couple3, position: "center" },         // p110
+  ];
   const [idx, setIdx] = useState(0);
   const { days, hours, minutes, seconds } = useCountdown(WEDDING_DATE);
 
@@ -310,17 +314,18 @@ function Hero() {
 
   return (
     <section className="relative h-[100svh] min-h-[640px] w-full overflow-hidden">
-      {slides.map((src, i) => (
+      {slides.map((s, i) => (
         <div
           key={i}
           className="absolute inset-0 transition-opacity duration-[2000ms] ease-out"
           style={{ opacity: i === idx ? 1 : 0 }}
         >
           <img
-            src={src}
+            src={s.src}
             alt="Lucía"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-center md:object-[var(--pos)]"
             style={{
+              ["--pos" as any]: s.position,
               transform: i === idx ? "scale(1.06)" : "scale(1)",
               transition: "transform 8s ease-out",
             }}
