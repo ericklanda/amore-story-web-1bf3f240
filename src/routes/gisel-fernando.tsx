@@ -53,9 +53,12 @@ const RECEPTION = {
 
 const GALLERY = [
   { src: gf20.url, caption: "Nosotros" },
+  { src: gf65.url, caption: "Sonrisas" },
   { src: gf144.url, caption: "Complicidad" },
   { src: gf82.url, caption: "Juntos" },
+  { src: gf121.url, caption: "En el camino" },
   { src: gf198.url, caption: "Nuestro camino" },
+  { src: gf217.url, caption: "Al atardecer" },
   { src: gf109.url, caption: "Cómplices" },
   { src: gf10.url, caption: "Miradas" },
 ];
