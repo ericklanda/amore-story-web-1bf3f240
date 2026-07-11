@@ -471,20 +471,25 @@ function EventDetails() {
         <div className="grid md:grid-cols-2 gap-6 md:gap-8">
           {events.map((ev, i) => (
             <Reveal key={ev.label} delay={i * 120}>
-              <article className="bg-card border border-border rounded-sm p-8 md:p-10 text-center shadow-card hover:shadow-soft transition-shadow h-full flex flex-col">
-                <div className="text-4xl mb-3">{ev.icon}</div>
-                <div className="text-xs tracking-[0.3em] uppercase text-gold mb-4">{ev.label}</div>
-                <div className="font-serif text-4xl italic text-primary mb-2">{ev.time}</div>
-                <h3 className="font-serif text-2xl text-foreground mb-2">{ev.place}</h3>
-                <p className="text-muted-foreground text-sm mb-6 flex-1">{ev.address}</p>
-                <a
-                  href={ev.maps}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 border border-primary text-primary text-xs tracking-[0.2em] uppercase rounded-full hover:bg-primary hover:text-primary-foreground transition-colors self-center"
-                >
-                  Cómo llegar →
-                </a>
+              <article className="bg-card border border-border rounded-sm overflow-hidden shadow-card hover:shadow-soft transition-shadow h-full flex flex-col">
+                <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+                  <img src={ev.image} alt={ev.place} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                </div>
+                <div className="p-8 md:p-10 text-center flex flex-col flex-1">
+                  <div className="text-3xl mb-3">{ev.icon}</div>
+                  <div className="text-xs tracking-[0.3em] uppercase text-gold mb-4">{ev.label}</div>
+                  <div className="font-serif text-4xl italic text-primary mb-2">{ev.time}</div>
+                  <h3 className="font-serif text-2xl text-foreground mb-2">{ev.place}</h3>
+                  <p className="text-muted-foreground text-sm mb-6 flex-1">{ev.address}</p>
+                  <a
+                    href={ev.maps}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 border border-primary text-primary text-xs tracking-[0.2em] uppercase rounded-full hover:bg-primary hover:text-primary-foreground transition-colors self-center"
+                  >
+                    Cómo llegar →
+                  </a>
+                </div>
               </article>
             </Reveal>
           ))}
