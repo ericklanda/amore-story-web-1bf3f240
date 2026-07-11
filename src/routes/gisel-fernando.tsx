@@ -512,7 +512,6 @@ function EventDetails() {
 
 /* ---------------- DRESS CODE ---------------- */
 function DressCode() {
-  const palette = ["#8ea083", "#a8b89c", "#d69aac", "#eec6cf", "#f4efe6"];
   return (
     <section className="py-24 md:py-32 px-6 bg-gradient-blush">
       <div className="max-w-5xl mx-auto text-center">
@@ -522,14 +521,12 @@ function DressCode() {
         <Reveal delay={150}>
           <p className="max-w-xl mx-auto text-muted-foreground mb-10">
             Queremos una celebración elegante. Te pedimos vestir <strong>formal</strong>.
-            Nos encantaría que la paleta de la boda te inspire.
           </p>
         </Reveal>
         <Reveal delay={250}>
-          <div className="flex justify-center flex-wrap gap-3 mb-10">
-            {palette.map((c) => (
-              <div key={c} className="w-14 h-14 md:w-20 md:h-20 rounded-full shadow-card ring-2 ring-background" style={{ backgroundColor: c }} />
-            ))}
+          <div className="flex justify-center flex-wrap gap-4 mb-10 text-5xl md:text-6xl">
+            <span>👗</span>
+            <span>🤵</span>
           </div>
         </Reveal>
         <Reveal delay={350}>
