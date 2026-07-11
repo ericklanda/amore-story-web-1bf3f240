@@ -754,7 +754,6 @@ function SocialWall() {
 /* ---------------- FAQ ---------------- */
 function Faq() {
   const items = [
-    { q: "¿Pueden asistir niños?", a: "Queremos que disfrutes al máximo esta noche, por lo que la celebración será únicamente para adultos." },
     { q: "¿Cuál es el código de vestimenta?", a: "Formal · elegante. La paleta de la boda es sage green y tonos rosa suaves, pero cualquier color formal es bienvenido." },
     { q: "¿Dónde es la ceremonia?", a: "En la Parroquia Santísima Trinidad, Chihuahua 712, Melchor Ocampo, Ciudad Juárez, a las 6:00 pm." },
     { q: "¿Dónde es la recepción?", a: "En Lumière Salón de Eventos, Av. Benjamín Franklin 3320, Zona Pronaf, Ciudad Juárez, a las 9:00 pm." },
