@@ -15,6 +15,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as PriscilaOscarRouteImport } from './routes/priscila-oscar'
 import { Route as LuisLeoRouteImport } from './routes/luis-leo'
+import { Route as GiselFernandoRouteImport } from './routes/gisel-fernando'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as SlugRouteImport } from './routes/$slug'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
@@ -55,6 +56,11 @@ const PriscilaOscarRoute = PriscilaOscarRouteImport.update({
 const LuisLeoRoute = LuisLeoRouteImport.update({
   id: '/luis-leo',
   path: '/luis-leo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GiselFernandoRoute = GiselFernandoRouteImport.update({
+  id: '/gisel-fernando',
+  path: '/gisel-fernando',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -116,6 +122,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$slug': typeof SlugRoute
   '/auth': typeof AuthRoute
+  '/gisel-fernando': typeof GiselFernandoRoute
   '/luis-leo': typeof LuisLeoRoute
   '/priscila-oscar': typeof PriscilaOscarRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -134,6 +141,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$slug': typeof SlugRoute
   '/auth': typeof AuthRoute
+  '/gisel-fernando': typeof GiselFernandoRoute
   '/luis-leo': typeof LuisLeoRoute
   '/priscila-oscar': typeof PriscilaOscarRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -154,6 +162,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/$slug': typeof SlugRoute
   '/auth': typeof AuthRoute
+  '/gisel-fernando': typeof GiselFernandoRoute
   '/luis-leo': typeof LuisLeoRoute
   '/priscila-oscar': typeof PriscilaOscarRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -174,6 +183,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$slug'
     | '/auth'
+    | '/gisel-fernando'
     | '/luis-leo'
     | '/priscila-oscar'
     | '/reset-password'
@@ -192,6 +202,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$slug'
     | '/auth'
+    | '/gisel-fernando'
     | '/luis-leo'
     | '/priscila-oscar'
     | '/reset-password'
@@ -211,6 +222,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/$slug'
     | '/auth'
+    | '/gisel-fernando'
     | '/luis-leo'
     | '/priscila-oscar'
     | '/reset-password'
@@ -231,6 +243,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   SlugRoute: typeof SlugRoute
   AuthRoute: typeof AuthRoute
+  GiselFernandoRoute: typeof GiselFernandoRoute
   LuisLeoRoute: typeof LuisLeoRoute
   PriscilaOscarRoute: typeof PriscilaOscarRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
@@ -287,6 +300,13 @@ declare module '@tanstack/react-router' {
       path: '/luis-leo'
       fullPath: '/luis-leo'
       preLoaderRoute: typeof LuisLeoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gisel-fernando': {
+      id: '/gisel-fernando'
+      path: '/gisel-fernando'
+      fullPath: '/gisel-fernando'
+      preLoaderRoute: typeof GiselFernandoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -385,6 +405,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   SlugRoute: SlugRoute,
   AuthRoute: AuthRoute,
+  GiselFernandoRoute: GiselFernandoRoute,
   LuisLeoRoute: LuisLeoRoute,
   PriscilaOscarRoute: PriscilaOscarRoute,
   ResetPasswordRoute: ResetPasswordRoute,
@@ -401,13 +422,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
