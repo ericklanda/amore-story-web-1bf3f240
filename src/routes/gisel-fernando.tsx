@@ -41,7 +41,6 @@ const WHATSAPP_NUMBER = "5216565833566";
 const YOUTUBE_SONG_ID = "iZpZDivj6SU";
 
 const CEREMONY = {
-const CEREMONY = {
   place: "Parroquia Santísima Trinidad",
   time: "6:00 pm",
   address: "Chihuahua 712, Melchor Ocampo, 32380 Juárez, Chih.",
