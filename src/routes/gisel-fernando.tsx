@@ -352,8 +352,7 @@ function OurStory() {
         </Reveal>
         <Reveal delay={120}>
           <p className="font-serif italic text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            "Hoy queremos compartir contigo uno de los días más importantes de nuestra vida.
-            Con la bendición de Dios y de nuestros padres, unimos nuestros caminos para siempre."
+            "Todo comenzó con un "hola" que, sin imaginarnos, cambiaría nuestras vidas para siempre. Entre risas, aventuras y muchos momentos inolvidables, descubrimos que el mejor lugar para estar siempre sería el uno al lado del otro."
           </p>
         </Reveal>
         <Reveal delay={240}>
@@ -513,7 +512,6 @@ function EventDetails() {
 
 /* ---------------- DRESS CODE ---------------- */
 function DressCode() {
-  const palette = ["#8ea083", "#a8b89c", "#d69aac", "#eec6cf", "#f4efe6"];
   return (
     <section className="py-24 md:py-32 px-6 bg-gradient-blush">
       <div className="max-w-5xl mx-auto text-center">
@@ -523,14 +521,12 @@ function DressCode() {
         <Reveal delay={150}>
           <p className="max-w-xl mx-auto text-muted-foreground mb-10">
             Queremos una celebración elegante. Te pedimos vestir <strong>formal</strong>.
-            Nos encantaría que la paleta de la boda te inspire.
           </p>
         </Reveal>
         <Reveal delay={250}>
-          <div className="flex justify-center flex-wrap gap-3 mb-10">
-            {palette.map((c) => (
-              <div key={c} className="w-14 h-14 md:w-20 md:h-20 rounded-full shadow-card ring-2 ring-background" style={{ backgroundColor: c }} />
-            ))}
+          <div className="flex justify-center flex-wrap gap-4 mb-10 text-5xl md:text-6xl">
+            <span>👗</span>
+            <span>🤵</span>
           </div>
         </Reveal>
         <Reveal delay={350}>
@@ -550,8 +546,7 @@ function Timeline() {
   const items = [
     { time: "6:00 pm", title: "Ceremonia religiosa", icon: "⛪" },
     { time: "9:00 pm", title: "Recepción", icon: "🥂" },
-    { time: "9:30 pm", title: "Cena", icon: "🍽️" },
-    { time: "10:30 pm", title: "Primer baile", icon: "💃" },
+    { time: "10:30 pm", title: "Primer baile", icon: "❤️" },
     { time: "11:00 pm", title: "Fiesta", icon: "🎶" },
   ];
 
@@ -759,7 +754,6 @@ function SocialWall() {
 /* ---------------- FAQ ---------------- */
 function Faq() {
   const items = [
-    { q: "¿Pueden asistir niños?", a: "Queremos que disfrutes al máximo esta noche, por lo que la celebración será únicamente para adultos." },
     { q: "¿Cuál es el código de vestimenta?", a: "Formal · elegante. La paleta de la boda es sage green y tonos rosa suaves, pero cualquier color formal es bienvenido." },
     { q: "¿Dónde es la ceremonia?", a: "En la Parroquia Santísima Trinidad, Chihuahua 712, Melchor Ocampo, Ciudad Juárez, a las 6:00 pm." },
     { q: "¿Dónde es la recepción?", a: "En Lumière Salón de Eventos, Av. Benjamín Franklin 3320, Zona Pronaf, Ciudad Juárez, a las 9:00 pm." },
