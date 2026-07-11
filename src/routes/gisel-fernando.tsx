@@ -12,6 +12,8 @@ import gf198 from "@/assets/gisel-fernando/gf-198.jpg.asset.json";
 import gf217 from "@/assets/gisel-fernando/gf-217.jpg.asset.json";
 import gf65 from "@/assets/gisel-fernando/gf-65.jpg.asset.json";
 import gf121 from "@/assets/gisel-fernando/gf-121.jpg.asset.json";
+import lumiereImg from "@/assets/gisel-fernando/lumiere.png.asset.json";
+import parroquiaImg from "@/assets/gisel-fernando/parroquia.png.asset.json";
 
 const heroA = gf20.url;
 const heroB = gf82.url;
