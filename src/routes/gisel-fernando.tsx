@@ -9,6 +9,9 @@ import gf82 from "@/assets/gisel-fernando/gf-82.jpg.asset.json";
 import gf109 from "@/assets/gisel-fernando/gf-109.jpg.asset.json";
 import gf144 from "@/assets/gisel-fernando/gf-144.jpg.asset.json";
 import gf198 from "@/assets/gisel-fernando/gf-198.jpg.asset.json";
+import gf217 from "@/assets/gisel-fernando/gf-217.jpg.asset.json";
+import gf65 from "@/assets/gisel-fernando/gf-65.jpg.asset.json";
+import gf121 from "@/assets/gisel-fernando/gf-121.jpg.asset.json";
 
 const heroA = gf20.url;
 const heroB = gf82.url;
@@ -50,9 +53,12 @@ const RECEPTION = {
 
 const GALLERY = [
   { src: gf20.url, caption: "Nosotros" },
+  { src: gf65.url, caption: "Sonrisas" },
   { src: gf144.url, caption: "Complicidad" },
   { src: gf82.url, caption: "Juntos" },
+  { src: gf121.url, caption: "En el camino" },
   { src: gf198.url, caption: "Nuestro camino" },
+  { src: gf217.url, caption: "Al atardecer" },
   { src: gf109.url, caption: "Cómplices" },
   { src: gf10.url, caption: "Miradas" },
 ];
