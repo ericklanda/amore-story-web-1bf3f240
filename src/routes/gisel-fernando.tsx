@@ -584,10 +584,21 @@ function Rsvp() {
   const [form, setForm] = useState({ name: "", attending: "yes", message: "" });
   const submit = useServerFn(submitRsvp);
 
+  const buildWhatsappUrl = (name: string, attending: string, message: string) => {
+    const attendText = attending === "yes" ? "Sí" : "No";
+    let text = `Hola! Confirmo mi asistencia a la boda de Gisel y Fernando.\nNombre: ${name}\nAsistencia: ${attendText}`;
+    if (message.trim()) text += `\nMensaje: ${message.trim()}`;
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+  };
+
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (submitting) return;
     setSubmitting(true);
+    // Abrir WhatsApp de inmediato dentro del gesto del usuario para evitar bloqueo de popups
+    const waUrl = buildWhatsappUrl(form.name.trim(), form.attending, form.message);
+    const waWindow = window.open(waUrl, "_blank", "noopener,noreferrer");
+    if (!waWindow) window.location.href = waUrl;
     try {
       await submit({
         data: {
@@ -606,10 +617,7 @@ function Rsvp() {
     }
   };
 
-  const whatsappMsg = useMemo(() => {
-    const text = `Hola! Confirmo mi asistencia a la boda de Gisel y Fernando. Nombre: ${form.name || "(nombre)"}, asistencia: ${form.attending === "yes" ? "Sí" : "No"}`;
-    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-  }, [form]);
+  const whatsappMsg = buildWhatsappUrl(form.name || "(nombre)", form.attending, form.message);
 
   return (
     <section className="py-24 md:py-32 px-6 bg-gradient-blush">
