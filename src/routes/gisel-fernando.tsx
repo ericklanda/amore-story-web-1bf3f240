@@ -549,8 +549,7 @@ function Timeline() {
   const items = [
     { time: "6:00 pm", title: "Ceremonia religiosa", icon: "⛪" },
     { time: "9:00 pm", title: "Recepción", icon: "🥂" },
-    { time: "9:30 pm", title: "Cena", icon: "🍽️" },
-    { time: "10:30 pm", title: "Primer baile", icon: "💃" },
+    { time: "10:30 pm", title: "Primer baile", icon: "❤️" },
     { time: "11:00 pm", title: "Fiesta", icon: "🎶" },
   ];
 
