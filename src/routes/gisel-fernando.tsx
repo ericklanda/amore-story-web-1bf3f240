@@ -19,6 +19,8 @@ const heroA = gf20.url;
 const heroB = gf82.url;
 const heroC = gf109.url;
 const detail = gf10.url;
+const SITE_URL = "https://luis-leo.lovable.app";
+const PREVIEW_IMG = `${SITE_URL}${gf20.url}`;
 
 export const Route = createFileRoute("/gisel-fernando")({
   head: () => ({
@@ -27,10 +29,15 @@ export const Route = createFileRoute("/gisel-fernando")({
       { name: "description", content: "Invitación de boda de Gisel y Fernando · 21 de Agosto de 2026, Ciudad Juárez." },
       { property: "og:title", content: "Gisel & Fernando · Nuestra Boda" },
       { property: "og:description", content: "Acompáñanos a celebrar nuestro gran día." },
-      { property: "og:image", content: gf20.url },
-      { property: "og:url", content: "https://blcksocial.com/gisel-fernando" },
+      { property: "og:image", content: PREVIEW_IMG },
+      { property: "og:url", content: `${SITE_URL}/gisel-fernando` },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Gisel & Fernando · Nuestra Boda" },
+      { name: "twitter:description", content: "Acompáñanos a celebrar nuestro gran día." },
+      { name: "twitter:image", content: PREVIEW_IMG },
     ],
-    links: [{ rel: "canonical", href: "https://blcksocial.com/gisel-fernando" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/gisel-fernando` }],
   }),
   component: WeddingInvitation,
 });
