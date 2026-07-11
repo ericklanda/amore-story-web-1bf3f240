@@ -41,16 +41,19 @@ const WHATSAPP_NUMBER = "5216565833566";
 const YOUTUBE_SONG_ID = "iZpZDivj6SU";
 
 const CEREMONY = {
+const CEREMONY = {
   place: "Parroquia Santísima Trinidad",
   time: "6:00 pm",
   address: "Chihuahua 712, Melchor Ocampo, 32380 Juárez, Chih.",
   maps: "https://maps.app.goo.gl/6NBQDYJT79nXGKzC6",
+  image: parroquiaImg.url,
 };
 const RECEPTION = {
   place: "Lumière Salón de Eventos",
   time: "9:00 pm",
   address: "Av. Benjamín Franklin 3320, Zona Pronaf Condominio La Plata, 32315 Juárez, Chih.",
   maps: "https://maps.app.goo.gl/XXXqfCcpwbHUKmJA7",
+  image: lumiereImg.url,
 };
 
 const GALLERY = [
