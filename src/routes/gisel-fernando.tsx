@@ -352,8 +352,7 @@ function OurStory() {
         </Reveal>
         <Reveal delay={120}>
           <p className="font-serif italic text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            "Hoy queremos compartir contigo uno de los días más importantes de nuestra vida.
-            Con la bendición de Dios y de nuestros padres, unimos nuestros caminos para siempre."
+            "Todo comenzó con un "hola" que, sin imaginarnos, cambiaría nuestras vidas para siempre. Entre risas, aventuras y muchos momentos inolvidables, descubrimos que el mejor lugar para estar siempre sería el uno al lado del otro."
           </p>
         </Reveal>
         <Reveal delay={240}>
