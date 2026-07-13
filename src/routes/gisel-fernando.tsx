@@ -11,6 +11,7 @@ import gf144 from "@/assets/gisel-fernando/gf-144.jpg.asset.json";
 import gf198 from "@/assets/gisel-fernando/gf-198.jpg.asset.json";
 import gf91 from "@/assets/gisel-fernando/gf-91.jpg.asset.json";
 import gf121 from "@/assets/gisel-fernando/gf-121.jpg.asset.json";
+import gf132 from "@/assets/gisel-fernando/gf-132.jpg.asset.json";
 import newGalleryImg from "@/assets/gisel-fernando/gisel-fernando-preview.jpg.asset.json";
 import lumiereImg from "@/assets/gisel-fernando/lumiere.png.asset.json";
 import parroquiaImg from "@/assets/gisel-fernando/parroquia.png.asset.json";
@@ -72,6 +73,7 @@ const GALLERY = [
   { src: gf91.url, caption: "Al atardecer" },
   { src: gf109.url, caption: "Cómplices" },
   { src: gf10.url, caption: "Miradas" },
+  { src: gf132.url, caption: "Al volante" },
 ];
 
 /* palette: sage #8ea083 · soft sage #a8b89c · dusty rose #d69aac · blush #eec6cf · cream #f4efe6 */
