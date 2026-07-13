@@ -10,7 +10,6 @@ import gf109 from "@/assets/gisel-fernando/gf-109.jpg.asset.json";
 import gf144 from "@/assets/gisel-fernando/gf-144.jpg.asset.json";
 import gf198 from "@/assets/gisel-fernando/gf-198.jpg.asset.json";
 import gf91 from "@/assets/gisel-fernando/gf-91.jpg.asset.json";
-import gf65 from "@/assets/gisel-fernando/gf-65.jpg.asset.json";
 import gf121 from "@/assets/gisel-fernando/gf-121.jpg.asset.json";
 import newGalleryImg from "@/assets/gisel-fernando/gisel-fernando-preview.jpg.asset.json";
 import lumiereImg from "@/assets/gisel-fernando/lumiere.png.asset.json";
@@ -65,7 +64,7 @@ const RECEPTION = {
 
 const GALLERY = [
   { src: gf20.url, caption: "Nosotros" },
-  { src: gf65.url, caption: "Sonrisas" },
+  { src: newGalleryImg.url, caption: "Sonrisas" },
   { src: gf144.url, caption: "Complicidad" },
   { src: gf82.url, caption: "Juntos" },
   { src: gf121.url, caption: "En el camino" },
