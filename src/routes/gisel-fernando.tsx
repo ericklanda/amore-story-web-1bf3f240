@@ -12,7 +12,7 @@ import gf198 from "@/assets/gisel-fernando/gf-198.jpg.asset.json";
 import gf91 from "@/assets/gisel-fernando/gf-91.jpg.asset.json";
 import gf65 from "@/assets/gisel-fernando/gf-65.jpg.asset.json";
 import gf121 from "@/assets/gisel-fernando/gf-121.jpg.asset.json";
-import previewImg from "@/assets/gisel-fernando/gisel-fernando-preview.jpg.asset.json";
+import newGalleryImg from "@/assets/gisel-fernando/gisel-fernando-preview.jpg.asset.json";
 import lumiereImg from "@/assets/gisel-fernando/lumiere.png.asset.json";
 import parroquiaImg from "@/assets/gisel-fernando/parroquia.png.asset.json";
 
@@ -21,7 +21,7 @@ const heroB = gf82.url;
 const heroC = gf109.url;
 const detail = gf10.url;
 const SITE_URL = "https://luis-leo.lovable.app";
-const PREVIEW_IMG = `${SITE_URL}${previewImg.url}`;
+const PREVIEW_IMG = `${SITE_URL}${gf20.url}`;
 
 export const Route = createFileRoute("/gisel-fernando")({
   head: () => ({
