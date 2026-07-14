@@ -71,6 +71,8 @@ const GALLERY = [
   { src: gf109.url, caption: "Cómplices" },
   { src: gf10.url, caption: "Miradas" },
   { src: gf132.url, caption: "Al volante" },
+  { src: gf56.url, caption: "Frente a frente" },
+  { src: gf65b.url, caption: "Risas" },
 ];
 
 /* palette: sage #8ea083 · soft sage #a8b89c · dusty rose #d69aac · blush #eec6cf · cream #f4efe6 */
