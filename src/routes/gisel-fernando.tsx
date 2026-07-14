@@ -11,6 +11,8 @@ import gf198 from "@/assets/gisel-fernando/gf-198.jpg.asset.json";
 import gf91 from "@/assets/gisel-fernando/gf-91.jpg.asset.json";
 import gf121 from "@/assets/gisel-fernando/gf-121.jpg.asset.json";
 import gf132 from "@/assets/gisel-fernando/gf-132.jpg.asset.json";
+import gf56 from "@/assets/gisel-fernando/gf-56.jpg.asset.json";
+import gf65b from "@/assets/gisel-fernando/gf-65-2.jpg.asset.json";
 import lumiereImg from "@/assets/gisel-fernando/lumiere.png.asset.json";
 import parroquiaImg from "@/assets/gisel-fernando/parroquia.png.asset.json";
 
