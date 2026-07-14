@@ -15,6 +15,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as PriscilaOscarRouteImport } from './routes/priscila-oscar'
 import { Route as LuisLeoRouteImport } from './routes/luis-leo'
+import { Route as JulianaSilvaRouteImport } from './routes/juliana-silva'
 import { Route as GiselFernandoRouteImport } from './routes/gisel-fernando'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as SlugRouteImport } from './routes/$slug'
@@ -56,6 +57,11 @@ const PriscilaOscarRoute = PriscilaOscarRouteImport.update({
 const LuisLeoRoute = LuisLeoRouteImport.update({
   id: '/luis-leo',
   path: '/luis-leo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JulianaSilvaRoute = JulianaSilvaRouteImport.update({
+  id: '/juliana-silva',
+  path: '/juliana-silva',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GiselFernandoRoute = GiselFernandoRouteImport.update({
@@ -123,6 +129,7 @@ export interface FileRoutesByFullPath {
   '/$slug': typeof SlugRoute
   '/auth': typeof AuthRoute
   '/gisel-fernando': typeof GiselFernandoRoute
+  '/juliana-silva': typeof JulianaSilvaRoute
   '/luis-leo': typeof LuisLeoRoute
   '/priscila-oscar': typeof PriscilaOscarRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -142,6 +149,7 @@ export interface FileRoutesByTo {
   '/$slug': typeof SlugRoute
   '/auth': typeof AuthRoute
   '/gisel-fernando': typeof GiselFernandoRoute
+  '/juliana-silva': typeof JulianaSilvaRoute
   '/luis-leo': typeof LuisLeoRoute
   '/priscila-oscar': typeof PriscilaOscarRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -163,6 +171,7 @@ export interface FileRoutesById {
   '/$slug': typeof SlugRoute
   '/auth': typeof AuthRoute
   '/gisel-fernando': typeof GiselFernandoRoute
+  '/juliana-silva': typeof JulianaSilvaRoute
   '/luis-leo': typeof LuisLeoRoute
   '/priscila-oscar': typeof PriscilaOscarRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -184,6 +193,7 @@ export interface FileRouteTypes {
     | '/$slug'
     | '/auth'
     | '/gisel-fernando'
+    | '/juliana-silva'
     | '/luis-leo'
     | '/priscila-oscar'
     | '/reset-password'
@@ -203,6 +213,7 @@ export interface FileRouteTypes {
     | '/$slug'
     | '/auth'
     | '/gisel-fernando'
+    | '/juliana-silva'
     | '/luis-leo'
     | '/priscila-oscar'
     | '/reset-password'
@@ -223,6 +234,7 @@ export interface FileRouteTypes {
     | '/$slug'
     | '/auth'
     | '/gisel-fernando'
+    | '/juliana-silva'
     | '/luis-leo'
     | '/priscila-oscar'
     | '/reset-password'
@@ -244,6 +256,7 @@ export interface RootRouteChildren {
   SlugRoute: typeof SlugRoute
   AuthRoute: typeof AuthRoute
   GiselFernandoRoute: typeof GiselFernandoRoute
+  JulianaSilvaRoute: typeof JulianaSilvaRoute
   LuisLeoRoute: typeof LuisLeoRoute
   PriscilaOscarRoute: typeof PriscilaOscarRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
@@ -300,6 +313,13 @@ declare module '@tanstack/react-router' {
       path: '/luis-leo'
       fullPath: '/luis-leo'
       preLoaderRoute: typeof LuisLeoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/juliana-silva': {
+      id: '/juliana-silva'
+      path: '/juliana-silva'
+      fullPath: '/juliana-silva'
+      preLoaderRoute: typeof JulianaSilvaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gisel-fernando': {
@@ -406,6 +426,7 @@ const rootRouteChildren: RootRouteChildren = {
   SlugRoute: SlugRoute,
   AuthRoute: AuthRoute,
   GiselFernandoRoute: GiselFernandoRoute,
+  JulianaSilvaRoute: JulianaSilvaRoute,
   LuisLeoRoute: LuisLeoRoute,
   PriscilaOscarRoute: PriscilaOscarRoute,
   ResetPasswordRoute: ResetPasswordRoute,
