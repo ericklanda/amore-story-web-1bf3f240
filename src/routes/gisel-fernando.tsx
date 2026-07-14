@@ -5,7 +5,6 @@ import { submitRsvp } from "@/lib/rsvp.functions";
 import { toast } from "sonner";
 import gf10 from "@/assets/gisel-fernando/gf-10.jpg.asset.json";
 import gf20 from "@/assets/gisel-fernando/gf-20.jpg.asset.json";
-import gf82 from "@/assets/gisel-fernando/gf-82.jpg.asset.json";
 import gf109 from "@/assets/gisel-fernando/gf-109.jpg.asset.json";
 import gf144 from "@/assets/gisel-fernando/gf-144.jpg.asset.json";
 import gf198 from "@/assets/gisel-fernando/gf-198.jpg.asset.json";
@@ -17,8 +16,7 @@ import lumiereImg from "@/assets/gisel-fernando/lumiere.png.asset.json";
 import parroquiaImg from "@/assets/gisel-fernando/parroquia.png.asset.json";
 
 const heroA = gf20.url;
-const heroB = gf82.url;
-const heroC = gf109.url;
+const heroB = gf109.url;
 const detail = gf10.url;
 const SITE_URL = "https://luis-leo.lovable.app";
 const PREVIEW_IMG = `${SITE_URL}${gf20.url}`;
@@ -67,7 +65,6 @@ const GALLERY = [
   { src: gf20.url, caption: "Nosotros" },
   { src: newGalleryImg.url, caption: "Sonrisas" },
   { src: gf144.url, caption: "Complicidad" },
-  { src: gf82.url, caption: "Juntos" },
   { src: gf121.url, caption: "En el camino" },
   { src: gf198.url, caption: "Nuestro camino" },
   { src: gf91.url, caption: "Al atardecer" },
@@ -264,7 +261,7 @@ function SplashOverlay({ onEnter }: { onEnter: () => void }) {
 
 /* ---------------- HERO ---------------- */
 function Hero() {
-  const slides = [heroA, heroB, heroC];
+  const slides = [heroA, heroB];
   const [idx, setIdx] = useState(0);
   const { days, hours, minutes, seconds } = useCountdown(WEDDING_DATE);
 
@@ -818,7 +815,7 @@ function Faq() {
 function ThankYou() {
   return (
     <section className="relative h-[100svh] min-h-[600px] w-full overflow-hidden">
-      <img src={heroC} alt="Gisel y Fernando" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center 30%" }} loading="lazy" />
+      <img src={heroB} alt="Gisel y Fernando" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center 30%" }} loading="lazy" />
       <div className="absolute inset-0 bg-black/55" />
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-white">
         <Reveal>
