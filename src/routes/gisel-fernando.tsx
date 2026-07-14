@@ -5,7 +5,6 @@ import { submitRsvp } from "@/lib/rsvp.functions";
 import { toast } from "sonner";
 import gf10 from "@/assets/gisel-fernando/gf-10.jpg.asset.json";
 import gf20 from "@/assets/gisel-fernando/gf-20.jpg.asset.json";
-import gf82 from "@/assets/gisel-fernando/gf-82.jpg.asset.json";
 import gf109 from "@/assets/gisel-fernando/gf-109.jpg.asset.json";
 import gf144 from "@/assets/gisel-fernando/gf-144.jpg.asset.json";
 import gf198 from "@/assets/gisel-fernando/gf-198.jpg.asset.json";
@@ -17,8 +16,7 @@ import lumiereImg from "@/assets/gisel-fernando/lumiere.png.asset.json";
 import parroquiaImg from "@/assets/gisel-fernando/parroquia.png.asset.json";
 
 const heroA = gf20.url;
-const heroB = gf82.url;
-const heroC = gf109.url;
+const heroB = gf109.url;
 const detail = gf10.url;
 const SITE_URL = "https://luis-leo.lovable.app";
 const PREVIEW_IMG = `${SITE_URL}${gf20.url}`;
