@@ -44,7 +44,7 @@ export const Route = createFileRoute("/gisel-fernando")({
 
 const WEDDING_DATE = new Date("2026-08-21T18:00:00");
 const HASHTAG = "#GiselYFernando2026";
-const WHATSAPP_NUMBER = "5216565833566";
+const WHATSAPP_NUMBER = "526568355435";
 const YOUTUBE_SONG_ID = "iZpZDivj6SU";
 
 const CEREMONY = {
@@ -700,7 +700,7 @@ function Rsvp() {
                 </button>
               </div>
               <p className="text-center text-xs text-muted-foreground pt-2">
-                Confirmaciones también por WhatsApp al 656 583 3566
+                Confirmaciones también por WhatsApp al 656 835 5435
               </p>
             </form>
           </Reveal>
@@ -773,7 +773,7 @@ function Faq() {
     { q: "¿Cuál es el código de vestimenta?", a: "Formal · elegante. La paleta de la boda es sage green y tonos rosa suaves, pero cualquier color formal es bienvenido." },
     { q: "¿Dónde es la ceremonia?", a: "En la Parroquia Santísima Trinidad, Chihuahua 712, Melchor Ocampo, Ciudad Juárez, a las 6:00 pm." },
     { q: "¿Dónde es la recepción?", a: "En Lumière Salón de Eventos, Av. Benjamín Franklin 3320, Zona Pronaf, Ciudad Juárez, a las 9:00 pm." },
-    { q: "¿Hasta cuándo puedo confirmar?", a: "Te pedimos confirmar tu asistencia antes del 21 de julio de 2026 por WhatsApp al 656 583 3566." },
+    { q: "¿Hasta cuándo confirmar?", a: "Te pedimos confirmar tu asistencia antes del 21 de julio de 2026 por WhatsApp al 656 835 5435." },
   ];
 
   const [open, setOpen] = useState<number | null>(0);
