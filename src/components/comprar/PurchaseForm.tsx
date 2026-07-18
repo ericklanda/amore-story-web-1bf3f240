@@ -92,10 +92,20 @@ export default function PurchaseForm({ tier, tierLabel, tagline, fields, baseFie
         <div className="max-w-md text-center">
           <p className="text-xs tracking-[0.3em] uppercase text-[#8A7E72] mb-3">BLCK Social</p>
           <h1 className="font-serif text-3xl text-[#2D2D2D] mb-3">¡Gracias!</h1>
-          <p className="text-[#5C5347]">
-            Recibimos tu solicitud del paquete <strong>{tierLabel}</strong>. Te contactaremos por
-            WhatsApp en las próximas horas para coordinar el pago y la entrega.
+          <p className="text-[#5C5347] mb-5">
+            Recibimos tu solicitud del paquete <strong>{tierLabel}</strong>. Serás redirigido a
+            WhatsApp para enviarnos las fotos y el contenido de tu invitación.
           </p>
+          {waUrl && (
+            <a
+              href={waUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-6 py-3 bg-[#D4AF37] text-[#1a1a1a] text-xs tracking-[0.2em] uppercase rounded-sm hover:opacity-90"
+            >
+              Abrir WhatsApp
+            </a>
+          )}
         </div>
       </div>
     );
