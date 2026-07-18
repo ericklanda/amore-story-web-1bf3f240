@@ -33,10 +33,13 @@ const BASE_FIELDS: FieldDef[] = [
   { name: "event_date", label: "Fecha del evento", type: "date", required: true },
 ];
 
+const BLCK_WHATSAPP = "526568355435";
+
 export default function PurchaseForm({ tier, tierLabel, tagline, fields, baseFields }: Props) {
   const submit = useServerFn(submitInvitationRequest);
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const [waUrl, setWaUrl] = useState<string | null>(null);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -53,6 +56,13 @@ export default function PurchaseForm({ tier, tierLabel, tagline, fields, baseFie
       if (v) payload[f.name] = v;
     }
 
+    const message = `Hola! Acabo de enviar la solicitud de mi invitación digital (Paquete ${tierLabel}). Te envío las fotos y el contenido para la invitación.\n\nNombre: ${contact_name}\nCorreo: ${contact_email}\nTeléfono: ${contact_phone}\nEvento: ${couple_names}\nFecha: ${event_date || "Por definir"}`;
+    const url = `https://wa.me/${BLCK_WHATSAPP}?text=${encodeURIComponent(message)}`;
+
+    // Abrir WhatsApp de inmediato dentro del gesto del usuario para evitar bloqueo de popups
+    const waWindow = window.open(url, "_blank", "noopener,noreferrer");
+    if (!waWindow) window.location.href = url;
+
     setLoading(true);
     try {
       await submit({
@@ -67,6 +77,7 @@ export default function PurchaseForm({ tier, tierLabel, tagline, fields, baseFie
         },
       });
       setDone(true);
+      setWaUrl(url);
       toast.success("¡Solicitud enviada! Te contactamos pronto.");
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Error al enviar");
@@ -81,10 +92,20 @@ export default function PurchaseForm({ tier, tierLabel, tagline, fields, baseFie
         <div className="max-w-md text-center">
           <p className="text-xs tracking-[0.3em] uppercase text-[#8A7E72] mb-3">BLCK Social</p>
           <h1 className="font-serif text-3xl text-[#2D2D2D] mb-3">¡Gracias!</h1>
-          <p className="text-[#5C5347]">
-            Recibimos tu solicitud del paquete <strong>{tierLabel}</strong>. Te contactaremos por
-            WhatsApp en las próximas horas para coordinar el pago y la entrega.
+          <p className="text-[#5C5347] mb-5">
+            Recibimos tu solicitud del paquete <strong>{tierLabel}</strong>. Serás redirigido a
+            WhatsApp para enviarnos las fotos y el contenido de tu invitación.
           </p>
+          {waUrl && (
+            <a
+              href={waUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-6 py-3 bg-[#D4AF37] text-[#1a1a1a] text-xs tracking-[0.2em] uppercase rounded-sm hover:opacity-90"
+            >
+              Abrir WhatsApp
+            </a>
+          )}
         </div>
       </div>
     );
