@@ -33,10 +33,13 @@ const BASE_FIELDS: FieldDef[] = [
   { name: "event_date", label: "Fecha del evento", type: "date", required: true },
 ];
 
+const BLCK_WHATSAPP = "526568355435";
+
 export default function PurchaseForm({ tier, tierLabel, tagline, fields, baseFields }: Props) {
   const submit = useServerFn(submitInvitationRequest);
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const [waUrl, setWaUrl] = useState<string | null>(null);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -53,6 +56,13 @@ export default function PurchaseForm({ tier, tierLabel, tagline, fields, baseFie
       if (v) payload[f.name] = v;
     }
 
+    const message = `Hola! Acabo de enviar la solicitud de mi invitación digital (Paquete ${tierLabel}). Te envío las fotos y el contenido para la invitación.\n\nNombre: ${contact_name}\nCorreo: ${contact_email}\nTeléfono: ${contact_phone}\nEvento: ${couple_names}\nFecha: ${event_date || "Por definir"}`;
+    const url = `https://wa.me/${BLCK_WHATSAPP}?text=${encodeURIComponent(message)}`;
+
+    // Abrir WhatsApp de inmediato dentro del gesto del usuario para evitar bloqueo de popups
+    const waWindow = window.open(url, "_blank", "noopener,noreferrer");
+    if (!waWindow) window.location.href = url;
+
     setLoading(true);
     try {
       await submit({
@@ -67,6 +77,7 @@ export default function PurchaseForm({ tier, tierLabel, tagline, fields, baseFie
         },
       });
       setDone(true);
+      setWaUrl(url);
       toast.success("¡Solicitud enviada! Te contactamos pronto.");
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Error al enviar");
