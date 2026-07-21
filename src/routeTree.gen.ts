@@ -18,6 +18,7 @@ import { Route as LuisLeoRouteImport } from './routes/luis-leo'
 import { Route as JulianaSilvaRouteImport } from './routes/juliana-silva'
 import { Route as GiselFernandoRouteImport } from './routes/gisel-fernando'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AlejandraAaronRouteImport } from './routes/alejandra-aaron'
 import { Route as SlugRouteImport } from './routes/$slug'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
@@ -74,6 +75,11 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AlejandraAaronRoute = AlejandraAaronRouteImport.update({
+  id: '/alejandra-aaron',
+  path: '/alejandra-aaron',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SlugRoute = SlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -127,6 +133,7 @@ const ComprarXvDiamanteRoute = ComprarXvDiamanteRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$slug': typeof SlugRoute
+  '/alejandra-aaron': typeof AlejandraAaronRoute
   '/auth': typeof AuthRoute
   '/gisel-fernando': typeof GiselFernandoRoute
   '/juliana-silva': typeof JulianaSilvaRoute
@@ -147,6 +154,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$slug': typeof SlugRoute
+  '/alejandra-aaron': typeof AlejandraAaronRoute
   '/auth': typeof AuthRoute
   '/gisel-fernando': typeof GiselFernandoRoute
   '/juliana-silva': typeof JulianaSilvaRoute
@@ -169,6 +177,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/$slug': typeof SlugRoute
+  '/alejandra-aaron': typeof AlejandraAaronRoute
   '/auth': typeof AuthRoute
   '/gisel-fernando': typeof GiselFernandoRoute
   '/juliana-silva': typeof JulianaSilvaRoute
@@ -191,6 +200,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$slug'
+    | '/alejandra-aaron'
     | '/auth'
     | '/gisel-fernando'
     | '/juliana-silva'
@@ -211,6 +221,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/$slug'
+    | '/alejandra-aaron'
     | '/auth'
     | '/gisel-fernando'
     | '/juliana-silva'
@@ -232,6 +243,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/$slug'
+    | '/alejandra-aaron'
     | '/auth'
     | '/gisel-fernando'
     | '/juliana-silva'
@@ -254,6 +266,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   SlugRoute: typeof SlugRoute
+  AlejandraAaronRoute: typeof AlejandraAaronRoute
   AuthRoute: typeof AuthRoute
   GiselFernandoRoute: typeof GiselFernandoRoute
   JulianaSilvaRoute: typeof JulianaSilvaRoute
@@ -334,6 +347,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/alejandra-aaron': {
+      id: '/alejandra-aaron'
+      path: '/alejandra-aaron'
+      fullPath: '/alejandra-aaron'
+      preLoaderRoute: typeof AlejandraAaronRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$slug': {
@@ -424,6 +444,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   SlugRoute: SlugRoute,
+  AlejandraAaronRoute: AlejandraAaronRoute,
   AuthRoute: AuthRoute,
   GiselFernandoRoute: GiselFernandoRoute,
   JulianaSilvaRoute: JulianaSilvaRoute,
@@ -443,13 +464,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
