@@ -56,8 +56,19 @@ export default function PurchaseForm({ tier, tierLabel, tagline, fields, baseFie
       const v = String(fd.get(f.name) ?? "").trim();
       if (v) payload[f.name] = v;
     }
+    const paletteRaw = String(fd.get("palette") ?? "").trim();
+    let paletteSummary = "";
+    if (paletteRaw) {
+      payload.palette = paletteRaw;
+      try {
+        const p = JSON.parse(paletteRaw) as { name?: string; colors?: string[] };
+        paletteSummary = `\nPaleta: ${p.name ?? "Personalizada"} (${(p.colors ?? []).join(", ")})`;
+      } catch {
+        paletteSummary = `\nPaleta: ${paletteRaw}`;
+      }
+    }
 
-    const message = `Hola! Acabo de enviar la solicitud de mi invitación digital (Paquete ${tierLabel}). Te envío las fotos y el contenido para la invitación.\n\nNombre: ${contact_name}\nCorreo: ${contact_email}\nTeléfono: ${contact_phone}\nEvento: ${couple_names}\nFecha: ${event_date || "Por definir"}`;
+    const message = `Hola! Acabo de enviar la solicitud de mi invitación digital (Paquete ${tierLabel}). Te envío las fotos y el contenido para la invitación.\n\nNombre: ${contact_name}\nCorreo: ${contact_email}\nTeléfono: ${contact_phone}\nEvento: ${couple_names}\nFecha: ${event_date || "Por definir"}${paletteSummary}`;
     const url = `https://wa.me/${BLCK_WHATSAPP}?text=${encodeURIComponent(message)}`;
 
     // Abrir WhatsApp de inmediato dentro del gesto del usuario para evitar bloqueo de popups
