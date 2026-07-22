@@ -2,18 +2,8 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
-type Ctx = {
-  supabase: {
-    from: (t: string) => {
-      select: (...args: unknown[]) => {
-        eq: (col: string, val: unknown) => { maybeSingle: () => Promise<{ data: { slug?: string; owner_user_id?: string | null; role?: string } | null }> };
-      };
-    };
-  };
-  userId: string;
-};
-
-async function assertOwnerOrAdmin(context: Ctx, slug: string) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function assertOwnerOrAdmin(context: any, slug: string) {
   const { data: inv } = await context.supabase
     .from("invitations")
     .select("slug, owner_user_id")
