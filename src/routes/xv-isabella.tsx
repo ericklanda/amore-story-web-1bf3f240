@@ -449,8 +449,8 @@ function ParentsAndCourt() {
 /* ---------------- EVENT DETAILS ---------------- */
 function EventDetails() {
   const cards = [
-    { label: "Ceremonia religiosa", ...CEREMONY, icon: "⛪" },
-    { label: "Recepción", ...VENUE, icon: "🥂" },
+    { label: "Ceremonia religiosa", ...CEREMONY, icon: "⛪", image: parroquiaImg.url },
+    { label: "Recepción", ...VENUE, icon: "🥂", image: ubuntuImg.url },
   ];
   const cal = () => {
     const start = "20260904T230000Z"; // 5pm CST → 23:00 UTC
