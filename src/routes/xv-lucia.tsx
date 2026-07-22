@@ -687,7 +687,7 @@ function EventDetails() {
 
 /* ---------------- DRESS CODE ---------------- */
 function DressCode() {
-  const palette = ["#000000", "#1a1a1a", "#2b2b2b", "#3d3d3d", "#525252"];
+  const palette = ["#A3A380", "#D7CE93", "#EFEBCE", "#D8A48F", "#BB8588"];
   return (
     <section className="py-24 md:py-32 px-6 bg-gradient-blush">
       <div className="max-w-5xl mx-auto text-center">
