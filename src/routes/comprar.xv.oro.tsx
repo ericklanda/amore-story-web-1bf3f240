@@ -41,6 +41,7 @@ export const Route = createFileRoute("/comprar/xv/oro")({
     <PurchaseForm
       tier="oro"
       tierLabel="Oro · XV Años"
+      title="Mis XV Años"
       tagline="Invitación completa para tus XV: historia, galería, corte de honor, itinerario y panel de confirmaciones."
       fields={FIELDS}
       baseFields={BASE_FIELDS}
