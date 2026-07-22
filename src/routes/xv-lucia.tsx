@@ -48,16 +48,6 @@ const GALLERY = [
   { src: p74.url, caption: "Mirada" },
   { src: p174.url, caption: "Juntos" },
   { src: p159.url, caption: "Para siempre" },
-  { src: n7262.url, caption: "Entre flores" },
-  { src: n7263.url, caption: "Sonrisa" },
-  { src: n7264.url, caption: "Mis historias" },
-  { src: n7265.url, caption: "Luz de tarde" },
-  { src: n7266.url, caption: "Serena" },
-  { src: n7267.url, caption: "Atardecer" },
-  { src: n7268.url, caption: "Detalles" },
-  { src: n7269.url, caption: "Mis libros" },
-  { src: n7270.url, caption: "Camino" },
-  { src: n7271.url, caption: "Yo" },
 ];
 
 
