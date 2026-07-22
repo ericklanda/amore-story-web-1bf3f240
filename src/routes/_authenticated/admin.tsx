@@ -200,6 +200,7 @@ function AdminPage() {
         {isAdmin && <NewRequestsSection />}
         {isAdmin && <ChangeRequestsAdminSection />}
 
+        {slug && !isAdmin && <OwnerSendInvitationSection slug={slug} />}
         {slug && !isAdmin && <OwnerChangeRequestSection slug={slug} />}
 
 
@@ -755,6 +756,161 @@ function ChangeRequestsAdminSection() {
               ))}
             </div>
           )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+type SendEntry = { id: string; phone: string; guests: number; sentAt: string | null };
+
+function OwnerSendInvitationSection({ slug }: { slug: string }) {
+  const storageKey = `send-list:${slug}`;
+  const [entries, setEntries] = useState<SendEntry[]>([]);
+  const [phone, setPhone] = useState("");
+  const [guests, setGuests] = useState<number>(2);
+  const [confirmation, setConfirmation] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const raw = window.localStorage.getItem(storageKey);
+      if (raw) setEntries(JSON.parse(raw));
+      else setEntries([]);
+    } catch {
+      setEntries([]);
+    }
+  }, [storageKey]);
+
+  const persist = (next: SendEntry[]) => {
+    setEntries(next);
+    try {
+      window.localStorage.setItem(storageKey, JSON.stringify(next));
+    } catch {
+      // ignore
+    }
+  };
+
+  const normalizePhone = (raw: string) => raw.replace(/[^\d]/g, "");
+
+  const addEntry = (e: React.FormEvent) => {
+    e.preventDefault();
+    const p = normalizePhone(phone);
+    if (p.length < 10) {
+      toast.error("Ingresa un número válido con lada.");
+      return;
+    }
+    if (guests < 1) {
+      toast.error("La cantidad de invitados debe ser al menos 1.");
+      return;
+    }
+    const next: SendEntry[] = [
+      ...entries,
+      { id: crypto.randomUUID(), phone: p, guests, sentAt: null },
+    ];
+    persist(next);
+    setPhone("");
+    setGuests(2);
+  };
+
+  const removeEntry = (id: string) => {
+    persist(entries.filter((e) => e.id !== id));
+  };
+
+  const buildMessage = (entry: SendEntry) => {
+    const url = `${window.location.origin}/${slug}`;
+    const lugares = entry.guests === 1 ? "1 lugar reservado" : `${entry.guests} lugares reservados`;
+    return `¡Hola! Te comparto nuestra invitación. Tienes ${lugares} a tu nombre. Confírmanos tu asistencia por favor 💌\n\n${url}`;
+  };
+
+  const sendEntry = (entry: SendEntry) => {
+    const url = `https://wa.me/${entry.phone}?text=${encodeURIComponent(buildMessage(entry))}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+    const next = entries.map((e) => (e.id === entry.id ? { ...e, sentAt: new Date().toISOString() } : e));
+    persist(next);
+    setConfirmation(`Tu invitación ha sido enviada a +${entry.phone}.`);
+    window.setTimeout(() => setConfirmation(null), 4000);
+  };
+
+  const resendEntry = (entry: SendEntry) => sendEntry(entry);
+
+  const totalGuests = entries.reduce((acc, e) => acc + (e.guests || 0), 0);
+
+  return (
+    <div className="mb-8 bg-white border border-[#E5DED3] rounded-sm p-5">
+      <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4AF37] mb-3">Enviar invitación por WhatsApp</p>
+      <p className="text-xs text-[#8A7E72] mb-4">
+        Agrega los números a los que quieres enviar la invitación y la cantidad de invitados autorizados para cada uno. Puedes agregar el mismo número varias veces si lo necesitas.
+      </p>
+
+      <form onSubmit={addEntry} className="grid grid-cols-1 sm:grid-cols-[1fr_auto_auto] gap-2 mb-4">
+        <input
+          type="tel"
+          inputMode="tel"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          placeholder="Ej: 526561234567 (con lada país)"
+          className="border border-[#E5DED3] rounded-sm px-3 py-2 text-sm bg-white focus:border-[#D4AF37] outline-none"
+        />
+        <select
+          value={guests}
+          onChange={(e) => setGuests(Number(e.target.value))}
+          className="border border-[#E5DED3] rounded-sm px-3 py-2 text-sm bg-white focus:border-[#D4AF37] outline-none"
+          aria-label="Cantidad de invitados autorizados"
+        >
+          {Array.from({ length: 15 }, (_, i) => i + 1).map((n) => (
+            <option key={n} value={n}>
+              {n} {n === 1 ? "invitado" : "invitados"}
+            </option>
+          ))}
+        </select>
+        <button
+          type="submit"
+          className="px-5 py-2 text-xs tracking-[0.25em] uppercase bg-[#2D2D2D] text-white rounded-sm hover:opacity-90"
+        >
+          Agregar
+        </button>
+      </form>
+
+      {confirmation && (
+        <div className="mb-4 border border-[#D4AF37] bg-[#FBF6E7] text-[#8A6D1A] rounded-sm px-4 py-3 text-sm">
+          ✓ {confirmation}
+        </div>
+      )}
+
+      {entries.length === 0 ? (
+        <p className="text-sm text-[#8A7E72] text-center py-6 border border-dashed border-[#E5DED3] rounded-sm">
+          Aún no has agregado números.
+        </p>
+      ) : (
+        <div className="space-y-2">
+          <div className="flex justify-between text-[10px] tracking-[0.25em] uppercase text-[#8A7E72] px-1">
+            <span>{entries.length} {entries.length === 1 ? "envío" : "envíos"}</span>
+            <span>{totalGuests} invitados totales</span>
+          </div>
+          {entries.map((e) => (
+            <div key={e.id} className="flex flex-wrap items-center gap-3 border border-[#E5DED3] rounded-sm px-3 py-2">
+              <div className="flex-1 min-w-[160px]">
+                <p className="text-sm text-[#2D2D2D]">+{e.phone}</p>
+                <p className="text-[11px] text-[#8A7E72]">
+                  {e.guests} {e.guests === 1 ? "invitado" : "invitados"}
+                  {e.sentAt && ` · enviado ${new Date(e.sentAt).toLocaleString("es-MX")}`}
+                </p>
+              </div>
+              <button
+                onClick={() => (e.sentAt ? resendEntry(e) : sendEntry(e))}
+                className="px-4 py-1.5 text-[10px] tracking-[0.25em] uppercase bg-[#25D366] text-white rounded-sm hover:opacity-90"
+              >
+                {e.sentAt ? "Reenviar" : "Enviar"}
+              </button>
+              <button
+                onClick={() => removeEntry(e.id)}
+                className="px-3 py-1.5 text-[10px] tracking-[0.25em] uppercase border border-[#E5DED3] text-[#8A7E72] rounded-sm hover:border-[#2D2D2D] hover:text-[#2D2D2D]"
+              >
+                Quitar
+              </button>
+            </div>
+          ))}
         </div>
       )}
     </div>
