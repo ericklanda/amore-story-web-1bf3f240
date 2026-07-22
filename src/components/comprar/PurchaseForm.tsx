@@ -21,6 +21,7 @@ export type FieldDef = {
 type Props = {
   tier: "plata" | "oro" | "diamante";
   tierLabel: string;
+  title?: string;
   tagline: string;
   fields: FieldDef[];
   baseFields?: FieldDef[];
