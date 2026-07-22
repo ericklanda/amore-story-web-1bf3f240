@@ -3,6 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
 import { listRsvps, listMyInvitations, createInvitation, listInvitationRequests, updateInvitationRequestStatus } from "@/lib/rsvp-admin.functions";
+import { submitChangeRequest, listMyChangeRequests, listAllChangeRequests, updateChangeRequest } from "@/lib/change-requests.functions";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { InvitationEditor } from "@/components/admin/InvitationEditor";
