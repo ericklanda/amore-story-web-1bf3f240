@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { submitRsvp } from "@/lib/rsvp.functions";
+import { lookupInvitationSendByToken } from "@/lib/invitation-sends.functions";
 import { toast } from "sonner";
 import cover from "@/assets/xv-isabella/isabella-cover.jpg.asset.json";
 import g7262 from "@/assets/xv-isabella/isabella-7262.jpg.asset.json";
@@ -609,7 +610,26 @@ function Rsvp() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: "", attending: "yes", message: "" });
+  const [invite, setInvite] = useState<{ guest_name: string | null; guests_allowed: number } | null>(null);
   const submit = useServerFn(submitRsvp);
+  const lookup = useServerFn(lookupInvitationSendByToken);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("i");
+    if (!token) return;
+    lookup({ data: { token } })
+      .then((res) => {
+        if (res?.row) {
+          setInvite({ guest_name: res.row.guest_name, guests_allowed: res.row.guests_allowed });
+          if (res.row.guest_name) {
+            setForm((f) => (f.name ? f : { ...f, name: res.row!.guest_name! }));
+          }
+        }
+      })
+      .catch(() => {});
+  }, [lookup]);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -620,6 +640,7 @@ function Rsvp() {
       `Hola! Confirmo asistencia a los XV de Isabella.\n` +
       `Nombre: ${form.name}\n` +
       `Asistencia: ${form.attending === "yes" ? "Sí" : "No"}` +
+      (invite ? `\nLugares reservados: ${invite.guests_allowed}` : "") +
       (form.message ? `\nMensaje: ${form.message}` : "");
     const wa = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
     const w = window.open(wa, "_blank", "noopener,noreferrer");
@@ -655,6 +676,13 @@ function Rsvp() {
           </div>
         ) : (
           <form onSubmit={onSubmit} className="rounded-sm p-7 md:p-10 shadow-md space-y-5" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
+            {invite && (
+              <div className="text-center rounded-sm px-4 py-3 text-sm" style={{ backgroundColor: C.bgAlt, border: `1px solid ${C.border}`, color: C.textMuted }}>
+                {invite.guest_name ? <span className="font-medium" style={{ color: C.primary }}>{invite.guest_name}</span> : "Invitación personal"}
+                {" · "}
+                <span>{invite.guests_allowed} {invite.guests_allowed === 1 ? "lugar reservado" : "lugares reservados"}</span>
+              </div>
+            )}
             <Field label="Nombre completo">
               <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full bg-transparent border-b outline-none py-2" style={{ borderColor: C.border }} />
             </Field>
