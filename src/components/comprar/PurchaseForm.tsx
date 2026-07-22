@@ -37,7 +37,7 @@ const BASE_FIELDS: FieldDef[] = [
 
 const BLCK_WHATSAPP = "526568355435";
 
-export default function PurchaseForm({ tier, tierLabel, tagline, fields, baseFields }: Props) {
+export default function PurchaseForm({ tier, tierLabel, title, tagline, fields, baseFields }: Props) {
   const submit = useServerFn(submitInvitationRequest);
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
