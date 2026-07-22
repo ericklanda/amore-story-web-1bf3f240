@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { submitInvitationRequest } from "@/lib/invitation-requests.functions";
+import PaletteSelector from "./PaletteSelector";
 
 export type FieldDef = {
   name: string;
@@ -55,8 +56,19 @@ export default function PurchaseForm({ tier, tierLabel, tagline, fields, baseFie
       const v = String(fd.get(f.name) ?? "").trim();
       if (v) payload[f.name] = v;
     }
+    const paletteRaw = String(fd.get("palette") ?? "").trim();
+    let paletteSummary = "";
+    if (paletteRaw) {
+      payload.palette = paletteRaw;
+      try {
+        const p = JSON.parse(paletteRaw) as { name?: string; colors?: string[] };
+        paletteSummary = `\nPaleta: ${p.name ?? "Personalizada"} (${(p.colors ?? []).join(", ")})`;
+      } catch {
+        paletteSummary = `\nPaleta: ${paletteRaw}`;
+      }
+    }
 
-    const message = `Hola! Acabo de enviar la solicitud de mi invitación digital (Paquete ${tierLabel}). Te envío las fotos y el contenido para la invitación.\n\nNombre: ${contact_name}\nCorreo: ${contact_email}\nTeléfono: ${contact_phone}\nEvento: ${couple_names}\nFecha: ${event_date || "Por definir"}`;
+    const message = `Hola! Acabo de enviar la solicitud de mi invitación digital (Paquete ${tierLabel}). Te envío las fotos y el contenido para la invitación.\n\nNombre: ${contact_name}\nCorreo: ${contact_email}\nTeléfono: ${contact_phone}\nEvento: ${couple_names}\nFecha: ${event_date || "Por definir"}${paletteSummary}`;
     const url = `https://wa.me/${BLCK_WHATSAPP}?text=${encodeURIComponent(message)}`;
 
     // Abrir WhatsApp de inmediato dentro del gesto del usuario para evitar bloqueo de popups
@@ -138,6 +150,14 @@ export default function PurchaseForm({ tier, tierLabel, tagline, fields, baseFie
             {fields.map((f) => (
               <FieldRow key={f.name} field={f} />
             ))}
+          </section>
+
+          <section className="space-y-3">
+            <h2 className="font-serif text-xl text-[#2D2D2D]">Paleta de colores</h2>
+            <p className="text-sm text-[#8A7E72]">
+              Elige una paleta lista o crea la tuya. Es solo una referencia — la afinamos contigo.
+            </p>
+            <PaletteSelector name="palette" />
           </section>
 
           <Button type="submit" disabled={loading} className="w-full bg-[#D4AF37] hover:bg-[#C4A77D] text-[#1a1a1a] tracking-[0.2em] uppercase text-xs py-6">
