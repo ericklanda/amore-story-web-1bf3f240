@@ -102,3 +102,53 @@ export const createInvitation = createServerFn({ method: "POST" })
     }
     return { ok: true };
   });
+
+export const listInvitationRequests = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { data: roleRow } = await context.supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", context.userId)
+      .eq("role", "admin")
+      .maybeSingle();
+    if (!roleRow) throw new Error("Solo el administrador puede ver solicitudes.");
+
+    const { data, error } = await context.supabase
+      .from("invitation_requests")
+      .select("id, package_tier, contact_name, contact_email, contact_phone, couple_names, event_date, payload, status, created_at")
+      .order("created_at", { ascending: false });
+    if (error) {
+      console.error("[listInvitationRequests]", error);
+      throw new Error("No se pudieron cargar las solicitudes.");
+    }
+    return { rows: data ?? [] };
+  });
+
+export const updateInvitationRequestStatus = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) =>
+    z.object({
+      id: z.string().uuid(),
+      status: z.enum(["pending", "in_progress", "done", "archived"]),
+    }).parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    const { data: roleRow } = await context.supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", context.userId)
+      .eq("role", "admin")
+      .maybeSingle();
+    if (!roleRow) throw new Error("Solo el administrador.");
+
+    const { error } = await context.supabase
+      .from("invitation_requests")
+      .update({ status: data.status })
+      .eq("id", data.id);
+    if (error) {
+      console.error("[updateInvitationRequestStatus]", error);
+      throw new Error("No se pudo actualizar la solicitud.");
+    }
+    return { ok: true };
+  });
