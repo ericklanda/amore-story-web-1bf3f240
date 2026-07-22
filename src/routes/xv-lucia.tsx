@@ -294,23 +294,23 @@ function SplashOverlay({ onEnter }: { onEnter: () => void }) {
       }}
     >
       {/* soft cream wash to keep text legible while showing the florals */}
-      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, oklch(0.99 0.012 30 / 0.55), oklch(0.96 0.025 25 / 0.75))" }} />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(239,235,206,0.55), rgba(216,164,143,0.55))" }} />
       <div className="relative z-10 max-w-lg">
-        <div className="ornament mb-6 text-sm tracking-[0.3em]" style={{ color: "oklch(0.55 0.10 25)" }}>03 · Octubre · 2026</div>
-        <h1 className="font-serif italic text-5xl sm:text-6xl md:text-7xl leading-[0.95] mb-4" style={{ color: "oklch(0.32 0.06 25)" }}>
+        <div className="ornament mb-6 text-sm tracking-[0.3em]" style={{ color: "#7A7A55" }}>03 · Octubre · 2026</div>
+        <h1 className="font-serif italic text-5xl sm:text-6xl md:text-7xl leading-[0.95] mb-4" style={{ color: "#4A4632" }}>
           Lucía
-          <span className="font-script block text-3xl sm:text-4xl md:text-5xl my-2 not-italic" style={{ color: "oklch(0.62 0.11 70)" }}>Mis XV Años</span>
+          <span className="font-script block text-3xl sm:text-4xl md:text-5xl my-2 not-italic" style={{ color: "#BB8588" }}>Mis XV Años</span>
         </h1>
-        <p className="text-xs tracking-[0.25em] uppercase mb-10" style={{ color: "oklch(0.45 0.06 25)" }}>
+        <p className="text-xs tracking-[0.25em] uppercase mb-10" style={{ color: "#6B6548" }}>
           Mis XV Años · Una noche para recordar
         </p>
-        <p className="font-serif italic text-2xl sm:text-3xl mb-6" style={{ color: "oklch(0.38 0.06 25)" }}>
+        <p className="font-serif italic text-2xl sm:text-3xl mb-6" style={{ color: "#4A4632" }}>
           Estás Invitado
         </p>
         <button
           onClick={handleEnter}
           className="inline-flex items-center gap-3 px-10 py-4 rounded-full font-sans text-sm tracking-[0.2em] uppercase transition-all hover:gap-5 shadow-soft"
-          style={{ background: "oklch(0.45 0.08 25)", color: "oklch(0.99 0.006 40)" }}
+          style={{ background: "#7A7A55", color: "#F7F4E1" }}
         >
           Ingresa
           <span>→</span>
