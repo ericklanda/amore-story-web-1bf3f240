@@ -11,6 +11,7 @@ import p174 from "@/assets/xv-lucia/lucia-174.jpg.asset.json";
 import p74 from "@/assets/xv-lucia/lucia-74.jpg.asset.json";
 import floralBg from "@/assets/xv-lucia/floral-bg.jpg.asset.json";
 import floralFrame from "@/assets/xv-lucia/lucia-flower-frame.png.asset.json";
+import karinaCover from "@/assets/xv-lucia/karina-cover.jpg.asset.json";
 import n7262 from "@/assets/xv-lucia/lucia-7262.jpg.asset.json";
 import n7263 from "@/assets/xv-lucia/lucia-7263.jpg.asset.json";
 import n7264 from "@/assets/xv-lucia/lucia-7264.jpg.asset.json";
@@ -22,7 +23,7 @@ import n7269 from "@/assets/xv-lucia/lucia-7269.jpg.asset.json";
 import n7270 from "@/assets/xv-lucia/lucia-7270.jpg.asset.json";
 import n7271 from "@/assets/xv-lucia/lucia-7271.jpg.asset.json";
 
-const heroCouple = p72.url;
+const heroCouple = karinaCover.url;
 const couple2 = p86.url;
 const couple3 = p110.url;
 const details = p174.url;
@@ -36,7 +37,7 @@ export const Route = createFileRoute("/xv-lucia")({
       { name: "description", content: "Invitación digital de los XV años de Lucía. Acompáñame a celebrar este momento tan especial." },
       { property: "og:title", content: "Lucía · Mis XV Años" },
       { property: "og:description", content: "Acompáñame a celebrar mis XV años." },
-      { property: "og:image", content: p72.url },
+      { property: "og:image", content: karinaCover.url },
       { property: "og:url", content: "https://blcksocial.com/xv-lucia" },
     ],
     links: [{ rel: "canonical", href: "https://blcksocial.com/xv-lucia" }],
