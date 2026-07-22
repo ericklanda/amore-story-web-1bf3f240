@@ -610,7 +610,26 @@ function Rsvp() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: "", attending: "yes", message: "" });
+  const [invite, setInvite] = useState<{ guest_name: string | null; guests_allowed: number } | null>(null);
   const submit = useServerFn(submitRsvp);
+  const lookup = useServerFn(lookupInvitationSendByToken);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("i");
+    if (!token) return;
+    lookup({ data: { token } })
+      .then((res) => {
+        if (res?.row) {
+          setInvite({ guest_name: res.row.guest_name, guests_allowed: res.row.guests_allowed });
+          if (res.row.guest_name) {
+            setForm((f) => (f.name ? f : { ...f, name: res.row!.guest_name! }));
+          }
+        }
+      })
+      .catch(() => {});
+  }, [lookup]);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -621,6 +640,7 @@ function Rsvp() {
       `Hola! Confirmo asistencia a los XV de Isabella.\n` +
       `Nombre: ${form.name}\n` +
       `Asistencia: ${form.attending === "yes" ? "Sí" : "No"}` +
+      (invite ? `\nLugares reservados: ${invite.guests_allowed}` : "") +
       (form.message ? `\nMensaje: ${form.message}` : "");
     const wa = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
     const w = window.open(wa, "_blank", "noopener,noreferrer");
