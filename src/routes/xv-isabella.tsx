@@ -293,6 +293,53 @@ function Splash({ onEnter }: { onEnter: () => void }) {
   );
 }
 
+/* ---------------- FLORAL PARALLAX OVERLAY ---------------- */
+function FloralParallax() {
+  const imgRef = useRef<HTMLImageElement | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const y = window.scrollY || 0;
+        const vh = window.innerHeight || 1;
+        setVisible(y > vh * 0.6);
+        if (imgRef.current) {
+          const offset = (y - vh) * 0.15;
+          imgRef.current.style.transform = `translate3d(0, ${offset}px, 0)`;
+        }
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-0 z-[5] overflow-hidden transition-opacity duration-700"
+      style={{ opacity: visible ? 0.65 : 0 }}
+    >
+      <img
+        ref={imgRef}
+        src={floralFrame.url}
+        alt=""
+        className="absolute left-1/2 top-1/2 w-[120vw] max-w-none -translate-x-1/2 -translate-y-1/2 select-none will-change-transform"
+        style={{ transform: "translate3d(0,0,0)" }}
+      />
+    </div>
+  );
+}
+
 /* ---------------- HERO ---------------- */
 function Hero() {
   return (
