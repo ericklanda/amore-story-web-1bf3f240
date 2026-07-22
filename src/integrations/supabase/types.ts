@@ -14,6 +14,47 @@ export type Database = {
   }
   public: {
     Tables: {
+      change_requests: {
+        Row: {
+          admin_note: string | null
+          created_at: string
+          id: string
+          invitation_slug: string
+          message: string
+          requester_user_id: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          admin_note?: string | null
+          created_at?: string
+          id?: string
+          invitation_slug: string
+          message: string
+          requester_user_id?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          admin_note?: string | null
+          created_at?: string
+          id?: string
+          invitation_slug?: string
+          message?: string
+          requester_user_id?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "change_requests_invitation_slug_fkey"
+            columns: ["invitation_slug"]
+            isOneToOne: false
+            referencedRelation: "invitations"
+            referencedColumns: ["slug"]
+          },
+        ]
+      }
       invitation_requests: {
         Row: {
           contact_email: string
