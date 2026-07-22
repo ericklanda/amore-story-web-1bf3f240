@@ -677,9 +677,6 @@ function Rsvp() {
                 ))}
               </div>
             </Field>
-            <Field label="Número de personas">
-              <input type="number" min={1} max={6} value={form.guests} onChange={(e) => setForm({ ...form, guests: e.target.value })} className="w-full bg-transparent border-b outline-none py-2" style={{ borderColor: C.border }} />
-            </Field>
             <Field label="Mensaje para Isabella (opcional)">
               <textarea rows={3} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full bg-transparent border outline-none p-3 rounded-sm resize-none" style={{ borderColor: C.border }} />
             </Field>
