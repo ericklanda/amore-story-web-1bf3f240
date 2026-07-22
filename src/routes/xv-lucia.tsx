@@ -772,16 +772,48 @@ function Rsvp() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ name: "", attending: "yes", message: "" });
+  const [invite, setInvite] = useState<{ guest_name: string | null; guests_allowed: number } | null>(null);
   const submit = useServerFn(submitRsvp);
+  const lookup = useServerFn(lookupInvitationSendByToken);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("i");
+    if (!token) return;
+    lookup({ data: { token } })
+      .then((res) => {
+        if (res?.row) {
+          setInvite({ guest_name: res.row.guest_name, guests_allowed: res.row.guests_allowed });
+          if (res.row.guest_name) {
+            setForm((f) => (f.name ? f : { ...f, name: res.row!.guest_name! }));
+          }
+        }
+      })
+      .catch(() => {});
+  }, [lookup]);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (submitting) return;
     setSubmitting(true);
+
+    if (WHATSAPP_NUMBER) {
+      const text =
+        `Hola! Confirmo asistencia a los XV de Lucía.\n` +
+        `Nombre: ${form.name}\n` +
+        `Asistencia: ${form.attending === "yes" ? "Sí" : "No"}` +
+        (invite ? `\nLugares reservados: ${invite.guests_allowed}` : "") +
+        (form.message ? `\nMensaje: ${form.message}` : "");
+      const wa = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+      const w = window.open(wa, "_blank", "noopener,noreferrer");
+      if (!w) window.location.href = wa;
+    }
+
     try {
       await submit({
         data: {
-          invitation_slug: "susana-alan",
+          invitation_slug: "xv-lucia",
           name: form.name.trim(),
           attending: form.attending as "yes" | "no",
           message: form.message || null,
@@ -795,11 +827,6 @@ function Rsvp() {
       setSubmitting(false);
     }
   };
-
-  const whatsappMsg = useMemo(() => {
-    const text = `Hola! Confirmo mi asistencia a la boda de Lucía. Nombre: ${form.name || "(nombre)"}, asistencia: ${form.attending === "yes" ? "Sí" : "No"}`;
-    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-  }, [form]);
 
   return (
     <section className="py-24 md:py-32 px-6 floral-section">
