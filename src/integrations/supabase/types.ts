@@ -94,6 +94,45 @@ export type Database = {
         }
         Relationships: []
       }
+      invitation_sends: {
+        Row: {
+          created_at: string
+          guest_name: string | null
+          guests_allowed: number
+          id: string
+          invitation_slug: string
+          owner_user_id: string
+          phone: string
+          sent_at: string | null
+          token: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          guest_name?: string | null
+          guests_allowed?: number
+          id?: string
+          invitation_slug: string
+          owner_user_id: string
+          phone: string
+          sent_at?: string | null
+          token?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          guest_name?: string | null
+          guests_allowed?: number
+          id?: string
+          invitation_slug?: string
+          owner_user_id?: string
+          phone?: string
+          sent_at?: string | null
+          token?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       invitations: {
         Row: {
           bride_name: string | null
