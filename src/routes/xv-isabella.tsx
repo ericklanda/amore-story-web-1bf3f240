@@ -196,14 +196,15 @@ function IsabellaXV() {
       <Music entered={entered} />
       {!entered && <Splash onEnter={() => setEntered(true)} />}
       <Hero />
+      <FloralParallax />
       <Welcome />
       <Countdown />
       <Story />
       <ParentsAndCourt />
+      <Gallery />
       <EventDetails />
       <Timeline />
       <DressCode />
-      <Gallery />
       <Rsvp />
       <GiftRegistry />
       <SocialWall />
