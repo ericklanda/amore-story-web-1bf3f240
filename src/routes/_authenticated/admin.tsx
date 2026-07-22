@@ -544,3 +544,219 @@ function NewRequestsSection() {
     </div>
   );
 }
+
+type ChangeRequestRow = {
+  id: string;
+  invitation_slug: string;
+  message: string;
+  status: string;
+  admin_note: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+function OwnerChangeRequestSection({ slug }: { slug: string }) {
+  const qc = useQueryClient();
+  const submit = useServerFn(submitChangeRequest);
+  const fetchMine = useServerFn(listMyChangeRequests);
+  const [message, setMessage] = useState("");
+  const [busy, setBusy] = useState(false);
+
+  const q = useQuery({
+    queryKey: ["my-change-requests", slug],
+    queryFn: () => fetchMine({ data: { invitation_slug: slug } }),
+    enabled: !!slug,
+  });
+  const rows: ChangeRequestRow[] = (q.data?.rows ?? []) as ChangeRequestRow[];
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (message.trim().length < 3) {
+      toast.error("Escribe tu solicitud.");
+      return;
+    }
+    setBusy(true);
+    try {
+      await submit({ data: { invitation_slug: slug, message: message.trim() } });
+      toast.success("Solicitud enviada.");
+      setMessage("");
+      qc.invalidateQueries({ queryKey: ["my-change-requests", slug] });
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Error");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div className="mb-8 bg-white border border-[#E5DED3] rounded-sm p-5">
+      <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4AF37] mb-3">Solicitar un cambio</p>
+      <p className="text-xs text-[#8A7E72] mb-4">
+        ¿Quieres ajustar colores, textos o cualquier detalle? Escribe abajo y nuestro equipo lo verá en su panel.
+      </p>
+      <form onSubmit={onSubmit} className="space-y-3">
+        <textarea
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          rows={4}
+          maxLength={4000}
+          placeholder="Ej: Cambiar el color rosa por uno más oscuro; corregir el nombre de mi mamá..."
+          className="w-full border border-[#E5DED3] rounded-sm px-3 py-2 text-sm bg-white focus:border-[#D4AF37] outline-none"
+        />
+        <div className="flex justify-end">
+          <button
+            type="submit"
+            disabled={busy}
+            className="px-5 py-2 text-xs tracking-[0.25em] uppercase bg-[#D4AF37] text-white rounded-sm hover:opacity-90 disabled:opacity-50"
+          >
+            {busy ? "Enviando..." : "Enviar solicitud"}
+          </button>
+        </div>
+      </form>
+
+      {rows.length > 0 && (
+        <div className="mt-6 space-y-2">
+          <p className="text-[10px] tracking-[0.25em] uppercase text-[#8A7E72]">Tus solicitudes</p>
+          {rows.map((r) => (
+            <div key={r.id} className="border border-[#F0E9DE] rounded-sm p-3 text-sm">
+              <div className="flex items-center justify-between gap-3 mb-1">
+                <span className="text-[10px] tracking-[0.25em] uppercase text-[#8A7E72]">
+                  {STATUS_LABELS[r.status] ?? r.status}
+                </span>
+                <span className="text-[10px] text-[#8A7E72]">
+                  {new Date(r.created_at).toLocaleString("es-MX")}
+                </span>
+              </div>
+              <p className="text-[#2D2D2D] whitespace-pre-wrap">{r.message}</p>
+              {r.admin_note && (
+                <p className="mt-2 text-xs text-[#5a5249] bg-[#FBF8F3] border-l-2 border-[#D4AF37] pl-3 py-1">
+                  <span className="text-[10px] tracking-[0.25em] uppercase text-[#8A7E72] block mb-0.5">Respuesta</span>
+                  {r.admin_note}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ChangeRequestsAdminSection() {
+  const qc = useQueryClient();
+  const fetchAll = useServerFn(listAllChangeRequests);
+  const update = useServerFn(updateChangeRequest);
+  const [open, setOpen] = useState(true);
+  const [filter, setFilter] = useState<string>("pending");
+  const [notes, setNotes] = useState<Record<string, string>>({});
+
+  const q = useQuery({
+    queryKey: ["all-change-requests"],
+    queryFn: () => fetchAll(),
+  });
+
+  const rows: ChangeRequestRow[] = (q.data?.rows ?? []) as ChangeRequestRow[];
+  const filtered = filter === "all" ? rows : rows.filter((r) => r.status === filter);
+  const pendingCount = rows.filter((r) => r.status === "pending").length;
+
+  const save = async (id: string, patch: { status?: "pending" | "in_progress" | "done" | "archived"; admin_note?: string }) => {
+    try {
+      await update({ data: { id, ...patch } });
+      toast.success("Solicitud actualizada.");
+      qc.invalidateQueries({ queryKey: ["all-change-requests"] });
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Error");
+    }
+  };
+
+  return (
+    <div className="mb-8 bg-white border border-[#D4AF37]/40 rounded-sm">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="w-full flex items-center justify-between px-5 py-4 border-b border-[#F0E9DE]"
+      >
+        <div className="flex items-center gap-3">
+          <span className="text-[10px] tracking-[0.3em] uppercase text-[#D4AF37]">Ajustes solicitados</span>
+          {pendingCount > 0 && (
+            <span className="text-[10px] tracking-[0.2em] uppercase bg-[#D4AF37] text-white px-2 py-0.5 rounded-sm">
+              {pendingCount} pendientes
+            </span>
+          )}
+        </div>
+        <span className="text-xs text-[#8A7E72]">{open ? "Ocultar" : "Mostrar"}</span>
+      </button>
+
+      {open && (
+        <div className="p-5">
+          <div className="flex flex-wrap gap-2 mb-4">
+            {(["pending", "in_progress", "done", "archived", "all"] as const).map((s) => (
+              <button
+                key={s}
+                onClick={() => setFilter(s)}
+                className={`px-3 py-1.5 text-[10px] tracking-[0.2em] uppercase rounded-sm border ${
+                  filter === s
+                    ? "bg-[#2D2D2D] text-white border-[#2D2D2D]"
+                    : "bg-white text-[#8A7E72] border-[#E5DED3] hover:border-[#2D2D2D]"
+                }`}
+              >
+                {s === "all" ? "Todas" : STATUS_LABELS[s]}
+              </button>
+            ))}
+          </div>
+
+          {q.isLoading ? (
+            <p className="text-sm text-[#8A7E72] text-center py-6">Cargando...</p>
+          ) : filtered.length === 0 ? (
+            <p className="text-sm text-[#8A7E72] text-center py-6">Sin solicitudes en este estado.</p>
+          ) : (
+            <div className="space-y-3">
+              {filtered.map((r) => (
+                <div key={r.id} className="border border-[#E5DED3] rounded-sm p-4">
+                  <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
+                    <div>
+                      <p className="text-[10px] tracking-[0.25em] uppercase text-[#D4AF37]">
+                        {r.invitation_slug}
+                      </p>
+                      <p className="text-[11px] text-[#8A7E72] mt-0.5">
+                        {new Date(r.created_at).toLocaleString("es-MX")} · {STATUS_LABELS[r.status] ?? r.status}
+                      </p>
+                    </div>
+                    <select
+                      value={r.status}
+                      onChange={(e) => save(r.id, { status: e.target.value as "pending" | "in_progress" | "done" | "archived" })}
+                      className="border border-[#E5DED3] rounded-sm px-2 py-1.5 text-xs bg-white"
+                    >
+                      <option value="pending">Pendiente</option>
+                      <option value="in_progress">En proceso</option>
+                      <option value="done">Lista</option>
+                      <option value="archived">Archivada</option>
+                    </select>
+                  </div>
+                  <p className="text-sm text-[#2D2D2D] whitespace-pre-wrap mb-3">{r.message}</p>
+                  <div className="border-t border-[#F0E9DE] pt-3">
+                    <p className="text-[10px] tracking-[0.25em] uppercase text-[#8A7E72] mb-1">Nota interna / respuesta</p>
+                    <textarea
+                      value={notes[r.id] ?? r.admin_note ?? ""}
+                      onChange={(e) => setNotes((n) => ({ ...n, [r.id]: e.target.value }))}
+                      rows={2}
+                      className="w-full border border-[#E5DED3] rounded-sm px-3 py-2 text-sm bg-white focus:border-[#D4AF37] outline-none"
+                    />
+                    <div className="flex justify-end mt-2">
+                      <button
+                        onClick={() => save(r.id, { admin_note: notes[r.id] ?? r.admin_note ?? "" })}
+                        className="px-3 py-1.5 text-[10px] tracking-[0.25em] uppercase border border-[#2D2D2D] text-[#2D2D2D] rounded-sm hover:bg-[#2D2D2D] hover:text-white transition-colors"
+                      >
+                        Guardar nota
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
