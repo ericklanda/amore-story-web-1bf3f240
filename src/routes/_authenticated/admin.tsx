@@ -196,6 +196,8 @@ function AdminPage() {
           </div>
         )}
 
+        {isAdmin && <NewRequestsSection />}
+
 
 
         {invitations.length === 0 && !invQuery.isLoading ? (
