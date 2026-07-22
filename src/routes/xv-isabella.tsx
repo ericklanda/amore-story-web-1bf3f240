@@ -17,6 +17,8 @@ import g7270 from "@/assets/xv-isabella/isabella-7270.jpg.asset.json";
 import g7271 from "@/assets/xv-isabella/isabella-7271.jpg.asset.json";
 import parroquiaImg from "@/assets/xv-isabella/isabella-parroquia.png.asset.json";
 import ubuntuImg from "@/assets/xv-isabella/isabella-ubuntu.png.asset.json";
+import floralBg from "@/assets/xv-lucia/floral-bg.jpg.asset.json";
+import floralFrame from "@/assets/xv-lucia/lucia-flower-frame.png.asset.json";
 
 export const Route = createFileRoute("/xv-isabella")({
   head: () => ({
@@ -194,14 +196,15 @@ function IsabellaXV() {
       <Music entered={entered} />
       {!entered && <Splash onEnter={() => setEntered(true)} />}
       <Hero />
+      <FloralParallax />
       <Welcome />
       <Countdown />
       <Story />
       <ParentsAndCourt />
+      <Gallery />
       <EventDetails />
       <Timeline />
       <DressCode />
-      <Gallery />
       <Rsvp />
       <GiftRegistry />
       <SocialWall />
@@ -286,6 +289,53 @@ function Splash({ onEnter }: { onEnter: () => void }) {
           Ingresa <span>→</span>
         </button>
       </div>
+    </div>
+  );
+}
+
+/* ---------------- FLORAL PARALLAX OVERLAY ---------------- */
+function FloralParallax() {
+  const imgRef = useRef<HTMLImageElement | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const y = window.scrollY || 0;
+        const vh = window.innerHeight || 1;
+        setVisible(y > vh * 0.6);
+        if (imgRef.current) {
+          const offset = (y - vh) * 0.15;
+          imgRef.current.style.transform = `translate3d(0, ${offset}px, 0)`;
+        }
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-0 z-[5] overflow-hidden transition-opacity duration-700"
+      style={{ opacity: visible ? 0.65 : 0 }}
+    >
+      <img
+        ref={imgRef}
+        src={floralFrame.url}
+        alt=""
+        className="absolute left-1/2 top-1/2 w-[120vw] max-w-none -translate-x-1/2 -translate-y-1/2 select-none will-change-transform"
+        style={{ transform: "translate3d(0,0,0)" }}
+      />
     </div>
   );
 }
@@ -665,7 +715,7 @@ function Rsvp() {
   };
 
   return (
-    <section className="py-24 md:py-32 px-6" style={{ backgroundColor: C.bgAlt }}>
+    <section className="relative py-24 md:py-32 px-6" style={{ backgroundColor: C.bgAlt, backgroundImage: `linear-gradient(180deg, rgba(253,243,246,0.82), rgba(249,229,236,0.9)), url(${floralBg.url})`, backgroundSize: "cover", backgroundPosition: "center" }}>
       <div className="max-w-2xl mx-auto">
         <Reveal><SectionTitle kicker="Confirmación" title="¿Me acompañas?" /></Reveal>
         {submitted ? (
@@ -826,7 +876,7 @@ function ThankYou() {
   return (
     <section className="relative h-[100svh] min-h-[600px] w-full overflow-hidden">
       <img src={g7267.url} alt="Isabella" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-      <div className="absolute inset-0" style={{ backgroundColor: "rgba(74,42,54,0.55)" }} />
+      <div className="absolute inset-0" style={{ backgroundColor: "#00000080" }} />
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-white">
         <div className="text-xs tracking-[0.4em] uppercase mb-6 text-white/85">Gracias</div>
         <h2 className="font-serif italic text-5xl md:text-7xl max-w-3xl leading-tight">
