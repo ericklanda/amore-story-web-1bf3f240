@@ -608,7 +608,7 @@ function Gallery() {
 function Rsvp() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ name: "", attending: "yes", guests: "1", message: "" });
+  const [form, setForm] = useState({ name: "", attending: "yes", message: "" });
   const submit = useServerFn(submitRsvp);
 
   const onSubmit = async (e: React.FormEvent) => {
