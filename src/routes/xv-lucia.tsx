@@ -157,7 +157,7 @@ function WeddingInvitation() {
       data-theme="blush"
       className="min-h-screen text-foreground overflow-x-hidden relative"
       style={{
-        backgroundColor: "oklch(0.985 0.012 30)",
+        backgroundColor: "#EFEBCE",
         backgroundImage: `url(${floralBg.url})`,
         backgroundSize: "cover",
         backgroundPosition: "center top",
