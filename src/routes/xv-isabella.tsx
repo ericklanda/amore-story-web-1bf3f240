@@ -298,7 +298,7 @@ function Hero() {
         style={{ objectPosition: "center 25%" }}
         fetchPriority="high"
       />
-      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(253,243,246,0.15) 0%, rgba(184,93,122,0.45) 100%)" }} />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(253,243,246,0.05) 0%, rgba(249,231,239,0.05) 100%)" }} />
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-white">
         <Reveal delay={200}>
           <div className="text-xs md:text-sm tracking-[0.35em] uppercase mb-6 text-white/90">
