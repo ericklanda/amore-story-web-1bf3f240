@@ -702,6 +702,7 @@ function Rsvp() {
           invitation_slug: "xv-isabella",
           name: form.name.trim(),
           attending: form.attending as "yes" | "no",
+          guests: invite?.guests_allowed ?? 1,
           message: form.message || null,
         },
       });
