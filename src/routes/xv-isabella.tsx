@@ -14,6 +14,8 @@ import g7268 from "@/assets/xv-isabella/isabella-7268.jpg.asset.json";
 import g7269 from "@/assets/xv-isabella/isabella-7269.jpg.asset.json";
 import g7270 from "@/assets/xv-isabella/isabella-7270.jpg.asset.json";
 import g7271 from "@/assets/xv-isabella/isabella-7271.jpg.asset.json";
+import parroquiaImg from "@/assets/xv-isabella/isabella-parroquia.png.asset.json";
+import ubuntuImg from "@/assets/xv-isabella/isabella-ubuntu.png.asset.json";
 
 export const Route = createFileRoute("/xv-isabella")({
   head: () => ({
