@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { submitInvitationRequest } from "@/lib/invitation-requests.functions";
+import PaletteSelector from "./PaletteSelector";
 
 export type FieldDef = {
   name: string;
@@ -138,6 +139,14 @@ export default function PurchaseForm({ tier, tierLabel, tagline, fields, baseFie
             {fields.map((f) => (
               <FieldRow key={f.name} field={f} />
             ))}
+          </section>
+
+          <section className="space-y-3">
+            <h2 className="font-serif text-xl text-[#2D2D2D]">Paleta de colores</h2>
+            <p className="text-sm text-[#8A7E72]">
+              Elige una paleta lista o crea la tuya. Es solo una referencia — la afinamos contigo.
+            </p>
+            <PaletteSelector name="palette" />
           </section>
 
           <Button type="submit" disabled={loading} className="w-full bg-[#D4AF37] hover:bg-[#C4A77D] text-[#1a1a1a] tracking-[0.2em] uppercase text-xs py-6">
