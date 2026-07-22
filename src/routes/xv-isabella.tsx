@@ -87,6 +87,7 @@ const TIMELINE = [
 
 const DRESS_CODE_NOTES = [
   "Formal / Elegante",
+  "No niños",
   "No mezclilla (jeans)",
   "No tenis ni calzado deportivo",
   "No usar color rosa (reservado para la quinceañera)",
