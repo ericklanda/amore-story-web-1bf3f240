@@ -608,7 +608,7 @@ function Gallery() {
 function Rsvp() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ name: "", attending: "yes", guests: "1", message: "" });
+  const [form, setForm] = useState({ name: "", attending: "yes", message: "" });
   const submit = useServerFn(submitRsvp);
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -619,8 +619,7 @@ function Rsvp() {
     const text =
       `Hola! Confirmo asistencia a los XV de Isabella.\n` +
       `Nombre: ${form.name}\n` +
-      `Asistencia: ${form.attending === "yes" ? "Sí" : "No"}\n` +
-      `Personas: ${form.guests}` +
+      `Asistencia: ${form.attending === "yes" ? "Sí" : "No"}` +
       (form.message ? `\nMensaje: ${form.message}` : "");
     const wa = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
     const w = window.open(wa, "_blank", "noopener,noreferrer");
@@ -677,9 +676,6 @@ function Rsvp() {
                   </button>
                 ))}
               </div>
-            </Field>
-            <Field label="Número de personas">
-              <input type="number" min={1} max={6} value={form.guests} onChange={(e) => setForm({ ...form, guests: e.target.value })} className="w-full bg-transparent border-b outline-none py-2" style={{ borderColor: C.border }} />
             </Field>
             <Field label="Mensaje para Isabella (opcional)">
               <textarea rows={3} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full bg-transparent border outline-none p-3 rounded-sm resize-none" style={{ borderColor: C.border }} />
