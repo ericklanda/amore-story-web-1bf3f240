@@ -21,6 +21,7 @@ export type FieldDef = {
 type Props = {
   tier: "plata" | "oro" | "diamante";
   tierLabel: string;
+  title?: string;
   tagline: string;
   fields: FieldDef[];
   baseFields?: FieldDef[];
@@ -36,7 +37,7 @@ const BASE_FIELDS: FieldDef[] = [
 
 const BLCK_WHATSAPP = "526568355435";
 
-export default function PurchaseForm({ tier, tierLabel, tagline, fields, baseFields }: Props) {
+export default function PurchaseForm({ tier, tierLabel, title, tagline, fields, baseFields }: Props) {
   const submit = useServerFn(submitInvitationRequest);
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
@@ -128,7 +129,7 @@ export default function PurchaseForm({ tier, tierLabel, tagline, fields, baseFie
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-10">
           <p className="text-xs tracking-[0.3em] uppercase text-[#8A7E72] mb-3">BLCK Social</p>
-          <h1 className="font-serif text-4xl sm:text-5xl mb-3">Paquete {tierLabel}</h1>
+          <h1 className="font-serif text-4xl sm:text-5xl mb-3">{title ?? `Paquete ${tierLabel}`}</h1>
           <p className="text-[#5C5347]">{tagline}</p>
           <div className="mt-6 mx-auto w-16 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent" />
         </div>

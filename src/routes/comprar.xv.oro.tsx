@@ -32,7 +32,7 @@ const FIELDS: FieldDef[] = [
 export const Route = createFileRoute("/comprar/xv/oro")({
   head: () => ({
     meta: [
-      { title: "Comprar invitación XV · Paquete Oro · BLCK Social" },
+      { title: "Mis XV Años · BLCK Social" },
       { name: "description", content: "Solicita tu invitación digital de XV años paquete Oro." },
       { name: "robots", content: "noindex, nofollow" },
     ],
@@ -41,6 +41,7 @@ export const Route = createFileRoute("/comprar/xv/oro")({
     <PurchaseForm
       tier="oro"
       tierLabel="Oro · XV Años"
+      title="Mis XV Años"
       tagline="Invitación completa para tus XV: historia, galería, corte de honor, itinerario y panel de confirmaciones."
       fields={FIELDS}
       baseFields={BASE_FIELDS}
