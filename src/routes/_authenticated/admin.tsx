@@ -200,6 +200,7 @@ function AdminPage() {
         {isAdmin && <NewRequestsSection />}
         {isAdmin && <ChangeRequestsAdminSection />}
 
+        {slug && !isAdmin && <OwnerSendInvitationSection slug={slug} />}
         {slug && !isAdmin && <OwnerChangeRequestSection slug={slug} />}
 
 
