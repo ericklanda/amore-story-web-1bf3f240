@@ -715,7 +715,7 @@ function Rsvp() {
   };
 
   return (
-    <section className="py-24 md:py-32 px-6" style={{ backgroundColor: C.bgAlt }}>
+    <section className="relative py-24 md:py-32 px-6" style={{ backgroundColor: C.bgAlt, backgroundImage: `linear-gradient(180deg, rgba(253,243,246,0.82), rgba(249,229,236,0.9)), url(${floralBg.url})`, backgroundSize: "cover", backgroundPosition: "center" }}>
       <div className="max-w-2xl mx-auto">
         <Reveal><SectionTitle kicker="Confirmación" title="¿Me acompañas?" /></Reveal>
         {submitted ? (
