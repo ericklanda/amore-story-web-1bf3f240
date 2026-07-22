@@ -836,6 +836,7 @@ function SocialWall() {
 function Faq() {
   const items = useMemo(() => ([
     { q: "¿Puedo llevar acompañante?", a: "Por favor confirma en la sección de RSVP el número de personas para poder recibirlos con el mejor lugar." },
+    { q: "¿Puedo llevar niños?", a: "Agradecemos tu comprensión: este evento es solo para adultos. No se permiten niños." },
     { q: "¿Cuál es el código de vestimenta?", a: "Formal / elegante. Por favor evita mezclilla, tenis y el color rosa (reservado para la quinceañera)." },
     { q: "¿Hay estacionamiento?", a: "Sí, el recinto cuenta con estacionamiento para los invitados." },
     { q: "¿Hasta cuándo puedo confirmar?", a: "Te pedimos confirmar antes del 20 de agosto de 2026 directamente en esta invitación." },
