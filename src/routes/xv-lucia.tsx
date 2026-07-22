@@ -370,7 +370,7 @@ function FloralParallax() {
 /* ---------------- HERO ---------------- */
 function Hero() {
   const slides = [
-    { src: heroCouple, position: "center 18%" }, // p72 — face near top
+    { src: heroCouple, position: "center 30%" }, // cover — face + candles
     { src: couple2, position: "center 28%" },    // p86 — face upper third
     { src: couple3, position: "center" },         // p110
   ];
