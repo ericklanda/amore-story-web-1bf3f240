@@ -103,7 +103,7 @@ export const updateChangeRequest = createServerFn({ method: "POST" })
       .maybeSingle();
     if (!adminRow) throw new Error("Solo el administrador.");
 
-    const patch: Record<string, unknown> = {};
+    const patch: { status?: "pending" | "in_progress" | "done" | "archived"; admin_note?: string } = {};
     if (data.status) patch.status = data.status;
     if (data.admin_note !== undefined) patch.admin_note = data.admin_note;
     if (Object.keys(patch).length === 0) return { ok: true };
