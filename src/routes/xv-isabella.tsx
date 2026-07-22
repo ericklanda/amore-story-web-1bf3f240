@@ -676,6 +676,13 @@ function Rsvp() {
           </div>
         ) : (
           <form onSubmit={onSubmit} className="rounded-sm p-7 md:p-10 shadow-md space-y-5" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
+            {invite && (
+              <div className="text-center rounded-sm px-4 py-3 text-sm" style={{ backgroundColor: C.bgAlt, border: `1px solid ${C.border}`, color: C.textMuted }}>
+                {invite.guest_name ? <span className="font-medium" style={{ color: C.primary }}>{invite.guest_name}</span> : "Invitación personal"}
+                {" · "}
+                <span>{invite.guests_allowed} {invite.guests_allowed === 1 ? "lugar reservado" : "lugares reservados"}</span>
+              </div>
+            )}
             <Field label="Nombre completo">
               <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full bg-transparent border-b outline-none py-2" style={{ borderColor: C.border }} />
             </Field>
