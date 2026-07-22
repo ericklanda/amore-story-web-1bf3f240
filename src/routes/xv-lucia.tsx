@@ -846,6 +846,13 @@ function Rsvp() {
         ) : (
           <Reveal>
             <form onSubmit={onSubmit} className="bg-card border border-border rounded-sm p-7 md:p-10 shadow-soft space-y-5">
+              {invite && (
+                <div className="text-center rounded-sm px-4 py-3 text-sm bg-muted/40 border border-border text-muted-foreground">
+                  {invite.guest_name ? <span className="font-medium text-primary">{invite.guest_name}</span> : "Invitación personal"}
+                  {" · "}
+                  <span>{invite.guests_allowed} {invite.guests_allowed === 1 ? "lugar reservado" : "lugares reservados"}</span>
+                </div>
+              )}
               <Field label="Nombre completo">
                 <input
                   required
