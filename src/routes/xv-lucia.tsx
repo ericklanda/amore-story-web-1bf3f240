@@ -26,7 +26,7 @@ export const Route = createFileRoute("/xv-lucia")({
       { name: "description", content: "Invitación digital de los XV años de Lucía. Acompáñame a celebrar este momento tan especial." },
       { property: "og:title", content: "Lucía · Mis XV Años" },
       { property: "og:description", content: "Acompáñame a celebrar mis XV años." },
-      { property: "og:image", content: karinaCover.url },
+      { property: "og:image", content: p72.url },
       { property: "og:url", content: "https://blcksocial.com/xv-lucia" },
     ],
     links: [{ rel: "canonical", href: "https://blcksocial.com/xv-lucia" }],
