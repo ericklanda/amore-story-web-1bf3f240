@@ -14,6 +14,8 @@ import g7268 from "@/assets/xv-isabella/isabella-7268.jpg.asset.json";
 import g7269 from "@/assets/xv-isabella/isabella-7269.jpg.asset.json";
 import g7270 from "@/assets/xv-isabella/isabella-7270.jpg.asset.json";
 import g7271 from "@/assets/xv-isabella/isabella-7271.jpg.asset.json";
+import parroquiaImg from "@/assets/xv-isabella/isabella-parroquia.png.asset.json";
+import ubuntuImg from "@/assets/xv-isabella/isabella-ubuntu.png.asset.json";
 
 export const Route = createFileRoute("/xv-isabella")({
   head: () => ({
@@ -447,8 +449,8 @@ function ParentsAndCourt() {
 /* ---------------- EVENT DETAILS ---------------- */
 function EventDetails() {
   const cards = [
-    { label: "Ceremonia religiosa", ...CEREMONY, icon: "⛪" },
-    { label: "Recepción", ...VENUE, icon: "🥂" },
+    { label: "Ceremonia religiosa", ...CEREMONY, icon: "⛪", image: parroquiaImg.url },
+    { label: "Recepción", ...VENUE, icon: "🥂", image: ubuntuImg.url },
   ];
   const cal = () => {
     const start = "20260904T230000Z"; // 5pm CST → 23:00 UTC
@@ -462,7 +464,9 @@ function EventDetails() {
         <div className="grid md:grid-cols-2 gap-6 md:gap-8">
           {cards.map((ev, i) => (
             <Reveal key={ev.label} delay={i * 120}>
-              <article className="rounded-sm p-8 md:p-10 text-center shadow-md h-full flex flex-col" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
+              <article className="rounded-sm overflow-hidden shadow-md h-full flex flex-col" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
+                <img src={ev.image} alt={ev.name} className="w-full aspect-[4/3] object-cover" loading="lazy" />
+                <div className="p-8 md:p-10 text-center flex-1 flex flex-col">
                 <div className="text-4xl mb-3">{ev.icon}</div>
                 <div className="text-xs tracking-[0.3em] uppercase mb-3" style={{ color: C.gold }}>{ev.label}</div>
                 <div className="font-serif italic text-3xl mb-3" style={{ color: C.primary }}>{ev.time}</div>
@@ -477,6 +481,7 @@ function EventDetails() {
                 >
                   Ver ubicación →
                 </a>
+                </div>
               </article>
             </Reveal>
           ))}
