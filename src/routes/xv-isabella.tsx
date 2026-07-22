@@ -876,7 +876,7 @@ function ThankYou() {
   return (
     <section className="relative h-[100svh] min-h-[600px] w-full overflow-hidden">
       <img src={g7267.url} alt="Isabella" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-      <div className="absolute inset-0" style={{ backgroundColor: "rgba(74,42,54,0.55)" }} />
+      <div className="absolute inset-0" style={{ backgroundColor: "#00000080" }} />
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-white">
         <div className="text-xs tracking-[0.4em] uppercase mb-6 text-white/85">Gracias</div>
         <h2 className="font-serif italic text-5xl md:text-7xl max-w-3xl leading-tight">
