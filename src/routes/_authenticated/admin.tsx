@@ -387,3 +387,155 @@ function Stat({ label, value, accent }: { label: string; value: number; accent?:
     </div>
   );
 }
+
+type RequestRow = {
+  id: string;
+  package_tier: string;
+  contact_name: string;
+  contact_email: string;
+  contact_phone: string | null;
+  couple_names: string | null;
+  event_date: string | null;
+  payload: Record<string, unknown> | null;
+  status: string;
+  created_at: string;
+};
+
+const STATUS_LABELS: Record<string, string> = {
+  pending: "Pendiente",
+  in_progress: "En proceso",
+  done: "Lista",
+  archived: "Archivada",
+};
+
+function NewRequestsSection() {
+  const qc = useQueryClient();
+  const fetchRequests = useServerFn(listInvitationRequests);
+  const updateStatus = useServerFn(updateInvitationRequestStatus);
+  const [open, setOpen] = useState(true);
+  const [expanded, setExpanded] = useState<string | null>(null);
+  const [filter, setFilter] = useState<string>("pending");
+
+  const q = useQuery({
+    queryKey: ["invitation-requests"],
+    queryFn: () => fetchRequests(),
+  });
+
+  const rows: RequestRow[] = (q.data?.rows ?? []) as RequestRow[];
+  const filtered = filter === "all" ? rows : rows.filter((r) => r.status === filter);
+  const pendingCount = rows.filter((r) => r.status === "pending").length;
+
+  const setStatus = async (id: string, status: "pending" | "in_progress" | "done" | "archived") => {
+    try {
+      await updateStatus({ data: { id, status } });
+      toast.success("Solicitud actualizada.");
+      qc.invalidateQueries({ queryKey: ["invitation-requests"] });
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Error");
+    }
+  };
+
+  return (
+    <div className="mb-8 bg-white border border-[#D4AF37]/40 rounded-sm">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="w-full flex items-center justify-between px-5 py-4 border-b border-[#F0E9DE]"
+      >
+        <div className="flex items-center gap-3">
+          <span className="text-[10px] tracking-[0.3em] uppercase text-[#D4AF37]">Solicitudes nuevas</span>
+          {pendingCount > 0 && (
+            <span className="text-[10px] tracking-[0.2em] uppercase bg-[#D4AF37] text-white px-2 py-0.5 rounded-sm">
+              {pendingCount} pendientes
+            </span>
+          )}
+        </div>
+        <span className="text-xs text-[#8A7E72]">{open ? "Ocultar" : "Mostrar"}</span>
+      </button>
+
+      {open && (
+        <div className="p-5">
+          <div className="flex flex-wrap gap-2 mb-4">
+            {(["pending", "in_progress", "done", "archived", "all"] as const).map((s) => (
+              <button
+                key={s}
+                onClick={() => setFilter(s)}
+                className={`px-3 py-1.5 text-[10px] tracking-[0.2em] uppercase rounded-sm border ${
+                  filter === s
+                    ? "bg-[#2D2D2D] text-white border-[#2D2D2D]"
+                    : "bg-white text-[#8A7E72] border-[#E5DED3] hover:border-[#2D2D2D]"
+                }`}
+              >
+                {s === "all" ? "Todas" : STATUS_LABELS[s]}
+              </button>
+            ))}
+          </div>
+
+          {q.isLoading ? (
+            <p className="text-sm text-[#8A7E72] text-center py-6">Cargando...</p>
+          ) : filtered.length === 0 ? (
+            <p className="text-sm text-[#8A7E72] text-center py-6">Sin solicitudes en este estado.</p>
+          ) : (
+            <div className="space-y-3">
+              {filtered.map((r) => {
+                const isOpen = expanded === r.id;
+                return (
+                  <div key={r.id} className="border border-[#E5DED3] rounded-sm">
+                    <div className="flex flex-wrap items-start justify-between gap-3 p-4">
+                      <div>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="text-[10px] tracking-[0.25em] uppercase text-[#D4AF37]">
+                            {r.package_tier}
+                          </span>
+                          <span className="text-[10px] tracking-[0.2em] uppercase text-[#8A7E72]">
+                            · {STATUS_LABELS[r.status] ?? r.status}
+                          </span>
+                        </div>
+                        <p className="font-serif text-lg text-[#2D2D2D] mt-1">
+                          {r.couple_names || r.contact_name}
+                        </p>
+                        <p className="text-xs text-[#8A7E72] mt-0.5">
+                          {r.contact_name} · {r.contact_email}
+                          {r.contact_phone ? ` · ${r.contact_phone}` : ""}
+                        </p>
+                        <p className="text-[11px] text-[#8A7E72] mt-1">
+                          Recibida: {new Date(r.created_at).toLocaleString("es-MX")}
+                          {r.event_date ? ` · Evento: ${r.event_date}` : ""}
+                        </p>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        <button
+                          onClick={() => setExpanded(isOpen ? null : r.id)}
+                          className="px-3 py-1.5 text-[10px] tracking-[0.2em] uppercase border border-[#E5DED3] rounded-sm hover:bg-[#F7F3EE]"
+                        >
+                          {isOpen ? "Ocultar" : "Ver detalles"}
+                        </button>
+                        <select
+                          value={r.status}
+                          onChange={(e) => setStatus(r.id, e.target.value as "pending" | "in_progress" | "done" | "archived")}
+                          className="border border-[#E5DED3] rounded-sm px-2 py-1.5 text-xs bg-white"
+                        >
+                          <option value="pending">Pendiente</option>
+                          <option value="in_progress">En proceso</option>
+                          <option value="done">Lista</option>
+                          <option value="archived">Archivada</option>
+                        </select>
+                      </div>
+                    </div>
+                    {isOpen && r.payload && (
+                      <div className="border-t border-[#F0E9DE] bg-[#FBF8F3] p-4">
+                        <pre className="text-[11px] text-[#2D2D2D] whitespace-pre-wrap break-words font-mono">
+                          {JSON.stringify(r.payload, null, 2)}
+                        </pre>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
