@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { submitRsvp } from "@/lib/rsvp.functions";
+import { lookupInvitationSendByToken } from "@/lib/invitation-sends.functions";
 import { toast } from "sonner";
 import p72 from "@/assets/xv-lucia/lucia-72.jpg.asset.json";
 import p110 from "@/assets/xv-lucia/lucia-110.jpg.asset.json";
