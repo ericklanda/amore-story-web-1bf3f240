@@ -619,8 +619,7 @@ function Rsvp() {
     const text =
       `Hola! Confirmo asistencia a los XV de Isabella.\n` +
       `Nombre: ${form.name}\n` +
-      `Asistencia: ${form.attending === "yes" ? "Sí" : "No"}\n` +
-      `Personas: ${form.guests}` +
+      `Asistencia: ${form.attending === "yes" ? "Sí" : "No"}` +
       (form.message ? `\nMensaje: ${form.message}` : "");
     const wa = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
     const w = window.open(wa, "_blank", "noopener,noreferrer");
