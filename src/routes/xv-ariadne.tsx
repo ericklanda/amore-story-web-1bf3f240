@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 import { useServerFn } from "@tanstack/react-start";
 import { submitRsvp } from "@/lib/rsvp.functions";
 import { lookupInvitationSendByToken } from "@/lib/invitation-sends.functions";
@@ -410,12 +411,27 @@ function Story() {
 }
 
 
-/* ---------------- GALLERY ---------------- */
+/* ---------------- GALLERY (carrusel) ---------------- */
 function Gallery() {
   const [lightbox, setLightbox] = useState<number | null>(null);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center", skipSnaps: false });
+  const [selected, setSelected] = useState(0);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    const onSelect = () => setSelected(emblaApi.selectedScrollSnap());
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
+    };
+  }, [emblaApi]);
+
   return (
     <section
-      className="py-24 md:py-32 px-6"
+      className="py-24 md:py-32 px-6 overflow-hidden"
       style={{
         backgroundImage: `linear-gradient(180deg, rgba(247,243,236,0.84), rgba(247,243,236,0.88)), url(${cowhide.url})`,
         backgroundSize: "cover",
@@ -425,21 +441,68 @@ function Gallery() {
     >
       <div className="max-w-6xl mx-auto">
         <Reveal><SectionTitle kicker="Galería" title="Mis recuerdos" /></Reveal>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-          {GALLERY.map((g, i) => (
-            <Reveal key={i} delay={(i % 3) * 100}>
-              <button
-                onClick={() => setLightbox(i)}
-                className={`group block w-full overflow-hidden rounded-sm shadow-sm ${i === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
-              >
-                <img
-                  src={g.src}
-                  alt={g.caption}
-                  className="w-full h-full aspect-square object-cover group-hover:scale-105 transition-transform duration-[1200ms]"
-                  loading="lazy"
-                />
-              </button>
-            </Reveal>
+
+        <Reveal delay={100}>
+          <div className="relative">
+            <div className="overflow-hidden" ref={emblaRef}>
+              <div className="flex touch-pan-y -ml-4 md:-ml-6 py-2">
+                {GALLERY.map((g, i) => (
+                  <div key={i} className="pl-4 md:pl-6 shrink-0 grow-0 basis-[78%] sm:basis-[55%] md:basis-[42%] lg:basis-[34%]">
+                    <button
+                      onClick={() => setLightbox(i)}
+                      className="group block w-full overflow-hidden rounded-sm shadow-xl transition-all duration-500"
+                      style={{
+                        transform: selected === i ? "scale(1)" : "scale(0.9)",
+                        opacity: selected === i ? 1 : 0.6,
+                      }}
+                    >
+                      <img
+                        src={g.src}
+                        alt={g.caption}
+                        className="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-[1200ms]"
+                        loading="lazy"
+                      />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <button
+              aria-label="Anterior"
+              onClick={() => emblaApi?.scrollPrev()}
+              className="absolute left-1 md:-left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full shadow-lg backdrop-blur flex items-center justify-center text-2xl transition-colors"
+              style={{ backgroundColor: C.card, color: C.primary, border: `1px solid ${C.border}` }}
+            >
+              ‹
+            </button>
+            <button
+              aria-label="Siguiente"
+              onClick={() => emblaApi?.scrollNext()}
+              className="absolute right-1 md:-right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full shadow-lg backdrop-blur flex items-center justify-center text-2xl transition-colors"
+              style={{ backgroundColor: C.card, color: C.primary, border: `1px solid ${C.border}` }}
+            >
+              ›
+            </button>
+          </div>
+        </Reveal>
+
+        <p className="text-center mt-6 text-xs tracking-[0.3em] uppercase" style={{ color: C.textMuted }}>
+          {GALLERY[selected]?.caption}
+        </p>
+
+        <div className="flex justify-center gap-2 mt-5">
+          {GALLERY.map((_, i) => (
+            <button
+              key={i}
+              aria-label={`Ir a la foto ${i + 1}`}
+              onClick={() => emblaApi?.scrollTo(i)}
+              className="h-1.5 rounded-full transition-all duration-300"
+              style={{
+                width: selected === i ? "1.75rem" : "0.375rem",
+                backgroundColor: selected === i ? C.gold : C.border,
+              }}
+            />
           ))}
         </div>
       </div>
