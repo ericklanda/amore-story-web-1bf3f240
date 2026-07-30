@@ -184,6 +184,8 @@ function AriadneXV() {
   return (
     <div className="min-h-screen overflow-x-hidden relative" style={{ backgroundColor: C.bg, color: C.text }}>
       {!entered && <Splash onEnter={() => setEntered(true)} />}
+      <MusicPlayer entered={entered} />
+
       <Hero />
       <Welcome />
       <Countdown />
