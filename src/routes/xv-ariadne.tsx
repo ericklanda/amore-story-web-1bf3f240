@@ -5,6 +5,16 @@ import { submitRsvp } from "@/lib/rsvp.functions";
 import { lookupInvitationSendByToken } from "@/lib/invitation-sends.functions";
 import { toast } from "sonner";
 import cowhide from "@/assets/xv-ariadne/cowhide.jpg.asset.json";
+import a73 from "@/assets/xv-ariadne/a73.jpg.asset.json";
+import a147 from "@/assets/xv-ariadne/a147.jpg.asset.json";
+import a162 from "@/assets/xv-ariadne/a162.jpg.asset.json";
+import a205 from "@/assets/xv-ariadne/a205.jpg.asset.json";
+import a309 from "@/assets/xv-ariadne/a309.jpg.asset.json";
+import a321 from "@/assets/xv-ariadne/a321.jpg.asset.json";
+import a367 from "@/assets/xv-ariadne/a367.jpg.asset.json";
+import a416 from "@/assets/xv-ariadne/a416.jpg.asset.json";
+import a439 from "@/assets/xv-ariadne/a439.jpg.asset.json";
+import a450 from "@/assets/xv-ariadne/a450.jpg.asset.json";
 
 export const Route = createFileRoute("/xv-ariadne")({
   head: () => ({
@@ -13,12 +23,28 @@ export const Route = createFileRoute("/xv-ariadne")({
       { name: "description", content: "Invitación digital a los XV años de Ariadne Estrella. 29 de agosto de 2026, Hacienda los Monroy." },
       { property: "og:title", content: "Ariadne Estrella · Mis XV Años" },
       { property: "og:description", content: "Acompáñame a celebrar mis XV años el 29 de agosto de 2026." },
+      { property: "og:image", content: a73.url },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: a73.url },
     ],
   }),
   component: AriadneXV,
 });
+
+const GALLERY = [
+  { src: a73.url, caption: "Mi compañero" },
+  { src: a162.url, caption: "Sombrero" },
+  { src: a147.url, caption: "Camino al establo" },
+  { src: a205.url, caption: "Atardecer" },
+  { src: a309.url, caption: "Rojo bandana" },
+  { src: a321.url, caption: "Descanso" },
+  { src: a367.url, caption: "Botas" },
+  { src: a416.url, caption: "Tarde en el rancho" },
+  { src: a439.url, caption: "Lienzo charro" },
+  { src: a450.url, caption: "Bajo el arco" },
+];
+
 
 /* -------- Datos del evento -------- */
 const EVENT_DATE = new Date("2026-08-29T20:00:00-06:00");
