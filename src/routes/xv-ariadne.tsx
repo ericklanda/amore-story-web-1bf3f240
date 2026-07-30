@@ -356,7 +356,15 @@ function Countdown() {
     { label: "Seg", v: seconds },
   ];
   return (
-    <section className="py-16 md:py-24 px-6" style={{ backgroundColor: C.bg }}>
+    <section
+      className="py-16 md:py-24 px-6"
+      style={{
+        backgroundImage: `linear-gradient(180deg, rgba(247,243,236,0.86), rgba(247,243,236,0.90)), url(${cowhide.url})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
+      }}
+    >
       <div className="max-w-3xl mx-auto text-center">
         <SectionTitle kicker="Cuenta regresiva" title="Falta poco" />
         <div className="grid grid-cols-4 gap-3 md:gap-6">
@@ -406,7 +414,15 @@ function Story() {
 function Gallery() {
   const [lightbox, setLightbox] = useState<number | null>(null);
   return (
-    <section className="py-24 md:py-32 px-6" style={{ backgroundColor: C.bgAlt }}>
+    <section
+      className="py-24 md:py-32 px-6"
+      style={{
+        backgroundImage: `linear-gradient(180deg, rgba(247,243,236,0.84), rgba(247,243,236,0.88)), url(${cowhide.url})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
+      }}
+    >
       <div className="max-w-6xl mx-auto">
         <Reveal><SectionTitle kicker="Galería" title="Mis recuerdos" /></Reveal>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
@@ -558,7 +574,7 @@ function DressCode() {
     <section
       className="relative py-24 md:py-32 px-6"
       style={{
-        backgroundImage: `linear-gradient(180deg, rgba(74,64,60,0.72), rgba(169,122,130,0.72)), url(${cowhide.url})`,
+        backgroundImage: `linear-gradient(180deg, rgba(74,64,60,0.50), rgba(169,122,130,0.50)), url(${cowhide.url})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "fixed",
