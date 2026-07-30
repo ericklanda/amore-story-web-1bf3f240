@@ -5,6 +5,16 @@ import { submitRsvp } from "@/lib/rsvp.functions";
 import { lookupInvitationSendByToken } from "@/lib/invitation-sends.functions";
 import { toast } from "sonner";
 import cowhide from "@/assets/xv-ariadne/cowhide.jpg.asset.json";
+import a73 from "@/assets/xv-ariadne/a73.jpg.asset.json";
+import a147 from "@/assets/xv-ariadne/a147.jpg.asset.json";
+import a162 from "@/assets/xv-ariadne/a162.jpg.asset.json";
+import a205 from "@/assets/xv-ariadne/a205.jpg.asset.json";
+import a309 from "@/assets/xv-ariadne/a309.jpg.asset.json";
+import a321 from "@/assets/xv-ariadne/a321.jpg.asset.json";
+import a367 from "@/assets/xv-ariadne/a367.jpg.asset.json";
+import a416 from "@/assets/xv-ariadne/a416.jpg.asset.json";
+import a439 from "@/assets/xv-ariadne/a439.jpg.asset.json";
+import a450 from "@/assets/xv-ariadne/a450.jpg.asset.json";
 
 export const Route = createFileRoute("/xv-ariadne")({
   head: () => ({
@@ -13,12 +23,28 @@ export const Route = createFileRoute("/xv-ariadne")({
       { name: "description", content: "Invitación digital a los XV años de Ariadne Estrella. 29 de agosto de 2026, Hacienda los Monroy." },
       { property: "og:title", content: "Ariadne Estrella · Mis XV Años" },
       { property: "og:description", content: "Acompáñame a celebrar mis XV años el 29 de agosto de 2026." },
+      { property: "og:image", content: a73.url },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: a73.url },
     ],
   }),
   component: AriadneXV,
 });
+
+const GALLERY = [
+  { src: a73.url, caption: "Mi compañero" },
+  { src: a162.url, caption: "Sombrero" },
+  { src: a147.url, caption: "Camino al establo" },
+  { src: a205.url, caption: "Atardecer" },
+  { src: a309.url, caption: "Rojo bandana" },
+  { src: a321.url, caption: "Descanso" },
+  { src: a367.url, caption: "Botas" },
+  { src: a416.url, caption: "Tarde en el rancho" },
+  { src: a439.url, caption: "Lienzo charro" },
+  { src: a450.url, caption: "Bajo el arco" },
+];
+
 
 /* -------- Datos del evento -------- */
 const EVENT_DATE = new Date("2026-08-29T20:00:00-06:00");
@@ -163,7 +189,9 @@ function AriadneXV() {
       <Countdown />
       <Story />
       <Parents />
+      <Gallery />
       <EventDetails />
+
       <Timeline />
       <DressCode />
       <Rsvp />
@@ -182,7 +210,7 @@ function Splash({ onEnter }: { onEnter: () => void }) {
     <div
       className={`fixed inset-0 z-[60] flex items-center justify-center text-center px-6 transition-opacity duration-700 ${fading ? "opacity-0 pointer-events-none" : "opacity-100"}`}
       style={{
-        backgroundImage: `linear-gradient(180deg, rgba(242,239,232,0.92), rgba(224,212,165,0.88)), url(${cowhide.url})`,
+        backgroundImage: `linear-gradient(180deg, rgba(242,239,232,0.72), rgba(224,212,165,0.72)), url(${a162.url})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -213,7 +241,7 @@ function Hero() {
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: `linear-gradient(180deg, rgba(74,64,60,0.45), rgba(169,122,130,0.55)), url(${cowhide.url})`,
+          backgroundImage: `linear-gradient(180deg, rgba(74,64,60,0.35), rgba(169,122,130,0.5)), url(${a147.url})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -305,6 +333,11 @@ function Story() {
     <section id="historia" className="py-24 md:py-32 px-6" style={{ backgroundColor: C.bgAlt }}>
       <div className="max-w-3xl mx-auto">
         <Reveal><SectionTitle kicker="Mi historia" title="Sobre mí" /></Reveal>
+        <Reveal delay={100}>
+          <div className="mb-12 overflow-hidden rounded-sm shadow-lg">
+            <img src={a367.url} alt="Ariadne Estrella" className="w-full aspect-[16/10] object-cover" style={{ objectPosition: "center 35%" }} loading="lazy" />
+          </div>
+        </Reveal>
         <div className="space-y-6">
           {STORY_PARAGRAPHS.map((p, i) => (
             <Reveal key={i} delay={i * 100}>
@@ -319,8 +352,51 @@ function Story() {
   );
 }
 
+
+/* ---------------- GALLERY ---------------- */
+function Gallery() {
+  const [lightbox, setLightbox] = useState<number | null>(null);
+  return (
+    <section className="py-24 md:py-32 px-6" style={{ backgroundColor: C.bgAlt }}>
+      <div className="max-w-6xl mx-auto">
+        <Reveal><SectionTitle kicker="Galería" title="Mis recuerdos" /></Reveal>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+          {GALLERY.map((g, i) => (
+            <Reveal key={i} delay={(i % 3) * 100}>
+              <button
+                onClick={() => setLightbox(i)}
+                className={`group block w-full overflow-hidden rounded-sm shadow-sm ${i === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
+              >
+                <img
+                  src={g.src}
+                  alt={g.caption}
+                  className="w-full h-full aspect-square object-cover group-hover:scale-105 transition-transform duration-[1200ms]"
+                  loading="lazy"
+                />
+              </button>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+
+      {lightbox !== null && (
+        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-6" onClick={() => setLightbox(null)}>
+          <button className="absolute top-5 right-5 w-12 h-12 rounded-full bg-white/10 text-white text-2xl" onClick={() => setLightbox(null)}>×</button>
+          <button className="absolute left-3 md:left-8 w-12 h-12 rounded-full bg-white/10 text-white text-2xl" onClick={(e) => { e.stopPropagation(); setLightbox((lightbox - 1 + GALLERY.length) % GALLERY.length); }}>‹</button>
+          <img src={GALLERY[lightbox].src} alt={GALLERY[lightbox].caption} className="max-w-full max-h-[85vh] object-contain" />
+          <button className="absolute right-3 md:right-8 w-12 h-12 rounded-full bg-white/10 text-white text-2xl" onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % GALLERY.length); }}>›</button>
+          <div className="absolute bottom-6 left-0 right-0 text-center text-white/80 text-sm tracking-widest uppercase">
+            {GALLERY[lightbox].caption}
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
 /* ---------------- PARENTS ---------------- */
 function Parents() {
+
   return (
     <section className="py-24 md:py-32 px-6" style={{ backgroundColor: C.bg }}>
       <div className="max-w-4xl mx-auto">
@@ -691,7 +767,7 @@ function ThankYou() {
     <section
       className="relative h-[100svh] min-h-[600px] w-full overflow-hidden"
       style={{
-        backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${cowhide.url})`,
+        backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${a450.url})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
