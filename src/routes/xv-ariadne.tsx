@@ -189,7 +189,9 @@ function AriadneXV() {
       <Countdown />
       <Story />
       <Parents />
+      <Gallery />
       <EventDetails />
+
       <Timeline />
       <DressCode />
       <Rsvp />
@@ -208,7 +210,7 @@ function Splash({ onEnter }: { onEnter: () => void }) {
     <div
       className={`fixed inset-0 z-[60] flex items-center justify-center text-center px-6 transition-opacity duration-700 ${fading ? "opacity-0 pointer-events-none" : "opacity-100"}`}
       style={{
-        backgroundImage: `linear-gradient(180deg, rgba(242,239,232,0.92), rgba(224,212,165,0.88)), url(${cowhide.url})`,
+        backgroundImage: `linear-gradient(180deg, rgba(242,239,232,0.72), rgba(224,212,165,0.72)), url(${a162.url})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -239,7 +241,7 @@ function Hero() {
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: `linear-gradient(180deg, rgba(74,64,60,0.45), rgba(169,122,130,0.55)), url(${cowhide.url})`,
+          backgroundImage: `linear-gradient(180deg, rgba(74,64,60,0.35), rgba(169,122,130,0.5)), url(${a147.url})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -717,7 +719,7 @@ function ThankYou() {
     <section
       className="relative h-[100svh] min-h-[600px] w-full overflow-hidden"
       style={{
-        backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${cowhide.url})`,
+        backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${a450.url})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
