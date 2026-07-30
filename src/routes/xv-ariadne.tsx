@@ -184,6 +184,8 @@ function AriadneXV() {
   return (
     <div className="min-h-screen overflow-x-hidden relative" style={{ backgroundColor: C.bg, color: C.text }}>
       {!entered && <Splash onEnter={() => setEntered(true)} />}
+      <MusicPlayer entered={entered} />
+
       <Hero />
       <Welcome />
       <Countdown />
@@ -203,8 +205,55 @@ function AriadneXV() {
   );
 }
 
+/* ---------------- MÚSICA ---------------- */
+const YOUTUBE_SONG_ID = "1k8craCGpgs";
+
+function MusicPlayer({ entered }: { entered: boolean }) {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [playing, setPlaying] = useState(false);
+
+  const sendCommand = (func: string) => {
+    iframeRef.current?.contentWindow?.postMessage(
+      JSON.stringify({ event: "command", func, args: [] }),
+      "*"
+    );
+  };
+
+  useEffect(() => {
+    if (entered) {
+      sendCommand("playVideo");
+      setPlaying(true);
+    }
+  }, [entered]);
+
+  return (
+    <>
+      <iframe
+        ref={iframeRef}
+        title="Música de fondo"
+        src={`https://www.youtube.com/embed/${YOUTUBE_SONG_ID}?enablejsapi=1&autoplay=1&loop=1&playlist=${YOUTUBE_SONG_ID}&controls=0&modestbranding=1`}
+        allow="autoplay"
+        style={{ position: "fixed", width: 1, height: 1, opacity: 0, pointerEvents: "none", border: 0 }}
+      />
+      <button
+        onClick={() => { sendCommand(playing ? "pauseVideo" : "playVideo"); setPlaying(!playing); }}
+        aria-label="Reproducir música"
+        className="fixed bottom-5 right-5 z-40 w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
+        style={{ backgroundColor: C.primary, color: "#fff" }}
+      >
+        {playing ? (
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" /><rect x="14" y="5" width="4" height="14" /></svg>
+        ) : (
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+        )}
+      </button>
+    </>
+  );
+}
+
 /* ---------------- SPLASH ---------------- */
 function Splash({ onEnter }: { onEnter: () => void }) {
+
   const [fading, setFading] = useState(false);
   return (
     <div
