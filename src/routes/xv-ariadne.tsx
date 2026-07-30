@@ -352,8 +352,51 @@ function Story() {
   );
 }
 
+
+/* ---------------- GALLERY ---------------- */
+function Gallery() {
+  const [lightbox, setLightbox] = useState<number | null>(null);
+  return (
+    <section className="py-24 md:py-32 px-6" style={{ backgroundColor: C.bgAlt }}>
+      <div className="max-w-6xl mx-auto">
+        <Reveal><SectionTitle kicker="Galería" title="Mis recuerdos" /></Reveal>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+          {GALLERY.map((g, i) => (
+            <Reveal key={i} delay={(i % 3) * 100}>
+              <button
+                onClick={() => setLightbox(i)}
+                className={`group block w-full overflow-hidden rounded-sm shadow-sm ${i === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
+              >
+                <img
+                  src={g.src}
+                  alt={g.caption}
+                  className="w-full h-full aspect-square object-cover group-hover:scale-105 transition-transform duration-[1200ms]"
+                  loading="lazy"
+                />
+              </button>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+
+      {lightbox !== null && (
+        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-6" onClick={() => setLightbox(null)}>
+          <button className="absolute top-5 right-5 w-12 h-12 rounded-full bg-white/10 text-white text-2xl" onClick={() => setLightbox(null)}>×</button>
+          <button className="absolute left-3 md:left-8 w-12 h-12 rounded-full bg-white/10 text-white text-2xl" onClick={(e) => { e.stopPropagation(); setLightbox((lightbox - 1 + GALLERY.length) % GALLERY.length); }}>‹</button>
+          <img src={GALLERY[lightbox].src} alt={GALLERY[lightbox].caption} className="max-w-full max-h-[85vh] object-contain" />
+          <button className="absolute right-3 md:right-8 w-12 h-12 rounded-full bg-white/10 text-white text-2xl" onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % GALLERY.length); }}>›</button>
+          <div className="absolute bottom-6 left-0 right-0 text-center text-white/80 text-sm tracking-widest uppercase">
+            {GALLERY[lightbox].caption}
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
 /* ---------------- PARENTS ---------------- */
 function Parents() {
+
   return (
     <section className="py-24 md:py-32 px-6" style={{ backgroundColor: C.bg }}>
       <div className="max-w-4xl mx-auto">
