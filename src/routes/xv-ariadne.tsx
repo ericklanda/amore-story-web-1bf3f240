@@ -333,6 +333,11 @@ function Story() {
     <section id="historia" className="py-24 md:py-32 px-6" style={{ backgroundColor: C.bgAlt }}>
       <div className="max-w-3xl mx-auto">
         <Reveal><SectionTitle kicker="Mi historia" title="Sobre mí" /></Reveal>
+        <Reveal delay={100}>
+          <div className="mb-12 overflow-hidden rounded-sm shadow-lg">
+            <img src={a367.url} alt="Ariadne Estrella" className="w-full aspect-[16/10] object-cover" style={{ objectPosition: "center 35%" }} loading="lazy" />
+          </div>
+        </Reveal>
         <div className="space-y-6">
           {STORY_PARAGRAPHS.map((p, i) => (
             <Reveal key={i} delay={i * 100}>
