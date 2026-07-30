@@ -16,6 +16,10 @@ const PRESETS: Palette[] = [
   { id: "forest-cream", name: "Bosque & Crema", colors: ["#2F4A3A", "#5C7A5F", "#B7C6A6", "#E4E1CE", "#F6F1E4"] },
   { id: "peach-burgundy", name: "Durazno & Burgundy", colors: ["#7A1F2E", "#C46B4B", "#EFB89A", "#F3D9C6", "#FBEFE3"] },
   { id: "pastel-xv", name: "XV Pastel", colors: ["#C48CA9", "#E7B7C7", "#F5D9E1", "#F2E8D3", "#FBF4EA"] },
+  { id: "verde-esmeralda", name: "Verde Esmeralda", colors: ["#1A3C2A", "#2F5A42", "#5A8A6A", "#D4C4A8", "#F5F0E8"] },
+  { id: "naranja-terracota", name: "Naranja & Terracota", colors: ["#8B4513", "#C46B3E", "#E8A579", "#F2D4C2", "#FBF5EF"] },
+  { id: "vino-tinto", name: "Vino Tinto", colors: ["#5C1624", "#7A1F2E", "#A73E4C", "#E8C4C4", "#FAF0F0"] },
+  { id: "mostaza-gris", name: "Mostaza & Gris", colors: ["#6B7280", "#B8860B", "#D4B86A", "#E8E0D0", "#FAF8F4"] },
 ];
 
 function randomHex() {
