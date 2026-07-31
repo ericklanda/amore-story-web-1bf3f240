@@ -308,7 +308,7 @@ function Hero() {
           </h1>
         </Reveal>
         <Reveal delay={600}>
-          <p className="font-script text-5xl md:text-6xl lg:text-[4rem] mt-3 drop-shadow-lg" style={{ color: C.honey }}>Mis XV Años</p>
+          <p className="font-script text-6xl md:text-[4rem] mt-3 drop-shadow-lg" style={{ color: C.honey }}>Mis XV Años</p>
         </Reveal>
         <Reveal delay={800}>
           <p className="mt-8 max-w-md text-xs md:text-sm tracking-[0.25em] uppercase text-white/85">
