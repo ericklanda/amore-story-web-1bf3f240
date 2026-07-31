@@ -291,7 +291,7 @@ function Hero() {
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: `linear-gradient(180deg, rgba(74,64,60,0.35), rgba(169,122,130,0.5)), url(${a147.url})`,
+          backgroundImage: `linear-gradient(180deg, rgb(74 64 60 / 55%), rgb(0 0 0 / 73%)), url(${a147.url})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
