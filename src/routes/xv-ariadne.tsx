@@ -53,7 +53,7 @@ const HASHTAG = "#XVAriadneEstrella";
 const WHATSAPP_NUMBER = "526561807344";
 
 const CEREMONY = {
-  name: "Acción de Gracias · Hacienda los Monroy",
+  name: "Hacienda los Monroy",
   address: "Av. Ejército Nacional 3404, C.P. 32542, Cd. Juárez, Chih.",
   time: "8:00 pm",
   maps: "https://www.google.com/maps/place/Hacienda+los+Monroy/@31.6915974,-106.401682,17z",
@@ -82,9 +82,9 @@ const PARENTS = [
 ];
 
 const TIMELINE = [
-  { time: "8:00 pm", title: "Misa de Acción de Gracias", icon: "⛪" },
+  { time: "8:00 pm", title: "Ceremonia Religiosa", icon: "⛪" },
   { time: "8:30 pm", title: "Recepción y bienvenida", icon: "🥂" },
-  { time: "9:30 pm", title: "Presentación y Vals", icon: "💃" },
+  { time: "9:00 pm", title: "Presentación y Vals", icon: "💃" },
   { time: "11:30 pm", title: "Brindis, pastel y baile sorpresa", icon: "🎂" },
   { time: "1:00 am", title: "Fin de la celebración", icon: "✨" },
 ];
@@ -308,7 +308,7 @@ function Hero() {
           </h1>
         </Reveal>
         <Reveal delay={600}>
-          <p className="font-script text-4xl md:text-5xl mt-3" style={{ color: C.honey }}>Mis XV Años</p>
+          <p className="font-script text-5xl md:text-7xl lg:text-8xl mt-3" style={{ color: C.honey }}>Mis XV Años</p>
         </Reveal>
         <Reveal delay={800}>
           <p className="mt-8 max-w-md text-xs md:text-sm tracking-[0.25em] uppercase text-white/85">
@@ -552,7 +552,7 @@ function Parents() {
 /* ---------------- EVENT DETAILS ---------------- */
 function EventDetails() {
   const cards = [
-    { label: "Misa de Acción de Gracias", ...CEREMONY, icon: "⛪" },
+    { label: "Ceremonia Religiosa", ...CEREMONY, icon: "⛪" },
     { label: "Recepción", ...VENUE, icon: "🥂" },
   ];
   const cal = () => {
@@ -649,7 +649,7 @@ function DressCode() {
           <div className="flex justify-center gap-8 my-8 text-5xl">
             <span title="Damas">👗</span>
             <span title="Vaquero">🤠</span>
-            <span title="Caballeros">🥾</span>
+            <span title="Caballeros">👢</span>
           </div>
         </Reveal>
         <Reveal delay={250}>
