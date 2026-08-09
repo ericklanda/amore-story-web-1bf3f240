@@ -6,7 +6,8 @@ import { submitRsvp } from "@/lib/rsvp.functions";
 import { lookupInvitationSendByToken } from "@/lib/invitation-sends.functions";
 import { toast } from "sonner";
 import silk from "@/assets/xv-danna/silk.jpg.asset.json";
-import ring from "@/assets/xv-danna/floral-ring.png.asset.json";
+import splashBg from "@/assets/xv-danna/splash-bg.jpg.asset.json";
+import floralSoft from "@/assets/xv-danna/floral-soft.jpg.asset.json";
 import d5 from "@/assets/xv-danna/d5.jpg.asset.json";
 import d18 from "@/assets/xv-danna/d18.jpg.asset.json";
 import d46 from "@/assets/xv-danna/d46.jpg.asset.json";
@@ -116,6 +117,14 @@ const SILK_BG = (a1: string, a2: string) => ({
   backgroundPosition: "center",
   backgroundAttachment: "fixed",
 });
+
+const SOFT_BG = (tint = "rgba(245,237,228,0.55)") => ({
+  backgroundImage: `linear-gradient(180deg, ${tint}, ${tint}), url(${floralSoft.url})`,
+  backgroundSize: "760px auto",
+  backgroundRepeat: "repeat",
+  backgroundPosition: "center",
+});
+
 
 /* ---------------- HOOKS ---------------- */
 function useCountdown(target: Date) {
@@ -261,24 +270,20 @@ function Splash({ onEnter }: { onEnter: () => void }) {
   const [fading, setFading] = useState(false);
   return (
     <div
-      className={`fixed inset-0 z-[60] flex items-center justify-center px-5 transition-opacity duration-700 ${fading ? "opacity-0 pointer-events-none" : "opacity-100"}`}
-      style={SILK_BG("rgba(245,237,228,0.55)", "rgba(169,180,155,0.55)")}
+      className={`fixed inset-0 z-[60] overflow-hidden transition-opacity duration-700 ${fading ? "opacity-0 pointer-events-none" : "opacity-100"}`}
+      style={{ backgroundColor: C.bg }}
     >
-      <div className="relative w-[min(92vw,560px)] aspect-square flex items-center justify-center">
-        {/* círculo blanco */}
-        <div
-          className="absolute rounded-full shadow-2xl"
-          style={{ inset: "13%", backgroundColor: "rgba(255,255,255,0.95)" }}
-        />
-        {/* marco floral + salpicaduras doradas */}
-        <img
-          src={ring.url}
-          alt=""
-          aria-hidden
-          className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none"
-        />
-        {/* contenido alineado dentro del círculo */}
-        <div className="relative z-10 text-center px-[22%]">
+      {/* arte floral inspirado en la referencia */}
+      <img
+        src={splashBg.url}
+        alt=""
+        aria-hidden
+        className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
+      />
+      <div className="absolute inset-0 flex items-center justify-center px-8">
+        {/* contenido alineado dentro del arco claro */}
+        <div className="relative z-10 text-center max-w-[19rem] md:max-w-sm">
+
           <div className="text-[10px] md:text-xs tracking-[0.35em] uppercase mb-3" style={{ color: C.sageDark }}>
             16 · Octubre · 2026
           </div>
@@ -353,7 +358,7 @@ function Hero() {
 /* ---------------- WELCOME ---------------- */
 function Welcome() {
   return (
-    <section className="py-20 md:py-28 px-6" style={{ backgroundColor: C.bgAlt }}>
+    <section className="py-20 md:py-28 px-6" style={SOFT_BG("rgba(238,216,204,0.78)")}>
       <div className="max-w-2xl mx-auto text-center space-y-5">
         <Reveal>
           <div className="text-xs tracking-[0.35em] uppercase mb-2" style={{ color: C.sageDark }}>— Bienvenid@ —</div>
@@ -403,7 +408,7 @@ function Countdown() {
 /* ---------------- STORY ---------------- */
 function Story() {
   return (
-    <section id="historia" className="py-24 md:py-32 px-6" style={{ backgroundColor: C.bg }}>
+    <section id="historia" className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(245,237,228,0.70)")}>
       <div className="max-w-3xl mx-auto">
         <Reveal><SectionTitle kicker="Mi historia" title="Sobre mí" /></Reveal>
         <Reveal delay={100}>
@@ -428,7 +433,7 @@ function Story() {
 /* ---------------- PARENTS ---------------- */
 function Parents() {
   return (
-    <section className="py-24 md:py-32 px-6" style={{ backgroundColor: C.bgAlt }}>
+    <section className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(238,216,204,0.78)")}>
       <div className="max-w-5xl mx-auto">
         <Reveal><SectionTitle kicker="Con amor" title="Mi familia" /></Reveal>
         <p className="text-center max-w-2xl mx-auto font-serif italic text-lg mb-14" style={{ color: C.textMuted }}>
@@ -560,7 +565,7 @@ function EventDetails() {
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+Danna+Joaquina&dates=${start}/${end}&details=Acomp%C3%A1%C3%B1ame+a+celebrar+mis+XV+a%C3%B1os&location=${encodeURIComponent(VENUE.name)}`;
   };
   return (
-    <section id="detalles" className="py-24 md:py-32 px-6" style={{ backgroundColor: C.bg }}>
+    <section id="detalles" className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(245,237,228,0.70)")}>
       <div className="max-w-5xl mx-auto">
         <Reveal><SectionTitle kicker="Detalles del evento" title="¿Cuándo y dónde?" /></Reveal>
         <div className="grid md:grid-cols-2 gap-6 md:gap-8">
@@ -690,7 +695,7 @@ function Rsvp() {
   };
 
   return (
-    <section className="relative py-24 md:py-32 px-6" style={{ backgroundColor: C.bgAlt }}>
+    <section className="relative py-24 md:py-32 px-6" style={SOFT_BG("rgba(238,216,204,0.78)")}>
       <div className="max-w-2xl mx-auto">
         <Reveal><SectionTitle kicker="Confirmación" title="¿Me acompañas?" /></Reveal>
         {submitted ? (
@@ -763,7 +768,7 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 /* ---------------- GIFT REGISTRY ---------------- */
 function GiftRegistry() {
   return (
-    <section className="py-24 md:py-32 px-6" style={{ backgroundColor: C.bg }}>
+    <section className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(245,237,228,0.70)")}>
       <div className="max-w-3xl mx-auto text-center">
         <Reveal><SectionTitle kicker="Con cariño" title="Mesa de regalos" /></Reveal>
         <Reveal delay={150}>
@@ -788,7 +793,7 @@ function GiftRegistry() {
 /* ---------------- SOCIAL WALL ---------------- */
 function SocialWall() {
   return (
-    <section className="py-24 md:py-32 px-6 text-center" style={{ backgroundColor: C.bgAlt }}>
+    <section className="py-24 md:py-32 px-6 text-center" style={SOFT_BG("rgba(238,216,204,0.78)")}>
       <div className="max-w-3xl mx-auto">
         <Reveal>
           <div className="text-xs tracking-[0.35em] uppercase mb-3" style={{ color: C.sageDark }}>— Comparte —</div>
@@ -818,7 +823,7 @@ function Faq() {
   );
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section className="py-24 md:py-32 px-6" style={{ backgroundColor: C.bg }}>
+    <section className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(245,237,228,0.70)")}>
       <div className="max-w-3xl mx-auto">
         <Reveal><SectionTitle kicker="FAQ" title="Preguntas frecuentes" /></Reveal>
         <div className="space-y-3">
