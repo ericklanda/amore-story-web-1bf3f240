@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as XvLuciaRouteImport } from './routes/xv-lucia'
 import { Route as XvIsabellaRouteImport } from './routes/xv-isabella'
+import { Route as XvDannaRouteImport } from './routes/xv-danna'
 import { Route as XvAriadneRouteImport } from './routes/xv-ariadne'
 import { Route as SusanaAlanRouteImport } from './routes/susana-alan'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -40,6 +41,11 @@ const XvLuciaRoute = XvLuciaRouteImport.update({
 const XvIsabellaRoute = XvIsabellaRouteImport.update({
   id: '/xv-isabella',
   path: '/xv-isabella',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const XvDannaRoute = XvDannaRouteImport.update({
+  id: '/xv-danna',
+  path: '/xv-danna',
   getParentRoute: () => rootRouteImport,
 } as any)
 const XvAriadneRoute = XvAriadneRouteImport.update({
@@ -155,6 +161,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/susana-alan': typeof SusanaAlanRoute
   '/xv-ariadne': typeof XvAriadneRoute
+  '/xv-danna': typeof XvDannaRoute
   '/xv-isabella': typeof XvIsabellaRoute
   '/xv-lucia': typeof XvLuciaRoute
   '/admin': typeof AuthenticatedAdminRoute
@@ -178,6 +185,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/susana-alan': typeof SusanaAlanRoute
   '/xv-ariadne': typeof XvAriadneRoute
+  '/xv-danna': typeof XvDannaRoute
   '/xv-isabella': typeof XvIsabellaRoute
   '/xv-lucia': typeof XvLuciaRoute
   '/admin': typeof AuthenticatedAdminRoute
@@ -203,6 +211,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/susana-alan': typeof SusanaAlanRoute
   '/xv-ariadne': typeof XvAriadneRoute
+  '/xv-danna': typeof XvDannaRoute
   '/xv-isabella': typeof XvIsabellaRoute
   '/xv-lucia': typeof XvLuciaRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
@@ -228,6 +237,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/susana-alan'
     | '/xv-ariadne'
+    | '/xv-danna'
     | '/xv-isabella'
     | '/xv-lucia'
     | '/admin'
@@ -251,6 +261,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/susana-alan'
     | '/xv-ariadne'
+    | '/xv-danna'
     | '/xv-isabella'
     | '/xv-lucia'
     | '/admin'
@@ -275,6 +286,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/susana-alan'
     | '/xv-ariadne'
+    | '/xv-danna'
     | '/xv-isabella'
     | '/xv-lucia'
     | '/_authenticated/admin'
@@ -300,6 +312,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SusanaAlanRoute: typeof SusanaAlanRoute
   XvAriadneRoute: typeof XvAriadneRoute
+  XvDannaRoute: typeof XvDannaRoute
   XvIsabellaRoute: typeof XvIsabellaRoute
   XvLuciaRoute: typeof XvLuciaRoute
   ComprarDiamanteRoute: typeof ComprarDiamanteRoute
@@ -324,6 +337,13 @@ declare module '@tanstack/react-router' {
       path: '/xv-isabella'
       fullPath: '/xv-isabella'
       preLoaderRoute: typeof XvIsabellaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/xv-danna': {
+      id: '/xv-danna'
+      path: '/xv-danna'
+      fullPath: '/xv-danna'
+      preLoaderRoute: typeof XvDannaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/xv-ariadne': {
@@ -494,6 +514,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SusanaAlanRoute: SusanaAlanRoute,
   XvAriadneRoute: XvAriadneRoute,
+  XvDannaRoute: XvDannaRoute,
   XvIsabellaRoute: XvIsabellaRoute,
   XvLuciaRoute: XvLuciaRoute,
   ComprarDiamanteRoute: ComprarDiamanteRoute,
