@@ -270,24 +270,20 @@ function Splash({ onEnter }: { onEnter: () => void }) {
   const [fading, setFading] = useState(false);
   return (
     <div
-      className={`fixed inset-0 z-[60] flex items-center justify-center px-5 transition-opacity duration-700 ${fading ? "opacity-0 pointer-events-none" : "opacity-100"}`}
-      style={SILK_BG("rgba(245,237,228,0.55)", "rgba(169,180,155,0.55)")}
+      className={`fixed inset-0 z-[60] overflow-hidden transition-opacity duration-700 ${fading ? "opacity-0 pointer-events-none" : "opacity-100"}`}
+      style={{ backgroundColor: C.bg }}
     >
-      <div className="relative w-[min(92vw,560px)] aspect-square flex items-center justify-center">
-        {/* círculo blanco */}
-        <div
-          className="absolute rounded-full shadow-2xl"
-          style={{ inset: "13%", backgroundColor: "rgba(255,255,255,0.95)" }}
-        />
-        {/* marco floral + salpicaduras doradas */}
-        <img
-          src={ring.url}
-          alt=""
-          aria-hidden
-          className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none"
-        />
-        {/* contenido alineado dentro del círculo */}
-        <div className="relative z-10 text-center px-[22%]">
+      {/* arte floral inspirado en la referencia */}
+      <img
+        src={splashBg.url}
+        alt=""
+        aria-hidden
+        className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
+      />
+      <div className="absolute inset-0 flex items-center justify-center px-8">
+        {/* contenido alineado dentro del arco claro */}
+        <div className="relative z-10 text-center max-w-[19rem] md:max-w-sm">
+
           <div className="text-[10px] md:text-xs tracking-[0.35em] uppercase mb-3" style={{ color: C.sageDark }}>
             16 · Octubre · 2026
           </div>
