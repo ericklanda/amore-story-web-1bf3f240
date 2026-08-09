@@ -8,6 +8,9 @@ import { toast } from "sonner";
 import silk from "@/assets/xv-danna/silk.jpg.asset.json";
 import splashBg from "@/assets/xv-danna/splash-bg.jpg.asset.json";
 import floralSoft from "@/assets/xv-danna/floral-soft.jpg.asset.json";
+import iglesiaImg from "@/assets/xv-danna/iglesia.png.asset.json";
+import recepcionImg from "@/assets/xv-danna/recepcion.png.asset.json";
+
 import d5 from "@/assets/xv-danna/d5.jpg.asset.json";
 import d18 from "@/assets/xv-danna/d18.jpg.asset.json";
 import d46 from "@/assets/xv-danna/d46.jpg.asset.json";
@@ -60,16 +63,19 @@ const WHATSAPP_NUMBER = "529157402244";
 const CEREMONY = {
   name: "Parroquia San Mateo",
   address: "Ceremonia religiosa",
-  time: "Por confirmar",
+  time: "4:00 pm",
+  photo: iglesiaImg.url,
   maps: "https://www.google.com/maps/search/Parroquia+San+Mateo",
 };
 
 const VENUE = {
   name: "Quinta El Vergel",
   address: "Recepción y celebración",
-  time: "Por confirmar",
+  time: "9:00 pm",
+  photo: recepcionImg.url,
   maps: "https://maps.google.com/maps/place//data=!4m2!3m1!1s0x86e74386ac8aecef:0x9269787617dfec3b",
 };
+
 
 const WELCOME = [
   "Con gran alegría y emoción, quiero compartir contigo uno de los momentos más especiales de mi vida.",
@@ -560,7 +566,7 @@ function EventDetails() {
     { label: "Recepción", ...VENUE, icon: "🥂" },
   ];
   const cal = () => {
-    const start = "20261017T010000Z";
+    const start = "20261016T220000Z";
     const end = "20261017T060000Z";
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+Danna+Joaquina&dates=${start}/${end}&details=Acomp%C3%A1%C3%B1ame+a+celebrar+mis+XV+a%C3%B1os&location=${encodeURIComponent(VENUE.name)}`;
   };
@@ -571,8 +577,11 @@ function EventDetails() {
         <div className="grid md:grid-cols-2 gap-6 md:gap-8">
           {cards.map((ev, i) => (
             <Reveal key={ev.label} delay={i * 120}>
-              <article className="rounded-sm overflow-hidden shadow-md h-full flex flex-col p-8 md:p-10 text-center" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
+              <article className="rounded-sm overflow-hidden shadow-md h-full flex flex-col text-center" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
+                <img src={ev.photo} alt={ev.name} loading="lazy" className="w-full h-48 md:h-56 object-cover" />
+                <div className="p-8 md:p-10 flex flex-col flex-1">
                 <div className="text-4xl mb-3">{ev.icon}</div>
+
                 <div className="text-xs tracking-[0.3em] uppercase mb-3" style={{ color: C.gold }}>{ev.label}</div>
                 <div className="font-serif italic text-3xl mb-3" style={{ color: C.primary }}>{ev.time}</div>
                 <h3 className="font-serif text-xl mb-2" style={{ color: C.text }}>{ev.name}</h3>
@@ -586,7 +595,9 @@ function EventDetails() {
                 >
                   Ver ubicación →
                 </a>
+                </div>
               </article>
+
             </Reveal>
           ))}
         </div>
