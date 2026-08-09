@@ -566,7 +566,7 @@ function EventDetails() {
     { label: "Recepción", ...VENUE, icon: "🥂" },
   ];
   const cal = () => {
-    const start = "20261017T010000Z";
+    const start = "20261016T220000Z";
     const end = "20261017T060000Z";
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+Danna+Joaquina&dates=${start}/${end}&details=Acomp%C3%A1%C3%B1ame+a+celebrar+mis+XV+a%C3%B1os&location=${encodeURIComponent(VENUE.name)}`;
   };
