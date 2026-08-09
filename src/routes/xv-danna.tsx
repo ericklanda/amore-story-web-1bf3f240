@@ -595,7 +595,9 @@ function EventDetails() {
                 >
                   Ver ubicación →
                 </a>
+                </div>
               </article>
+
             </Reveal>
           ))}
         </div>
