@@ -209,43 +209,52 @@ function DannaXV() {
   );
 }
 
-/* ---------------- MÚSICA (Spotify) ---------------- */
-const SPOTIFY_TRACK = "4eUj4TpbvSlwa7DZmUhcLk";
+/* ---------------- MÚSICA ---------------- */
+const YOUTUBE_SONG_ID = "md4Eav4rhFM";
 
 function MusicPlayer({ entered }: { entered: boolean }) {
-  const [open, setOpen] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [playing, setPlaying] = useState(false);
+
+  const sendCommand = (func: string) => {
+    iframeRef.current?.contentWindow?.postMessage(
+      JSON.stringify({ event: "command", func, args: [] }),
+      "*"
+    );
+  };
+
   useEffect(() => {
-    if (entered) setOpen(true);
+    if (entered) {
+      sendCommand("playVideo");
+      setPlaying(true);
+    }
   }, [entered]);
 
   return (
-    <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-2">
-      {open && (
-        <div className="rounded-xl overflow-hidden shadow-2xl w-[300px] max-w-[85vw]" style={{ border: `1px solid ${C.border}` }}>
-          <iframe
-            title="Canción de Danna"
-            src={`https://open.spotify.com/embed/track/${SPOTIFY_TRACK}?utm_source=generator`}
-            width="100%"
-            height="152"
-            frameBorder="0"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"
-          />
-        </div>
-      )}
+    <>
+      <iframe
+        ref={iframeRef}
+        title="Música de fondo"
+        src={`https://www.youtube.com/embed/${YOUTUBE_SONG_ID}?enablejsapi=1&autoplay=1&loop=1&playlist=${YOUTUBE_SONG_ID}&controls=0&modestbranding=1`}
+        allow="autoplay"
+        style={{ position: "fixed", width: 1, height: 1, opacity: 0, pointerEvents: "none", border: 0 }}
+      />
       <button
-        onClick={() => setOpen((o) => !o)}
-        aria-label="Música"
-        className="w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
+        onClick={() => { sendCommand(playing ? "pauseVideo" : "playVideo"); setPlaying(!playing); }}
+        aria-label="Reproducir música"
+        className="fixed bottom-5 right-5 z-40 w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
         style={{ backgroundColor: C.primary, color: "#fff" }}
       >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z" />
-        </svg>
+        {playing ? (
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" /><rect x="14" y="5" width="4" height="14" /></svg>
+        ) : (
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+        )}
       </button>
-    </div>
+    </>
   );
 }
+
 
 /* ---------------- SPLASH ---------------- */
 function Splash({ onEnter }: { onEnter: () => void }) {
