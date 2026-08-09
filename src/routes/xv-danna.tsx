@@ -118,6 +118,14 @@ const SILK_BG = (a1: string, a2: string) => ({
   backgroundAttachment: "fixed",
 });
 
+const SOFT_BG = (tint = "rgba(245,237,228,0.55)") => ({
+  backgroundImage: `linear-gradient(180deg, ${tint}, ${tint}), url(${floralSoft.url})`,
+  backgroundSize: "760px auto",
+  backgroundRepeat: "repeat",
+  backgroundPosition: "center",
+});
+
+
 /* ---------------- HOOKS ---------------- */
 function useCountdown(target: Date) {
   const [now, setNow] = useState(() => new Date());
