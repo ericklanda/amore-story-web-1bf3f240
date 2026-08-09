@@ -358,7 +358,7 @@ function Hero() {
 /* ---------------- WELCOME ---------------- */
 function Welcome() {
   return (
-    <section className="py-20 md:py-28 px-6" style={{ backgroundColor: C.bgAlt }}>
+    <section className="py-20 md:py-28 px-6" style={SOFT_BG("rgba(238,216,204,0.78)")}>
       <div className="max-w-2xl mx-auto text-center space-y-5">
         <Reveal>
           <div className="text-xs tracking-[0.35em] uppercase mb-2" style={{ color: C.sageDark }}>— Bienvenid@ —</div>
@@ -408,7 +408,7 @@ function Countdown() {
 /* ---------------- STORY ---------------- */
 function Story() {
   return (
-    <section id="historia" className="py-24 md:py-32 px-6" style={{ backgroundColor: C.bg }}>
+    <section id="historia" className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(245,237,228,0.70)")}>
       <div className="max-w-3xl mx-auto">
         <Reveal><SectionTitle kicker="Mi historia" title="Sobre mí" /></Reveal>
         <Reveal delay={100}>
@@ -433,7 +433,7 @@ function Story() {
 /* ---------------- PARENTS ---------------- */
 function Parents() {
   return (
-    <section className="py-24 md:py-32 px-6" style={{ backgroundColor: C.bgAlt }}>
+    <section className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(238,216,204,0.78)")}>
       <div className="max-w-5xl mx-auto">
         <Reveal><SectionTitle kicker="Con amor" title="Mi familia" /></Reveal>
         <p className="text-center max-w-2xl mx-auto font-serif italic text-lg mb-14" style={{ color: C.textMuted }}>
@@ -565,7 +565,7 @@ function EventDetails() {
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+Danna+Joaquina&dates=${start}/${end}&details=Acomp%C3%A1%C3%B1ame+a+celebrar+mis+XV+a%C3%B1os&location=${encodeURIComponent(VENUE.name)}`;
   };
   return (
-    <section id="detalles" className="py-24 md:py-32 px-6" style={{ backgroundColor: C.bg }}>
+    <section id="detalles" className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(245,237,228,0.70)")}>
       <div className="max-w-5xl mx-auto">
         <Reveal><SectionTitle kicker="Detalles del evento" title="¿Cuándo y dónde?" /></Reveal>
         <div className="grid md:grid-cols-2 gap-6 md:gap-8">
@@ -695,7 +695,7 @@ function Rsvp() {
   };
 
   return (
-    <section className="relative py-24 md:py-32 px-6" style={{ backgroundColor: C.bgAlt }}>
+    <section className="relative py-24 md:py-32 px-6" style={SOFT_BG("rgba(238,216,204,0.78)")}>
       <div className="max-w-2xl mx-auto">
         <Reveal><SectionTitle kicker="Confirmación" title="¿Me acompañas?" /></Reveal>
         {submitted ? (
@@ -768,7 +768,7 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 /* ---------------- GIFT REGISTRY ---------------- */
 function GiftRegistry() {
   return (
-    <section className="py-24 md:py-32 px-6" style={{ backgroundColor: C.bg }}>
+    <section className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(245,237,228,0.70)")}>
       <div className="max-w-3xl mx-auto text-center">
         <Reveal><SectionTitle kicker="Con cariño" title="Mesa de regalos" /></Reveal>
         <Reveal delay={150}>
@@ -793,7 +793,7 @@ function GiftRegistry() {
 /* ---------------- SOCIAL WALL ---------------- */
 function SocialWall() {
   return (
-    <section className="py-24 md:py-32 px-6 text-center" style={{ backgroundColor: C.bgAlt }}>
+    <section className="py-24 md:py-32 px-6 text-center" style={SOFT_BG("rgba(238,216,204,0.78)")}>
       <div className="max-w-3xl mx-auto">
         <Reveal>
           <div className="text-xs tracking-[0.35em] uppercase mb-3" style={{ color: C.sageDark }}>— Comparte —</div>
@@ -823,7 +823,7 @@ function Faq() {
   );
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section className="py-24 md:py-32 px-6" style={{ backgroundColor: C.bg }}>
+    <section className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(245,237,228,0.70)")}>
       <div className="max-w-3xl mx-auto">
         <Reveal><SectionTitle kicker="FAQ" title="Preguntas frecuentes" /></Reveal>
         <div className="space-y-3">
