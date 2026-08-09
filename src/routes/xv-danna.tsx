@@ -8,6 +8,9 @@ import { toast } from "sonner";
 import silk from "@/assets/xv-danna/silk.jpg.asset.json";
 import splashBg from "@/assets/xv-danna/splash-bg.jpg.asset.json";
 import floralSoft from "@/assets/xv-danna/floral-soft.jpg.asset.json";
+import iglesiaImg from "@/assets/xv-danna/iglesia.png.asset.json";
+import recepcionImg from "@/assets/xv-danna/recepcion.png.asset.json";
+
 import d5 from "@/assets/xv-danna/d5.jpg.asset.json";
 import d18 from "@/assets/xv-danna/d18.jpg.asset.json";
 import d46 from "@/assets/xv-danna/d46.jpg.asset.json";
