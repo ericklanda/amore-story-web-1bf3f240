@@ -60,16 +60,19 @@ const WHATSAPP_NUMBER = "529157402244";
 const CEREMONY = {
   name: "Parroquia San Mateo",
   address: "Ceremonia religiosa",
-  time: "Por confirmar",
+  time: "4:00 pm",
+  photo: iglesiaImg.url,
   maps: "https://www.google.com/maps/search/Parroquia+San+Mateo",
 };
 
 const VENUE = {
   name: "Quinta El Vergel",
   address: "Recepción y celebración",
-  time: "Por confirmar",
+  time: "9:00 pm",
+  photo: recepcionImg.url,
   maps: "https://maps.google.com/maps/place//data=!4m2!3m1!1s0x86e74386ac8aecef:0x9269787617dfec3b",
 };
+
 
 const WELCOME = [
   "Con gran alegría y emoción, quiero compartir contigo uno de los momentos más especiales de mi vida.",
