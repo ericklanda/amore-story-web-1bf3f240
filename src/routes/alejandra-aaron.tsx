@@ -13,6 +13,8 @@ import aa318 from "@/assets/ale-aaron/aa-318.jpg.asset.json";
 import aa340 from "@/assets/ale-aaron/aa-340.jpg.asset.json";
 import aa356 from "@/assets/ale-aaron/aa-356.jpg.asset.json";
 import aa384 from "@/assets/ale-aaron/aa-384.jpg.asset.json";
+import iglesiaImg from "@/assets/ale-aaron/iglesia.png.asset.json";
+import recepcionImg from "@/assets/ale-aaron/recepcion.png.asset.json";
 
 const heroA = aa173.url;
 const heroB = aa62.url;
@@ -43,7 +45,7 @@ export const Route = createFileRoute("/alejandra-aaron")({
 const WEDDING_DATE = new Date("2026-10-03T17:00:00");
 const HASHTAG = "#AleYAaron2026";
 const WHATSAPP_NUMBER = "5216563078286";
-const YOUTUBE_SONG_ID = "NKgn-STmdQY";
+const YOUTUBE_SONG_ID = "yP_dhALIuFc";
 
 /* Palette (terracota / burgundy / peach / cream / dusty rose)
    burgundy #6c2f2c · terracotta #b97a6a · dusty rose #a06b64 · peach #e6b89e · cream #f4ead9 */
@@ -61,12 +63,14 @@ const CEREMONY = {
   time: "5:00 pm",
   address: "Av. Plutarco Elías Calles 821, Progresista, 32310 Juárez, Chih.",
   maps: "https://maps.app.goo.gl/HtsTZVZZnnhiSFmx8",
+  image: iglesiaImg.url,
 };
 const RECEPTION = {
   place: "Recepción",
   time: "9:00 pm",
   address: "Pedro Meneses Hoyos #6754, Partido Iglesias, 32528 Ciudad Juárez.",
   maps: "https://maps.app.goo.gl/h36nByxfemYscpfM7",
+  image: recepcionImg.url,
 };
 
 const GALLERY = [
@@ -465,7 +469,9 @@ function EventDetails() {
         <div className="grid md:grid-cols-2 gap-6 md:gap-8">
           {events.map((ev, i) => (
             <Reveal key={ev.label} delay={i * 120}>
-              <article className="rounded-sm overflow-hidden shadow-md hover:shadow-lg transition-shadow h-full flex flex-col p-8 md:p-10 text-center" style={{ background: "#fff8ef", border: `1px solid ${C_PEACH}` }}>
+              <article className="rounded-sm overflow-hidden shadow-md hover:shadow-lg transition-shadow h-full flex flex-col text-center" style={{ background: "#fff8ef", border: `1px solid ${C_PEACH}` }}>
+                <img src={ev.image} alt={`${ev.label} — ${ev.place}`} loading="lazy" className="w-full h-52 md:h-60 object-cover" />
+                <div className="p-8 md:p-10 flex flex-col flex-1">
                 <div className="text-3xl mb-3">{ev.icon}</div>
                 <div className="text-xs tracking-[0.3em] uppercase mb-4" style={{ color: C_TERRACOTTA }}>{ev.label}</div>
                 <div className="font-serif text-4xl italic mb-2" style={{ color: C_BURGUNDY }}>{ev.time}</div>
@@ -480,6 +486,7 @@ function EventDetails() {
                 >
                   Cómo llegar →
                 </a>
+                </div>
               </article>
             </Reveal>
           ))}
