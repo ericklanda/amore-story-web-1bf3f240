@@ -701,19 +701,9 @@ function DressCode() {
           </div>
         </Reveal>
         <Reveal delay={250}>
-          <div className="max-w-md mx-auto rounded-sm p-7 text-left shadow-xl" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
-            <p className="text-sm mb-4" style={{ color: C.text }}>
-              Para que esta celebración sea aún más especial, les pedimos amablemente asistir con vestimenta semiformal:
-            </p>
-            <ul className="space-y-2 text-sm" style={{ color: C.text }}>
-              {DRESS_CODE_NOTES.map((n) => (
-                <li key={n} className="flex gap-3">
-                  <span style={{ color: C.accent }}>•</span>
-                  <span>{n}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <p className="text-base leading-relaxed" style={{ color: C.card }}>
+            Una celebración relajada y alegre. Vengan cómodos y disfruten con nosotros.
+          </p>
         </Reveal>
       </div>
     </section>
@@ -899,7 +889,7 @@ function SocialWall() {
 function Faq() {
   const items = useMemo(
     () => [
-      { q: "¿Cuál es el código de vestimenta?", a: "Semiformal. Se recomienda evitar el color blanco, reservado para la quinceañera." },
+      { q: "¿Cuál es el código de vestimenta?", a: "Semiformal. El color azul rey es exclusivo para la quinceañera; te pedimos amablemente no usarlo para que ella sea la protagonista." },
       { q: "¿Puedo llevar acompañante?", a: "Los lugares son los indicados en tu invitación personal. Confírmalos en la sección de confirmación." },
       { q: "¿Dónde será la celebración?", a: "La misa en la Parroquia Cristo Rey a las 6:00 pm y la recepción en el Gimnasio Municipal Óscar Acosta, Ejido Benito Juárez, de 8:00 pm a 2:00 am." },
       { q: "¿Habrá comida al día siguiente?", a: "Sí, el domingo 18 de octubre de 2026 en el Salón Marlo." },
