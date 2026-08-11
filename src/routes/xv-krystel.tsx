@@ -125,8 +125,8 @@ const MARBLE_BG = (a1: string, a2: string, fixed = true) => ({
   ...(fixed ? { backgroundAttachment: "fixed" as const } : {}),
 });
 
-const SPLASH_BG = (a1: string, a2: string) => ({
-  backgroundImage: `linear-gradient(180deg, ${a1}, ${a2}), url(${marble.url})`,
+const SPLASH_BG = () => ({
+  backgroundImage: `url(${marble.url})`,
   backgroundSize: "cover",
   backgroundPosition: "center",
 });
