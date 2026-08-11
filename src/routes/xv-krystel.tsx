@@ -6,6 +6,7 @@ import { submitRsvp } from "@/lib/rsvp.functions";
 import { lookupInvitationSendByToken } from "@/lib/invitation-sends.functions";
 import { toast } from "sonner";
 import marble from "@/assets/krystel/marble.jpg.asset.json";
+import marbleInterior from "@/assets/krystel/marble-interior.png.asset.json";
 
 import k1 from "@/assets/xv-krystel/k1.jpg.asset.json";
 import k2 from "@/assets/xv-krystel/k2.jpg.asset.json";
@@ -118,13 +119,83 @@ const GALLERY = [
 
 /* Fondos de mármol azul rey */
 const MARBLE_BG = (a1: string, a2: string, fixed = true) => ({
-  backgroundImage: `linear-gradient(180deg, ${a1}, ${a2}), url(${marble.url})`,
+  backgroundImage: `linear-gradient(180deg, ${a1}, ${a2}), url(${marbleInterior.url})`,
   backgroundSize: "cover",
   backgroundPosition: "center",
   ...(fixed ? { backgroundAttachment: "fixed" as const } : {}),
 });
 
+const SPLASH_BG = (a1: string, a2: string) => ({
+  backgroundImage: `linear-gradient(180deg, ${a1}, ${a2}), url(${marble.url})`,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+});
+
 const SOFT_BG = (tint = "rgba(246,242,232,0.92)") => MARBLE_BG(tint, tint, false);
+
+/* Parallax por scroll */
+function useParallax(speed = 0.25) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [offset, setOffset] = useState(0);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const el = ref.current;
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const center = rect.top + rect.height / 2 - window.innerHeight / 2;
+        setOffset(-center * speed);
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [speed]);
+  return { ref, offset };
+}
+
+function ParallaxImage({
+  src,
+  className = "",
+  speed = 0.18,
+  overlay,
+  position = "center",
+  children,
+}: {
+  src: string;
+  className?: string;
+  speed?: number;
+  overlay?: string;
+  position?: string;
+  children?: React.ReactNode;
+}) {
+  const { ref, offset } = useParallax(speed);
+  return (
+    <div ref={ref} className={`relative overflow-hidden ${className}`}>
+      <div
+        className="absolute inset-x-0 -top-[15%] h-[130%] will-change-transform"
+        style={{
+          backgroundImage: `url(${src})`,
+          backgroundSize: "cover",
+          backgroundPosition: position,
+          transform: `translate3d(0, ${offset}px, 0)`,
+        }}
+      />
+      {overlay && <div className="absolute inset-0" style={{ background: overlay }} />}
+      {children && <div className="relative z-10 h-full">{children}</div>}
+    </div>
+  );
+}
 
 /* ---------------- HOOKS ---------------- */
 function useCountdown(target: Date) {
@@ -270,7 +341,7 @@ function Splash({ onEnter }: { onEnter: () => void }) {
   return (
     <div
       className={`fixed inset-0 z-[60] overflow-hidden transition-opacity duration-700 ${fading ? "opacity-0 pointer-events-none" : "opacity-100"}`}
-      style={MARBLE_BG("rgba(18,42,107,0.55)", "rgba(11,24,64,0.72)", false)}
+      style={SPLASH_BG("rgba(18,42,107,0.55)", "rgba(11,24,64,0.72)")}
     >
       <div className="absolute inset-0 flex items-center justify-center px-8">
         <div
@@ -309,13 +380,12 @@ function Splash({ onEnter }: { onEnter: () => void }) {
 function Hero() {
   return (
     <section className="relative h-[100svh] min-h-[620px] w-full overflow-hidden">
-      <div
+      <ParallaxImage
+        src={k2.url}
+        speed={0.22}
+        position="center 25%"
         className="absolute inset-0"
-        style={{
-          backgroundImage: `linear-gradient(180deg, rgb(18 42 107 / 45%), rgb(6 14 38 / 72%)), url(${k2.url})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center 25%",
-        }}
+        overlay="linear-gradient(180deg, rgb(18 42 107 / 45%), rgb(6 14 38 / 72%))"
       />
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-white">
         <Reveal delay={200}>
@@ -405,9 +475,12 @@ function Story() {
       <div className="max-w-3xl mx-auto">
         <Reveal><SectionTitle kicker="Mi historia" title="Sobre mí" /></Reveal>
         <Reveal delay={100}>
-          <div className="mb-12 overflow-hidden rounded-sm shadow-lg">
-            <img src={k4.url} alt="Tania Krystel" className="w-full aspect-[16/10] object-cover" style={{ objectPosition: "center 30%" }} loading="lazy" />
-          </div>
+          <ParallaxImage
+            src={k4.url}
+            speed={0.14}
+            position="center 30%"
+            className="mb-12 rounded-sm shadow-lg w-full aspect-[16/10]"
+          />
         </Reveal>
         <div className="space-y-6">
           {STORY_PARAGRAPHS.map((p, i) => (
@@ -667,8 +740,6 @@ function Rsvp() {
       `Hola! Confirmo asistencia a los XV de Tania Krystel.\n` +
       `Nombre: ${form.name}\n` +
       `Asistencia: ${form.attending === "yes" ? "Sí" : "No"}` +
-      `\nPersonas: ${form.attending === "yes" ? guests : 0}` +
-      (invite ? `\nLugares reservados: ${invite.guests_allowed}` : "") +
       (form.message ? `\nMensaje: ${form.message}` : "");
     const wa = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
     const w = window.open(wa, "_blank", "noopener,noreferrer");
@@ -708,8 +779,6 @@ function Rsvp() {
             {invite && (
               <div className="text-center rounded-sm px-4 py-3 text-sm" style={{ backgroundColor: C.bg, border: `1px solid ${C.border}`, color: C.textMuted }}>
                 {invite.guest_name ? <span className="font-medium" style={{ color: C.primary }}>{invite.guest_name}</span> : "Invitación personal"}
-                {" · "}
-                <span>{invite.guests_allowed} {invite.guests_allowed === 1 ? "lugar reservado" : "lugares reservados"}</span>
               </div>
             )}
             <Field label="Nombre completo">
@@ -734,25 +803,9 @@ function Rsvp() {
                 ))}
               </div>
             </Field>
-            {form.attending === "yes" && (
-              <Field label="Número de personas">
-                <input
-                  type="number"
-                  min={1}
-                  max={invite?.guests_allowed ?? 10}
-                  value={guests}
-                  onChange={(e) => setGuests(Math.max(1, Number(e.target.value) || 1))}
-                  className="w-full bg-transparent border-b outline-none py-2"
-                  style={{ borderColor: C.border }}
-                />
-              </Field>
-            )}
             <Field label="Mensaje para Krystel (opcional)">
               <textarea rows={3} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full bg-transparent border outline-none p-3 rounded-sm resize-none" style={{ borderColor: C.border }} />
             </Field>
-            <p className="text-xs text-center leading-relaxed rounded-sm px-4 py-3" style={{ backgroundColor: C.bgAlt, border: `1px solid ${C.border}`, color: C.text }}>
-              Esta invitación es <strong>personal e intransferible</strong> y válida únicamente para el número de personas indicado.
-            </p>
             <button
               type="submit"
               disabled={submitting || !form.name.trim()}
