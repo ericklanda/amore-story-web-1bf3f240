@@ -701,19 +701,9 @@ function DressCode() {
           </div>
         </Reveal>
         <Reveal delay={250}>
-          <div className="max-w-md mx-auto rounded-sm p-7 text-left shadow-xl" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
-            <p className="text-sm mb-4" style={{ color: C.text }}>
-              Para que esta celebración sea aún más especial, les pedimos amablemente asistir con vestimenta semiformal:
-            </p>
-            <ul className="space-y-2 text-sm" style={{ color: C.text }}>
-              {DRESS_CODE_NOTES.map((n) => (
-                <li key={n} className="flex gap-3">
-                  <span style={{ color: C.accent }}>•</span>
-                  <span>{n}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <p className="text-base leading-relaxed" style={{ color: C.card }}>
+            Una celebración relajada y alegre. Vengan cómodos y disfruten con nosotros.
+          </p>
         </Reveal>
       </div>
     </section>
