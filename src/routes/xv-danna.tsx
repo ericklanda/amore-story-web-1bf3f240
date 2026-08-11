@@ -650,6 +650,7 @@ function Rsvp() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: "", attending: "yes", message: "" });
+  const [guests, setGuests] = useState<2 | 4>(2);
   const [invite, setInvite] = useState<{ guest_name: string | null; guests_allowed: number } | null>(null);
   const submit = useServerFn(submitRsvp);
   const lookup = useServerFn(lookupInvitationSendByToken);
