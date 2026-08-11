@@ -6,6 +6,7 @@ import { submitRsvp } from "@/lib/rsvp.functions";
 import { lookupInvitationSendByToken } from "@/lib/invitation-sends.functions";
 import { toast } from "sonner";
 import marble from "@/assets/krystel/marble.jpg.asset.json";
+import marbleInterior from "@/assets/krystel/marble-interior.png.asset.json";
 
 import k1 from "@/assets/xv-krystel/k1.jpg.asset.json";
 import k2 from "@/assets/xv-krystel/k2.jpg.asset.json";
