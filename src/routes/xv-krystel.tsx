@@ -475,9 +475,12 @@ function Story() {
       <div className="max-w-3xl mx-auto">
         <Reveal><SectionTitle kicker="Mi historia" title="Sobre mí" /></Reveal>
         <Reveal delay={100}>
-          <div className="mb-12 overflow-hidden rounded-sm shadow-lg">
-            <img src={k4.url} alt="Tania Krystel" className="w-full aspect-[16/10] object-cover" style={{ objectPosition: "center 30%" }} loading="lazy" />
-          </div>
+          <ParallaxImage
+            src={k4.url}
+            speed={0.14}
+            position="center 30%"
+            className="mb-12 rounded-sm shadow-lg w-full aspect-[16/10]"
+          />
         </Reveal>
         <div className="space-y-6">
           {STORY_PARAGRAPHS.map((p, i) => (
