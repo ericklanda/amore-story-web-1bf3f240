@@ -193,7 +193,7 @@ function ParallaxImage({
   }, [images.length, interval]);
 
   return (
-    <div ref={ref} className={`overflow-hidden ${className}`} style={{ position: "absolute" in {} ? undefined : undefined }}>
+    <div ref={ref} className={`overflow-hidden ${className.includes("absolute") ? "" : "relative"} ${className}`}>
       <div className="absolute inset-x-0 -top-[15%] h-[130%] will-change-transform" style={{ transform: `translate3d(0, ${offset}px, 0)` }}>
         {images.map((img, i) => (
           <div
