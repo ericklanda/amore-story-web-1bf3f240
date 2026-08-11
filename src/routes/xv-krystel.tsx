@@ -166,31 +166,48 @@ function useParallax(speed = 0.25) {
 
 function ParallaxImage({
   src,
+  srcs,
   className = "",
   speed = 0.18,
   overlay,
   position = "center",
+  interval = 5000,
   children,
 }: {
-  src: string;
+  src?: string;
+  srcs?: string[];
   className?: string;
   speed?: number;
   overlay?: string;
   position?: string;
+  interval?: number;
   children?: React.ReactNode;
 }) {
   const { ref, offset } = useParallax(speed);
+  const images = srcs && srcs.length ? srcs : src ? [src] : [];
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    if (images.length < 2) return;
+    const id = setInterval(() => setIndex((i) => (i + 1) % images.length), interval);
+    return () => clearInterval(id);
+  }, [images.length, interval]);
+
   return (
-    <div ref={ref} className={`relative overflow-hidden ${className}`}>
-      <div
-        className="absolute inset-x-0 -top-[15%] h-[130%] will-change-transform"
-        style={{
-          backgroundImage: `url(${src})`,
-          backgroundSize: "cover",
-          backgroundPosition: position,
-          transform: `translate3d(0, ${offset}px, 0)`,
-        }}
-      />
+    <div ref={ref} className={`overflow-hidden ${className}`} style={{ position: "absolute" in {} ? undefined : undefined }}>
+      <div className="absolute inset-x-0 -top-[15%] h-[130%] will-change-transform" style={{ transform: `translate3d(0, ${offset}px, 0)` }}>
+        {images.map((img, i) => (
+          <div
+            key={img}
+            className="absolute inset-0 transition-opacity duration-[1400ms] ease-in-out"
+            style={{
+              backgroundImage: `url(${img})`,
+              backgroundSize: "cover",
+              backgroundPosition: position,
+              opacity: i === index ? 1 : 0,
+            }}
+          />
+        ))}
+      </div>
       {overlay && <div className="absolute inset-0" style={{ background: overlay }} />}
       {children && <div className="relative z-10 h-full">{children}</div>}
     </div>
