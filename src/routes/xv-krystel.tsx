@@ -804,25 +804,9 @@ function Rsvp() {
                 ))}
               </div>
             </Field>
-            {form.attending === "yes" && (
-              <Field label="Número de personas">
-                <input
-                  type="number"
-                  min={1}
-                  max={invite?.guests_allowed ?? 10}
-                  value={guests}
-                  onChange={(e) => setGuests(Math.max(1, Number(e.target.value) || 1))}
-                  className="w-full bg-transparent border-b outline-none py-2"
-                  style={{ borderColor: C.border }}
-                />
-              </Field>
-            )}
             <Field label="Mensaje para Krystel (opcional)">
               <textarea rows={3} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full bg-transparent border outline-none p-3 rounded-sm resize-none" style={{ borderColor: C.border }} />
             </Field>
-            <p className="text-xs text-center leading-relaxed rounded-sm px-4 py-3" style={{ backgroundColor: C.bgAlt, border: `1px solid ${C.border}`, color: C.text }}>
-              Esta invitación es <strong>personal e intransferible</strong> y válida únicamente para el número de personas indicado.
-            </p>
             <button
               type="submit"
               disabled={submitting || !form.name.trim()}
