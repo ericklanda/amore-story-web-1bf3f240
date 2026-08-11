@@ -41,18 +41,18 @@ export const Route = createFileRoute("/xv-danna")({
 /* -------- Paleta Sage & Rosa -------- */
 const C = {
   bg: "#F5EDE4",
-  bgAlt: "#EED8CC",
+  bgAlt: "#DDE5D3",
   sage: "#A9B49B",
   sageDark: "#7A8A6E",
-  rose: "#D9B8AE",
+  rose: "#B9C4A8",
   primary: "#7A8A6E",
   primaryDark: "#5C6B52",
-  accent: "#C79A8C",
+  accent: "#7A8A6E",
   gold: "#B99461",
   text: "#4A443E",
   textMuted: "#8B8279",
-  card: "#FBF7F2",
-  border: "#E2D6C9",
+  card: "#FAF8F2",
+  border: "#D6DCC9",
 };
 
 /* -------- Datos del evento -------- */
@@ -364,7 +364,7 @@ function Hero() {
 /* ---------------- WELCOME ---------------- */
 function Welcome() {
   return (
-    <section className="py-20 md:py-28 px-6" style={SOFT_BG("rgba(238,216,204,0.78)")}>
+    <section className="py-20 md:py-28 px-6" style={SOFT_BG("rgba(203,216,192,0.80)")}>
       <div className="max-w-2xl mx-auto text-center space-y-5">
         <Reveal>
           <div className="text-xs tracking-[0.35em] uppercase mb-2" style={{ color: C.sageDark }}>— Bienvenid@ —</div>
@@ -439,7 +439,7 @@ function Story() {
 /* ---------------- PARENTS ---------------- */
 function Parents() {
   return (
-    <section className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(238,216,204,0.78)")}>
+    <section className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(203,216,192,0.80)")}>
       <div className="max-w-5xl mx-auto">
         <Reveal><SectionTitle kicker="Con amor" title="Mi familia" /></Reveal>
         <p className="text-center max-w-2xl mx-auto font-serif italic text-lg mb-14" style={{ color: C.textMuted }}>
@@ -481,7 +481,7 @@ function Gallery() {
   }, [emblaApi]);
 
   return (
-    <section className="py-24 md:py-32 px-6 overflow-hidden" style={SILK_BG("rgba(238,216,204,0.80)", "rgba(245,237,228,0.86)")}>
+    <section className="py-24 md:py-32 px-6 overflow-hidden" style={SILK_BG("rgba(203,216,192,0.82)", "rgba(245,237,228,0.86)")}>
       <div className="max-w-6xl mx-auto">
         <Reveal><SectionTitle kicker="Galería" title="Mis recuerdos" /></Reveal>
 
@@ -650,6 +650,7 @@ function Rsvp() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: "", attending: "yes", message: "" });
+  const [guests, setGuests] = useState<2 | 4>(2);
   const [invite, setInvite] = useState<{ guest_name: string | null; guests_allowed: number } | null>(null);
   const submit = useServerFn(submitRsvp);
   const lookup = useServerFn(lookupInvitationSendByToken);
@@ -663,6 +664,7 @@ function Rsvp() {
       .then((res) => {
         if (res?.row) {
           setInvite({ guest_name: res.row.guest_name, guests_allowed: res.row.guests_allowed });
+          setGuests(res.row.guests_allowed >= 4 ? 4 : 2);
           if (res.row.guest_name) {
             setForm((f) => (f.name ? f : { ...f, name: res.row!.guest_name! }));
           }
@@ -680,6 +682,7 @@ function Rsvp() {
       `Hola! Confirmo asistencia a los XV de Danna Joaquina.\n` +
       `Nombre: ${form.name}\n` +
       `Asistencia: ${form.attending === "yes" ? "Sí" : "No"}` +
+      `\nPersonas: ${form.attending === "yes" ? guests : 0}` +
       (invite ? `\nLugares reservados: ${invite.guests_allowed}` : "") +
       (form.message ? `\nMensaje: ${form.message}` : "");
     const wa = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
@@ -692,7 +695,7 @@ function Rsvp() {
           invitation_slug: "xv-danna",
           name: form.name.trim(),
           attending: form.attending as "yes" | "no",
-          guests: invite?.guests_allowed ?? 1,
+          guests: form.attending === "yes" ? guests : 0,
           message: form.message || null,
         },
       });
@@ -706,7 +709,7 @@ function Rsvp() {
   };
 
   return (
-    <section className="relative py-24 md:py-32 px-6" style={SOFT_BG("rgba(238,216,204,0.78)")}>
+    <section className="relative py-24 md:py-32 px-6" style={SOFT_BG("rgba(203,216,192,0.80)")}>
       <div className="max-w-2xl mx-auto">
         <Reveal><SectionTitle kicker="Confirmación" title="¿Me acompañas?" /></Reveal>
         {submitted ? (
@@ -746,9 +749,37 @@ function Rsvp() {
                 ))}
               </div>
             </Field>
+            {form.attending === "yes" && (
+              <Field label="Número de personas">
+                <div className="flex gap-3">
+                  {([2, 4] as const).map((n) => {
+                    const disabled = !!invite && invite.guests_allowed < n;
+                    return (
+                      <button
+                        key={n}
+                        type="button"
+                        disabled={disabled}
+                        onClick={() => setGuests(n)}
+                        className="flex-1 py-3 rounded-sm text-sm tracking-wider uppercase border transition-colors disabled:opacity-40"
+                        style={
+                          guests === n
+                            ? { backgroundColor: C.primary, color: "#fff", borderColor: C.primary }
+                            : { borderColor: C.border, color: C.textMuted }
+                        }
+                      >
+                        {n} personas
+                      </button>
+                    );
+                  })}
+                </div>
+              </Field>
+            )}
             <Field label="Mensaje para Danna (opcional)">
               <textarea rows={3} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full bg-transparent border outline-none p-3 rounded-sm resize-none" style={{ borderColor: C.border }} />
             </Field>
+            <p className="text-xs text-center leading-relaxed rounded-sm px-4 py-3" style={{ backgroundColor: C.bgAlt, border: `1px solid ${C.border}`, color: C.text }}>
+              Esta invitación es <strong>personal e intransferible</strong> y válida únicamente para el número de personas indicado.
+            </p>
             <button
               type="submit"
               disabled={submitting || !form.name.trim()}
@@ -760,6 +791,7 @@ function Rsvp() {
             <p className="text-[11px] text-center italic" style={{ color: C.textMuted }}>
               Al enviar, se abrirá WhatsApp con tu mensaje listo para enviar.
             </p>
+
           </form>
         )}
       </div>
@@ -804,7 +836,7 @@ function GiftRegistry() {
 /* ---------------- SOCIAL WALL ---------------- */
 function SocialWall() {
   return (
-    <section className="py-24 md:py-32 px-6 text-center" style={SOFT_BG("rgba(238,216,204,0.78)")}>
+    <section className="py-24 md:py-32 px-6 text-center" style={SOFT_BG("rgba(203,216,192,0.80)")}>
       <div className="max-w-3xl mx-auto">
         <Reveal>
           <div className="text-xs tracking-[0.35em] uppercase mb-3" style={{ color: C.sageDark }}>— Comparte —</div>
