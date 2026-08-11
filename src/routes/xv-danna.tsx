@@ -749,9 +749,37 @@ function Rsvp() {
                 ))}
               </div>
             </Field>
+            {form.attending === "yes" && (
+              <Field label="Número de personas">
+                <div className="flex gap-3">
+                  {([2, 4] as const).map((n) => {
+                    const disabled = !!invite && invite.guests_allowed < n;
+                    return (
+                      <button
+                        key={n}
+                        type="button"
+                        disabled={disabled}
+                        onClick={() => setGuests(n)}
+                        className="flex-1 py-3 rounded-sm text-sm tracking-wider uppercase border transition-colors disabled:opacity-40"
+                        style={
+                          guests === n
+                            ? { backgroundColor: C.primary, color: "#fff", borderColor: C.primary }
+                            : { borderColor: C.border, color: C.textMuted }
+                        }
+                      >
+                        {n} personas
+                      </button>
+                    );
+                  })}
+                </div>
+              </Field>
+            )}
             <Field label="Mensaje para Danna (opcional)">
               <textarea rows={3} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full bg-transparent border outline-none p-3 rounded-sm resize-none" style={{ borderColor: C.border }} />
             </Field>
+            <p className="text-xs text-center leading-relaxed rounded-sm px-4 py-3" style={{ backgroundColor: C.bgAlt, border: `1px solid ${C.border}`, color: C.text }}>
+              Esta invitación es <strong>personal e intransferible</strong> y válida únicamente para el número de personas indicado.
+            </p>
             <button
               type="submit"
               disabled={submitting || !form.name.trim()}
@@ -763,6 +791,7 @@ function Rsvp() {
             <p className="text-[11px] text-center italic" style={{ color: C.textMuted }}>
               Al enviar, se abrirá WhatsApp con tu mensaje listo para enviar.
             </p>
+
           </form>
         )}
       </div>
