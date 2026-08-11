@@ -664,6 +664,7 @@ function Rsvp() {
       .then((res) => {
         if (res?.row) {
           setInvite({ guest_name: res.row.guest_name, guests_allowed: res.row.guests_allowed });
+          setGuests(res.row.guests_allowed >= 4 ? 4 : 2);
           if (res.row.guest_name) {
             setForm((f) => (f.name ? f : { ...f, name: res.row!.guest_name! }));
           }
