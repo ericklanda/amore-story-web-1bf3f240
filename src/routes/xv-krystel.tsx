@@ -423,7 +423,7 @@ function Hero() {
         </Reveal>
         <Reveal delay={1000}>
           <a
-            href="#detalles"
+            href="#bienvenida"
             className="mt-10 inline-flex items-center gap-3 px-8 py-3.5 rounded-full text-sm tracking-[0.2em] uppercase transition-all hover:gap-5"
             style={{ backgroundColor: "#fff", color: C.primaryDark }}
           >
