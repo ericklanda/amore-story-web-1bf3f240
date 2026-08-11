@@ -469,7 +469,9 @@ function EventDetails() {
         <div className="grid md:grid-cols-2 gap-6 md:gap-8">
           {events.map((ev, i) => (
             <Reveal key={ev.label} delay={i * 120}>
-              <article className="rounded-sm overflow-hidden shadow-md hover:shadow-lg transition-shadow h-full flex flex-col p-8 md:p-10 text-center" style={{ background: "#fff8ef", border: `1px solid ${C_PEACH}` }}>
+              <article className="rounded-sm overflow-hidden shadow-md hover:shadow-lg transition-shadow h-full flex flex-col text-center" style={{ background: "#fff8ef", border: `1px solid ${C_PEACH}` }}>
+                <img src={ev.image} alt={`${ev.label} — ${ev.place}`} loading="lazy" className="w-full h-52 md:h-60 object-cover" />
+                <div className="p-8 md:p-10 flex flex-col flex-1">
                 <div className="text-3xl mb-3">{ev.icon}</div>
                 <div className="text-xs tracking-[0.3em] uppercase mb-4" style={{ color: C_TERRACOTTA }}>{ev.label}</div>
                 <div className="font-serif text-4xl italic mb-2" style={{ color: C_BURGUNDY }}>{ev.time}</div>
