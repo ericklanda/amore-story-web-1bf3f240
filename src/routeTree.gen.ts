@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as XvLuciaRouteImport } from './routes/xv-lucia'
+import { Route as XvKrystelRouteImport } from './routes/xv-krystel'
 import { Route as XvIsabellaRouteImport } from './routes/xv-isabella'
 import { Route as XvDannaRouteImport } from './routes/xv-danna'
 import { Route as XvAriadneRouteImport } from './routes/xv-ariadne'
@@ -36,6 +37,11 @@ import { Route as ComprarXvDiamanteRouteImport } from './routes/comprar.xv.diama
 const XvLuciaRoute = XvLuciaRouteImport.update({
   id: '/xv-lucia',
   path: '/xv-lucia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const XvKrystelRoute = XvKrystelRouteImport.update({
+  id: '/xv-krystel',
+  path: '/xv-krystel',
   getParentRoute: () => rootRouteImport,
 } as any)
 const XvIsabellaRoute = XvIsabellaRouteImport.update({
@@ -163,6 +169,7 @@ export interface FileRoutesByFullPath {
   '/xv-ariadne': typeof XvAriadneRoute
   '/xv-danna': typeof XvDannaRoute
   '/xv-isabella': typeof XvIsabellaRoute
+  '/xv-krystel': typeof XvKrystelRoute
   '/xv-lucia': typeof XvLuciaRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/comprar/diamante': typeof ComprarDiamanteRoute
@@ -187,6 +194,7 @@ export interface FileRoutesByTo {
   '/xv-ariadne': typeof XvAriadneRoute
   '/xv-danna': typeof XvDannaRoute
   '/xv-isabella': typeof XvIsabellaRoute
+  '/xv-krystel': typeof XvKrystelRoute
   '/xv-lucia': typeof XvLuciaRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/comprar/diamante': typeof ComprarDiamanteRoute
@@ -213,6 +221,7 @@ export interface FileRoutesById {
   '/xv-ariadne': typeof XvAriadneRoute
   '/xv-danna': typeof XvDannaRoute
   '/xv-isabella': typeof XvIsabellaRoute
+  '/xv-krystel': typeof XvKrystelRoute
   '/xv-lucia': typeof XvLuciaRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/comprar/diamante': typeof ComprarDiamanteRoute
@@ -239,6 +248,7 @@ export interface FileRouteTypes {
     | '/xv-ariadne'
     | '/xv-danna'
     | '/xv-isabella'
+    | '/xv-krystel'
     | '/xv-lucia'
     | '/admin'
     | '/comprar/diamante'
@@ -263,6 +273,7 @@ export interface FileRouteTypes {
     | '/xv-ariadne'
     | '/xv-danna'
     | '/xv-isabella'
+    | '/xv-krystel'
     | '/xv-lucia'
     | '/admin'
     | '/comprar/diamante'
@@ -288,6 +299,7 @@ export interface FileRouteTypes {
     | '/xv-ariadne'
     | '/xv-danna'
     | '/xv-isabella'
+    | '/xv-krystel'
     | '/xv-lucia'
     | '/_authenticated/admin'
     | '/comprar/diamante'
@@ -314,6 +326,7 @@ export interface RootRouteChildren {
   XvAriadneRoute: typeof XvAriadneRoute
   XvDannaRoute: typeof XvDannaRoute
   XvIsabellaRoute: typeof XvIsabellaRoute
+  XvKrystelRoute: typeof XvKrystelRoute
   XvLuciaRoute: typeof XvLuciaRoute
   ComprarDiamanteRoute: typeof ComprarDiamanteRoute
   ComprarOroRoute: typeof ComprarOroRoute
@@ -330,6 +343,13 @@ declare module '@tanstack/react-router' {
       path: '/xv-lucia'
       fullPath: '/xv-lucia'
       preLoaderRoute: typeof XvLuciaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/xv-krystel': {
+      id: '/xv-krystel'
+      path: '/xv-krystel'
+      fullPath: '/xv-krystel'
+      preLoaderRoute: typeof XvKrystelRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/xv-isabella': {
@@ -516,6 +536,7 @@ const rootRouteChildren: RootRouteChildren = {
   XvAriadneRoute: XvAriadneRoute,
   XvDannaRoute: XvDannaRoute,
   XvIsabellaRoute: XvIsabellaRoute,
+  XvKrystelRoute: XvKrystelRoute,
   XvLuciaRoute: XvLuciaRoute,
   ComprarDiamanteRoute: ComprarDiamanteRoute,
   ComprarOroRoute: ComprarOroRoute,
