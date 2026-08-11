@@ -398,7 +398,7 @@ function Hero() {
   return (
     <section className="relative h-[100svh] min-h-[620px] w-full overflow-hidden">
       <ParallaxImage
-        src={k2.url}
+        srcs={[k2.url, k3.url, k4.url, k9.url]}
         speed={0.22}
         position="center 25%"
         className="absolute inset-0"
