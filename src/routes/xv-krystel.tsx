@@ -704,7 +704,7 @@ function DressCode() {
           <p className="text-base leading-relaxed" style={{ color: C.card }}>
             Una celebración relajada y alegre. Vengan cómodos y disfruten con nosotros.
           </p>
-          <p className="text-sm leading-relaxed mt-3" style={{ color: C.textMuted }}>
+          <p className="text-base leading-relaxed mt-3" style={{ color: C.card }}>
             El color azul rey es exclusivo para la quinceañera; te pedimos amablemente no usarlo para que ella sea la protagonista.
           </p>
         </Reveal>
