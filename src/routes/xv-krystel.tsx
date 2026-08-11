@@ -119,13 +119,83 @@ const GALLERY = [
 
 /* Fondos de mármol azul rey */
 const MARBLE_BG = (a1: string, a2: string, fixed = true) => ({
-  backgroundImage: `linear-gradient(180deg, ${a1}, ${a2}), url(${marble.url})`,
+  backgroundImage: `linear-gradient(180deg, ${a1}, ${a2}), url(${marbleInterior.url})`,
   backgroundSize: "cover",
   backgroundPosition: "center",
   ...(fixed ? { backgroundAttachment: "fixed" as const } : {}),
 });
 
+const SPLASH_BG = (a1: string, a2: string) => ({
+  backgroundImage: `linear-gradient(180deg, ${a1}, ${a2}), url(${marble.url})`,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+});
+
 const SOFT_BG = (tint = "rgba(246,242,232,0.92)") => MARBLE_BG(tint, tint, false);
+
+/* Parallax por scroll */
+function useParallax(speed = 0.25) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [offset, setOffset] = useState(0);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const el = ref.current;
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const center = rect.top + rect.height / 2 - window.innerHeight / 2;
+        setOffset(-center * speed);
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [speed]);
+  return { ref, offset };
+}
+
+function ParallaxImage({
+  src,
+  className = "",
+  speed = 0.18,
+  overlay,
+  position = "center",
+  children,
+}: {
+  src: string;
+  className?: string;
+  speed?: number;
+  overlay?: string;
+  position?: string;
+  children?: React.ReactNode;
+}) {
+  const { ref, offset } = useParallax(speed);
+  return (
+    <div ref={ref} className={`relative overflow-hidden ${className}`}>
+      <div
+        className="absolute inset-x-0 -top-[15%] h-[130%] will-change-transform"
+        style={{
+          backgroundImage: `url(${src})`,
+          backgroundSize: "cover",
+          backgroundPosition: position,
+          transform: `translate3d(0, ${offset}px, 0)`,
+        }}
+      />
+      {overlay && <div className="absolute inset-0" style={{ background: overlay }} />}
+      {children && <div className="relative z-10 h-full">{children}</div>}
+    </div>
+  );
+}
 
 /* ---------------- HOOKS ---------------- */
 function useCountdown(target: Date) {
