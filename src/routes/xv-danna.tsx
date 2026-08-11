@@ -41,18 +41,18 @@ export const Route = createFileRoute("/xv-danna")({
 /* -------- Paleta Sage & Rosa -------- */
 const C = {
   bg: "#F5EDE4",
-  bgAlt: "#EED8CC",
+  bgAlt: "#DDE5D3",
   sage: "#A9B49B",
   sageDark: "#7A8A6E",
-  rose: "#D9B8AE",
+  rose: "#B9C4A8",
   primary: "#7A8A6E",
   primaryDark: "#5C6B52",
-  accent: "#C79A8C",
+  accent: "#7A8A6E",
   gold: "#B99461",
   text: "#4A443E",
   textMuted: "#8B8279",
-  card: "#FBF7F2",
-  border: "#E2D6C9",
+  card: "#FAF8F2",
+  border: "#D6DCC9",
 };
 
 /* -------- Datos del evento -------- */
@@ -364,7 +364,7 @@ function Hero() {
 /* ---------------- WELCOME ---------------- */
 function Welcome() {
   return (
-    <section className="py-20 md:py-28 px-6" style={SOFT_BG("rgba(238,216,204,0.78)")}>
+    <section className="py-20 md:py-28 px-6" style={SOFT_BG("rgba(203,216,192,0.80)")}>
       <div className="max-w-2xl mx-auto text-center space-y-5">
         <Reveal>
           <div className="text-xs tracking-[0.35em] uppercase mb-2" style={{ color: C.sageDark }}>— Bienvenid@ —</div>
@@ -439,7 +439,7 @@ function Story() {
 /* ---------------- PARENTS ---------------- */
 function Parents() {
   return (
-    <section className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(238,216,204,0.78)")}>
+    <section className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(203,216,192,0.80)")}>
       <div className="max-w-5xl mx-auto">
         <Reveal><SectionTitle kicker="Con amor" title="Mi familia" /></Reveal>
         <p className="text-center max-w-2xl mx-auto font-serif italic text-lg mb-14" style={{ color: C.textMuted }}>
@@ -481,7 +481,7 @@ function Gallery() {
   }, [emblaApi]);
 
   return (
-    <section className="py-24 md:py-32 px-6 overflow-hidden" style={SILK_BG("rgba(238,216,204,0.80)", "rgba(245,237,228,0.86)")}>
+    <section className="py-24 md:py-32 px-6 overflow-hidden" style={SILK_BG("rgba(203,216,192,0.82)", "rgba(245,237,228,0.86)")}>
       <div className="max-w-6xl mx-auto">
         <Reveal><SectionTitle kicker="Galería" title="Mis recuerdos" /></Reveal>
 
@@ -706,7 +706,7 @@ function Rsvp() {
   };
 
   return (
-    <section className="relative py-24 md:py-32 px-6" style={SOFT_BG("rgba(238,216,204,0.78)")}>
+    <section className="relative py-24 md:py-32 px-6" style={SOFT_BG("rgba(203,216,192,0.80)")}>
       <div className="max-w-2xl mx-auto">
         <Reveal><SectionTitle kicker="Confirmación" title="¿Me acompañas?" /></Reveal>
         {submitted ? (
@@ -804,7 +804,7 @@ function GiftRegistry() {
 /* ---------------- SOCIAL WALL ---------------- */
 function SocialWall() {
   return (
-    <section className="py-24 md:py-32 px-6 text-center" style={SOFT_BG("rgba(238,216,204,0.78)")}>
+    <section className="py-24 md:py-32 px-6 text-center" style={SOFT_BG("rgba(203,216,192,0.80)")}>
       <div className="max-w-3xl mx-auto">
         <Reveal>
           <div className="text-xs tracking-[0.35em] uppercase mb-3" style={{ color: C.sageDark }}>— Comparte —</div>
