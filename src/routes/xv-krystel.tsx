@@ -358,7 +358,7 @@ function Splash({ onEnter }: { onEnter: () => void }) {
   return (
     <div
       className={`fixed inset-0 z-[60] overflow-hidden transition-opacity duration-700 ${fading ? "opacity-0 pointer-events-none" : "opacity-100"}`}
-      style={SPLASH_BG("rgba(18,42,107,0.55)", "rgba(11,24,64,0.72)")}
+      style={SPLASH_BG()}
     >
       <div className="absolute inset-0 flex items-center justify-center px-8">
         <div
