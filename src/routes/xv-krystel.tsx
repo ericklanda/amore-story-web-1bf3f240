@@ -380,13 +380,12 @@ function Splash({ onEnter }: { onEnter: () => void }) {
 function Hero() {
   return (
     <section className="relative h-[100svh] min-h-[620px] w-full overflow-hidden">
-      <div
+      <ParallaxImage
+        src={k2.url}
+        speed={0.22}
+        position="center 25%"
         className="absolute inset-0"
-        style={{
-          backgroundImage: `linear-gradient(180deg, rgb(18 42 107 / 45%), rgb(6 14 38 / 72%)), url(${k2.url})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center 25%",
-        }}
+        overlay="linear-gradient(180deg, rgb(18 42 107 / 45%), rgb(6 14 38 / 72%))"
       />
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-white">
         <Reveal delay={200}>
