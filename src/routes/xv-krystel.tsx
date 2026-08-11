@@ -423,7 +423,7 @@ function Hero() {
         </Reveal>
         <Reveal delay={1000}>
           <a
-            href="#detalles"
+            href="#bienvenida"
             className="mt-10 inline-flex items-center gap-3 px-8 py-3.5 rounded-full text-sm tracking-[0.2em] uppercase transition-all hover:gap-5"
             style={{ backgroundColor: "#fff", color: C.primaryDark }}
           >
@@ -438,7 +438,7 @@ function Hero() {
 /* ---------------- WELCOME ---------------- */
 function Welcome() {
   return (
-    <section className="py-20 md:py-28 px-6" style={SOFT_BG("rgba(231,236,246,0.90)")}>
+    <section id="bienvenida" className="py-20 md:py-28 px-6" style={SOFT_BG("rgba(231,236,246,0.90)")}>
       <div className="max-w-2xl mx-auto text-center space-y-5">
         <Reveal>
           <div className="text-xs tracking-[0.35em] uppercase mb-2" style={{ color: C.gold }}>— Bienvenid@ —</div>
