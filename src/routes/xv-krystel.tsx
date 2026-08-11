@@ -737,8 +737,6 @@ function Rsvp() {
       `Hola! Confirmo asistencia a los XV de Tania Krystel.\n` +
       `Nombre: ${form.name}\n` +
       `Asistencia: ${form.attending === "yes" ? "Sí" : "No"}` +
-      `\nPersonas: ${form.attending === "yes" ? guests : 0}` +
-      (invite ? `\nLugares reservados: ${invite.guests_allowed}` : "") +
       (form.message ? `\nMensaje: ${form.message}` : "");
     const wa = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
     const w = window.open(wa, "_blank", "noopener,noreferrer");
