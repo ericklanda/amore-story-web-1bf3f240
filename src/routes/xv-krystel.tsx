@@ -778,8 +778,6 @@ function Rsvp() {
             {invite && (
               <div className="text-center rounded-sm px-4 py-3 text-sm" style={{ backgroundColor: C.bg, border: `1px solid ${C.border}`, color: C.textMuted }}>
                 {invite.guest_name ? <span className="font-medium" style={{ color: C.primary }}>{invite.guest_name}</span> : "Invitación personal"}
-                {" · "}
-                <span>{invite.guests_allowed} {invite.guests_allowed === 1 ? "lugar reservado" : "lugares reservados"}</span>
               </div>
             )}
             <Field label="Nombre completo">
