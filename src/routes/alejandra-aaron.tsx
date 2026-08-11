@@ -486,6 +486,7 @@ function EventDetails() {
                 >
                   Cómo llegar →
                 </a>
+                </div>
               </article>
             </Reveal>
           ))}
