@@ -93,7 +93,7 @@ const STORY_PARAGRAPHS = [
 
 const PARENTS = [
   { title: "Mis papás", names: ["Pedro Paredes", "Dayanara Paredes"] },
-  { title: "Mis padrinos", names: ["Mario Hinojos", "Jazmín Monjer de Hinojos"] },
+  { title: "Mis padrinos", names: ["Mario Hinojos", "Yazmín Monjer de Hinojos"] },
   { title: "Chambelán de honor", names: ["Pedro Damián Paredes"] },
 ];
 
