@@ -368,8 +368,8 @@ function Hero() {
 /* ---------------- PARENTS ---------------- */
 function ParentsSection() {
   const groups = [
-    { title: "Padres de la novia", names: ["Elvia Oropeza", "Ricardo Félix"] },
-    { title: "Padres del novio", names: ["Rosa Rueda", "Tomás Rueda"] },
+    { title: "Padres de la novia", names: [{ name: "Elvia Oropeza" }, { name: "Ricardo Félix" }] },
+    { title: "Padres del novio", names: [{ name: "Rosa Rueda" }, { name: "Tomás Rueda", icon: "cross" }] },
   ];
 
   return (
@@ -387,7 +387,9 @@ function ParentsSection() {
               <div className="rounded-sm p-8 text-center shadow-md hover:shadow-lg transition-shadow" style={{ background: "#fff8ef", border: `1px solid ${C_PEACH}` }}>
                 <div className="text-xs tracking-[0.3em] uppercase mb-5" style={{ color: C_TERRACOTTA }}>{g.title}</div>
                 {g.names.map((n) => (
-                  <p key={n} className="font-serif text-xl leading-relaxed" style={{ color: C_BURGUNDY }}>{n}</p>
+                  <p key={n.name} className="font-serif text-xl leading-relaxed flex items-center justify-center gap-2" style={{ color: C_BURGUNDY }}>
+                    {n.name} {n.icon === "cross" && <Cross size={16} strokeWidth={2} aria-label="En memoria" />}
+                  </p>
                 ))}
               </div>
             </Reveal>
