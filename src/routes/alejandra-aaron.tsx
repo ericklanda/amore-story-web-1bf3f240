@@ -364,6 +364,24 @@ function Hero() {
   );
 }
 
+function ChristianCross({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      width="24"
+      height="28"
+      viewBox="0 0 24 28"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <path d="M12 0v28M4 10h16M8 24L12 28L16 24" />
+    </svg>
+  );
+}
+
 /* ---------------- PARENTS ---------------- */
 function ParentsSection() {
   const groups = [
@@ -387,7 +405,14 @@ function ParentsSection() {
                 <div className="text-xs tracking-[0.3em] uppercase mb-5" style={{ color: C_TERRACOTTA }}>{g.title}</div>
                 {g.names.map((n) => (
                   <p key={n.name} className="font-serif text-xl leading-relaxed flex items-center justify-center gap-2" style={{ color: C_BURGUNDY }}>
-                    {n.name} {n.icon === "cross" && <Cross size={16} strokeWidth={2} aria-label="En memoria" />}
+                    {n.icon === "cross" ? (
+                      <span className="flex flex-col items-center gap-1">
+                        <ChristianCross className="w-5 h-6 text-[#8a3c38]" />
+                        <span>{n.name}</span>
+                      </span>
+                    ) : (
+                      n.name
+                    )}
                   </p>
                 ))}
               </div>
