@@ -377,7 +377,7 @@ function ChristianCross({ className = "" }: { className?: string }) {
       strokeLinecap="round"
       aria-hidden="true"
     >
-      <path d="M12 0v28M4 10h16M8 24L12 28L16 24" />
+      <path d="M12 0v28M4 10h16" />
     </svg>
   );
 }
