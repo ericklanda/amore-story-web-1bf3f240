@@ -46,7 +46,7 @@ export const Route = createFileRoute("/alejandra-aaron")({
 const WEDDING_DATE = new Date("2026-10-03T17:00:00");
 const HASHTAG = "#AleYAaron2026";
 const WHATSAPP_NUMBER = "5216563078286";
-const YOUTUBE_SONG_ID = "yP_dhALIuFc";
+const YOUTUBE_SONG_ID = "5tizh3fNksE";
 
 /* Palette (terracota / burgundy / peach / cream / dusty rose)
    burgundy #6c2f2c · terracotta #b97a6a · dusty rose #a06b64 · peach #e6b89e · cream #f4ead9 */
