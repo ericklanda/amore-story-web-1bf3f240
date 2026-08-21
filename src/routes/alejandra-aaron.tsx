@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { Cross } from "lucide-react";
 import { submitRsvp } from "@/lib/rsvp.functions";
 import { toast } from "sonner";
 import aa62 from "@/assets/ale-aaron/aa-62.jpg.asset.json";
