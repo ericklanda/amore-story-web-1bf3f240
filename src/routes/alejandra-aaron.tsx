@@ -406,8 +406,8 @@ function ParentsSection() {
                 {g.names.map((n) => (
                   <p key={n.name} className="font-serif text-xl leading-relaxed flex items-center justify-center gap-2" style={{ color: C_BURGUNDY }}>
                     {n.icon === "cross" ? (
-                      <span className="flex flex-col items-center gap-1">
-                        <ChristianCross className="w-5 h-6 text-[#8a3c38]" />
+                      <span className="inline-flex items-center gap-2">
+                        <ChristianCross className="w-4 h-5 text-[#8a3c38]" />
                         <span>{n.name}</span>
                       </span>
                     ) : (
