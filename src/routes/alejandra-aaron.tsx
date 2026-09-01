@@ -804,7 +804,7 @@ function Faq() {
     { q: "¿Cuál es el código de vestimenta?", a: "Formal. Por favor evita usar blanco y rojo, colores reservados para la novia y la celebración." },
     { q: "¿Dónde es la ceremonia?", a: "En la Parroquia Natividad del Señor, Av. Plutarco Elías Calles 821, Progresista, Cd. Juárez, a las 5:00 pm." },
     { q: "¿Dónde es la recepción?", a: "En Pedro Meneses Hoyos #6754, Partido Iglesias, Cd. Juárez, a partir de las 9:00 pm." },
-    { q: "¿Hasta cuándo confirmar?", a: "Te pedimos confirmar tu asistencia antes del 3 de septiembre de 2026 por WhatsApp al 656 307 8286." },
+    { q: "¿Hasta cuándo confirmar?", a: "Te pedimos confirmar tu asistencia antes del 25 de septiembre de 2026 por WhatsApp al 656 307 8286." },
   ];
 
   const [open, setOpen] = useState<number | null>(0);
