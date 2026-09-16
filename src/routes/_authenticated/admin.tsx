@@ -84,38 +84,58 @@ function AdminPage() {
     return { total: rows.length, yes: yes.length, no: no.length, totalGuests };
   }, [rows]);
 
-  const downloadExcel = () => {
+  const downloadExcel = async () => {
     if (!rows.length) {
       toast.info("No hay confirmaciones aún.");
       return;
     }
-    const headers = ["Fecha", "Nombre", "Asiste", "Personas", "Mensaje"];
-    const escape = (v: string) => `"${v.replace(/"/g, '""')}"`;
-    const lines = [
-      headers.map(escape).join(","),
-      ...rows.map((r) =>
-        [
-          new Date(r.created_at).toLocaleString("es-MX"),
-          r.name,
-          r.attending === "yes" ? "Sí" : "No",
-          String(r.guests),
-          r.message ?? "",
-        ]
-          .map(escape)
-          .join(","),
-      ),
-    ];
-    const csv = "\uFEFF" + lines.join("\r\n");
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `confirmaciones-${slug}-${new Date().toISOString().slice(0, 10)}.csv`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    try {
+      const ExcelJS = (await import("exceljs")).default;
+      const wb = new ExcelJS.Workbook();
+      const ws = wb.addWorksheet("Confirmaciones");
+      ws.columns = [
+        { header: "Fecha", key: "fecha", width: 22 },
+        { header: "Nombre", key: "nombre", width: 28 },
+        { header: "Asiste", key: "asiste", width: 10 },
+        { header: "Personas", key: "personas", width: 12 },
+        { header: "Mensaje", key: "mensaje", width: 50 },
+      ];
+      ws.getRow(1).font = { bold: true, name: "Arial" };
+      rows.forEach((r) => {
+        ws.addRow({
+          fecha: new Date(r.created_at).toLocaleString("es-MX"),
+          nombre: r.name,
+          asiste: r.attending === "yes" ? "Sí" : "No",
+          personas: r.guests,
+          mensaje: r.message ?? "",
+        });
+      });
+      ws.addRow({});
+      const totalRow = ws.addRow({
+        nombre: "Total personas confirmadas",
+        personas: stats.totalGuests,
+      });
+      totalRow.font = { bold: true, name: "Arial" };
+
+      const buffer = await wb.xlsx.writeBuffer();
+      const blob = new Blob([buffer], {
+        type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `confirmaciones-${slug}-${new Date().toISOString().slice(0, 10)}.xlsx`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      toast.success("Archivo de Excel descargado.");
+    } catch (err) {
+      console.error("[downloadExcel]", err);
+      toast.error("No se pudo generar el archivo de Excel.");
+    }
   };
+
 
   const signOut = async () => {
     await supabase.auth.signOut();
