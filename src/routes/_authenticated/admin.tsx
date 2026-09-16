@@ -935,10 +935,10 @@ function OwnerSendInvitationSection({ slug }: { slug: string }) {
                   +{r.phone}
                 </p>
                 <p className="text-[11px] text-[#8A7E72]">
-                  {r.guests_allowed} {r.guests_allowed === 1 ? "invitado" : "invitados"}
-                  {r.sent_at && ` · enviado ${new Date(r.sent_at).toLocaleString("es-MX")}`}
+                  {r.sent_at ? `Enviado ${new Date(r.sent_at).toLocaleString("es-MX")}` : "Sin enviar"}
                 </p>
               </div>
+              <GuestsEditor row={r} onSaved={() => qc.invalidateQueries({ queryKey: ["invitation-sends", slug] })} />
               <button
                 onClick={() => sendEntry(r)}
                 className="px-4 py-1.5 text-[10px] tracking-[0.25em] uppercase bg-[#25D366] text-white rounded-sm hover:opacity-90"
