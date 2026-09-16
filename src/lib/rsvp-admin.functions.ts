@@ -125,6 +125,30 @@ export const listInvitationRequests = createServerFn({ method: "GET" })
     return { rows: data ?? [] };
   });
 
+export const updateRsvpGuests = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) =>
+    z
+      .object({
+        id: z.string().uuid(),
+        guests: z.number().int().min(1).max(30),
+      })
+      .parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    const { data: row, error } = await context.supabase
+      .from("rsvps")
+      .update({ guests: data.guests })
+      .eq("id", data.id)
+      .select("id, guests")
+      .single();
+    if (error) {
+      console.error("[updateRsvpGuests]", error);
+      throw new Error("No se pudo actualizar el número de invitados.");
+    }
+    return { row };
+  });
+
 export const updateInvitationRequestStatus = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) =>
