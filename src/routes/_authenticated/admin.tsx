@@ -130,7 +130,17 @@ function AdminPage() {
             )}
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            {invitations.length > 0 && (
+            {slug && (
+              <a
+                href={`/${slug}`}
+                target="_blank"
+                rel="noreferrer"
+                className="px-3 py-2 text-xs tracking-[0.2em] uppercase border border-[#E5DED3] rounded-sm hover:bg-white"
+              >
+                Ver mi invitación
+              </a>
+            )}
+            {(isAdmin || invitations.length > 1) && invitations.length > 0 && (
               <select
                 value={slug}
                 onChange={(e) => setSlug(e.target.value)}
