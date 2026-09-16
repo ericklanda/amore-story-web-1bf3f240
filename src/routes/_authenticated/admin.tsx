@@ -958,3 +958,66 @@ function OwnerSendInvitationSection({ slug }: { slug: string }) {
     </div>
   );
 }
+
+function GuestsEditor({ row, onSaved }: { row: SendRow; onSaved: () => void }) {
+  const update = useServerFn(updateInvitationSendGuests);
+  const [value, setValue] = useState<number>(row.guests_allowed);
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    setValue(row.guests_allowed);
+  }, [row.guests_allowed]);
+
+  const dirty = value !== row.guests_allowed;
+
+  const save = async () => {
+    setSaving(true);
+    try {
+      await update({ data: { id: row.id, guests_allowed: value } });
+      toast.success("Invitados actualizados.");
+      onSaved();
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "No se pudo guardar.");
+      setValue(row.guests_allowed);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="flex items-center gap-2">
+      <label className="text-[10px] tracking-[0.2em] uppercase text-[#8A7E72]">Invitados</label>
+      <input
+        type="number"
+        min={1}
+        max={30}
+        value={value}
+        onChange={(e) => {
+          const n = Number(e.target.value);
+          if (!Number.isNaN(n)) setValue(Math.min(30, Math.max(1, Math.trunc(n))));
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && dirty && !saving) void save();
+        }}
+        className={`w-16 border rounded-sm px-2 py-1.5 text-sm bg-white outline-none ${dirty ? "border-[#D4AF37]" : "border-[#E5DED3]"}`}
+      />
+      {dirty && (
+        <>
+          <button
+            onClick={save}
+            disabled={saving}
+            className="px-3 py-1.5 text-[10px] tracking-[0.25em] uppercase bg-[#D4AF37] text-white rounded-sm hover:opacity-90 disabled:opacity-50"
+          >
+            {saving ? "..." : "Guardar"}
+          </button>
+          <button
+            onClick={() => setValue(row.guests_allowed)}
+            className="text-[10px] tracking-[0.2em] uppercase text-[#8A7E72] hover:text-[#2D2D2D]"
+          >
+            Cancelar
+          </button>
+        </>
+      )}
+    </div>
+  );
+}
