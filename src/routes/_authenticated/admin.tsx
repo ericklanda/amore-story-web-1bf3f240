@@ -215,8 +215,9 @@ function AdminPage() {
         {isAdmin && <NewRequestsSection />}
         {isAdmin && <ChangeRequestsAdminSection />}
 
-        {slug && currentInv?.package_tier !== "plata" && <OwnerSendInvitationSection slug={slug} />}
-        {slug && !isAdmin && <OwnerChangeRequestSection slug={slug} />}
+        {slug && !simplified && currentInv?.package_tier !== "plata" && <OwnerSendInvitationSection slug={slug} />}
+        {slug && !isAdmin && !simplified && <OwnerChangeRequestSection slug={slug} />}
+
 
 
 
