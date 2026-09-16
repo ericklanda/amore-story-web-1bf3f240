@@ -109,3 +109,31 @@ export const lookupInvitationSendByToken = createServerFn({ method: "GET" })
     if (error) throw new Error(error.message);
     return { row: row ?? null };
   });
+
+export const updateInvitationSendGuests = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) =>
+    z
+      .object({
+        id: z.string().uuid(),
+        guests_allowed: z.number().int().min(1).max(30),
+      })
+      .parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    const { data: existing } = await context.supabase
+      .from("invitation_sends")
+      .select("invitation_slug")
+      .eq("id", data.id)
+      .maybeSingle();
+    if (!existing) throw new Error("Envío no encontrado.");
+    await assertOwnerOrAdmin(context, existing.invitation_slug as string);
+    const { data: row, error } = await context.supabase
+      .from("invitation_sends")
+      .update({ guests_allowed: data.guests_allowed })
+      .eq("id", data.id)
+      .select("*")
+      .single();
+    if (error) throw new Error(error.message);
+    return { row };
+  });

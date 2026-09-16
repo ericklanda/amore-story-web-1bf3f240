@@ -4,7 +4,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
 import { listRsvps, listMyInvitations, createInvitation, listInvitationRequests, updateInvitationRequestStatus } from "@/lib/rsvp-admin.functions";
 import { submitChangeRequest, listMyChangeRequests, listAllChangeRequests, updateChangeRequest } from "@/lib/change-requests.functions";
-import { listInvitationSends, createInvitationSend, markInvitationSendSent, deleteInvitationSend } from "@/lib/invitation-sends.functions";
+import { listInvitationSends, createInvitationSend, markInvitationSendSent, deleteInvitationSend, updateInvitationSendGuests } from "@/lib/invitation-sends.functions";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { InvitationEditor } from "@/components/admin/InvitationEditor";
@@ -211,7 +211,7 @@ function AdminPage() {
         {isAdmin && <NewRequestsSection />}
         {isAdmin && <ChangeRequestsAdminSection />}
 
-        {slug && !isAdmin && <OwnerSendInvitationSection slug={slug} />}
+        {slug && currentInv?.package_tier !== "plata" && <OwnerSendInvitationSection slug={slug} />}
         {slug && !isAdmin && <OwnerChangeRequestSection slug={slug} />}
 
 
@@ -935,10 +935,10 @@ function OwnerSendInvitationSection({ slug }: { slug: string }) {
                   +{r.phone}
                 </p>
                 <p className="text-[11px] text-[#8A7E72]">
-                  {r.guests_allowed} {r.guests_allowed === 1 ? "invitado" : "invitados"}
-                  {r.sent_at && ` · enviado ${new Date(r.sent_at).toLocaleString("es-MX")}`}
+                  {r.sent_at ? `Enviado ${new Date(r.sent_at).toLocaleString("es-MX")}` : "Sin enviar"}
                 </p>
               </div>
+              <GuestsEditor row={r} onSaved={() => qc.invalidateQueries({ queryKey: ["invitation-sends", slug] })} />
               <button
                 onClick={() => sendEntry(r)}
                 className="px-4 py-1.5 text-[10px] tracking-[0.25em] uppercase bg-[#25D366] text-white rounded-sm hover:opacity-90"
@@ -954,6 +954,69 @@ function OwnerSendInvitationSection({ slug }: { slug: string }) {
             </div>
           ))}
         </div>
+      )}
+    </div>
+  );
+}
+
+function GuestsEditor({ row, onSaved }: { row: SendRow; onSaved: () => void }) {
+  const update = useServerFn(updateInvitationSendGuests);
+  const [value, setValue] = useState<number>(row.guests_allowed);
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    setValue(row.guests_allowed);
+  }, [row.guests_allowed]);
+
+  const dirty = value !== row.guests_allowed;
+
+  const save = async () => {
+    setSaving(true);
+    try {
+      await update({ data: { id: row.id, guests_allowed: value } });
+      toast.success("Invitados actualizados.");
+      onSaved();
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "No se pudo guardar.");
+      setValue(row.guests_allowed);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="flex items-center gap-2">
+      <label className="text-[10px] tracking-[0.2em] uppercase text-[#8A7E72]">Invitados</label>
+      <input
+        type="number"
+        min={1}
+        max={30}
+        value={value}
+        onChange={(e) => {
+          const n = Number(e.target.value);
+          if (!Number.isNaN(n)) setValue(Math.min(30, Math.max(1, Math.trunc(n))));
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && dirty && !saving) void save();
+        }}
+        className={`w-16 border rounded-sm px-2 py-1.5 text-sm bg-white outline-none ${dirty ? "border-[#D4AF37]" : "border-[#E5DED3]"}`}
+      />
+      {dirty && (
+        <>
+          <button
+            onClick={save}
+            disabled={saving}
+            className="px-3 py-1.5 text-[10px] tracking-[0.25em] uppercase bg-[#D4AF37] text-white rounded-sm hover:opacity-90 disabled:opacity-50"
+          >
+            {saving ? "..." : "Guardar"}
+          </button>
+          <button
+            onClick={() => setValue(row.guests_allowed)}
+            className="text-[10px] tracking-[0.2em] uppercase text-[#8A7E72] hover:text-[#2D2D2D]"
+          >
+            Cancelar
+          </button>
+        </>
       )}
     </div>
   );
