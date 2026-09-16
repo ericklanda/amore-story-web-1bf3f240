@@ -72,6 +72,10 @@ function AdminPage() {
 
   const rows: Rsvp[] = data?.rows ?? [];
   const currentInv = invitations.find((i) => i.slug === slug);
+  // Clientes con panel simplificado: sin solicitudes nuevas, ajustes solicitados ni envío por WhatsApp
+  const SIMPLIFIED_OWNERS = ["dayis_hinojos@hotmail.es"];
+  const simplified = !isAdmin && !!currentInv?.owner_email && SIMPLIFIED_OWNERS.includes(currentInv.owner_email.toLowerCase());
+
 
   const stats = useMemo(() => {
     const yes = rows.filter((r) => r.attending === "yes");
