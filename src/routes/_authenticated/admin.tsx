@@ -2,9 +2,9 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
-import { listRsvps, listMyInvitations, createInvitation, listInvitationRequests, updateInvitationRequestStatus } from "@/lib/rsvp-admin.functions";
+import { listRsvps, listMyInvitations, createInvitation, listInvitationRequests, updateInvitationRequestStatus, updateRsvpGuests } from "@/lib/rsvp-admin.functions";
 import { submitChangeRequest, listMyChangeRequests, listAllChangeRequests, updateChangeRequest } from "@/lib/change-requests.functions";
-import { listInvitationSends, createInvitationSend, markInvitationSendSent, deleteInvitationSend, updateInvitationSendGuests } from "@/lib/invitation-sends.functions";
+import { listInvitationSends, createInvitationSend, markInvitationSendSent, deleteInvitationSend } from "@/lib/invitation-sends.functions";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { InvitationEditor } from "@/components/admin/InvitationEditor";
@@ -275,7 +275,9 @@ function AdminPage() {
                                 {r.attending === "yes" ? "Sí" : "No"}
                               </span>
                             </td>
-                            <td className="px-4 py-3">{r.guests}</td>
+                            <td className="px-4 py-3">
+                              <RsvpGuestsEditor row={r} onSaved={() => refetch()} />
+                            </td>
                             <td className="px-4 py-3 text-[#5a5249] max-w-md">{r.message}</td>
                           </tr>
                         ))
@@ -938,7 +940,9 @@ function OwnerSendInvitationSection({ slug }: { slug: string }) {
                   {r.sent_at ? `Enviado ${new Date(r.sent_at).toLocaleString("es-MX")}` : "Sin enviar"}
                 </p>
               </div>
-              <GuestsEditor row={r} onSaved={() => qc.invalidateQueries({ queryKey: ["invitation-sends", slug] })} />
+              <div className="text-sm text-[#2D2D2D]">
+                {r.guests_allowed} {r.guests_allowed === 1 ? "invitado" : "invitados"}
+              </div>
               <button
                 onClick={() => sendEntry(r)}
                 className="px-4 py-1.5 text-[10px] tracking-[0.25em] uppercase bg-[#25D366] text-white rounded-sm hover:opacity-90"
@@ -959,26 +963,26 @@ function OwnerSendInvitationSection({ slug }: { slug: string }) {
   );
 }
 
-function GuestsEditor({ row, onSaved }: { row: SendRow; onSaved: () => void }) {
-  const update = useServerFn(updateInvitationSendGuests);
-  const [value, setValue] = useState<number>(row.guests_allowed);
+function RsvpGuestsEditor({ row, onSaved }: { row: Rsvp; onSaved: () => void }) {
+  const update = useServerFn(updateRsvpGuests);
+  const [value, setValue] = useState<number>(row.guests);
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    setValue(row.guests_allowed);
-  }, [row.guests_allowed]);
+    setValue(row.guests);
+  }, [row.guests]);
 
-  const dirty = value !== row.guests_allowed;
+  const dirty = value !== row.guests;
 
   const save = async () => {
     setSaving(true);
     try {
-      await update({ data: { id: row.id, guests_allowed: value } });
+      await update({ data: { id: row.id, guests: value } });
       toast.success("Invitados actualizados.");
       onSaved();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "No se pudo guardar.");
-      setValue(row.guests_allowed);
+      setValue(row.guests);
     } finally {
       setSaving(false);
     }
@@ -986,7 +990,6 @@ function GuestsEditor({ row, onSaved }: { row: SendRow; onSaved: () => void }) {
 
   return (
     <div className="flex items-center gap-2">
-      <label className="text-[10px] tracking-[0.2em] uppercase text-[#8A7E72]">Invitados</label>
       <input
         type="number"
         min={1}
@@ -1011,7 +1014,7 @@ function GuestsEditor({ row, onSaved }: { row: SendRow; onSaved: () => void }) {
             {saving ? "..." : "Guardar"}
           </button>
           <button
-            onClick={() => setValue(row.guests_allowed)}
+            onClick={() => setValue(row.guests)}
             className="text-[10px] tracking-[0.2em] uppercase text-[#8A7E72] hover:text-[#2D2D2D]"
           >
             Cancelar
