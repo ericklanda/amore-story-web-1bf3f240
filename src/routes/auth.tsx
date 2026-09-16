@@ -15,10 +15,11 @@ export const Route = createFileRoute("/auth")({
 
 function AuthPage() {
   const navigate = useNavigate();
-  const [mode, setMode] = useState<"login" | "signup">("login");
+  const [mode, setMode] = useState<"magic" | "login" | "signup">("magic");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [sent, setSent] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -30,7 +31,15 @@ function AuthPage() {
     e.preventDefault();
     setLoading(true);
     try {
-      if (mode === "signup") {
+      if (mode === "magic") {
+        const { error } = await supabase.auth.signInWithOtp({
+          email,
+          options: { emailRedirectTo: `${window.location.origin}/admin` },
+        });
+        if (error) throw error;
+        setSent(true);
+        toast.success("Te enviamos un enlace de acceso a tu correo.");
+      } else if (mode === "signup") {
         const { error } = await supabase.auth.signUp({
           email,
           password,
@@ -60,67 +69,120 @@ function AuthPage() {
         </Link>
         <div className="bg-white border border-[#E5DED3] rounded-sm p-8 shadow-sm">
           <h1 className="font-serif text-2xl text-center mb-1 text-[#2D2D2D]">
-            {mode === "login" ? "Acceso admin" : "Crear cuenta"}
+            {mode === "magic" ? "Acceso" : mode === "login" ? "Acceso con contraseña" : "Crear cuenta"}
           </h1>
           <p className="text-center text-xs tracking-[0.2em] uppercase text-[#8A7E72] mb-6">
-            Solo para los novios
+            {mode === "magic" ? "Sin contraseña" : "Solo para los novios"}
           </p>
-          <form onSubmit={onSubmit} className="space-y-4">
-            <label className="block">
-              <span className="text-[10px] tracking-[0.3em] uppercase text-[#8A7E72]">Email</span>
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-1.5 w-full bg-transparent border-b border-[#E5DED3] focus:border-[#D4AF37] outline-none py-2"
-              />
-            </label>
-            <label className="block">
-              <span className="text-[10px] tracking-[0.3em] uppercase text-[#8A7E72]">Contraseña</span>
-              <input
-                type="password"
-                required
-                minLength={6}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-1.5 w-full bg-transparent border-b border-[#E5DED3] focus:border-[#D4AF37] outline-none py-2"
-              />
-            </label>
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full py-3 bg-[#2D2D2D] text-white tracking-[0.2em] uppercase text-xs rounded-full hover:opacity-90 transition-opacity disabled:opacity-60"
-            >
-              {loading ? "Espera..." : mode === "login" ? "Entrar" : "Crear cuenta"}
-            </button>
-          </form>
-          <button
-            onClick={() => setMode(mode === "login" ? "signup" : "login")}
-            className="mt-4 w-full text-xs tracking-[0.2em] uppercase text-[#8A7E72] hover:text-[#D4AF37] transition-colors"
-          >
-            {mode === "login" ? "¿Primera vez? Crear cuenta" : "Ya tengo cuenta · Entrar"}
-          </button>
-          {mode === "login" && (
-            <button
-              onClick={async () => {
-                if (!email) {
-                  toast.error("Escribe tu email primero");
-                  return;
-                }
-                const { error } = await supabase.auth.resetPasswordForEmail(email, {
-                  redirectTo: `${window.location.origin}/reset-password`,
-                });
-                if (error) toast.error(error.message);
-                else toast.success("Te enviamos un enlace para restablecer tu contraseña");
-              }}
-              className="mt-2 w-full text-xs tracking-[0.2em] uppercase text-[#8A7E72] hover:text-[#D4AF37] transition-colors"
-            >
-              Olvidé mi contraseña
-            </button>
+
+          {mode === "magic" && sent ? (
+            <div className="text-center space-y-4">
+              <p className="text-sm text-[#5a5249]">
+                Revisa tu correo <span className="text-[#2D2D2D]">{email}</span> y abre el enlace para entrar.
+              </p>
+              <button
+                onClick={() => setSent(false)}
+                className="text-xs tracking-[0.2em] uppercase text-[#8A7E72] hover:text-[#D4AF37] transition-colors"
+              >
+                Usar otro correo
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={onSubmit} className="space-y-4">
+              <label className="block">
+                <span className="text-[10px] tracking-[0.3em] uppercase text-[#8A7E72]">Email</span>
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="mt-1.5 w-full bg-transparent border-b border-[#E5DED3] focus:border-[#D4AF37] outline-none py-2"
+                />
+              </label>
+              {mode !== "magic" && (
+                <label className="block">
+                  <span className="text-[10px] tracking-[0.3em] uppercase text-[#8A7E72]">Contraseña</span>
+                  <input
+                    type="password"
+                    required
+                    minLength={6}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="mt-1.5 w-full bg-transparent border-b border-[#E5DED3] focus:border-[#D4AF37] outline-none py-2"
+                  />
+                </label>
+              )}
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full py-3 bg-[#2D2D2D] text-white tracking-[0.2em] uppercase text-xs rounded-full hover:opacity-90 transition-opacity disabled:opacity-60"
+              >
+                {loading
+                  ? "Espera..."
+                  : mode === "magic"
+                    ? "Enviarme enlace de acceso"
+                    : mode === "login"
+                      ? "Entrar"
+                      : "Crear cuenta"}
+              </button>
+            </form>
           )}
+
+          <div className="mt-4 space-y-2">
+            {mode !== "magic" && (
+              <button
+                onClick={() => { setMode("magic"); setSent(false); }}
+                className="w-full text-xs tracking-[0.2em] uppercase text-[#8A7E72] hover:text-[#D4AF37] transition-colors"
+              >
+                Entrar sin contraseña
+              </button>
+            )}
+            {mode === "magic" && (
+              <button
+                onClick={() => setMode("login")}
+                className="w-full text-xs tracking-[0.2em] uppercase text-[#8A7E72] hover:text-[#D4AF37] transition-colors"
+              >
+                Prefiero usar contraseña
+              </button>
+            )}
+            {mode === "login" && (
+              <button
+                onClick={() => setMode("signup")}
+                className="w-full text-xs tracking-[0.2em] uppercase text-[#8A7E72] hover:text-[#D4AF37] transition-colors"
+              >
+                ¿Primera vez? Crear cuenta
+              </button>
+            )}
+            {mode === "signup" && (
+              <button
+                onClick={() => setMode("login")}
+                className="w-full text-xs tracking-[0.2em] uppercase text-[#8A7E72] hover:text-[#D4AF37] transition-colors"
+              >
+                Ya tengo cuenta · Entrar
+              </button>
+            )}
+            {mode === "login" && (
+              <button
+                onClick={async () => {
+                  if (!email) {
+                    toast.error("Escribe tu email primero");
+                    return;
+                  }
+                  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+                    redirectTo: `${window.location.origin}/reset-password`,
+                  });
+                  if (error) toast.error(error.message);
+                  else toast.success("Te enviamos un enlace para restablecer tu contraseña");
+                }}
+                className="w-full text-xs tracking-[0.2em] uppercase text-[#8A7E72] hover:text-[#D4AF37] transition-colors"
+              >
+                Olvidé mi contraseña
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
   );
 }
+
