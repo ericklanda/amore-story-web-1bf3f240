@@ -72,6 +72,10 @@ function AdminPage() {
 
   const rows: Rsvp[] = data?.rows ?? [];
   const currentInv = invitations.find((i) => i.slug === slug);
+  // Clientes con panel simplificado: sin solicitudes nuevas, ajustes solicitados ni envío por WhatsApp
+  const SIMPLIFIED_OWNERS = ["dayis_hinojos@hotmail.es"];
+  const simplified = !isAdmin && !!currentInv?.owner_email && SIMPLIFIED_OWNERS.includes(currentInv.owner_email.toLowerCase());
+
 
   const stats = useMemo(() => {
     const yes = rows.filter((r) => r.attending === "yes");
@@ -211,8 +215,9 @@ function AdminPage() {
         {isAdmin && <NewRequestsSection />}
         {isAdmin && <ChangeRequestsAdminSection />}
 
-        {slug && currentInv?.package_tier !== "plata" && <OwnerSendInvitationSection slug={slug} />}
-        {slug && !isAdmin && <OwnerChangeRequestSection slug={slug} />}
+        {slug && !simplified && currentInv?.package_tier !== "plata" && <OwnerSendInvitationSection slug={slug} />}
+        {slug && !isAdmin && !simplified && <OwnerChangeRequestSection slug={slug} />}
+
 
 
 
