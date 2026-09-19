@@ -69,7 +69,7 @@ function AuthPage() {
         const { error } = await supabase.auth.signUp({
           email,
           password,
-          options: { emailRedirectTo: `${window.location.origin}/admin` },
+          options: { emailRedirectTo: `${publicOrigin()}/admin` },
         });
         if (error) throw error;
         toast.success("Cuenta creada. Ya puedes iniciar sesión.");
@@ -195,7 +195,7 @@ function AuthPage() {
                     return;
                   }
                   const { error } = await supabase.auth.resetPasswordForEmail(email, {
-                    redirectTo: `${window.location.origin}/reset-password`,
+                    redirectTo: `${publicOrigin()}/reset-password`,
                   });
                   if (error) toast.error(error.message);
                   else toast.success("Te enviamos un enlace para restablecer tu contraseña");
