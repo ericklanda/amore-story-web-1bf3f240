@@ -13,6 +13,17 @@ export const Route = createFileRoute("/auth")({
   component: AuthPage,
 });
 
+// El sitio público siempre debe recibir los enlaces de acceso.
+// Los dominios de vista previa de Lovable exigen cuenta propia y muestran "Acceso denegado".
+const PUBLIC_SITE = "https://invitaciones.blcksocial.com";
+
+function publicOrigin(): string {
+  if (typeof window === "undefined") return PUBLIC_SITE;
+  const host = window.location.hostname;
+  const isPreview = host.includes("lovable.app") || host.includes("lovableproject.com");
+  return isPreview ? PUBLIC_SITE : window.location.origin;
+}
+
 function AuthPage() {
   const navigate = useNavigate();
   const [mode, setMode] = useState<"magic" | "login" | "signup">("magic");
@@ -27,6 +38,21 @@ function AuthPage() {
     });
   }, [navigate]);
 
+  // Aviso claro cuando el enlace del correo ya venció o fue usado
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.hash.replace(/^#/, "") || window.location.search);
+    const err = params.get("error") || params.get("error_code");
+    if (!err) return;
+    const expired = /otp_expired|access_denied/i.test(err);
+    toast.error(
+      expired
+        ? "El enlace de acceso ya venció o fue usado. Pide uno nuevo con tu correo."
+        : params.get("error_description") || "No pudimos validar el enlace de acceso.",
+    );
+    window.history.replaceState({}, "", window.location.pathname);
+  }, []);
+
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -34,7 +60,7 @@ function AuthPage() {
       if (mode === "magic") {
         const { error } = await supabase.auth.signInWithOtp({
           email,
-          options: { emailRedirectTo: `${window.location.origin}/admin` },
+          options: { emailRedirectTo: `${publicOrigin()}/admin` },
         });
         if (error) throw error;
         setSent(true);
