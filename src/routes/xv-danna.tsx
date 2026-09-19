@@ -58,7 +58,7 @@ const C = {
 /* -------- Datos del evento -------- */
 const EVENT_DATE = new Date("2026-10-16T19:00:00-06:00");
 const HASHTAG = "#Dannasquince26";
-const WHATSAPP_NUMBER = "529157402244";
+const WHATSAPP_NUMBER = "19157402244";
 
 const CEREMONY = {
   name: "Parroquia San Mateo",
