@@ -1,3 +1,4 @@
+import type { ErrorComponentProps } from "@tanstack/react-router";
 import { createFileRoute, notFound, useRouter } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
@@ -46,7 +47,7 @@ function NotFoundInvitation() {
   );
 }
 
-function ErrorInvitation({ error }: { error: Error }) {
+function ErrorInvitation({ error }: ErrorComponentProps) {
   const router = useRouter();
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F7F3EE] px-6 text-center">
