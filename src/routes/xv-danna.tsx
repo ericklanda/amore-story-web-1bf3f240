@@ -686,9 +686,8 @@ function Rsvp() {
       (invite ? `\nLugares reservados: ${invite.guests_allowed}` : "") +
       (form.message ? `\nMensaje: ${form.message}` : "");
     const wa = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-    const w = window.open(wa, "_blank", "noopener,noreferrer");
-    if (!w) window.location.href = wa;
 
+    // Save first so leaving the page for WhatsApp can't cancel the save.
     try {
       await submit({
         data: {
@@ -702,10 +701,11 @@ function Rsvp() {
       setSubmitted(true);
     } catch (err) {
       console.error(err);
-      toast.error("No pudimos guardar tu confirmación, pero WhatsApp ya se abrió.");
+      toast.error("No pudimos guardar tu confirmación, pero te enviamos a WhatsApp.");
     } finally {
       setSubmitting(false);
     }
+    window.location.href = wa;
   };
 
   return (
