@@ -9,34 +9,99 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as XvLuciaRouteImport } from './routes/xv-lucia'
+import { Route as XvKrystelRouteImport } from './routes/xv-krystel'
+import { Route as XvIsabellaRouteImport } from './routes/xv-isabella'
+import { Route as XvDannaRouteImport } from './routes/xv-danna'
+import { Route as XvAriadneRouteImport } from './routes/xv-ariadne'
+import { Route as SusanaAlanRouteImport } from './routes/susana-alan'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as PriscilaOscarRouteImport } from './routes/priscila-oscar'
+import { Route as LuisLeoRouteImport } from './routes/luis-leo'
+import { Route as JulianaSilvaRouteImport } from './routes/juliana-silva'
+import { Route as GiselFernandoRouteImport } from './routes/gisel-fernando'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AlejandraAaronRouteImport } from './routes/alejandra-aaron'
 import { Route as SlugRouteImport } from './routes/$slug'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
-import { Route as AlejandraAaronRouteImport } from './routes/alejandra-aaron'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as GiselFernandoRouteImport } from './routes/gisel-fernando'
-import { Route as JulianaSilvaRouteImport } from './routes/juliana-silva'
-import { Route as LuisLeoRouteImport } from './routes/luis-leo'
-import { Route as PriscilaOscarRouteImport } from './routes/priscila-oscar'
-import { Route as ResetPasswordRouteImport } from './routes/reset-password'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as SusanaAlanRouteImport } from './routes/susana-alan'
-import { Route as XvAriadneRouteImport } from './routes/xv-ariadne'
-import { Route as XvDannaRouteImport } from './routes/xv-danna'
-import { Route as XvIsabellaRouteImport } from './routes/xv-isabella'
-import { Route as XvKrystelRouteImport } from './routes/xv-krystel'
-import { Route as XvLuciaRouteImport } from './routes/xv-lucia'
-import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
-import { Route as ComprarDiamanteRouteImport } from './routes/comprar.diamante'
-import { Route as ComprarOroRouteImport } from './routes/comprar.oro'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as ComprarPlataRouteImport } from './routes/comprar.plata'
-import { Route as ComprarXvDiamanteRouteImport } from './routes/comprar.xv.diamante'
-import { Route as ComprarXvOroRouteImport } from './routes/comprar.xv.oro'
+import { Route as ComprarOroRouteImport } from './routes/comprar.oro'
+import { Route as ComprarDiamanteRouteImport } from './routes/comprar.diamante'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as ComprarXvPlataRouteImport } from './routes/comprar.xv.plata'
+import { Route as ComprarXvOroRouteImport } from './routes/comprar.xv.oro'
+import { Route as ComprarXvDiamanteRouteImport } from './routes/comprar.xv.diamante'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const XvLuciaRoute = XvLuciaRouteImport.update({
+  id: '/xv-lucia',
+  path: '/xv-lucia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const XvKrystelRoute = XvKrystelRouteImport.update({
+  id: '/xv-krystel',
+  path: '/xv-krystel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const XvIsabellaRoute = XvIsabellaRouteImport.update({
+  id: '/xv-isabella',
+  path: '/xv-isabella',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const XvDannaRoute = XvDannaRouteImport.update({
+  id: '/xv-danna',
+  path: '/xv-danna',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const XvAriadneRoute = XvAriadneRouteImport.update({
+  id: '/xv-ariadne',
+  path: '/xv-ariadne',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SusanaAlanRoute = SusanaAlanRouteImport.update({
+  id: '/susana-alan',
+  path: '/susana-alan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PriscilaOscarRoute = PriscilaOscarRouteImport.update({
+  id: '/priscila-oscar',
+  path: '/priscila-oscar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LuisLeoRoute = LuisLeoRouteImport.update({
+  id: '/luis-leo',
+  path: '/luis-leo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JulianaSilvaRoute = JulianaSilvaRouteImport.update({
+  id: '/juliana-silva',
+  path: '/juliana-silva',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GiselFernandoRoute = GiselFernandoRouteImport.update({
+  id: '/gisel-fernando',
+  path: '/gisel-fernando',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlejandraAaronRoute = AlejandraAaronRouteImport.update({
+  id: '/alejandra-aaron',
+  path: '/alejandra-aaron',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SlugRoute = SlugRouteImport.update({
@@ -48,89 +113,9 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AlejandraAaronRoute = AlejandraAaronRouteImport.update({
-  id: '/alejandra-aaron',
-  path: '/alejandra-aaron',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GiselFernandoRoute = GiselFernandoRouteImport.update({
-  id: '/gisel-fernando',
-  path: '/gisel-fernando',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const JulianaSilvaRoute = JulianaSilvaRouteImport.update({
-  id: '/juliana-silva',
-  path: '/juliana-silva',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LuisLeoRoute = LuisLeoRouteImport.update({
-  id: '/luis-leo',
-  path: '/luis-leo',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PriscilaOscarRoute = PriscilaOscarRouteImport.update({
-  id: '/priscila-oscar',
-  path: '/priscila-oscar',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResetPasswordRoute = ResetPasswordRouteImport.update({
-  id: '/reset-password',
-  path: '/reset-password',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SusanaAlanRoute = SusanaAlanRouteImport.update({
-  id: '/susana-alan',
-  path: '/susana-alan',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const XvAriadneRoute = XvAriadneRouteImport.update({
-  id: '/xv-ariadne',
-  path: '/xv-ariadne',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const XvDannaRoute = XvDannaRouteImport.update({
-  id: '/xv-danna',
-  path: '/xv-danna',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const XvIsabellaRoute = XvIsabellaRouteImport.update({
-  id: '/xv-isabella',
-  path: '/xv-isabella',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const XvKrystelRoute = XvKrystelRouteImport.update({
-  id: '/xv-krystel',
-  path: '/xv-krystel',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const XvLuciaRoute = XvLuciaRouteImport.update({
-  id: '/xv-lucia',
-  path: '/xv-lucia',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const ComprarDiamanteRoute = ComprarDiamanteRouteImport.update({
-  id: '/comprar/diamante',
-  path: '/comprar/diamante',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ComprarOroRoute = ComprarOroRouteImport.update({
-  id: '/comprar/oro',
-  path: '/comprar/oro',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComprarPlataRoute = ComprarPlataRouteImport.update({
@@ -138,9 +123,24 @@ const ComprarPlataRoute = ComprarPlataRouteImport.update({
   path: '/comprar/plata',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ComprarXvDiamanteRoute = ComprarXvDiamanteRouteImport.update({
-  id: '/comprar/xv/diamante',
-  path: '/comprar/xv/diamante',
+const ComprarOroRoute = ComprarOroRouteImport.update({
+  id: '/comprar/oro',
+  path: '/comprar/oro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComprarDiamanteRoute = ComprarDiamanteRouteImport.update({
+  id: '/comprar/diamante',
+  path: '/comprar/diamante',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const ComprarXvPlataRoute = ComprarXvPlataRouteImport.update({
+  id: '/comprar/xv/plata',
+  path: '/comprar/xv/plata',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComprarXvOroRoute = ComprarXvOroRouteImport.update({
@@ -148,9 +148,9 @@ const ComprarXvOroRoute = ComprarXvOroRouteImport.update({
   path: '/comprar/xv/oro',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ComprarXvPlataRoute = ComprarXvPlataRouteImport.update({
-  id: '/comprar/xv/plata',
-  path: '/comprar/xv/plata',
+const ComprarXvDiamanteRoute = ComprarXvDiamanteRouteImport.update({
+  id: '/comprar/xv/diamante',
+  path: '/comprar/xv/diamante',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -338,11 +338,102 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/xv-lucia': {
+      id: '/xv-lucia'
+      path: '/xv-lucia'
+      fullPath: '/xv-lucia'
+      preLoaderRoute: typeof XvLuciaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/xv-krystel': {
+      id: '/xv-krystel'
+      path: '/xv-krystel'
+      fullPath: '/xv-krystel'
+      preLoaderRoute: typeof XvKrystelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/xv-isabella': {
+      id: '/xv-isabella'
+      path: '/xv-isabella'
+      fullPath: '/xv-isabella'
+      preLoaderRoute: typeof XvIsabellaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/xv-danna': {
+      id: '/xv-danna'
+      path: '/xv-danna'
+      fullPath: '/xv-danna'
+      preLoaderRoute: typeof XvDannaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/xv-ariadne': {
+      id: '/xv-ariadne'
+      path: '/xv-ariadne'
+      fullPath: '/xv-ariadne'
+      preLoaderRoute: typeof XvAriadneRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/susana-alan': {
+      id: '/susana-alan'
+      path: '/susana-alan'
+      fullPath: '/susana-alan'
+      preLoaderRoute: typeof SusanaAlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/priscila-oscar': {
+      id: '/priscila-oscar'
+      path: '/priscila-oscar'
+      fullPath: '/priscila-oscar'
+      preLoaderRoute: typeof PriscilaOscarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/luis-leo': {
+      id: '/luis-leo'
+      path: '/luis-leo'
+      fullPath: '/luis-leo'
+      preLoaderRoute: typeof LuisLeoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/juliana-silva': {
+      id: '/juliana-silva'
+      path: '/juliana-silva'
+      fullPath: '/juliana-silva'
+      preLoaderRoute: typeof JulianaSilvaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gisel-fernando': {
+      id: '/gisel-fernando'
+      path: '/gisel-fernando'
+      fullPath: '/gisel-fernando'
+      preLoaderRoute: typeof GiselFernandoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/alejandra-aaron': {
+      id: '/alejandra-aaron'
+      path: '/alejandra-aaron'
+      fullPath: '/alejandra-aaron'
+      preLoaderRoute: typeof AlejandraAaronRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$slug': {
@@ -359,123 +450,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/alejandra-aaron': {
-      id: '/alejandra-aaron'
-      path: '/alejandra-aaron'
-      fullPath: '/alejandra-aaron'
-      preLoaderRoute: typeof AlejandraAaronRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/gisel-fernando': {
-      id: '/gisel-fernando'
-      path: '/gisel-fernando'
-      fullPath: '/gisel-fernando'
-      preLoaderRoute: typeof GiselFernandoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/juliana-silva': {
-      id: '/juliana-silva'
-      path: '/juliana-silva'
-      fullPath: '/juliana-silva'
-      preLoaderRoute: typeof JulianaSilvaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/luis-leo': {
-      id: '/luis-leo'
-      path: '/luis-leo'
-      fullPath: '/luis-leo'
-      preLoaderRoute: typeof LuisLeoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/priscila-oscar': {
-      id: '/priscila-oscar'
-      path: '/priscila-oscar'
-      fullPath: '/priscila-oscar'
-      preLoaderRoute: typeof PriscilaOscarRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reset-password': {
-      id: '/reset-password'
-      path: '/reset-password'
-      fullPath: '/reset-password'
-      preLoaderRoute: typeof ResetPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/susana-alan': {
-      id: '/susana-alan'
-      path: '/susana-alan'
-      fullPath: '/susana-alan'
-      preLoaderRoute: typeof SusanaAlanRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/xv-ariadne': {
-      id: '/xv-ariadne'
-      path: '/xv-ariadne'
-      fullPath: '/xv-ariadne'
-      preLoaderRoute: typeof XvAriadneRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/xv-danna': {
-      id: '/xv-danna'
-      path: '/xv-danna'
-      fullPath: '/xv-danna'
-      preLoaderRoute: typeof XvDannaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/xv-isabella': {
-      id: '/xv-isabella'
-      path: '/xv-isabella'
-      fullPath: '/xv-isabella'
-      preLoaderRoute: typeof XvIsabellaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/xv-krystel': {
-      id: '/xv-krystel'
-      path: '/xv-krystel'
-      fullPath: '/xv-krystel'
-      preLoaderRoute: typeof XvKrystelRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/xv-lucia': {
-      id: '/xv-lucia'
-      path: '/xv-lucia'
-      fullPath: '/xv-lucia'
-      preLoaderRoute: typeof XvLuciaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/admin': {
-      id: '/_authenticated/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AuthenticatedAdminRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/comprar/diamante': {
-      id: '/comprar/diamante'
-      path: '/comprar/diamante'
-      fullPath: '/comprar/diamante'
-      preLoaderRoute: typeof ComprarDiamanteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/comprar/oro': {
-      id: '/comprar/oro'
-      path: '/comprar/oro'
-      fullPath: '/comprar/oro'
-      preLoaderRoute: typeof ComprarOroRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/comprar/plata': {
@@ -485,11 +464,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComprarPlataRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/comprar/xv/diamante': {
-      id: '/comprar/xv/diamante'
-      path: '/comprar/xv/diamante'
-      fullPath: '/comprar/xv/diamante'
-      preLoaderRoute: typeof ComprarXvDiamanteRouteImport
+    '/comprar/oro': {
+      id: '/comprar/oro'
+      path: '/comprar/oro'
+      fullPath: '/comprar/oro'
+      preLoaderRoute: typeof ComprarOroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comprar/diamante': {
+      id: '/comprar/diamante'
+      path: '/comprar/diamante'
+      fullPath: '/comprar/diamante'
+      preLoaderRoute: typeof ComprarDiamanteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/comprar/xv/plata': {
+      id: '/comprar/xv/plata'
+      path: '/comprar/xv/plata'
+      fullPath: '/comprar/xv/plata'
+      preLoaderRoute: typeof ComprarXvPlataRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/comprar/xv/oro': {
@@ -499,11 +499,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComprarXvOroRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/comprar/xv/plata': {
-      id: '/comprar/xv/plata'
-      path: '/comprar/xv/plata'
-      fullPath: '/comprar/xv/plata'
-      preLoaderRoute: typeof ComprarXvPlataRouteImport
+    '/comprar/xv/diamante': {
+      id: '/comprar/xv/diamante'
+      path: '/comprar/xv/diamante'
+      fullPath: '/comprar/xv/diamante'
+      preLoaderRoute: typeof ComprarXvDiamanteRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
