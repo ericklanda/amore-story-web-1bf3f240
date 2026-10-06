@@ -1,3 +1,4 @@
+import type { ErrorComponentProps } from "@tanstack/react-router";
 import { createFileRoute, notFound, useRouter } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
@@ -46,13 +47,13 @@ function NotFoundInvitation() {
   );
 }
 
-function ErrorInvitation({ error }: { error: Error }) {
+function ErrorInvitation({ error }: ErrorComponentProps) {
   const router = useRouter();
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F7F3EE] px-6 text-center">
       <div>
         <h1 className="font-serif text-2xl text-[#2D2D2D] mb-2">No se pudo cargar</h1>
-        <p className="text-[#8A7E72] mb-4">{error.message}</p>
+        <p className="text-[#8A7E72] mb-4">{(error as Error).message}</p>
         <button onClick={() => router.invalidate()} className="px-4 py-2 bg-[#2D2D2D] text-white text-xs tracking-[0.2em] uppercase rounded-full">
           Reintentar
         </button>
