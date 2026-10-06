@@ -39,6 +39,23 @@ export const listRsvps = createServerFn({ method: "GET" })
     z.object({ invitation_slug: z.string().min(1).max(64) }).parse(input),
   )
   .handler(async ({ data, context }) => {
+    const { data: adminRow } = await context.supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", context.userId)
+      .eq("role", "admin")
+      .maybeSingle();
+    if (!adminRow) {
+      const { data: inv } = await context.supabase
+        .from("invitations")
+        .select("package_tier")
+        .eq("slug", data.invitation_slug)
+        .maybeSingle();
+      if (!inv) throw new Error("Invitación no encontrada.");
+      if (inv.package_tier === "plata") {
+        throw new Error("El panel de confirmaciones no está incluido en el paquete Plata.");
+      }
+    }
     const { data: rows, error } = await context.supabase
       .from("rsvps")
       .select("id, invitation_slug, name, attending, guests, message, created_at")
