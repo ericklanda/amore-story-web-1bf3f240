@@ -34,7 +34,7 @@ export const Route = createFileRoute("/xv-alice")({
   head: () => ({
     meta: [
       { title: "Alice Chavarria · Mis XV Años" },
-      { name: "description", content: "Invitación digital a los XV años de Alice Chavarria. 8 de enero de 2027, Tuscany Hall - Lucca, El Paso, TX." },
+      { name: "description", content: "Invitación digital a los XV años de Alice Chavarria. 8 de enero de 2027, Tuscany Siena, El Paso, TX." },
       { property: "og:title", content: "Alice Chavarria · Mis XV Años" },
       { property: "og:description", content: "Acompáñame a celebrar mis XV años el 8 de enero de 2027." },
       { property: "og:image", content: c94.url },
@@ -68,9 +68,16 @@ const HASHTAG = "#AliceXV27";
 const WHATSAPP_NUMBER = "19154930001";
 
 const VENUE = {
-  name: "Tuscany Hall - Lucca",
+  name: "Tuscany Siena",
   address: "8600 Gtwy Blvd E Ste A2, El Paso, TX 79907",
   time: "7:00 pm",
+  maps: "https://maps.app.goo.gl/x9b7hxPJ9vxCisdh6?g_st=ic",
+};
+
+const CEREMONY = {
+  name: "Tuscany Siena",
+  address: "8600 Gtwy Blvd E Ste A2, El Paso, TX 79907",
+  time: "3:00 - 4:00 pm",
   maps: "https://maps.app.goo.gl/x9b7hxPJ9vxCisdh6?g_st=ic",
 };
 
@@ -567,8 +574,29 @@ function EventDetails() {
     <section id="detalles" className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(245,237,228,0.70)")}>
       <div className="max-w-5xl mx-auto">
         <Reveal><SectionTitle kicker="Detalles del evento" title="¿Cuándo y dónde?" /></Reveal>
-        <div className="max-w-md mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
           <Reveal>
+            <article className="rounded-sm overflow-hidden shadow-md h-full flex flex-col text-center" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
+              <img src={c115.url} alt={CEREMONY.name} loading="lazy" className="w-full h-48 md:h-56 object-cover" />
+              <div className="p-8 md:p-10 flex flex-col flex-1">
+                <div className="text-4xl mb-3">⛪</div>
+                <div className="text-xs tracking-[0.3em] uppercase mb-3" style={{ color: C.gold }}>Servicio religioso</div>
+                <div className="font-serif italic text-3xl mb-3" style={{ color: C.primary }}>{CEREMONY.time}</div>
+                <h3 className="font-serif text-xl mb-2" style={{ color: C.text }}>{CEREMONY.name}</h3>
+                <p className="text-sm mb-6 flex-1" style={{ color: C.textMuted }}>{CEREMONY.address}</p>
+                <a
+                  href={CEREMONY.maps}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 text-xs tracking-[0.2em] uppercase rounded-full"
+                  style={{ backgroundColor: C.primary, color: "#fff" }}
+                >
+                  Ver ubicación →
+                </a>
+              </div>
+            </article>
+          </Reveal>
+          <Reveal delay={120}>
             <article className="rounded-sm overflow-hidden shadow-md h-full flex flex-col text-center" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
               <img src={c132.url} alt={VENUE.name} loading="lazy" className="w-full h-48 md:h-56 object-cover" />
               <div className="p-8 md:p-10 flex flex-col flex-1">
@@ -844,7 +872,7 @@ function Faq() {
     () => [
       { q: "¿Cuál es el código de vestimenta?", a: "Semi formal. El color azul bajito está reservado exclusivamente para la quinceañera." },
       { q: "¿Puedo llevar acompañante?", a: "Los lugares son los indicados en tu invitación personal. Confirma en la sección de confirmación para reservarlos." },
-      { q: "¿Dónde será la celebración?", a: "La recepción será en Tuscany Hall - Lucca, 8600 Gtwy Blvd E Ste A2, El Paso, TX 79907." },
+      { q: "¿Dónde será la celebración?", a: "El servicio religioso será de 3:00 a 4:00 pm y la recepción a las 7:00 pm, ambos en Tuscany Siena, 8600 Gtwy Blvd E Ste A2, El Paso, TX 79907." },
       { q: "¿Cómo confirmo mi asistencia?", a: "Directamente en esta invitación, en la sección de confirmación. Tu respuesta llegará por WhatsApp." },
     ],
     []
