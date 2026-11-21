@@ -34,6 +34,16 @@ import c155 from "@/assets/xv-alice/alice-casual-155.jpg.asset.json";
 import c158 from "@/assets/xv-alice/alice-casual-158.jpg.asset.json";
 import c177 from "@/assets/xv-alice/alice-casual-177.jpg.asset.json";
 import c179 from "@/assets/xv-alice/alice-casual-179.jpg.asset.json";
+import c182 from "@/assets/xv-alice/alice-casual-182.jpg.asset.json";
+import c187 from "@/assets/xv-alice/alice-casual-187.jpg.asset.json";
+import c194 from "@/assets/xv-alice/alice-casual-194.jpg.asset.json";
+import c200 from "@/assets/xv-alice/alice-casual-200.jpg.asset.json";
+import c246 from "@/assets/xv-alice/alice-casual-246.jpg.asset.json";
+import c251 from "@/assets/xv-alice/alice-casual-251.jpg.asset.json";
+import c256 from "@/assets/xv-alice/alice-casual-256.jpg.asset.json";
+import c261 from "@/assets/xv-alice/alice-casual-261.jpg.asset.json";
+import c265 from "@/assets/xv-alice/alice-casual-265.jpg.asset.json";
+import c270 from "@/assets/xv-alice/alice-casual-270.jpg.asset.json";
 
 export const Route = createFileRoute("/xv-alice")({
   head: () => ({
@@ -127,6 +137,16 @@ const GALLERY = [
   { src: c158.url, caption: "Momentos" },
   { src: c177.url, caption: "Momentos" },
   { src: c179.url, caption: "Momentos" },
+  { src: c182.url, caption: "Momentos" },
+  { src: c187.url, caption: "Momentos" },
+  { src: c194.url, caption: "Momentos" },
+  { src: c200.url, caption: "Momentos" },
+  { src: c246.url, caption: "Momentos" },
+  { src: c251.url, caption: "Momentos" },
+  { src: c256.url, caption: "Momentos" },
+  { src: c261.url, caption: "Momentos" },
+  { src: c265.url, caption: "Momentos" },
+  { src: c270.url, caption: "Momentos" },
 ];
 
 const SILK_BG = (a1: string, a2: string) => ({
