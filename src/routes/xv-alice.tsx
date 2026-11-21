@@ -9,10 +9,6 @@ import silk from "@/assets/xv-danna/silk.jpg.asset.json";
 import splashBg from "@/assets/xv-danna/splash-bg.jpg.asset.json";
 import floralSoft from "@/assets/xv-danna/floral-soft.jpg.asset.json";
 
-import a7265 from "@/assets/xv-alice/alice-7265.jpg.asset.json";
-import a7271 from "@/assets/xv-alice/alice-7271.jpg.asset.json";
-import a7273 from "@/assets/xv-alice/alice-7273.jpg.asset.json";
-import a7276 from "@/assets/xv-alice/alice-7276.jpg.asset.json";
 import c94 from "@/assets/xv-alice/alice-casual-94.jpg.asset.json";
 import c97 from "@/assets/xv-alice/alice-casual-97.jpg.asset.json";
 import c115 from "@/assets/xv-alice/alice-casual-115.jpg.asset.json";
@@ -41,10 +37,10 @@ export const Route = createFileRoute("/xv-alice")({
       { name: "description", content: "Invitación digital a los XV años de Alice Chavarria. 8 de enero de 2027, Tuscany Hall - Lucca, El Paso, TX." },
       { property: "og:title", content: "Alice Chavarria · Mis XV Años" },
       { property: "og:description", content: "Acompáñame a celebrar mis XV años el 8 de enero de 2027." },
-      { property: "og:image", content: a7271.url },
+      { property: "og:image", content: c94.url },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: a7271.url },
+      { name: "twitter:image", content: c94.url },
     ],
   }),
   component: AliceXV,
@@ -326,7 +322,7 @@ function Hero() {
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: `linear-gradient(180deg, rgb(43 92 184 / 35%), rgb(0 0 0 / 60%)), url(${a7271.url})`,
+          backgroundImage: `linear-gradient(180deg, rgb(43 92 184 / 35%), rgb(0 0 0 / 60%)), url(${c94.url})`,
           backgroundSize: "cover",
           backgroundPosition: "center 20%",
         }}
@@ -420,7 +416,7 @@ function Story() {
         <Reveal><SectionTitle kicker="Mi historia" title="Sobre mí" /></Reveal>
         <Reveal delay={100}>
           <div className="mb-12 overflow-hidden rounded-sm shadow-lg">
-            <img src={a7265.url} alt="Alice Chavarria" className="w-full aspect-[16/10] object-cover" style={{ objectPosition: "center 30%" }} loading="lazy" />
+            <img src={c115.url} alt="Alice Chavarria" className="w-full aspect-[16/10] object-cover" style={{ objectPosition: "center 30%" }} loading="lazy" />
           </div>
         </Reveal>
         <div className="space-y-6">
@@ -574,7 +570,7 @@ function EventDetails() {
         <div className="max-w-md mx-auto">
           <Reveal>
             <article className="rounded-sm overflow-hidden shadow-md h-full flex flex-col text-center" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
-              <img src={a7273.url} alt={VENUE.name} loading="lazy" className="w-full h-48 md:h-56 object-cover" />
+              <img src={c132.url} alt={VENUE.name} loading="lazy" className="w-full h-48 md:h-56 object-cover" />
               <div className="p-8 md:p-10 flex flex-col flex-1">
                 <div className="text-4xl mb-3">🥂</div>
                 <div className="text-xs tracking-[0.3em] uppercase mb-3" style={{ color: C.gold }}>Recepción</div>
@@ -887,7 +883,7 @@ function ThankYou() {
     <section
       className="relative h-[100svh] min-h-[600px] w-full overflow-hidden"
       style={{
-        backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.55)), url(${a7276.url})`,
+        backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.55)), url(${c179.url})`,
         backgroundSize: "cover",
         backgroundPosition: "center 25%",
       }}
