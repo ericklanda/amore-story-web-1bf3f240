@@ -14,28 +14,7 @@ const invitationQueryOptions = (slug: string) =>
     staleTime: 60_000,
   });
 
-export const Route = createFileRoute("/$slug")({
-  // ssr off — uses runtime client navigation, simpler interactions w/ animations
-  loader: async ({ params, context }) => {
-    if (params.slug === "luis-leo" || params.slug === "auth" || params.slug === "admin" || params.slug === "reset-password") {
-      // these are owned by other routes; should not match this dynamic in practice,
-      // but guard anyway.
-      throw notFound();
-    }
-    await context.queryClient.ensureQueryData(invitationQueryOptions(params.slug));
-  },
-  head: ({ params }) => ({
-    meta: [
-      { title: `Invitación · ${params.slug}` },
-      { property: "og:title", content: `Invitación · ${params.slug}` },
-    ],
-  }),
-  component: PublicInvitationPage,
-  notFoundComponent: NotFoundInvitation,
-  errorComponent: ErrorInvitation,
-});
-
-function NotFoundInvitation() {
+function NotFoundView() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F7F3EE] px-6 text-center">
       <div>
@@ -45,6 +24,10 @@ function NotFoundInvitation() {
       </div>
     </div>
   );
+}
+
+function NotFoundInvitation() {
+  return <NotFoundView />;
 }
 
 function ErrorInvitation({ error }: ErrorComponentProps) {
@@ -65,9 +48,30 @@ function ErrorInvitation({ error }: ErrorComponentProps) {
 function PublicInvitationPage() {
   const { slug } = Route.useParams();
   const { data: inv } = useSuspenseQuery(invitationQueryOptions(slug));
-  if (!inv) return <NotFoundInvitation />;
+  if (!inv) return <NotFoundView />;
   return <Template inv={inv} />;
 }
+
+export const Route = createFileRoute("/$slug")({
+  // ssr off — uses runtime client navigation, simpler interactions w/ animations
+  loader: async ({ params, context }) => {
+    if (params.slug === "luis-leo" || params.slug === "auth" || params.slug === "admin" || params.slug === "reset-password") {
+      // these are owned by other routes; should not match this dynamic in practice,
+      // but guard anyway.
+      throw notFound();
+    }
+    await context.queryClient.ensureQueryData(invitationQueryOptions(params.slug));
+  },
+  head: ({ params }) => ({
+    meta: [
+      { title: `Invitación · ${params.slug}` },
+      { property: "og:title", content: `Invitación · ${params.slug}` },
+    ],
+  }),
+  component: PublicInvitationPage,
+  notFoundComponent: NotFoundInvitation,
+  errorComponent: ErrorInvitation,
+});
 
 
 /* ============================================================

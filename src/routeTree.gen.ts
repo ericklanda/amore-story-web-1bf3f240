@@ -21,6 +21,7 @@ import { Route as PriscilaOscarRouteImport } from './routes/priscila-oscar'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SusanaAlanRouteImport } from './routes/susana-alan'
+import { Route as XvAliceRouteImport } from './routes/xv-alice'
 import { Route as XvAriadneRouteImport } from './routes/xv-ariadne'
 import { Route as XvDannaRouteImport } from './routes/xv-danna'
 import { Route as XvIsabellaRouteImport } from './routes/xv-isabella'
@@ -91,6 +92,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const SusanaAlanRoute = SusanaAlanRouteImport.update({
   id: '/susana-alan',
   path: '/susana-alan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const XvAliceRoute = XvAliceRouteImport.update({
+  id: '/xv-alice',
+  path: '/xv-alice',
   getParentRoute: () => rootRouteImport,
 } as any)
 const XvAriadneRoute = XvAriadneRouteImport.update({
@@ -166,6 +172,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/susana-alan': typeof SusanaAlanRoute
+  '/xv-alice': typeof XvAliceRoute
   '/xv-ariadne': typeof XvAriadneRoute
   '/xv-danna': typeof XvDannaRoute
   '/xv-isabella': typeof XvIsabellaRoute
@@ -191,6 +198,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/susana-alan': typeof SusanaAlanRoute
+  '/xv-alice': typeof XvAliceRoute
   '/xv-ariadne': typeof XvAriadneRoute
   '/xv-danna': typeof XvDannaRoute
   '/xv-isabella': typeof XvIsabellaRoute
@@ -218,6 +226,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/susana-alan': typeof SusanaAlanRoute
+  '/xv-alice': typeof XvAliceRoute
   '/xv-ariadne': typeof XvAriadneRoute
   '/xv-danna': typeof XvDannaRoute
   '/xv-isabella': typeof XvIsabellaRoute
@@ -245,6 +254,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/susana-alan'
+    | '/xv-alice'
     | '/xv-ariadne'
     | '/xv-danna'
     | '/xv-isabella'
@@ -270,6 +280,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/susana-alan'
+    | '/xv-alice'
     | '/xv-ariadne'
     | '/xv-danna'
     | '/xv-isabella'
@@ -296,6 +307,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/susana-alan'
+    | '/xv-alice'
     | '/xv-ariadne'
     | '/xv-danna'
     | '/xv-isabella'
@@ -323,6 +335,7 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SusanaAlanRoute: typeof SusanaAlanRoute
+  XvAliceRoute: typeof XvAliceRoute
   XvAriadneRoute: typeof XvAriadneRoute
   XvDannaRoute: typeof XvDannaRoute
   XvIsabellaRoute: typeof XvIsabellaRoute
@@ -420,6 +433,13 @@ declare module '@tanstack/react-router' {
       path: '/susana-alan'
       fullPath: '/susana-alan'
       preLoaderRoute: typeof SusanaAlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/xv-alice': {
+      id: '/xv-alice'
+      path: '/xv-alice'
+      fullPath: '/xv-alice'
+      preLoaderRoute: typeof XvAliceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/xv-ariadne': {
@@ -533,6 +553,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SusanaAlanRoute: SusanaAlanRoute,
+  XvAliceRoute: XvAliceRoute,
   XvAriadneRoute: XvAriadneRoute,
   XvDannaRoute: XvDannaRoute,
   XvIsabellaRoute: XvIsabellaRoute,
