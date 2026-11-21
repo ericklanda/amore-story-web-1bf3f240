@@ -9,20 +9,9 @@ import silk from "@/assets/xv-danna/silk.jpg.asset.json";
 import splashBg from "@/assets/xv-danna/splash-bg.jpg.asset.json";
 import floralSoft from "@/assets/xv-danna/floral-soft.jpg.asset.json";
 
-import a7262 from "@/assets/xv-alice/alice-7262.jpg.asset.json";
-import a7263 from "@/assets/xv-alice/alice-7263.jpg.asset.json";
-import a7264 from "@/assets/xv-alice/alice-7264.jpg.asset.json";
 import a7265 from "@/assets/xv-alice/alice-7265.jpg.asset.json";
-import a7266 from "@/assets/xv-alice/alice-7266.jpg.asset.json";
-import a7267 from "@/assets/xv-alice/alice-7267.jpg.asset.json";
-import a7268 from "@/assets/xv-alice/alice-7268.jpg.asset.json";
-import a7269 from "@/assets/xv-alice/alice-7269.jpg.asset.json";
-import a7270 from "@/assets/xv-alice/alice-7270.jpg.asset.json";
 import a7271 from "@/assets/xv-alice/alice-7271.jpg.asset.json";
-import a7272 from "@/assets/xv-alice/alice-7272.jpg.asset.json";
 import a7273 from "@/assets/xv-alice/alice-7273.jpg.asset.json";
-import a7274 from "@/assets/xv-alice/alice-7274.jpg.asset.json";
-import a7275 from "@/assets/xv-alice/alice-7275.jpg.asset.json";
 import a7276 from "@/assets/xv-alice/alice-7276.jpg.asset.json";
 import c94 from "@/assets/xv-alice/alice-casual-94.jpg.asset.json";
 import c97 from "@/assets/xv-alice/alice-casual-97.jpg.asset.json";
@@ -112,21 +101,6 @@ const DRESS_CODE_NOTES = [
 ];
 
 const GALLERY = [
-  { src: a7271.url, caption: "Sonrisa" },
-  { src: a7265.url, caption: "Mis libros" },
-  { src: a7262.url, caption: "Jardín" },
-  { src: a7272.url, caption: "Atardecer" },
-  { src: a7263.url, caption: "Mirada" },
-  { src: a7264.url, caption: "Paseo" },
-  { src: a7266.url, caption: "Tarde dorada" },
-  { src: a7269.url, caption: "Corona" },
-  { src: a7270.url, caption: "Sueños" },
-  { src: a7267.url, caption: "Campo" },
-  { src: a7268.url, caption: "Risas" },
-  { src: a7273.url, caption: "Horizonte" },
-  { src: a7274.url, caption: "Pradera" },
-  { src: a7275.url, caption: "Luz" },
-  { src: a7276.url, caption: "Recuerdo" },
   { src: c94.url, caption: "Momentos" },
   { src: c97.url, caption: "Momentos" },
   { src: c115.url, caption: "Momentos" },
