@@ -35,9 +35,9 @@ export const Route = createFileRoute("/xv-alice")({
   head: () => ({
     meta: [
       { title: "Alice Jane Chavarria · Mis XV Años" },
-      { name: "description", content: "Invitación digital a los XV años de Alice Jane Chavarria. 1 de agosto de 2027, Tuscany Siena, El Paso, TX." },
+      { name: "description", content: "Invitación digital a los XV años de Alice Jane Chavarria. 8 de enero de 2027, Tuscany Siena, El Paso, TX." },
       { property: "og:title", content: "Alice Jane Chavarria · Mis XV Años" },
-      { property: "og:description", content: "Acompáñame a celebrar mis XV años el 1 de agosto de 2027." },
+      { property: "og:description", content: "Acompáñame a celebrar mis XV años el 8 de enero de 2027." },
       { property: "og:image", content: c94.url },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -72,7 +72,7 @@ const C = {
 };
 
 /* -------- Datos del evento -------- */
-const EVENT_DATE = new Date("2027-08-01T20:30:00-06:00");
+const EVENT_DATE = new Date("2027-01-08T20:30:00-07:00");
 const HASHTAG = "#AliceXV27";
 const WHATSAPP_NUMBER = "19154930001";
 
@@ -324,7 +324,7 @@ function Splash({ onEnter, lang, setLang }: { onEnter: () => void; lang: Lang; s
       <div className="absolute inset-0 flex items-center justify-center px-8">
         <div className="relative z-10 text-center max-w-[19rem] md:max-w-sm">
           <div className="text-[10px] md:text-xs tracking-[0.35em] uppercase mb-3" style={{ color: C.primaryDark }}>
-            {L("1 · Agosto · 2027", "August · 1 · 2027")}
+            {L("8 · Enero · 2027", "January · 8 · 2027")}
           </div>
           <h1 className="font-serif italic text-3xl md:text-5xl leading-tight" style={{ color: C.primaryDark }}>
             Alice Jane Chavarria
@@ -381,7 +381,7 @@ function Hero() {
       />
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-white">
         <Reveal delay={200}>
-          <div className="text-xs md:text-sm tracking-[0.35em] uppercase mb-6 text-white/90">{L("1 · Agosto · 2027", "August · 1 · 2027")}</div>
+          <div className="text-xs md:text-sm tracking-[0.35em] uppercase mb-6 text-white/90">{L("8 · Enero · 2027", "January · 8 · 2027")}</div>
         </Reveal>
         <Reveal delay={400}>
           <h1 className="font-serif italic text-5xl sm:text-6xl md:text-8xl leading-[0.95]">Alice Jane Chavarria</h1>
@@ -617,8 +617,8 @@ function Gallery() {
 function EventDetails() {
   const L = useL();
   const cal = () => {
-    const start = "20270802T023000Z";
-    const end = "20270802T050000Z";
+    const start = "20270109T033000Z";
+    const end = "20270109T060000Z";
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+Alice+Jane+Chavarria&dates=${start}/${end}&details=Acomp%C3%A1%C3%B1ame+a+celebrar+mis+XV+a%C3%B1os&location=${encodeURIComponent(VENUE.name)}`;
   };
   return (
@@ -630,7 +630,7 @@ function EventDetails() {
             <div className="inline-flex items-center gap-3">
               <span className="h-px w-10" style={{ backgroundColor: C.gold }} />
               <span className="font-serif italic text-xl md:text-2xl" style={{ color: C.primaryDark }}>
-                {L("Domingo 1 de Agosto de 2027", "Sunday, August 1, 2027")}
+                {L("Viernes 8 de Enero de 2027", "Friday, January 8, 2027")}
               </span>
               <span className="h-px w-10" style={{ backgroundColor: C.gold }} />
             </div>
@@ -794,7 +794,7 @@ function Rsvp() {
           <div className="text-center rounded-sm p-10 shadow-md" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
             <div className="text-5xl mb-4">💌</div>
             <h3 className="font-serif italic text-3xl mb-3" style={{ color: C.primary }}>{L("¡Gracias, ", "Thank you, ")}{form.name || L("amig@", "friend")}!</h3>
-            <p style={{ color: C.textMuted }}>{L("He recibido tu confirmación. Nos vemos el 1 de agosto.", "I've received your RSVP. See you on August 1.")}</p>
+            <p style={{ color: C.textMuted }}>{L("He recibido tu confirmación. Nos vemos el 8 de enero.", "I've received your RSVP. See you on January 8.")}</p>
           </div>
         ) : (
           <form onSubmit={onSubmit} className="rounded-sm p-7 md:p-10 shadow-md space-y-5" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
@@ -999,7 +999,7 @@ function ThankYou() {
         <div className="mt-8 font-script text-4xl md:text-6xl" style={{ color: "#DCE9FB" }}>
           Alice Jane Chavarria
         </div>
-        <div className="mt-6 text-xs tracking-[0.4em] uppercase text-white/70">01 · 08 · 2027</div>
+        <div className="mt-6 text-xs tracking-[0.4em] uppercase text-white/70">08 · 01 · 2027</div>
       </div>
     </section>
   );
