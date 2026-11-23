@@ -625,6 +625,17 @@ function EventDetails() {
     <section id="detalles" className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(245,237,228,0.70)")}>
       <div className="max-w-5xl mx-auto">
         <Reveal><SectionTitle kicker={L("Detalles del evento", "Event details")} title={L("¿Cuándo y dónde?", "When & where?")} /></Reveal>
+        <Reveal>
+          <div className="text-center -mt-6 mb-10">
+            <div className="inline-flex items-center gap-3">
+              <span className="h-px w-10" style={{ backgroundColor: C.gold }} />
+              <span className="font-serif italic text-xl md:text-2xl" style={{ color: C.primaryDark }}>
+                {L("Domingo 1 de Agosto de 2027", "Sunday, August 1, 2027")}
+              </span>
+              <span className="h-px w-10" style={{ backgroundColor: C.gold }} />
+            </div>
+          </div>
+        </Reveal>
         <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
           <Reveal>
             <article className="rounded-sm overflow-hidden shadow-md h-full flex flex-col text-center" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
