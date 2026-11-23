@@ -634,7 +634,7 @@ function EventDetails() {
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           <Reveal>
             <article className="rounded-sm overflow-hidden shadow-md h-full flex flex-col text-center" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
-              <img src={c115.url} alt={CEREMONY.name} loading="lazy" className="w-full h-48 md:h-56 object-cover" />
+              <img src={c115.url} alt={CEREMONY.name} loading="lazy" className="w-full h-48 md:h-56 object-contain" style={{ backgroundColor: C.bgAlt }} />
               <div className="p-8 md:p-10 flex flex-col flex-1">
                 <div className="text-4xl mb-3">⛪</div>
                 <div className="text-xs tracking-[0.3em] uppercase mb-3" style={{ color: C.gold }}>{L("Servicio religioso", "Religious service")}</div>
@@ -655,7 +655,7 @@ function EventDetails() {
           </Reveal>
           <Reveal delay={120}>
             <article className="rounded-sm overflow-hidden shadow-md h-full flex flex-col text-center" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
-              <img src={c149.url} alt={DINNER.name} loading="lazy" className="w-full h-48 md:h-56 object-cover" />
+              <img src={c149.url} alt={DINNER.name} loading="lazy" className="w-full h-48 md:h-56 object-contain" style={{ backgroundColor: C.bgAlt }} />
               <div className="p-8 md:p-10 flex flex-col flex-1">
                 <div className="text-4xl mb-3">🍽️</div>
                 <div className="text-xs tracking-[0.3em] uppercase mb-3" style={{ color: C.gold }}>{L("Cena", "Dinner")}</div>
@@ -808,7 +808,7 @@ function Rsvp() {
         <Reveal><SectionTitle kicker={L("Confirmación", "RSVP")} title={L("¿Me acompañas?", "Will you join me?")} /></Reveal>
         <Reveal delay={80}>
           <p className="text-center font-serif italic text-lg md:text-xl -mt-6 mb-10" style={{ color: C.primaryDark }}>
-            {L("Estás invitad@ a la cena de 7:20 a 8:20 pm en Tuscany Siena.", "You're invited to dinner from 7:20 to 8:20 pm at Tuscany Siena.")}
+            {L("Estás invitad@ a la fiesta y a la cena de 7:20 a 8:20 pm en Tuscany Siena.", "You're invited to the party and dinner from 7:20 to 8:20 pm at Tuscany Siena.")}
           </p>
         </Reveal>
         {submitted ? (
