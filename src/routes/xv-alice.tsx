@@ -34,10 +34,10 @@ import aliceCeremonyA from "@/assets/xv-alice/alice-ceremony-a.jpg.asset.json";
 export const Route = createFileRoute("/xv-alice")({
   head: () => ({
     meta: [
-      { title: "Alice Chavarria · Mis XV Años" },
-      { name: "description", content: "Invitación digital a los XV años de Alice Chavarria. 8 de enero de 2027, Tuscany Siena, El Paso, TX." },
-      { property: "og:title", content: "Alice Chavarria · Mis XV Años" },
-      { property: "og:description", content: "Acompáñame a celebrar mis XV años el 8 de enero de 2027." },
+      { title: "Alice Jane Chavarria · Mis XV Años" },
+      { name: "description", content: "Invitación digital a los XV años de Alice Jane Chavarria. 1 de agosto de 2027, Tuscany Siena, El Paso, TX." },
+      { property: "og:title", content: "Alice Jane Chavarria · Mis XV Años" },
+      { property: "og:description", content: "Acompáñame a celebrar mis XV años el 1 de agosto de 2027." },
       { property: "og:image", content: c94.url },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -72,7 +72,7 @@ const C = {
 };
 
 /* -------- Datos del evento -------- */
-const EVENT_DATE = new Date("2027-01-08T20:30:00-07:00");
+const EVENT_DATE = new Date("2027-08-01T20:30:00-06:00");
 const HASHTAG = "#AliceXV27";
 const WHATSAPP_NUMBER = "19154930001";
 
@@ -324,10 +324,10 @@ function Splash({ onEnter, lang, setLang }: { onEnter: () => void; lang: Lang; s
       <div className="absolute inset-0 flex items-center justify-center px-8">
         <div className="relative z-10 text-center max-w-[19rem] md:max-w-sm">
           <div className="text-[10px] md:text-xs tracking-[0.35em] uppercase mb-3" style={{ color: C.primaryDark }}>
-            {L("8 · Enero · 2027", "January · 8 · 2027")}
+            {L("1 · Agosto · 2027", "August · 1 · 2027")}
           </div>
           <h1 className="font-serif italic text-3xl md:text-5xl leading-tight" style={{ color: C.primaryDark }}>
-            Alice Chavarria
+            Alice Jane Chavarria
           </h1>
           <p className="font-script text-2xl md:text-3xl mt-1 mb-4" style={{ color: C.accent }}>
             {L("Mis XV Años", "My Quinceañera")}
@@ -381,10 +381,10 @@ function Hero() {
       />
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-white">
         <Reveal delay={200}>
-          <div className="text-xs md:text-sm tracking-[0.35em] uppercase mb-6 text-white/90">{L("8 · Enero · 2027", "January · 8 · 2027")}</div>
+          <div className="text-xs md:text-sm tracking-[0.35em] uppercase mb-6 text-white/90">{L("1 · Agosto · 2027", "August · 1 · 2027")}</div>
         </Reveal>
         <Reveal delay={400}>
-          <h1 className="font-serif italic text-5xl sm:text-6xl md:text-8xl leading-[0.95]">Alice Chavarria</h1>
+          <h1 className="font-serif italic text-5xl sm:text-6xl md:text-8xl leading-[0.95]">Alice Jane Chavarria</h1>
         </Reveal>
         <Reveal delay={600}>
           <p className="font-script text-6xl md:text-[4rem] mt-3 drop-shadow-lg" style={{ color: "#DCE9FB" }}>
@@ -471,7 +471,7 @@ function Story() {
         <Reveal><SectionTitle kicker={L("Mi historia", "My story")} title={L("Sobre mí", "About me")} /></Reveal>
         <Reveal delay={100}>
           <div className="mb-12 overflow-hidden rounded-sm shadow-lg">
-            <img src={c115.url} alt="Alice Chavarria" className="w-full aspect-[16/10] object-cover" style={{ objectPosition: "center 30%" }} loading="lazy" />
+            <img src={c115.url} alt="Alice Jane Chavarria" className="w-full aspect-[16/10] object-cover" style={{ objectPosition: "center 30%" }} loading="lazy" />
           </div>
         </Reveal>
         <div className="space-y-6">
@@ -617,9 +617,9 @@ function Gallery() {
 function EventDetails() {
   const L = useL();
   const cal = () => {
-    const start = "20270109T033000Z";
-    const end = "20270109T060000Z";
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+Alice+Chavarria&dates=${start}/${end}&details=Acomp%C3%A1%C3%B1ame+a+celebrar+mis+XV+a%C3%B1os&location=${encodeURIComponent(VENUE.name)}`;
+    const start = "20270802T023000Z";
+    const end = "20270802T050000Z";
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+Alice+Jane+Chavarria&dates=${start}/${end}&details=Acomp%C3%A1%C3%B1ame+a+celebrar+mis+XV+a%C3%B1os&location=${encodeURIComponent(VENUE.name)}`;
   };
   return (
     <section id="detalles" className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(245,237,228,0.70)")}>
@@ -628,7 +628,7 @@ function EventDetails() {
         <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
           <Reveal>
             <article className="rounded-sm overflow-hidden shadow-md h-full flex flex-col text-center" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
-              <img src={aliceCeremonyA.url} alt="Alice Chavarria" loading="lazy" className="w-full h-48 md:h-56 object-cover" style={{ objectPosition: "center 18%" }} />
+              <img src={aliceCeremonyA.url} alt="Alice Jane Chavarria" loading="lazy" className="w-full h-48 md:h-56 object-cover" style={{ objectPosition: "center 18%" }} />
               <div className="p-8 md:p-10 flex flex-col flex-1">
                 <div className="text-4xl mb-3">⛪</div>
                 <div className="text-xs tracking-[0.3em] uppercase mb-3" style={{ color: C.gold }}>{L("Servicio religioso", "Religious service")}</div>
@@ -746,7 +746,7 @@ function Rsvp() {
     setSubmitting(true);
 
     const text =
-      `Hola! Confirmo asistencia a los XV de Alice Chavarria.\n` +
+      `Hola! Confirmo asistencia a los XV de Alice Jane Chavarria.\n` +
       `Nombre: ${form.name}\n` +
       `Asistencia: ${form.attending === "yes" ? "Sí" : "No"}` +
       `\nPersonas: ${form.attending === "yes" ? guests : 0}` +
@@ -783,7 +783,7 @@ function Rsvp() {
           <div className="text-center rounded-sm p-10 shadow-md" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
             <div className="text-5xl mb-4">💌</div>
             <h3 className="font-serif italic text-3xl mb-3" style={{ color: C.primary }}>{L("¡Gracias, ", "Thank you, ")}{form.name || L("amig@", "friend")}!</h3>
-            <p style={{ color: C.textMuted }}>{L("He recibido tu confirmación. Nos vemos el 8 de enero.", "I've received your RSVP. See you on January 8.")}</p>
+            <p style={{ color: C.textMuted }}>{L("He recibido tu confirmación. Nos vemos el 1 de agosto.", "I've received your RSVP. See you on August 1.")}</p>
           </div>
         ) : (
           <form onSubmit={onSubmit} className="rounded-sm p-7 md:p-10 shadow-md space-y-5" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
@@ -986,9 +986,9 @@ function ThankYou() {
           {L("Tu presencia hará este día aún más inolvidable. Con todo mi cariño,", "Your presence will make this day even more unforgettable. With all my love,")}
         </p>
         <div className="mt-8 font-script text-4xl md:text-6xl" style={{ color: "#DCE9FB" }}>
-          Alice Chavarria
+          Alice Jane Chavarria
         </div>
-        <div className="mt-6 text-xs tracking-[0.4em] uppercase text-white/70">08 · 01 · 2027</div>
+        <div className="mt-6 text-xs tracking-[0.4em] uppercase text-white/70">01 · 08 · 2027</div>
       </div>
     </section>
   );
