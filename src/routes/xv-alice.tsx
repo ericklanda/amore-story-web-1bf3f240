@@ -29,6 +29,7 @@ import c256 from "@/assets/xv-alice/alice-casual-256.jpg.asset.json";
 import c261 from "@/assets/xv-alice/alice-casual-261.jpg.asset.json";
 import c265 from "@/assets/xv-alice/alice-casual-265.jpg.asset.json";
 import c270 from "@/assets/xv-alice/alice-casual-270.jpg.asset.json";
+import aliceCeremonyA from "@/assets/xv-alice/alice-ceremony-a.jpg.asset.json";
 
 export const Route = createFileRoute("/xv-alice")({
   head: () => ({
@@ -627,7 +628,7 @@ function EventDetails() {
         <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
           <Reveal>
             <article className="rounded-sm overflow-hidden shadow-md h-full flex flex-col text-center" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
-              <img src={c115.url} alt={CEREMONY.name} loading="lazy" className="w-full h-48 md:h-56 object-cover" />
+              <img src={aliceCeremonyA.url} alt="Alice Chavarria" loading="lazy" className="w-full h-48 md:h-56 object-cover" style={{ objectPosition: "center 18%" }} />
               <div className="p-8 md:p-10 flex flex-col flex-1">
                 <div className="text-4xl mb-3">⛪</div>
                 <div className="text-xs tracking-[0.3em] uppercase mb-3" style={{ color: C.gold }}>{L("Servicio religioso", "Religious service")}</div>
