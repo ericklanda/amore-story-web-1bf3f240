@@ -71,14 +71,14 @@ const C = {
 };
 
 /* -------- Datos del evento -------- */
-const EVENT_DATE = new Date("2027-01-08T19:00:00-07:00");
+const EVENT_DATE = new Date("2027-01-08T20:30:00-07:00");
 const HASHTAG = "#AliceXV27";
 const WHATSAPP_NUMBER = "19154930001";
 
 const VENUE = {
   name: "Tuscany Siena",
   address: "8600 Gtwy Blvd E Ste A2, El Paso, TX 79907",
-  time: "7:00 pm",
+  time: "8:30 pm",
   maps: "https://maps.app.goo.gl/x9b7hxPJ9vxCisdh6?g_st=ic",
 };
 
@@ -616,7 +616,7 @@ function Gallery() {
 function EventDetails() {
   const L = useL();
   const cal = () => {
-    const start = "20270109T020000Z";
+    const start = "20270109T033000Z";
     const end = "20270109T060000Z";
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+Alice+Chavarria&dates=${start}/${end}&details=Acomp%C3%A1%C3%B1ame+a+celebrar+mis+XV+a%C3%B1os&location=${encodeURIComponent(VENUE.name)}`;
   };
@@ -928,12 +928,12 @@ function Faq() {
     () => lang === "en" ? [
       { q: "What is the dress code?", a: "Semi formal. Light blue is reserved exclusively for the quinceañera." },
       { q: "Can I bring a guest?", a: "Seats are as indicated on your personal invitation. Confirm in the RSVP section to reserve them." },
-      { q: "Where is the celebration?", a: "The religious service will be from 3:00 to 4:00 pm at Our Lady of Sorrows Catholic, 7712 S Rosedale St, El Paso, TX 79915, and the reception at 7:00 pm at Tuscany Siena, 8600 Gtwy Blvd E Ste A2, El Paso, TX 79907." },
+      { q: "Where is the celebration?", a: "The religious service will be from 3:00 to 4:00 pm at Our Lady of Sorrows Catholic, 7712 S Rosedale St, El Paso, TX 79915, and the reception at 8:30 pm at Tuscany Siena, 8600 Gtwy Blvd E Ste A2, El Paso, TX 79907." },
       { q: "How do I RSVP?", a: "Right here in this invitation, in the RSVP section. Your answer will be sent via WhatsApp." },
     ] : [
       { q: "¿Cuál es el código de vestimenta?", a: "Semi formal. El color azul bajito está reservado exclusivamente para la quinceañera." },
       { q: "¿Puedo llevar acompañante?", a: "Los lugares son los indicados en tu invitación personal. Confirma en la sección de confirmación para reservarlos." },
-      { q: "¿Dónde será la celebración?", a: "El servicio religioso será de 3:00 a 4:00 pm en Our Lady of Sorrows Catholic, 7712 S Rosedale St, El Paso, TX 79915, y la recepción a las 7:00 pm en Tuscany Siena, 8600 Gtwy Blvd E Ste A2, El Paso, TX 79907." },
+      { q: "¿Dónde será la celebración?", a: "El servicio religioso será de 3:00 a 4:00 pm en Our Lady of Sorrows Catholic, 7712 S Rosedale St, El Paso, TX 79915, y la recepción a las 8:30 pm en Tuscany Siena, 8600 Gtwy Blvd E Ste A2, El Paso, TX 79907." },
       { q: "¿Cómo confirmo mi asistencia?", a: "Directamente en esta invitación, en la sección de confirmación. Tu respuesta llegará por WhatsApp." },
     ],
     [lang]
