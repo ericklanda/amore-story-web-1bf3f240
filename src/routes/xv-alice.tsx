@@ -341,8 +341,8 @@ function Splash({ onEnter, lang, setLang }: { onEnter: () => void; lang: Lang; s
                 type="button"
                 onClick={() => setLang(v)}
                 aria-pressed={lang === v}
-                className="px-4 py-1.5 rounded-full text-[10px] tracking-[0.2em] uppercase transition-colors"
-                style={lang === v ? { backgroundColor: C.primaryDark, color: "#fff" } : { color: C.primaryDark }}
+                className="px-5 py-2 rounded-full text-xs font-semibold tracking-[0.2em] uppercase"
+                style={lang === v ? { backgroundColor: C.primaryDark, color: "#fff", opacity: 1 } : { backgroundColor: "#fff", color: C.primaryDark, opacity: 1 }}
               >
                 {label}
               </button>
