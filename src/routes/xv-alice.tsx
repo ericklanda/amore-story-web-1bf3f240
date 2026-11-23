@@ -83,10 +83,10 @@ const VENUE = {
 };
 
 const CEREMONY = {
-  name: "Tuscany Siena",
-  address: "8600 Gtwy Blvd E Ste A2, El Paso, TX 79907",
+  name: "Our Lady of Sorrows Catholic",
+  address: "7712 S Rosedale St, El Paso, TX 79915",
   time: "3:00 - 4:00 pm",
-  maps: "https://maps.app.goo.gl/x9b7hxPJ9vxCisdh6?g_st=ic",
+  maps: "https://www.google.com/maps/place/?q=place_id:ChIJKxP3NKdc54YRdWpp2Ghl8Ys",
 };
 
 const WELCOME_EN = [
@@ -928,12 +928,12 @@ function Faq() {
     () => lang === "en" ? [
       { q: "What is the dress code?", a: "Semi formal. Light blue is reserved exclusively for the quinceañera." },
       { q: "Can I bring a guest?", a: "Seats are as indicated on your personal invitation. Confirm in the RSVP section to reserve them." },
-      { q: "Where is the celebration?", a: "The religious service will be from 3:00 to 4:00 pm and the reception at 7:00 pm, both at Tuscany Siena, 8600 Gtwy Blvd E Ste A2, El Paso, TX 79907." },
+      { q: "Where is the celebration?", a: "The religious service will be from 3:00 to 4:00 pm at Our Lady of Sorrows Catholic, 7712 S Rosedale St, El Paso, TX 79915, and the reception at 7:00 pm at Tuscany Siena, 8600 Gtwy Blvd E Ste A2, El Paso, TX 79907." },
       { q: "How do I RSVP?", a: "Right here in this invitation, in the RSVP section. Your answer will be sent via WhatsApp." },
     ] : [
       { q: "¿Cuál es el código de vestimenta?", a: "Semi formal. El color azul bajito está reservado exclusivamente para la quinceañera." },
       { q: "¿Puedo llevar acompañante?", a: "Los lugares son los indicados en tu invitación personal. Confirma en la sección de confirmación para reservarlos." },
-      { q: "¿Dónde será la celebración?", a: "El servicio religioso será de 3:00 a 4:00 pm y la recepción a las 7:00 pm, ambos en Tuscany Siena, 8600 Gtwy Blvd E Ste A2, El Paso, TX 79907." },
+      { q: "¿Dónde será la celebración?", a: "El servicio religioso será de 3:00 a 4:00 pm en Our Lady of Sorrows Catholic, 7712 S Rosedale St, El Paso, TX 79915, y la recepción a las 7:00 pm en Tuscany Siena, 8600 Gtwy Blvd E Ste A2, El Paso, TX 79907." },
       { q: "¿Cómo confirmo mi asistencia?", a: "Directamente en esta invitación, en la sección de confirmación. Tu respuesta llegará por WhatsApp." },
     ],
     [lang]
