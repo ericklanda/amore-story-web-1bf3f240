@@ -787,11 +787,11 @@ function Rsvp() {
     try {
       await submit({
         data: {
-          invitation_slug: "xv-alice-b",
+          invitation_slug: "xv-alice",
           name: form.name.trim(),
           attending: form.attending as "yes" | "no",
           guests: form.attending === "yes" ? guests : 0,
-          message: form.message || null,
+          message: `[Invitación B · con cena]${form.message ? " " + form.message : ""}`,
         },
       });
       setSubmitted(true);
