@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { useServerFn } from "@tanstack/react-start";
 import { submitRsvp } from "@/lib/rsvp.functions";
@@ -46,6 +46,14 @@ export const Route = createFileRoute("/xv-alice")({
   component: AliceXV,
 });
 
+/* -------- Idioma -------- */
+type Lang = "es" | "en";
+const LangCtx = createContext<Lang>("es");
+function useL() {
+  const l = useContext(LangCtx);
+  return <T,>(es: T, en: T): T => (l === "en" ? en : es);
+}
+
 /* -------- Paleta Azul Cielo -------- */
 const C = {
   bg: "#F5EDE4",
@@ -80,6 +88,22 @@ const CEREMONY = {
   time: "3:00 - 4:00 pm",
   maps: "https://maps.app.goo.gl/x9b7hxPJ9vxCisdh6?g_st=ic",
 };
+
+const WELCOME_EN = [
+  "With great joy, Alice and her parents warmly welcome you to this very special night. We are deeply grateful for your presence and the love with which you join us to celebrate this beautiful moment.",
+  "Today we celebrate the dreams, the hopes and a new chapter in Alice's life.",
+  "Thank you for being part of this unforgettable memory!",
+];
+const STORY_EN = [
+  "Since she was little, Alice has had a kind heart and a special love for animals. One of her dreams is to become a veterinarian to care for, protect and help those who have no voice.",
+  "Today, as she celebrates her fifteenth birthday, she begins a new chapter full of hopes, goals and opportunities.",
+  "May she never stop dreaming, and may she one day turn that beautiful wish into reality.",
+];
+const PARENTS_EN = ["My parents", "My godparents"];
+const DRESS_CODE_NOTES_EN = [
+  "Semi formal attire",
+  "Light blue is reserved exclusively for the quinceañera",
+];
 
 const WELCOME = [
   "Con mucha alegría, Alice y sus padres les dan la más cordial bienvenida a esta noche tan especial. Agradecemos de todo corazón su presencia y el cariño con el que nos acompañan para celebrar este hermoso momento.",
@@ -209,10 +233,12 @@ function SectionTitle({ kicker, title, light = false }: { kicker?: string; title
 /* ---------------- ROOT ---------------- */
 function AliceXV() {
   const [entered, setEntered] = useState(false);
+  const [lang, setLang] = useState<Lang>("es");
 
   return (
+    <LangCtx.Provider value={lang}>
     <div className="min-h-screen overflow-x-hidden relative" style={{ backgroundColor: C.bg, color: C.text }}>
-      {!entered && <Splash onEnter={() => setEntered(true)} />}
+      {!entered && <Splash lang={lang} setLang={setLang} onEnter={() => setEntered(true)} />}
       <MusicPlayer entered={entered} />
 
       <Hero />
@@ -229,6 +255,7 @@ function AliceXV() {
       <Faq />
       <ThankYou />
     </div>
+    </LangCtx.Provider>
   );
 }
 
@@ -279,8 +306,9 @@ function MusicPlayer({ entered }: { entered: boolean }) {
 }
 
 /* ---------------- SPLASH ---------------- */
-function Splash({ onEnter }: { onEnter: () => void }) {
+function Splash({ onEnter, lang, setLang }: { onEnter: () => void; lang: Lang; setLang: (l: Lang) => void }) {
   const [fading, setFading] = useState(false);
+  const L = useL();
   return (
     <div
       className={`fixed inset-0 z-[60] overflow-hidden transition-opacity duration-700 ${fading ? "opacity-0 pointer-events-none" : "opacity-100"}`}
@@ -295,17 +323,32 @@ function Splash({ onEnter }: { onEnter: () => void }) {
       <div className="absolute inset-0 flex items-center justify-center px-8">
         <div className="relative z-10 text-center max-w-[19rem] md:max-w-sm">
           <div className="text-[10px] md:text-xs tracking-[0.35em] uppercase mb-3" style={{ color: C.primaryDark }}>
-            8 · Enero · 2027
+            {L("8 · Enero · 2027", "January · 8 · 2027")}
           </div>
           <h1 className="font-serif italic text-3xl md:text-5xl leading-tight" style={{ color: C.primaryDark }}>
             Alice Chavarria
           </h1>
           <p className="font-script text-2xl md:text-3xl mt-1 mb-4" style={{ color: C.accent }}>
-            Mis XV Años
+            {L("Mis XV Años", "My Quinceañera")}
           </p>
-          <p className="text-[10px] tracking-[0.3em] uppercase mb-5" style={{ color: C.textMuted }}>
-            Estás Invitad@
+          <p className="text-[10px] tracking-[0.3em] uppercase mb-4" style={{ color: C.textMuted }}>
+            {L("Estás Invitad@", "You're Invited")}
           </p>
+          <div className="inline-flex mb-5 rounded-full p-1 shadow-sm" role="group" aria-label="Idioma / Language" style={{ backgroundColor: "rgba(255,255,255,0.75)", border: `1px solid ${C.border}` }}>
+            {([["es", "Español"], ["en", "English"]] as const).map(([v, label]) => (
+              <button
+                key={v}
+                type="button"
+                onClick={() => setLang(v)}
+                aria-pressed={lang === v}
+                className="px-4 py-1.5 rounded-full text-[10px] tracking-[0.2em] uppercase transition-colors"
+                style={lang === v ? { backgroundColor: C.primaryDark, color: "#fff" } : { color: C.primaryDark }}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+          <br />
           <button
             onClick={() => {
               setFading(true);
@@ -314,7 +357,7 @@ function Splash({ onEnter }: { onEnter: () => void }) {
             className="inline-flex items-center gap-3 px-7 py-3 rounded-full text-[11px] tracking-[0.2em] uppercase transition-all hover:gap-5 shadow-lg"
             style={{ backgroundColor: C.primary, color: "#fff" }}
           >
-            Ingresa <span>→</span>
+            {L("Ingresa", "Enter")} <span>→</span>
           </button>
         </div>
       </div>
@@ -324,6 +367,7 @@ function Splash({ onEnter }: { onEnter: () => void }) {
 
 /* ---------------- HERO ---------------- */
 function Hero() {
+  const L = useL();
   return (
     <section className="relative h-[100svh] min-h-[620px] w-full overflow-hidden">
       <div
@@ -336,19 +380,19 @@ function Hero() {
       />
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-white">
         <Reveal delay={200}>
-          <div className="text-xs md:text-sm tracking-[0.35em] uppercase mb-6 text-white/90">8 · Enero · 2027</div>
+          <div className="text-xs md:text-sm tracking-[0.35em] uppercase mb-6 text-white/90">{L("8 · Enero · 2027", "January · 8 · 2027")}</div>
         </Reveal>
         <Reveal delay={400}>
           <h1 className="font-serif italic text-5xl sm:text-6xl md:text-8xl leading-[0.95]">Alice Chavarria</h1>
         </Reveal>
         <Reveal delay={600}>
           <p className="font-script text-6xl md:text-[4rem] mt-3 drop-shadow-lg" style={{ color: "#DCE9FB" }}>
-            Mis XV Años
+            {L("Mis XV Años", "My Quinceañera")}
           </p>
         </Reveal>
         <Reveal delay={800}>
           <p className="mt-8 max-w-md text-xs md:text-sm tracking-[0.25em] uppercase text-white/85">
-            Una noche llena de sueños e ilusiones
+            {L("Una noche llena de sueños e ilusiones", "A night full of dreams and wishes")}
           </p>
         </Reveal>
         <Reveal delay={1000}>
@@ -357,7 +401,7 @@ function Hero() {
             className="mt-10 inline-flex items-center gap-3 px-8 py-3.5 rounded-full text-sm tracking-[0.2em] uppercase transition-all hover:gap-5"
             style={{ backgroundColor: "#fff", color: C.primaryDark }}
           >
-            Ver invitación <span>→</span>
+            {L("Ver invitación", "View invitation")} <span>→</span>
           </a>
         </Reveal>
       </div>
@@ -367,13 +411,14 @@ function Hero() {
 
 /* ---------------- WELCOME ---------------- */
 function Welcome() {
+  const L = useL();
   return (
     <section className="py-20 md:py-28 px-6" style={SOFT_BG("rgba(220,233,251,0.80)")}>
       <div className="max-w-2xl mx-auto text-center space-y-5">
         <Reveal>
-          <div className="text-xs tracking-[0.35em] uppercase mb-2" style={{ color: C.primaryDark }}>— Bienvenid@ —</div>
+          <div className="text-xs tracking-[0.35em] uppercase mb-2" style={{ color: C.primaryDark }}>— {L("Bienvenid@", "Welcome")} —</div>
         </Reveal>
-        {WELCOME.map((p, i) => (
+        {L(WELCOME, WELCOME_EN).map((p, i) => (
           <Reveal key={i} delay={100 + i * 80}>
             <p className="font-serif italic text-base md:text-xl leading-relaxed" style={{ color: C.primaryDark }}>
               {p}
@@ -388,16 +433,17 @@ function Welcome() {
 /* ---------------- COUNTDOWN (seda) ---------------- */
 function Countdown() {
   const { days, hours, minutes, seconds } = useCountdown(EVENT_DATE);
+  const L = useL();
   const items = [
-    { label: "Días", v: days },
+    { label: L("Días", "Days"), v: days },
     { label: "Hrs", v: hours },
     { label: "Min", v: minutes },
-    { label: "Seg", v: seconds },
+    { label: L("Seg", "Sec"), v: seconds },
   ];
   return (
     <section className="py-16 md:py-24 px-6" style={SILK_BG("rgba(245,237,228,0.82)", "rgba(245,237,228,0.88)")}>
       <div className="max-w-3xl mx-auto text-center">
-        <SectionTitle kicker="Cuenta regresiva" title="Falta poco" />
+        <SectionTitle kicker={L("Cuenta regresiva", "Countdown")} title={L("Falta poco", "Almost time")} />
         <div className="grid grid-cols-4 gap-3 md:gap-6">
           {items.map((t) => (
             <div key={t.label} className="p-5 rounded-sm" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
@@ -417,17 +463,18 @@ function Countdown() {
 
 /* ---------------- STORY ---------------- */
 function Story() {
+  const L = useL();
   return (
     <section id="historia" className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(245,237,228,0.70)")}>
       <div className="max-w-3xl mx-auto">
-        <Reveal><SectionTitle kicker="Mi historia" title="Sobre mí" /></Reveal>
+        <Reveal><SectionTitle kicker={L("Mi historia", "My story")} title={L("Sobre mí", "About me")} /></Reveal>
         <Reveal delay={100}>
           <div className="mb-12 overflow-hidden rounded-sm shadow-lg">
             <img src={c115.url} alt="Alice Chavarria" className="w-full aspect-[16/10] object-cover" style={{ objectPosition: "center 30%" }} loading="lazy" />
           </div>
         </Reveal>
         <div className="space-y-6">
-          {STORY_PARAGRAPHS.map((p, i) => (
+          {L(STORY_PARAGRAPHS, STORY_EN).map((p, i) => (
             <Reveal key={i} delay={i * 100}>
               <p className="font-serif italic text-base md:text-lg leading-relaxed text-center" style={{ color: C.text }}>
                 {p}
@@ -442,18 +489,19 @@ function Story() {
 
 /* ---------------- PARENTS ---------------- */
 function Parents() {
+  const L = useL();
   return (
     <section className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(220,233,251,0.80)")}>
       <div className="max-w-4xl mx-auto">
-        <Reveal><SectionTitle kicker="Con amor" title="Mi familia" /></Reveal>
+        <Reveal><SectionTitle kicker={L("Con amor", "With love")} title={L("Mi familia", "My family")} /></Reveal>
         <p className="text-center max-w-2xl mx-auto font-serif italic text-lg mb-14" style={{ color: C.textMuted }}>
-          "Con la bendición de Dios y el amor de mi familia, quiero compartir contigo este día tan especial."
+          {L("\"Con la bendición de Dios y el amor de mi familia, quiero compartir contigo este día tan especial.\"", "\"With God's blessing and my family's love, I want to share this very special day with you.\"")}
         </p>
         <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-          {PARENTS.map((g) => (
+          {PARENTS.map((g, gi) => (
             <Reveal key={g.title}>
               <div className="rounded-sm p-8 text-center shadow-md h-full" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
-                <div className="text-xs tracking-[0.3em] uppercase mb-4" style={{ color: C.gold }}>{g.title}</div>
+                <div className="text-xs tracking-[0.3em] uppercase mb-4" style={{ color: C.gold }}>{L(g.title, PARENTS_EN[gi] ?? g.title)}</div>
                 {g.names.map((n) => (
                   <p key={n} className="font-serif text-xl leading-relaxed" style={{ color: C.primary }}>{n}</p>
                 ))}
@@ -471,6 +519,7 @@ function Gallery() {
   const [lightbox, setLightbox] = useState<number | null>(null);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center", skipSnaps: false });
   const [selected, setSelected] = useState(0);
+  const L = useL();
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -487,7 +536,7 @@ function Gallery() {
   return (
     <section className="py-24 md:py-32 px-6 overflow-hidden" style={SILK_BG("rgba(220,233,251,0.82)", "rgba(245,237,228,0.86)")}>
       <div className="max-w-6xl mx-auto">
-        <Reveal><SectionTitle kicker="Galería" title="Mis recuerdos" /></Reveal>
+        <Reveal><SectionTitle kicker={L("Galería", "Gallery")} title={L("Mis recuerdos", "My memories")} /></Reveal>
 
         <Reveal delay={100}>
           <div className="relative">
@@ -532,7 +581,7 @@ function Gallery() {
         </Reveal>
 
         <p className="text-center mt-6 text-xs tracking-[0.3em] uppercase" style={{ color: C.textMuted }}>
-          {GALLERY[selected]?.caption}
+          {L(GALLERY[selected]?.caption, "Moments")}
         </p>
 
         <div className="flex justify-center gap-2 mt-5">
@@ -555,7 +604,7 @@ function Gallery() {
           <img src={GALLERY[lightbox].src} alt={GALLERY[lightbox].caption} className="max-w-full max-h-[85vh] object-contain" />
           <button className="absolute right-3 md:right-8 w-12 h-12 rounded-full bg-white/10 text-white text-2xl" onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % GALLERY.length); }}>›</button>
           <div className="absolute bottom-6 left-0 right-0 text-center text-white/80 text-sm tracking-widest uppercase">
-            {GALLERY[lightbox].caption}
+            {L(GALLERY[lightbox].caption, "Moments")}
           </div>
         </div>
       )}
@@ -565,6 +614,7 @@ function Gallery() {
 
 /* ---------------- EVENT DETAILS ---------------- */
 function EventDetails() {
+  const L = useL();
   const cal = () => {
     const start = "20270109T020000Z";
     const end = "20270109T060000Z";
@@ -573,14 +623,14 @@ function EventDetails() {
   return (
     <section id="detalles" className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(245,237,228,0.70)")}>
       <div className="max-w-5xl mx-auto">
-        <Reveal><SectionTitle kicker="Detalles del evento" title="¿Cuándo y dónde?" /></Reveal>
+        <Reveal><SectionTitle kicker={L("Detalles del evento", "Event details")} title={L("¿Cuándo y dónde?", "When & where?")} /></Reveal>
         <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
           <Reveal>
             <article className="rounded-sm overflow-hidden shadow-md h-full flex flex-col text-center" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
               <img src={c115.url} alt={CEREMONY.name} loading="lazy" className="w-full h-48 md:h-56 object-cover" />
               <div className="p-8 md:p-10 flex flex-col flex-1">
                 <div className="text-4xl mb-3">⛪</div>
-                <div className="text-xs tracking-[0.3em] uppercase mb-3" style={{ color: C.gold }}>Servicio religioso</div>
+                <div className="text-xs tracking-[0.3em] uppercase mb-3" style={{ color: C.gold }}>{L("Servicio religioso", "Religious service")}</div>
                 <div className="font-serif italic text-3xl mb-3" style={{ color: C.primary }}>{CEREMONY.time}</div>
                 <h3 className="font-serif text-xl mb-2" style={{ color: C.text }}>{CEREMONY.name}</h3>
                 <p className="text-sm mb-6 flex-1" style={{ color: C.textMuted }}>{CEREMONY.address}</p>
@@ -591,7 +641,7 @@ function EventDetails() {
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 text-xs tracking-[0.2em] uppercase rounded-full"
                   style={{ backgroundColor: C.primary, color: "#fff" }}
                 >
-                  Ver ubicación →
+                  {L("Ver ubicación", "View location")} →
                 </a>
               </div>
             </article>
@@ -601,7 +651,7 @@ function EventDetails() {
               <img src={c132.url} alt={VENUE.name} loading="lazy" className="w-full h-48 md:h-56 object-cover" />
               <div className="p-8 md:p-10 flex flex-col flex-1">
                 <div className="text-4xl mb-3">🥂</div>
-                <div className="text-xs tracking-[0.3em] uppercase mb-3" style={{ color: C.gold }}>Recepción</div>
+                <div className="text-xs tracking-[0.3em] uppercase mb-3" style={{ color: C.gold }}>{L("Recepción", "Reception")}</div>
                 <div className="font-serif italic text-3xl mb-3" style={{ color: C.primary }}>{VENUE.time}</div>
                 <h3 className="font-serif text-xl mb-2" style={{ color: C.text }}>{VENUE.name}</h3>
                 <p className="text-sm mb-6 flex-1" style={{ color: C.textMuted }}>{VENUE.address}</p>
@@ -612,7 +662,7 @@ function EventDetails() {
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 text-xs tracking-[0.2em] uppercase rounded-full"
                   style={{ backgroundColor: C.primary, color: "#fff" }}
                 >
-                  Ver ubicación →
+                  {L("Ver ubicación", "View location")} →
                 </a>
               </div>
             </article>
@@ -621,7 +671,7 @@ function EventDetails() {
         <Reveal delay={200}>
           <div className="text-center mt-10">
             <a href={cal()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm tracking-[0.2em] uppercase" style={{ color: C.primaryDark }}>
-              + Añadir al calendario
+              + {L("Añadir al calendario", "Add to calendar")}
             </a>
           </div>
         </Reveal>
@@ -632,10 +682,11 @@ function EventDetails() {
 
 /* ---------------- DRESS CODE (seda azul) ---------------- */
 function DressCode() {
+  const L = useL();
   return (
     <section className="relative py-24 md:py-32 px-6" style={SILK_BG("rgba(43,92,184,0.55)", "rgba(58,135,254,0.55)")}>
       <div className="max-w-3xl mx-auto text-center">
-        <Reveal><SectionTitle kicker="Código de vestimenta" title="Semi Formal" light /></Reveal>
+        <Reveal><SectionTitle kicker={L("Código de vestimenta", "Dress code")} title="Semi Formal" light /></Reveal>
         <Reveal delay={150}>
           <div className="flex justify-center gap-10 my-8 text-5xl">
             <span title="Damas">👗</span>
@@ -645,7 +696,7 @@ function DressCode() {
         <Reveal delay={250}>
           <div className="max-w-md mx-auto rounded-sm p-7 text-left shadow-xl" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
             <ul className="space-y-2 text-sm" style={{ color: C.text }}>
-              {DRESS_CODE_NOTES.map((n) => (
+              {L(DRESS_CODE_NOTES, DRESS_CODE_NOTES_EN).map((n) => (
                 <li key={n} className="flex gap-3">
                   <span style={{ color: C.accent }}>•</span>
                   <span>{n}</span>
@@ -668,6 +719,7 @@ function Rsvp() {
   const [invite, setInvite] = useState<{ guest_name: string | null; guests_allowed: number } | null>(null);
   const submit = useServerFn(submitRsvp);
   const lookup = useServerFn(lookupInvitationSendByToken);
+  const L = useL();
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -715,7 +767,7 @@ function Rsvp() {
       setSubmitted(true);
     } catch (err) {
       console.error(err);
-      toast.error("No pudimos guardar tu confirmación, pero te enviamos a WhatsApp.");
+      toast.error(L("No pudimos guardar tu confirmación, pero te enviamos a WhatsApp.", "We couldn't save your RSVP, but we're sending you to WhatsApp."));
     } finally {
       setSubmitting(false);
     }
@@ -725,28 +777,28 @@ function Rsvp() {
   return (
     <section className="relative py-24 md:py-32 px-6" style={SOFT_BG("rgba(220,233,251,0.80)")}>
       <div className="max-w-2xl mx-auto">
-        <Reveal><SectionTitle kicker="Confirmación" title="¿Me acompañas?" /></Reveal>
+        <Reveal><SectionTitle kicker={L("Confirmación", "RSVP")} title={L("¿Me acompañas?", "Will you join me?")} /></Reveal>
         {submitted ? (
           <div className="text-center rounded-sm p-10 shadow-md" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
             <div className="text-5xl mb-4">💌</div>
-            <h3 className="font-serif italic text-3xl mb-3" style={{ color: C.primary }}>¡Gracias, {form.name || "amig@"}!</h3>
-            <p style={{ color: C.textMuted }}>He recibido tu confirmación. Nos vemos el 8 de enero.</p>
+            <h3 className="font-serif italic text-3xl mb-3" style={{ color: C.primary }}>{L("¡Gracias, ", "Thank you, ")}{form.name || L("amig@", "friend")}!</h3>
+            <p style={{ color: C.textMuted }}>{L("He recibido tu confirmación. Nos vemos el 8 de enero.", "I've received your RSVP. See you on January 8.")}</p>
           </div>
         ) : (
           <form onSubmit={onSubmit} className="rounded-sm p-7 md:p-10 shadow-md space-y-5" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
             {invite && (
               <div className="text-center rounded-sm px-4 py-3 text-sm" style={{ backgroundColor: C.bg, border: `1px solid ${C.border}`, color: C.textMuted }}>
-                {invite.guest_name ? <span className="font-medium" style={{ color: C.primary }}>{invite.guest_name}</span> : "Invitación personal"}
+                {invite.guest_name ? <span className="font-medium" style={{ color: C.primary }}>{invite.guest_name}</span> : L("Invitación personal", "Personal invitation")}
                 {" · "}
-                <span>{invite.guests_allowed} {invite.guests_allowed === 1 ? "lugar reservado" : "lugares reservados"}</span>
+                <span>{invite.guests_allowed} {invite.guests_allowed === 1 ? L("lugar reservado", "seat reserved") : L("lugares reservados", "seats reserved")}</span>
               </div>
             )}
-            <Field label="Nombre completo">
+            <Field label={L("Nombre completo", "Full name")}>
               <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full bg-transparent border-b outline-none py-2" style={{ borderColor: C.border }} />
             </Field>
-            <Field label="¿Asistirás?">
+            <Field label={L("¿Asistirás?", "Will you attend?")}>
               <div className="flex gap-3">
-                {[{ v: "yes", l: "Sí, asistiré" }, { v: "no", l: "No puedo" }].map((o) => (
+                {[{ v: "yes", l: L("Sí, asistiré", "Yes, I'll attend") }, { v: "no", l: L("No puedo", "Can't make it") }].map((o) => (
                   <button
                     key={o.v}
                     type="button"
@@ -764,7 +816,7 @@ function Rsvp() {
               </div>
             </Field>
             {form.attending === "yes" && (
-              <Field label="Número de personas">
+              <Field label={L("Número de personas", "Number of guests")}>
                 <div className="flex gap-3">
                   {([2, 4] as const).map((n) => {
                     const disabled = !!invite && invite.guests_allowed < n;
@@ -781,18 +833,18 @@ function Rsvp() {
                             : { borderColor: C.border, color: C.textMuted }
                         }
                       >
-                        {n} personas
+                        {n} {L("personas", "guests")}
                       </button>
                     );
                   })}
                 </div>
               </Field>
             )}
-            <Field label="Mensaje para Alice (opcional)">
+            <Field label={L("Mensaje para Alice (opcional)", "Message for Alice (optional)")}>
               <textarea rows={3} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full bg-transparent border outline-none p-3 rounded-sm resize-none" style={{ borderColor: C.border }} />
             </Field>
             <p className="text-xs text-center leading-relaxed rounded-sm px-4 py-3" style={{ backgroundColor: C.bgAlt, border: `1px solid ${C.border}`, color: C.text }}>
-              Esta invitación es <strong>personal e intransferible</strong> y válida únicamente para el número de personas indicado.
+              {L(<>Esta invitación es <strong>personal e intransferible</strong> y válida únicamente para el número de personas indicado.</>, <>This invitation is <strong>personal and non-transferable</strong> and valid only for the number of guests indicated.</>)}
             </p>
             <button
               type="submit"
@@ -800,10 +852,10 @@ function Rsvp() {
               className="w-full py-3.5 tracking-[0.2em] uppercase text-xs rounded-full transition-opacity disabled:opacity-60"
               style={{ backgroundColor: C.primary, color: "#fff" }}
             >
-              {submitting ? "Enviando..." : "Enviar confirmación por WhatsApp"}
+              {submitting ? L("Enviando...", "Sending...") : L("Enviar confirmación por WhatsApp", "Send RSVP via WhatsApp")}
             </button>
             <p className="text-[11px] text-center italic" style={{ color: C.textMuted }}>
-              Al enviar, se abrirá WhatsApp con tu mensaje listo para enviar.
+              {L("Al enviar, se abrirá WhatsApp con tu mensaje listo para enviar.", "WhatsApp will open with your message ready to send.")}
             </p>
           </form>
         )}
@@ -823,21 +875,22 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 
 /* ---------------- GIFT REGISTRY ---------------- */
 function GiftRegistry() {
+  const L = useL();
   return (
     <section className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(245,237,228,0.70)")}>
       <div className="max-w-3xl mx-auto text-center">
-        <Reveal><SectionTitle kicker="Con cariño" title="Mesa de regalos" /></Reveal>
+        <Reveal><SectionTitle kicker={L("Con cariño", "With love")} title={L("Mesa de regalos", "Gift registry")} /></Reveal>
         <Reveal delay={150}>
           <p className="font-serif italic text-lg mb-10" style={{ color: C.textMuted }}>
-            El mejor regalo será compartir contigo este día tan especial.
+            {L("El mejor regalo será compartir contigo este día tan especial.", "The best gift will be sharing this special day with you.")}
           </p>
         </Reveal>
         <Reveal delay={250}>
           <div className="max-w-md mx-auto rounded-sm p-10 shadow-md" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
             <div className="text-5xl mb-4">🌳</div>
-            <h3 className="font-serif italic text-2xl mb-2" style={{ color: C.primary }}>Árbol de dinero</h3>
+            <h3 className="font-serif italic text-2xl mb-2" style={{ color: C.primary }}>{L("Árbol de dinero", "Money tree")}</h3>
             <p className="text-sm" style={{ color: C.textMuted }}>
-              Para quienes deseen tener un detalle conmigo, habrá un árbol destinado a sobres de dinero.
+              {L("Para quienes deseen tener un detalle conmigo, habrá un árbol destinado a sobres de dinero.", "For those who wish to give a gift, there will be a money tree for envelopes.")}
             </p>
           </div>
         </Reveal>
@@ -848,15 +901,16 @@ function GiftRegistry() {
 
 /* ---------------- SOCIAL WALL ---------------- */
 function SocialWall() {
+  const L = useL();
   return (
     <section className="py-24 md:py-32 px-6 text-center" style={SOFT_BG("rgba(220,233,251,0.80)")}>
       <div className="max-w-3xl mx-auto">
         <Reveal>
-          <div className="text-xs tracking-[0.35em] uppercase mb-3" style={{ color: C.primaryDark }}>— Comparte —</div>
-          <h2 className="font-serif italic text-4xl md:text-5xl mb-6" style={{ color: C.primary }}>Comparte tus fotos</h2>
+          <div className="text-xs tracking-[0.35em] uppercase mb-3" style={{ color: C.primaryDark }}>— {L("Comparte", "Share")} —</div>
+          <h2 className="font-serif italic text-4xl md:text-5xl mb-6" style={{ color: C.primary }}>{L("Comparte tus fotos", "Share your photos")}</h2>
         </Reveal>
         <Reveal delay={150}>
-          <p className="mb-8" style={{ color: C.textMuted }}>Etiquétame y usa mi hashtag para verlas todas en un mismo lugar.</p>
+          <p className="mb-8" style={{ color: C.textMuted }}>{L("Etiquétame y usa mi hashtag para verlas todas en un mismo lugar.", "Tag me and use my hashtag so we can see them all in one place.")}</p>
           <div className="inline-block font-script text-2xl md:text-4xl px-10 py-5 rounded-full shadow-md" style={{ background: `linear-gradient(135deg, ${C.blueSoft}, ${C.primary})`, color: "#fff" }}>
             {HASHTAG}
           </div>
@@ -868,20 +922,27 @@ function SocialWall() {
 
 /* ---------------- FAQ ---------------- */
 function Faq() {
+  const L = useL();
+  const lang = useContext(LangCtx);
   const items = useMemo(
-    () => [
+    () => lang === "en" ? [
+      { q: "What is the dress code?", a: "Semi formal. Light blue is reserved exclusively for the quinceañera." },
+      { q: "Can I bring a guest?", a: "Seats are as indicated on your personal invitation. Confirm in the RSVP section to reserve them." },
+      { q: "Where is the celebration?", a: "The religious service will be from 3:00 to 4:00 pm and the reception at 7:00 pm, both at Tuscany Siena, 8600 Gtwy Blvd E Ste A2, El Paso, TX 79907." },
+      { q: "How do I RSVP?", a: "Right here in this invitation, in the RSVP section. Your answer will be sent via WhatsApp." },
+    ] : [
       { q: "¿Cuál es el código de vestimenta?", a: "Semi formal. El color azul bajito está reservado exclusivamente para la quinceañera." },
       { q: "¿Puedo llevar acompañante?", a: "Los lugares son los indicados en tu invitación personal. Confirma en la sección de confirmación para reservarlos." },
       { q: "¿Dónde será la celebración?", a: "El servicio religioso será de 3:00 a 4:00 pm y la recepción a las 7:00 pm, ambos en Tuscany Siena, 8600 Gtwy Blvd E Ste A2, El Paso, TX 79907." },
       { q: "¿Cómo confirmo mi asistencia?", a: "Directamente en esta invitación, en la sección de confirmación. Tu respuesta llegará por WhatsApp." },
     ],
-    []
+    [lang]
   );
   const [open, setOpen] = useState<number | null>(0);
   return (
     <section className="py-24 md:py-32 px-6" style={SOFT_BG("rgba(245,237,228,0.70)")}>
       <div className="max-w-3xl mx-auto">
-        <Reveal><SectionTitle kicker="FAQ" title="Preguntas frecuentes" /></Reveal>
+        <Reveal><SectionTitle kicker="FAQ" title={L("Preguntas frecuentes", "Frequently asked questions")} /></Reveal>
         <div className="space-y-3">
           {items.map((it, i) => (
             <Reveal key={i} delay={i * 60}>
@@ -907,6 +968,7 @@ function Faq() {
 
 /* ---------------- THANK YOU ---------------- */
 function ThankYou() {
+  const L = useL();
   return (
     <section
       className="relative h-[100svh] min-h-[600px] w-full overflow-hidden"
@@ -917,10 +979,10 @@ function ThankYou() {
       }}
     >
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-white">
-        <div className="text-xs tracking-[0.4em] uppercase mb-6 text-white/85">Gracias</div>
-        <h2 className="font-serif italic text-4xl md:text-7xl max-w-3xl leading-tight">Gracias por ser parte de mi historia</h2>
+        <div className="text-xs tracking-[0.4em] uppercase mb-6 text-white/85">{L("Gracias", "Thank you")}</div>
+        <h2 className="font-serif italic text-4xl md:text-7xl max-w-3xl leading-tight">{L("Gracias por ser parte de mi historia", "Thank you for being part of my story")}</h2>
         <p className="mt-6 max-w-xl italic font-serif text-lg text-white/85">
-          Tu presencia hará este día aún más inolvidable. Con todo mi cariño,
+          {L("Tu presencia hará este día aún más inolvidable. Con todo mi cariño,", "Your presence will make this day even more unforgettable. With all my love,")}
         </p>
         <div className="mt-8 font-script text-4xl md:text-6xl" style={{ color: "#DCE9FB" }}>
           Alice Chavarria
