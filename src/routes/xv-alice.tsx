@@ -999,7 +999,7 @@ function ThankYou() {
         <div className="mt-8 font-script text-4xl md:text-6xl" style={{ color: "#DCE9FB" }}>
           Alice Jane Chavarria
         </div>
-        <div className="mt-6 text-xs tracking-[0.4em] uppercase text-white/70">08 · 01 · 2027</div>
+        <div className="mt-6 text-xs tracking-[0.4em] uppercase text-white/70">01 · 08 · 2027</div>
       </div>
     </section>
   );
