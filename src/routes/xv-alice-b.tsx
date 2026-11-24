@@ -824,6 +824,11 @@ function Rsvp() {
             {L("Estás invitad@ a la fiesta y a la cena de 7:20 a 8:20 pm en Tuscany Siena.", "You're invited to the party and dinner from 7:20 to 8:20 pm at Tuscany Siena.")}
           </p>
         </Reveal>
+        <Reveal delay={120}>
+          <p className="text-center text-sm tracking-[0.2em] uppercase -mt-4 mb-10" style={{ color: C.gold }}>
+            {L("Favor de confirmar antes del 15 de diciembre", "Kindly RSVP by December 15")}
+          </p>
+        </Reveal>
         {submitted ? (
           <div className="text-center rounded-sm p-10 shadow-md" style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}>
             <div className="text-5xl mb-4">💌</div>
